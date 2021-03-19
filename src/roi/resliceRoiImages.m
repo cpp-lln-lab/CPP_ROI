@@ -1,4 +1,4 @@
-% (C) Copyright 2021 CPP BIDS SPM-pipeline developers
+% (C) Copyright 2021 CPP ROI developers
 
 function reslicedImages = resliceRoiImages(referenceImage, imagesToCheck)
 
@@ -12,14 +12,14 @@ function reslicedImages = resliceRoiImages(referenceImage, imagesToCheck)
     reslicedImages = imagesToCheck;
 
   else
-    
+
     matlabbatch = [];
     matlabbatch = setBatchReslice(matlabbatch, referenceImage, imagesToCheck);
     spm_jobman('run', matlabbatch);
 
     basename = spm_file(imagesToCheck, 'basename');
     reslicedImages = spm_file(imagesToCheck, 'basename', ...
-        [spm_get_defaults('realign.write.prefix') basename]);
+                              [spm_get_defaults('realign.write.prefix') basename]);
 
   end
 

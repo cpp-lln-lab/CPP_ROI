@@ -1,18 +1,23 @@
-% (C) Copyright 2021 CPP BIDS SPM-pipeline developers
+% (C) Copyright 2021 CPP ROI developers
 
-function mask = createRoi(type, varargin)
+function mask = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
   %
   % Returns a mask to be used as a ROI by ``spm_summarize``.
   % Can also save the ROI as binary image.
   %
   % USAGE::
   %
-  %  mask = createROI(type, varargin);
+  %  mask = createROI(type, ...
+  %                   specification, ...
+  %                   volumeDefiningImage = '', ...
+  %                   outputDir = pwd, ...
+  %                   saveImg = false);
   %
-  %  mask = createROI('mask', roiImage, volumeDefiningImage, saveImg = false);
-  %  mask = createROI('sphere', sphere, volumeDefiningImage, saveImg = false);
-  %  mask = createROI('intersection', roiImage, sphere, volumeDefiningImage, saveImg = false);
-  %  mask = createROI('expand', roiImage, sphere, volumeDefiningImage, saveImg = false);
+  %  mask = createROI('mask', roiImage);
+  %  mask = createROI('sphere', sphere);
+  %  mask = createROI('intersection', specification);
+  %  mask = createROI('expand', specification);
+  %
   %
   % See the ``demos/roi`` to see examples on how to use it.
   %
@@ -51,30 +56,27 @@ function mask = createRoi(type, varargin)
   %
   %
 
-  if islogical(varargin{end})
-    saveImg = varargin{end};
-  else
+  if nargin < 5
     saveImg = false;
   end
 
-  if saveImg
-    switch type
-      case {'sphere', 'mask'}
-        volumeDefiningImage = varargin{2};
-      case {'intersection', 'expand'}
-        volumeDefiningImage = varargin{3};
-    end
+  if nargin < 4
+    outputDir = pwd;
+  end
+
+  if nargin < 3
+    volumeDefiningImage = '';
   end
 
   switch type
 
     case 'sphere'
 
-      specification = varargin{1};
+      sphere = specification;
 
       mask.def = type;
-      mask.spec = specification.radius;
-      mask.xyz = specification.location;
+      mask.spec = sphere.radius;
+      mask.xyz = sphere.location;
 
       if size(mask.xyz, 1) ~= 3
         mask.xyz = mask.xyz';
@@ -83,9 +85,11 @@ function mask = createRoi(type, varargin)
       mask = spm_ROI(mask);
       mask.roi.XYZmm = [];
 
+      mask = createRoiLabel(mask);
+
     case 'mask'
 
-      roiImage = varargin{1};
+      roiImage = specification;
 
       mask = struct('XYZmm', []);
       mask = defineGlobalSearchSpace(mask, roiImage);
@@ -105,13 +109,23 @@ function mask = createRoi(type, varargin)
 
       mask = setRoiSizeAndType(mask, type);
 
+      mask = createRoiLabel(mask, roiImage);
+
     case 'intersection'
 
-      roiImage = varargin{1};
-      mask = createRoi('mask', roiImage);
+      % Ugly hack
+      % ideally we want to loop over the masks and figure out
+      % if they are binary images or spheres...
+      if ischar(specification.mask1)
+        roiImage = specification.mask1;
+        sphere = specification.mask2;
+      else
+        roiImage = specification.mask1;
+        sphere = specification.mask2;
+      end
 
-      specification = varargin{2};
-      mask2 = createRoi('sphere', specification);
+      mask = createRoi('mask', roiImage);
+      mask2 = createRoi('sphere', sphere);
 
       locationsToSample = mask.global.XYZmm;
 
@@ -119,10 +133,24 @@ function mask = createRoi(type, varargin)
 
       mask = setRoiSizeAndType(mask, type);
 
+      mask = createRoiLabel(mask, roiImage);
+
     case 'expand'
 
-      roiImage = varargin{1};
-      specification = varargin{2};
+      % Ugly hack
+      % ideally we want to loop over the masks and figure out
+      % if they are binary images or spheres...
+      if ischar(specification.mask1)
+        roiImage = specification.mask1;
+        sphere = specification.mask2;
+      else
+        roiImage = specification.mask1;
+        sphere = specification.mask2;
+      end
+
+      specification  = struct( ...
+                              'mask1', roiImage, ...
+                              'mask2', sphere);
 
       % take as radius step the smallest voxel dimension of the roi image
       hdr = spm_vol(roiImage);
@@ -130,20 +158,24 @@ function mask = createRoi(type, varargin)
       radiusStep = min(abs(dim(1:3)));
 
       while  true
-        mask = createRoi('intersection', roiImage, specification);
-        mask.roi.radius = specification.radius;
-        if mask.roi.size > specification.maxNbVoxels
+        mask = createRoi('intersection', specification);
+        mask.roi.radius = specification.mask2.radius;
+        if mask.roi.size > sphere.maxNbVoxels
           break
         end
-        specification.radius = specification.radius + radiusStep;
+        specification.mask2.radius = specification.mask2.radius + radiusStep;
       end
 
+      mask.xyz = sphere.location;
+
       mask = setRoiSizeAndType(mask, type);
+
+      mask = createRoiLabel(mask, roiImage);
 
   end
 
   if saveImg
-    saveRoi(mask, volumeDefiningImage);
+    saveRoi(mask, volumeDefiningImage, outputDir);
   end
 
 end
@@ -166,40 +198,63 @@ function XYZmm = returnXYZm(transformationMatrix, XYZ)
   XYZmm = transformationMatrix(1:3, :) * [XYZ; ones(1, size(XYZ, 2))];
 end
 
-function saveRoi(mask, volumeDefiningImage)
+function mask = setRoiSizeAndType(mask, type)
+  mask.def = type;
+  mask.roi.size = size(mask.roi.XYZmm, 2);
+end
+
+function mask = createRoiLabel(mask, roiImage)
 
   switch mask.def
 
     case 'sphere'
+      mask.descrip = sprintf('%0.1fmm radius sphere at [%0.1f %0.1f %0.1f]', ...
+                             mask.spec, ...
+                             mask.xyz);
+      mask.label = sprintf('label-sphere%0.0fmmx%0.0fy%0.0fz%0.0f', ...
+                           mask.spec, ...
+                           mask.xyz);
 
-      [~, mask.roi.XYZmm] = spm_ROI(mask, volumeDefiningImage);
-      mask = setRoiSizeAndType(mask, mask.def);
+    case 'expand'
 
-      radius = mask.spec;
-      center = mask.xyz;
+      basename = spm_file(roiImage, 'basename');
+      basename = strrep(basename, '_mask', '');
+      mask.label = sprintf('%s_label-%sVox%i', ...
+                           basename, ...
+                           mask.def, ...
+                           mask.roi.size);
 
-      descrip = sprintf('%0.1fmm radius sphere at [%0.1f %0.1f %0.1f]', radius, center);
-      label = sprintf('sphere_%0.0f-%0.0f_%0.0f_%0.0f', radius, center);
+      mask.descrip = sprintf('%s from [%0.0f %0.0f %0.0f] till %i voxels', ...
+                             mask.def, ...
+                             mask.xyz, ...
+                             mask.roi.size);
 
     otherwise
 
-      label = [mask.def '-roiMcRoiFace'];
-      descrip = [mask.def '-roiMcRoiFace'];
+      basename = spm_file(roiImage, 'basename');
+      basename = strrep(basename, '_mask', '');
+      mask.label = [basename '_label-' mask.def];
 
+      mask.descrip = mask.def;
+
+  end
+
+end
+
+function saveRoi(mask, volumeDefiningImage, outputDir)
+
+  if strcmp(mask.def, 'sphere')
+    [~, mask.roi.XYZmm] = spm_ROI(mask, volumeDefiningImage);
+    mask = setRoiSizeAndType(mask, mask.def);
   end
 
   % use the marsbar toolbox
   roiObject = maroi_pointlist(struct('XYZ', mask.roi.XYZmm, ...
                                      'mat', spm_get_space(volumeDefiningImage), ...
-                                     'label', label, ...
-                                     'descrip', descrip));
+                                     'label', mask.label, ...
+                                     'descrip', mask.descrip));
 
-  roiName = sprintf('%s.nii', label);
-  save_as_image(roiObject, fullfile(pwd, roiName));
+  roiName = sprintf('%s_mask.nii', mask.label);
+  save_as_image(roiObject, fullfile(outputDir, roiName));
 
-end
-
-function mask = setRoiSizeAndType(mask, type)
-  mask.def = type;
-  mask.roi.size = size(mask.roi.XYZmm, 2);
 end

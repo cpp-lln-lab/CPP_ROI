@@ -1,4 +1,4 @@
-% (C) Copyright 2020 CPP BIDS SPM-pipeline developers
+% (C) Copyright 2020 CPP ROI developers
 
 %% examples to create ROIs and extract data
 %
@@ -32,6 +32,7 @@ dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;
 opt.save.roi = true;
+opt.outputDir = []; % if empty new masks are saved in pwd.
 if opt.save.roi
   opt.reslice.do = true;
 else
@@ -65,7 +66,7 @@ function data_sphere = getDataFromSphere(opt, dataImage)
   sphere.location = location;
   sphere.radius = radius;
 
-  mask = createRoi('sphere', sphere, dataImage, opt.save.roi);
+  mask = createRoi('sphere', sphere, dataImage, opt.outputDir, opt.save.roi);
 
   data_sphere = spm_summarise(dataImage, mask);
 
@@ -86,7 +87,11 @@ function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
   sphere.location = location;
   sphere.radius = 5;
 
-  mask = createRoi('intersection', roiName, sphere, dataImage, opt.save.roi);
+  specification  = struct( ...
+                          'mask1', roiName, ...
+                          'mask2', sphere);
+
+  mask = createRoi('intersection', specification, dataImage, opt.outputDir, opt.save.roi);
 
   data_intersection = spm_summarise(dataImage, mask.roi.XYZmm);
 
@@ -101,7 +106,11 @@ function data_expand = getDataFromExpansion(opt, dataImage,  roiName)
   sphere.radius = 1; % starting radius
   sphere.maxNbVoxels = 50;
 
-  mask = createRoi('expand', roiName, sphere, dataImage, opt.save.roi);
+  specification  = struct( ...
+                          'mask1', roiName, ...
+                          'mask2', sphere);
+
+  mask = createRoi('expand', specification, dataImage, opt.outputDir, opt.save.roi);
 
   data_expand = spm_summarise(dataImage, mask.roi.XYZmm);
 

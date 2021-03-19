@@ -1,4 +1,4 @@
-% (C) Copyright 2021 CPP BIDS SPM-pipeline developers
+% (C) Copyright 2021 CPP ROI developers
 
 function roiName = thresholdToMask(sourceImage, threshold)
 
@@ -10,7 +10,7 @@ function roiName = thresholdToMask(sourceImage, threshold)
 
   roi_hdr = hdr;
   basename = spm_file(roi_hdr.fname, 'basename');
-  roi_hdr.fname = spm_file(roi_hdr.fname, 'basename', [basename '-mask']);
+  roi_hdr.fname = spm_file(roi_hdr.fname, 'basename', [basename '_mask']);
 
   img = img > threshold;
 
