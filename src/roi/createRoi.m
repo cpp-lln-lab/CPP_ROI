@@ -168,8 +168,6 @@ end
 
 function saveRoi(mask, volumeDefiningImage)
 
-  checkDependencies('marsbar');
-
   switch mask.def
 
     case 'sphere'
