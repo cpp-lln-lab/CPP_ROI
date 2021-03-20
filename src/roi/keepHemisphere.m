@@ -32,8 +32,11 @@ function keepHemisphere(image, hemisphere)
     
     vol(discard,:,:) = NaN;
     
-    basename = spm_file(image, 'basename');
-    hdr.fname = spm_file(image, 'basename', [basename '_hs-' lower(hemisphere)]);
+    p = bids.internal.parse_filename(image);
+    p.hs = lower(hemisphere);
+    newName = createFilename(p);
+    
+    hdr.fname = spm_file(image, 'filename', newName);
 
     spm_write_vol(hdr, vol);
     
