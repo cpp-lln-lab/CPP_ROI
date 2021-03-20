@@ -24,3 +24,23 @@ function reslicedImages = resliceRoiImages(referenceImage, imagesToCheck)
   end
 
 end
+
+
+function matlabbatch = setBatchReslice(matlabbatch, referenceImg, sourceImages)
+
+  interp = 4;
+  write.roptions.interp = interp;
+
+  if ischar(referenceImg)
+    referenceImg = {referenceImg};
+  end
+  write.ref(1) = referenceImg;
+
+  if ischar(sourceImages)
+    sourceImages = {sourceImages};
+  end
+  write.source(1) = sourceImages;
+  
+  matlabbatch{end + 1}.spm.spatial.coreg.write = write;
+
+end
