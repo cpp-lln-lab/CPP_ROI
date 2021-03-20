@@ -1,6 +1,6 @@
 % (C) Copyright 2021 CPP ROI developers
 
-function keepHemisphere(image, hemisphere)
+function image = keepHemisphere(image, hemisphere)
     %
     % Only keep the values from one hemisphere. Sets the other half to NaN.
     % Writes an image with an extra entity ``_hs-[hemisphere]``
@@ -39,5 +39,7 @@ function keepHemisphere(image, hemisphere)
     hdr.fname = spm_file(image, 'filename', newName);
 
     spm_write_vol(hdr, vol);
+    
+    image = hdr.fname;
     
 end

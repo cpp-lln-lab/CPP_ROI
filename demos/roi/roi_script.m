@@ -123,6 +123,8 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
   if opt.unzip.do
     gunzip(fullfile('inputs', '*.gz'));
   end
+  
+  probabilityMap = renameNeuroSynth(probabilityMap);
 
   if opt.reslice.do
     % If needed reslice probability map to have same resolution as the data image
@@ -138,5 +140,6 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
   % to keep only values above a certain threshold
   threshold = 10;
   roiName = thresholdToMask(probabilityMap, threshold);
+  roiName = removeSpmPrefix(roiName, spm_get_defaults('realign.write.prefix'));
 
 end

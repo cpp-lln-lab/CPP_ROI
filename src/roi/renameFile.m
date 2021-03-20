@@ -1,7 +1,7 @@
-function image = renameFile(image, specification)
+function file = renameFile(file, specification)
     
-    pth = spm_fileparts(image);
-    p = bids.internal.parse_filename(image);
+    pth = spm_fileparts(file);
+    p = bids.internal.parse_filename(file);
     
     entitiesToChange = fieldnames(specification);
     
@@ -11,7 +11,7 @@ function image = renameFile(image, specification)
     
     newName = createFilename(p);
     
-    movefile(image, fullfile(pth, newName));
+    movefile(file, fullfile(pth, newName));
     
 end
 

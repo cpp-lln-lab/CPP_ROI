@@ -7,7 +7,7 @@ function newImage = renameNeuroSynth(image)
     
     basename = spm_file(image, 'basename');
     parts = strsplit(basename,'_');
-    p.label = converToValidCamelCase(['neurosynth ' parts{1}]);
+    p.label = ['neurosynth ' parts{1}];
     
     newName = createFilename(p);
     
