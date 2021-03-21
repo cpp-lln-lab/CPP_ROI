@@ -475,7 +475,7 @@ set(ax,'plotboxaspectratiomode','manual',...
        'unit','pixels',...
        'pos',[0 0 srect(3:4)]);
 set(h,'visible','on');
-pause(3);
+pause(2);
 close(h);
  
 %=======================================================================

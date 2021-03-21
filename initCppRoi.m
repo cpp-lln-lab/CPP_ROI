@@ -13,7 +13,10 @@ function initCppRoi()
     addpath(genpath(fullfile(WD, 'src')));
     addpath(fullfile(WD, 'lib', 'marsbar-0.44'));
     marsbar('on');
+    try
     marsbar('splash');
+    catch
+    end
 
     CPP_ROI_INITIALIZED = true();
 
