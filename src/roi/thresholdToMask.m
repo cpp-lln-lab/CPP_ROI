@@ -9,7 +9,7 @@ function roiName = thresholdToMask(sourceImage, threshold)
   img = spm_read_vols(hdr);
 
   roi_hdr = hdr;
-  
+
   p = bids.internal.parse_filename(sourceImage);
   p.type = 'mask';
   newName = createFilename(p);

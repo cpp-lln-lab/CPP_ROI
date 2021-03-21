@@ -84,11 +84,11 @@ function data_sphere = getDataFromSphere(opt, dataImage)
 end
 
 function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
-    %
-    % Gets the voxels at the intersection of:
-    % - a binary mask and user defined sphere
-    % - TODO: 2 binary masks
-    %
+  %
+  % Gets the voxels at the intersection of:
+  % - a binary mask and user defined sphere
+  % - TODO: 2 binary masks
+  %
 
   % X Y Z coordinates of right V5 in millimeters
   location = [44 -67 0];
@@ -139,7 +139,7 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
   if opt.unzip.do
     gunzip(fullfile('inputs', '*.gz'));
   end
-  
+
   % give the neurosynth map a name that is more bids friendly
   %
   % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii

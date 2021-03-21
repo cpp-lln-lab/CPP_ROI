@@ -12,8 +12,8 @@ function initCppRoi()
     % we add all the subfunctions that are in the sub directories
     addpath(genpath(fullfile(WD, 'src')));
     addpath(fullfile(WD, 'lib', 'marsbar-0.44'));
-    marsbar('on')
-    marsbar('splash')
+    marsbar('on');
+    marsbar('splash');
 
     CPP_ROI_INITIALIZED = true();
 
