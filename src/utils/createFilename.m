@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 function newName = createFilename(p)
 
   entities = fieldnames(p);

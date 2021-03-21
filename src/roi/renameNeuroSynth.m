@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 function outputImage = renameNeuroSynth(inputImage)
   % give the neurosynth map a name that is more bids friendly
   %

@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 %
 % scritps to transform a probability map from neurosynth
 % into an image with fewer clusters (apply peak and extend threshold) and

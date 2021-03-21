@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 function unzipAtlas()
 
   atlasDir = fullfile(fileparts(mfilename('fullpath')), '..', '..', 'atlas');

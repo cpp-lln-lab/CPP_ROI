@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 function file = renameFile(file, specification)
 
   pth = spm_fileparts(file);

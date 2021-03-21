@@ -14,7 +14,7 @@ function initCppRoi()
     addpath(fullfile(WD, 'lib', 'marsbar-0.44'));
     marsbar('on');
     try
-    marsbar('splash');
+      marsbar('splash');
     catch
     end
 

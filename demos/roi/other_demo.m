@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 gunzip(fullfile('inputs', '*.gz'));
 zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 

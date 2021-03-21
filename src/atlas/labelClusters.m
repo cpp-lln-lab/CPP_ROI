@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 function outputImage = labelClusters(sourceImage, peakThreshold, extendThreshold)
 
   % Adapted from:
