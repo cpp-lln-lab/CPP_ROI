@@ -1,18 +1,13 @@
 
 .DS_Store
+
+*.nii
+
 *.asv
 *.m~
 *.mat
-*.xml
-*.log
-*.html
-*.zip
-*.ps
 
-
-
-# files in the demo folder related to running the demo analysis
-demos/roi
+atlas/visual_topography_probability_atlas/
 
 # test folder and dummy data
 
@@ -20,7 +15,6 @@ demos/roi
 docs/build/*
 
 # ignore virtual env
-cpp_spm/*
 envs/*
 
 # visual studio code stuff

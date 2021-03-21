@@ -32,14 +32,18 @@ dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;
 opt.save.roi = true;
-opt.outputDir = []; % if empty new masks are saved in pwd.
+opt.outputDir = []; % if this is empty new masks are saved in the current directory.
 if opt.save.roi
   opt.reslice.do = true;
 else
   opt.reslice.do = false;
 end
 
+% all of these functions can be found below and show you how to create ROIs and
+% / or ROIs to extract data from an image.
+%
 [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabilityMap);
+
 data_mask = getDataFromMask(dataImage,  roiName);
 data_sphere = getDataFromSphere(opt, dataImage);
 data_intersection = getDataFromIntersection(opt, dataImage,  roiName);
@@ -80,6 +84,11 @@ function data_sphere = getDataFromSphere(opt, dataImage)
 end
 
 function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
+    %
+    % Gets the voxels at the intersection of:
+    % - a binary mask and user defined sphere
+    % - TODO: 2 binary masks
+    %
 
   % X Y Z coordinates of right V5 in millimeters
   location = [44 -67 0];
@@ -98,6 +107,13 @@ function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
 end
 
 function data_expand = getDataFromExpansion(opt, dataImage,  roiName)
+  %
+  % will expand a ROI with a series of expanding spheres but within the
+  % constrains of a binary mask
+  %
+  % the expansion stops once the number of voxels goes above a user defined
+  % threshold.
+  %
 
   % X Y Z coordinates of right V5 in millimeters
   location = [44 -67 0];
@@ -124,6 +140,10 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
     gunzip(fullfile('inputs', '*.gz'));
   end
   
+  % give the neurosynth map a name that is more bids friendly
+  %
+  % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
+  %
   probabilityMap = renameNeuroSynth(probabilityMap);
 
   if opt.reslice.do

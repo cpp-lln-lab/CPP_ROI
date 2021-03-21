@@ -1,4 +1,8 @@
 function newImage = renameNeuroSynth(image)
+  % give the neurosynth map a name that is more bids friendly
+  %
+  % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
+  %
 
     p.filename = spm_file(image, 'filename');
     p.type = 'probseg';
