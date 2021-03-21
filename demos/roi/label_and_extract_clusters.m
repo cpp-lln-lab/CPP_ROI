@@ -6,15 +6,15 @@
 
 gunzip(fullfile('inputs', '*.gz'));
 
-probabilityMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
-probabilityMap = renameNeuroSynth(probabilityMap);
+zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
+zMap = renameNeuroSynth(zMap);
 
-peakThreshold = .1;
+peakThreshold = 5;
 extendThreshold = 50;
 
-probabilityMap = renameNeuroSynth(probabilityMap);
+zMap = renameNeuroSynth(zMap);
 
-labeledClusters = labelClusters(probabilityMap, peakThreshold, extendThreshold);
+labeledClusters = labelClusters(zMap, peakThreshold, extendThreshold);
 
 %% Use the ouput of the previous step
 % to vizualize the image and figure out what is the label we want to extract.

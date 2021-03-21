@@ -27,7 +27,7 @@ clc;
 % You can use the resliceRoiImages for that.
 
 %%
-probabilityMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
+zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;
@@ -42,7 +42,7 @@ end
 % all of these functions can be found below and show you how to create ROIs and
 % / or ROIs to extract data from an image.
 %
-[roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabilityMap);
+[roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap);
 
 data_mask = getDataFromMask(dataImage,  roiName);
 data_sphere = getDataFromSphere(opt, dataImage);
@@ -134,7 +134,7 @@ end
 
 %% HELPER FUNCTION
 
-function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabilityMap)
+function [roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap)
 
   if opt.unzip.do
     gunzip(fullfile('inputs', '*.gz'));
@@ -144,7 +144,7 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
   %
   % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
   %
-  probabilityMap = renameNeuroSynth(probabilityMap);
+  zMap = renameNeuroSynth(zMap);
 
   if opt.reslice.do
     % If needed reslice probability map to have same resolution as the data image
@@ -153,13 +153,13 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
     %
     % if you read the data with spm_summarise,
     % then the 2 images do not need the same resolution.
-    probabilityMap = resliceRoiImages(dataImage, probabilityMap);
+    zMap = resliceRoiImages(dataImage, zMap);
   end
 
   % Threshold probability map into a binary mask
   % to keep only values above a certain threshold
   threshold = 10;
-  roiName = thresholdToMask(probabilityMap, threshold);
+  roiName = thresholdToMask(zMap, threshold);
   roiName = removeSpmPrefix(roiName, spm_get_defaults('realign.write.prefix'));
 
 end
