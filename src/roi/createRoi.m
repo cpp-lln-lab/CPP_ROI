@@ -275,7 +275,20 @@ function saveRoi(mask, volumeDefiningImage, outputDir)
                                      'label', mask.label, ...
                                      'descrip', mask.descrip));
 
-  save_as_image(roiObject, fullfile(outputDir, roiName));
+  % use Marsbar to save as a .mat and then convert that to an image
+  % in the correct space
+  tempFile = spm_file(roiName, ...
+                      'ext', ...
+                      'mat');
+  saveroi(roiObject, ...
+          fullfile(outputDir, tempFile));
+  mars_rois2img(fullfile(outputDir, tempFile), ...
+                fullfile(outputDir, roiName), ...
+                spm_vol(volumeDefiningImage));
+  delete(fullfile(outputDir, tempFile));
+
+  % delete label files
+  delete(fullfile(outputDir, '*_mask_labels.mat'));
 
 end
 
