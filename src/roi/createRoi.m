@@ -149,20 +149,25 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
     case 'merge'
 
       roiImages = specification;
-      
+            
       for iRoi = 1:length(roiImages)
 
-        maskToMerge(iRoi, :) = load_nii(roiImages{iRoi});
+        maskToMerge = load_untouch_nii(roiImages{iRoi});
+        
+        if iRoi == 1
+        
+            mask = maskToMerge;
+        
+            mask.fileprefix = [];
+        
+        else 
+            
+            mask = mask.img + maskToMerge.img;
+            
+        end
 
       end
-
-      mask = maskToMerge(1, :);
       
-      mask.img = [];
-      
-      C.fileprefix = 
-
-
     case 'expand'
 
       % Ugly hack
