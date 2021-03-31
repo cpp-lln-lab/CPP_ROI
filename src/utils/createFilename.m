@@ -3,6 +3,11 @@
 function newName = createFilename(p)
 
   entities = fieldnames(p);
+  
+  if ~isfield(p, 'filename')
+      p.filename = '';
+  end
+  
   ext = p.ext;
   suffix = p.type;
 
