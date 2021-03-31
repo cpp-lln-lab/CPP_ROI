@@ -48,7 +48,7 @@ cd CPP_ROI
 % Th following adds the relevant folders to your path.
 % This needs to be done once per session (your path will not be saved)
 
-initCppROI
+initCppRoi
 
 ```
 
@@ -69,7 +69,7 @@ TODO
 
 -   currently still needs some CPP_SPM function but ultimately should be
     standalone: this will most likely happen when some functions are passed to
-    bids=matlab
+    bids-matlab
 
 -   Other dependencies (MarsBar) are shipped with CPP_ROI in the `lib` folder.
 
@@ -86,7 +86,7 @@ TODO
 -   Can help generate ROI based on:
     -   the SPM Anatomy toolbox (INSERT URL)
     -   neurosynth probabilty maps
-    -   the probabilistic maps of wisual topography in human cortex:
+    -   the probabilistic maps of visual topography in human cortex:
         -   https://scholar.princeton.edu/napl/resources
         -   Wang, L., Mruczek, R. E., Arcaro, M. J., & Kastner, S. (2015).
             Probabilistic Maps of Visual Topography in Human Cortex. Cerebral
