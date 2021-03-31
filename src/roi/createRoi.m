@@ -146,6 +146,19 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
 
       mask = createRoiLabel(mask);
 
+    case 'merge'
+
+      roiImage = specification;
+
+      for iRoi = 1:size(roiImage, 1)
+
+        mask(:, :, iRoi) = load_nii(roiImage{iRoi})
+
+      end
+
+      
+
+
     case 'expand'
 
       % Ugly hack
