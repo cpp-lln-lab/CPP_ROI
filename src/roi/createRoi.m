@@ -161,14 +161,17 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
             mask.fileprefix = [];
         else 
             % sum up the ROI masks
-            mask = mask.img + maskToMerge.img;
+            mask.img  = mask.img + maskToMerge.img;
         end
 
       end
       
-      % check that there are no 2s
+      % check that there are no >1s 
+      mask.img(mask.img > 1) = 1;
       
-      % assign fileprefix (name to be save?)
+      % assign fileprefix (name to be save?) 
+      % [ WIP ]
+      mask = createRoiLabel(mask);
       
     case 'expand'
 
