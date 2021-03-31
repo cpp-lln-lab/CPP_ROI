@@ -150,23 +150,25 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
 
       roiImages = specification;
             
+      % loop through the ROIs to merge
       for iRoi = 1:length(roiImages)
-
+        % load one ROI per time
         maskToMerge = load_untouch_nii(roiImages{iRoi});
-        
+        % take the first ROI as reference to add the others to it
         if iRoi == 1
-        
             mask = maskToMerge;
-        
+            % delete the fileprefix argument to be re-assigned with the new one
             mask.fileprefix = [];
-        
         else 
-            
+            % sum up the ROI masks
             mask = mask.img + maskToMerge.img;
-            
         end
 
       end
+      
+      % check that there are no 2s
+      
+      % assign fileprefix (name to be save?)
       
     case 'expand'
 
