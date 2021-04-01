@@ -149,29 +149,25 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
     case 'merge'
 
       roiImages = specification;
-            
+      
+      mask = [];
+                  
       % loop through the ROIs to merge
       for iRoi = 1:length(roiImages)
+          
         % load one ROI per time
-        maskToMerge = load_untouch_nii(roiImages{iRoi});
-        % take the first ROI as reference to add the others to it
-        if iRoi == 1
-            mask = maskToMerge;
-            % delete the fileprefix argument to be re-assigned with the new one
-            mask.fileprefix = [];
-        else 
-            % sum up the ROI masks
-            mask.img  = mask.img + maskToMerge.img;
-        end
-
+        maskToMerge = spm_read_vols(spm_vol(roiImages{iRoi}));
+        
+        mask = cat(4, mask, maskToMerge);
+        
       end
       
-      % check that there are no >1s 
-      mask.img(mask.img > 1) = 1;
+      % merge the logical masks into one
+      mask = any(mask, 4);
       
       % assign fileprefix (name to be save?) 
       % [ WIP ]
-      mask = createRoiLabel(mask);
+      % mask = createRoiLabel(mask);
       
     case 'expand'
 
