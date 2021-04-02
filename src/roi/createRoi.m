@@ -168,14 +168,23 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
       dim = diag(hdr.mat);
       radiusStep = min(abs(dim(1:3)));
 
+      fprintf(1, '\n Expansion:')
+      
       while  true
         mask = createRoi('intersection', specification);
         mask.roi.radius = specification.mask2.radius;
+        
+        fprintf(1, '\n radius: %0.2f mm; roi size: %i voxels', ...
+            mask.roi.radius, ...
+            mask.roi.size)
+        
         if mask.roi.size > sphere.maxNbVoxels
           break
         end
         specification.mask2.radius = specification.mask2.radius + radiusStep;
       end
+      
+      fprintf(1, '\n')
 
       mask.xyz = sphere.location;
 
