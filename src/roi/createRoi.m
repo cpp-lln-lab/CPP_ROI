@@ -1,6 +1,6 @@
 % (C) Copyright 2021 CPP ROI developers
 
-function mask = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
+function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
   %
   % Returns a mask to be used as a ROI by ``spm_summarize``.
   % Can also save the ROI as binary image.
@@ -210,8 +210,9 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
 
   end
 
+  outputFile = [];
   if saveImg
-    saveRoi(mask, volumeDefiningImage, outputDir);
+    outputFile = saveRoi(mask, volumeDefiningImage, outputDir);
   end
 
 end
@@ -283,7 +284,7 @@ function mask = createRoiLabel(mask)
 
 end
 
-function saveRoi(mask, volumeDefiningImage, outputDir)
+function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
 
   if strcmp(mask.def, 'sphere')
 
@@ -307,8 +308,11 @@ function saveRoi(mask, volumeDefiningImage, outputDir)
                       'mat');
   saveroi(roiObject, ...
           fullfile(outputDir, tempFile));
+
+  outputFile = fullfile(outputDir, roiName);
+      
   mars_rois2img(fullfile(outputDir, tempFile), ...
-                fullfile(outputDir, roiName), ...
+                outputFile, ...
                 spm_vol(volumeDefiningImage));
   delete(fullfile(outputDir, tempFile));
   

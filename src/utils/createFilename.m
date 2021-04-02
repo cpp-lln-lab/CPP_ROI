@@ -11,7 +11,7 @@ function newName = createFilename(p)
 
     if ~any(strcmp(thisEntity, {'filename', 'type', 'ext'})) && ...
             ~isempty(p.(thisEntity))
-      thisLabel = converToValidCamelCase(p.(thisEntity));
+      thisLabel = convertToValidCamelCase(p.(thisEntity));
       newName = [newName '_' thisEntity '-' thisLabel]; %#ok<AGROW>
     end
 

@@ -1,6 +1,6 @@
 % (C) Copyright 2021 CPP ROI developers
 
-function str = converToValidCamelCase(str)
+function str = convertToValidCamelCase(str)
   %
   % Removes non alphanumeric characters and uppercase first letter of all
   % words but the first
