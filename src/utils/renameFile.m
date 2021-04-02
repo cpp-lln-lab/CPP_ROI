@@ -1,6 +1,6 @@
 % (C) Copyright 2021 CPP ROI developers
 
-function file = renameFile(file, specification)
+function newName = renameFile(file, specification)
 
   pth = spm_fileparts(file);
   p = bids.internal.parse_filename(file);
