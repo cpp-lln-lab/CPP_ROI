@@ -59,11 +59,15 @@ jobs:
         make -C MOxUnit install
         git clone https://github.com/MOcov/MOcov.git --depth 1
         make -C MOcov install    
+
+    - name: Add bids-matlab
+      run: | 
+        git clone https://github.com/bids-standard/bids-matlab.git --depth 1      
         
     - name: Update octave path
       run: |
         octave $OCTFLAGS --eval "initCppRoi; savepath();"
-        octave $OCTFLAGS --eval "addpath(fullfile(pwd, 'tests', 'utils')); savepath();"        
+        octave $OCTFLAGS --eval "addpath(fullfile(pwd, 'bids-matlab')); savepath();"        
 
     - name: Run tests
       run: |
