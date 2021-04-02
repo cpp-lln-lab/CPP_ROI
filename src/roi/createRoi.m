@@ -174,6 +174,10 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
       hdr = spm_vol(roiImage);
       dim = diag(hdr.mat);
       radiusStep = min(abs(dim(1:3)));
+      
+      % determine maximum radius to expand to
+      maxRadius = hdr.dim .* dim(1:3)';
+      maxRadius = max(abs(maxRadius));
 
       fprintf(1, '\n Expansion:')
       
@@ -188,6 +192,11 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
         if mask.roi.size > sphere.maxNbVoxels
           break
         end
+        
+        if mask.roi.radius > maxRadius
+            error('sphere expanded beyond the dimension of the mask.')
+        end
+        
         specification.mask2.radius = specification.mask2.radius + radiusStep;
       end
       
