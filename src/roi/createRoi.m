@@ -158,6 +158,13 @@ function mask = createRoi(type, specification, volumeDefiningImage, outputDir, s
         roiImage = specification.mask1;
         sphere = specification.mask2;
       end
+      
+      % check that input image has at least enough voxels to include
+      maskVol = spm_read_vols(spm_vol(roiImage));
+      totalNbVoxels = sum(maskVol(:));
+      if sphere.maxNbVoxels > totalNbVoxels
+          error('Number of voxels requested greater than the total number of voxels in this mask');
+      end
 
       specification  = struct( ...
                               'mask1', roiImage, ...
@@ -295,7 +302,7 @@ function saveRoi(mask, volumeDefiningImage, outputDir)
                 fullfile(outputDir, roiName), ...
                 spm_vol(volumeDefiningImage));
   delete(fullfile(outputDir, tempFile));
-
+  
   % delete label files
   delete(fullfile(outputDir, '*_mask_labels.mat'));
 
