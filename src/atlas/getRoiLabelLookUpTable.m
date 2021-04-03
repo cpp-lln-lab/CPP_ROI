@@ -7,26 +7,19 @@ function roiLabelLUT = getRoiLabelLookUpTable(atlas)
     return
   end
 
+  atlasDir = returnAtlasDir(atlas);
+
   switch lower(atlas)
 
     case 'wang'
 
-      atlasDir = fullfile(fileparts(mfilename('fullpath')), ...
-                          '..', ...
-                          '..', ...
-                          'atlas');
-
-      roiLabelLUT = spm_load(fullfile(atlasDir, ...
-                                      'visual_topography_probability_atlas', ...
-                                      'LUT.csv'));
+      roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
     case 'anatomy_toobox'
 
       anat_tb_URL = 'https://www.fz-juelich.de/SharedDocs/Downloads/INM/INM-1/DE/Toolbox/Toolbox_22c.html';
 
-      spmDir = spm('dir');
-
-      roiLabelLUT = fullfile(spmDir, 'toolbox', 'Anatomy', 'Anatomy_v22c_MPM.txt');
+      roiLabelLUT = fullfile(atlasDir, 'Anatomy_v22c_MPM.txt');
 
       if ~exist(roiLabelLUT, 'file')
         error('Did you install the spm Anatomy toolbox?\n\nDownload it from: %s', ...

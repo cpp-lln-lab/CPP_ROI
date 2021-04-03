@@ -1,19 +1,27 @@
 % (C) Copyright 2021 CPP ROI developers
 
-function unzipAtlas()
+function unzipAtlas(atlas)
 
-  atlasDir = fullfile(fileparts(mfilename('fullpath')), '..', '..', 'atlas');
+  atlasDir = returnAtlasDir();
 
-  file = fullfile(atlasDir, 'visual_topography_probability_atlas.zip');
+  if strcmp(atlas, 'wang')
 
-  unzip(file, fileparts(file));
+    file = fullfile(atlasDir, 'visual_topography_probability_atlas.zip');
 
-  labelImages =  spm_select('FPList', ...
-                            fullfile(atlasDir, ...
-                                     'visual_topography_probability_atlas', ...
-                                     'subj_vol_all'), ...
-                            '^maxprob_vol_.*h.nii.gz$');
+    if ~exist(fullfile(atlasDir, 'visual_topography_probability_atlas'), 'dir')
 
-  gunzip(cellstr(labelImages));
+      unzip(file, fileparts(file));
+
+      labelImages =  spm_select('FPList', ...
+                                fullfile(atlasDir, ...
+                                         'visual_topography_probability_atlas', ...
+                                         'subj_vol_all'), ...
+                                '^.*_dseg.nii.gz$');
+
+      gunzip(cellstr(labelImages));
+
+    end
+
+  end
 
 end

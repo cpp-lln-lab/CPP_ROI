@@ -158,12 +158,12 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
         roiImage = specification.mask1;
         sphere = specification.mask2;
       end
-      
+
       % check that input image has at least enough voxels to include
       maskVol = spm_read_vols(spm_vol(roiImage));
       totalNbVoxels = sum(maskVol(:));
       if sphere.maxNbVoxels > totalNbVoxels
-          error('Number of voxels requested greater than the total number of voxels in this mask');
+        error('Number of voxels requested greater than the total number of voxels in this mask');
       end
 
       specification  = struct( ...
@@ -174,33 +174,33 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
       hdr = spm_vol(roiImage);
       dim = diag(hdr.mat);
       radiusStep = min(abs(dim(1:3)));
-      
+
       % determine maximum radius to expand to
       maxRadius = hdr.dim .* dim(1:3)';
       maxRadius = max(abs(maxRadius));
 
-      fprintf(1, '\n Expansion:')
-      
+      fprintf(1, '\n Expansion:');
+
       while  true
         mask = createRoi('intersection', specification);
         mask.roi.radius = specification.mask2.radius;
-        
+
         fprintf(1, '\n radius: %0.2f mm; roi size: %i voxels', ...
-            mask.roi.radius, ...
-            mask.roi.size)
-        
+                mask.roi.radius, ...
+                mask.roi.size);
+
         if mask.roi.size > sphere.maxNbVoxels
           break
         end
-        
+
         if mask.roi.radius > maxRadius
-            error('sphere expanded beyond the dimension of the mask.')
+          error('sphere expanded beyond the dimension of the mask.');
         end
-        
+
         specification.mask2.radius = specification.mask2.radius + radiusStep;
       end
-      
-      fprintf(1, '\n')
+
+      fprintf(1, '\n');
 
       mask.xyz = sphere.location;
 
@@ -310,12 +310,12 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
           fullfile(outputDir, tempFile));
 
   outputFile = fullfile(outputDir, roiName);
-      
+
   mars_rois2img(fullfile(outputDir, tempFile), ...
                 outputFile, ...
                 spm_vol(volumeDefiningImage));
   delete(fullfile(outputDir, tempFile));
-  
+
   % delete label files
   delete(fullfile(outputDir, '*_mask_labels.mat'));
 
