@@ -6,6 +6,8 @@
 % where each cluster has one label.
 %
 
+run ../../initCppRoi;
+
 gunzip(fullfile('inputs', '*.gz'));
 
 zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');

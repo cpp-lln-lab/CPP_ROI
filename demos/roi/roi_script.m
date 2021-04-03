@@ -10,6 +10,8 @@
 clear;
 clc;
 
+run ../../initCppRoi;
+
 %% ASSUMPTION
 %
 % This assumes that the 2 immages are in the same space (MNI, individual)
