@@ -9,7 +9,7 @@ function outputImage = thresholdToMask(inputImage, threshold)
   img = spm_read_vols(hdr);
 
   p = bids.internal.parse_filename(inputImage);
-  p.type = 'mask';
+  p.suffix = 'mask';
   newName = createFilename(p);
   hdr.fname = spm_file(hdr.fname, 'filename', newName);
 

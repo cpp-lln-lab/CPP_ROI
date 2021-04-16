@@ -2,16 +2,15 @@
 
 function newName = createFilename(p)
 
-  entities = fieldnames(p);
+  entities = fieldnames(p.entities);
 
   newName = '';
   for iEntity = 1:numel(entities)
 
     thisEntity = entities{iEntity};
 
-    if ~any(strcmp(thisEntity, {'filename', 'type', 'ext'})) && ...
-            ~isempty(p.(thisEntity))
-      thisLabel = convertToValidCamelCase(p.(thisEntity));
+    if ~isempty(p.entities.(thisEntity))
+      thisLabel = convertToValidCamelCase(p.entities.(thisEntity));
       newName = [newName '_' thisEntity '-' thisLabel]; %#ok<AGROW>
     end
 
@@ -21,7 +20,7 @@ function newName = createFilename(p)
   newName(1) = [];
 
   ext = p.ext;
-  suffix = p.type;
+  suffix = p.suffix;
   newName = [newName '_', suffix ext];
 
 end

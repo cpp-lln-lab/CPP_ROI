@@ -18,7 +18,7 @@ function outputImage = labelClusters(sourceImage, peakThreshold, extendThreshold
 
   % Write new image with cluster laebelled with their voxel size
   p = bids.internal.parse_filename(sourceImage);
-  p.type = 'dseg'; % discrete segmentation
+  p.suffix = 'dseg'; % discrete segmentation
   newName = createFilename(p);
   hdr.fname = spm_file(hdr.fname, 'filename', newName);
 

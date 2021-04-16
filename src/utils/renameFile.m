@@ -8,7 +8,7 @@ function newName = renameFile(file, specification)
   entitiesToChange = fieldnames(specification);
 
   for iEntity = 1:numel(entitiesToChange)
-    p.(entitiesToChange{iEntity}) = specification.(entitiesToChange{iEntity});
+    p.entities.(entitiesToChange{iEntity}) = specification.(entitiesToChange{iEntity});
   end
 
   newName = createFilename(p);

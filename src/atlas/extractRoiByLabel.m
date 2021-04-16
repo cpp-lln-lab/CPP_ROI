@@ -10,7 +10,7 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
 
   p = bids.internal.parse_filename(sourceImage);
   p.label = labelStruct.ROI;
-  p.type = 'mask';
+  p.suffix = 'mask';
   newName = createFilename(p);
   hdr.fname = spm_file(hdr.fname, 'filename', newName);
 

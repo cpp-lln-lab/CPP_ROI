@@ -327,14 +327,14 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
     p.filename = '';
     p.ext = '.nii';
-    p.type = 'mask';
+    p.suffix = 'mask';
 
     if ~isempty(volumeDefiningImage)
       tmp = bids.internal.parse_filename(volumeDefiningImage);
 
       % if the volume defining image has a space entity we reuse it
       if isfield(p, 'space')
-        p.space = tmp.space;
+        p.entities.space = tmp.space;
       end
 
     end
@@ -347,10 +347,10 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
   label = '';
   if isfield(p, 'label')
-    label = p.label;
+    label = p.entities.label;
   end
 
-  p.label = [label ' ' mask.label];
+  p.entities.label = [label ' ' mask.label];
 
   roiName = createFilename(p);
 

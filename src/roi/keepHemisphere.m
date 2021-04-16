@@ -33,7 +33,7 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   vol(discard, :, :) = NaN;
 
   p = bids.internal.parse_filename(inputImage);
-  p.hs = lower(hemisphere);
+  p.entities.hs = lower(hemisphere);
   newName = createFilename(p);
 
   hdr.fname = spm_file(inputImage, 'filename', newName);
