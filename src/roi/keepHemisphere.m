@@ -1,5 +1,3 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function outputImage = keepHemisphere(inputImage, hemisphere)
   %
   % Only keep the values from one hemisphere. Sets the other half to NaN.
@@ -14,6 +12,8 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   % :param hemisphere: ``'lh'`` or ``'rh'``
   % :type hemisphere: string
   %
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   hdr = spm_vol(inputImage);
   vol = spm_read_vols(hdr);
@@ -33,8 +33,9 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   vol(discard, :, :) = NaN;
 
   p = bids.internal.parse_filename(inputImage);
-  p.hs = lower(hemisphere);
-  newName = createFilename(p);
+  p.entities.hs = lower(hemisphere);
+  p.use_schema = false;
+  newName = bids.create_filename(p);
 
   hdr.fname = spm_file(inputImage, 'filename', newName);
 

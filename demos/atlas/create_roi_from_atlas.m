@@ -1,3 +1,5 @@
+% (C) Copyright 2021 CPP ROI developers
+
 opt.roi.atlas = 'wang';
 opt.roi.name = {'V1v', 'V1d'};
 opt.roi.dir = fullfile(pwd, 'derivatives', 'cpp_roi', 'group');

@@ -1,18 +1,12 @@
-% (C) Copyright 2021 CPP ROI developers
+function newName = renameFile(inputFile, specification)
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
-function newName = renameFile(file, specification)
+  specification.use_schema = false;
+  newName = bids.create_filename(specification, inputFile);
 
-  pth = spm_fileparts(file);
-  p = bids.internal.parse_filename(file);
+  outputFile = spm_file(inputFile, 'filename', newName);
 
-  entitiesToChange = fieldnames(specification);
-
-  for iEntity = 1:numel(entitiesToChange)
-    p.(entitiesToChange{iEntity}) = specification.(entitiesToChange{iEntity});
-  end
-
-  newName = createFilename(p);
-
-  movefile(file, fullfile(pth, newName));
+  movefile(inputFile, outputFile);
 
 end

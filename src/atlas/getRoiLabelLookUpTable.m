@@ -1,6 +1,6 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function roiLabelLUT = getRoiLabelLookUpTable(atlas)
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   if exist(atlas, 'file')
     roiLabelLUT = spm_load(atlas);

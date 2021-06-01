@@ -1,21 +1,23 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function outputImage = renameNeuroSynth(inputImage)
   % give the neurosynth map a name that is more bids friendly
   %
   % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
   %
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   p.filename = spm_file(inputImage, 'filename');
-  p.type = 'probseg';
+  p.suffix = 'probseg';
   p.ext = '.nii';
-  p.space = 'MNI';
+  p.entities.space = 'MNI';
 
   basename = spm_file(inputImage, 'basename');
   parts = strsplit(basename, '_');
-  p.label = ['neurosynth ' parts{1}];
+  p.entities.label = ['neurosynth ' parts{1}];
 
-  newName = createFilename(p);
+  p.use_schema = false;
+
+  newName = bids.create_filename(p);
 
   outputImage = spm_file(inputImage, 'filename', newName);
 

@@ -1,5 +1,3 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
   %
   % Returns a mask to be used as a ROI by ``spm_summarize``.
@@ -66,6 +64,7 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %      mask.global.XYZmm
   %
   %
+  % (C) Copyright 2021 CPP ROI developers
 
   if nargin < 5
     saveImg = false;
@@ -319,6 +318,9 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
   % delete label files
   delete(fullfile(outputDir, '*_mask_labels.mat'));
 
+  json = bids.derivatives_json(outputFile);
+  bids.util.jsonencode(json.filename, json.content);
+
 end
 
 function roiName = createRoiName(mask, volumeDefiningImage)
@@ -327,14 +329,15 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
     p.filename = '';
     p.ext = '.nii';
-    p.type = 'mask';
+    p.suffix = 'mask';
+    p.use_schema = false;
 
     if ~isempty(volumeDefiningImage)
       tmp = bids.internal.parse_filename(volumeDefiningImage);
 
       % if the volume defining image has a space entity we reuse it
       if isfield(p, 'space')
-        p.space = tmp.space;
+        p.entities.space = tmp.space;
       end
 
     end
@@ -347,11 +350,12 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
   label = '';
   if isfield(p, 'label')
-    label = p.label;
+    label = p.entities.label;
   end
 
-  p.label = [label ' ' mask.label];
+  p.entities.label = [label ' ' mask.label];
+  p.use_schema = false;
 
-  roiName = createFilename(p);
+  roiName = bids.create_filename(p);
 
 end

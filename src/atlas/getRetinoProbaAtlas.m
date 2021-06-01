@@ -1,5 +1,3 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function [maxProbaFiles, roiLabels] = getRetinoProbaAtlas()
   %
   % Loads the volumetric data from the
@@ -15,6 +13,7 @@ function [maxProbaFiles, roiLabels] = getRetinoProbaAtlas()
   %   PMID: 25452571
   %   Probabilistic Maps of Visual Topography in Human Cortex
   %
+  % (C) Copyright 2021 CPP ROI developers
 
   unzipAtlas('wang');
 
