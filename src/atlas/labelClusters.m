@@ -1,9 +1,9 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function outputImage = labelClusters(sourceImage, peakThreshold, extendThreshold)
-
+  %
   % Adapted from:
   % https://en.wikibooks.org/wiki/SPM/How-to#How_to_remove_clusters_under_a_certain_size_in_a_binary_mask?
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   hdr = spm_vol(sourceImage);
 
@@ -19,12 +19,17 @@ function outputImage = labelClusters(sourceImage, peakThreshold, extendThreshold
   % Write new image with cluster laebelled with their voxel size
   p = bids.internal.parse_filename(sourceImage);
   p.suffix = 'dseg'; % discrete segmentation
-  newName = createFilename(p);
+  p.use_schema = false;
+
+  newName = bids.create_filename(p);
   hdr.fname = spm_file(hdr.fname, 'filename', newName);
 
   % Cluster labels as their size.
   spm_write_vol(hdr, vol);
   outputImage = hdr.fname;
+
+  json = bids.derivatives_json(outputImage);
+  bids.util.jsonencode(json.filename, json.content);
 
 end
 

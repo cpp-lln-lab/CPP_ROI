@@ -1,6 +1,6 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function atlasDir = returnAtlasDir(atlas)
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   atlasDir = fullfile(fileparts(mfilename('fullpath')), '..', '..', 'atlas');
 
