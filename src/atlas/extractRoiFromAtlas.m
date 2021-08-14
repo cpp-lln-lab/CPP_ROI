@@ -6,7 +6,7 @@ function roiImage = extractRoiFromAtlas(roiDir, atlas, roiName, hemisphere)
 
     [maxProbaFiles, roiLabels] = getRetinoProbaAtlas();
 
-    if strcmp(hemisphere, 'lh')
+    if strcmp(hemisphere, 'L')
       sourceImage = maxProbaFiles(1, :);
     else
       sourceImage = maxProbaFiles(2, :);
@@ -24,8 +24,8 @@ function roiImage = extractRoiFromAtlas(roiDir, atlas, roiName, hemisphere)
 
   entities = struct('space', 'MNI', ...
                     'hemi', hemisphere, ...
-                    'desc', atlas, ...
-                    'label', roiName);
+                    'label', roiName, ...
+                    'desc', atlas);
   nameStructure = struct('entities', entities, ...
                          'suffix', 'mask', ...
                          'ext', '.nii');
