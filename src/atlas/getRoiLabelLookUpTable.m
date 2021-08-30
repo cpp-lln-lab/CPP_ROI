@@ -10,10 +10,16 @@ function roiLabelLUT = getRoiLabelLookUpTable(atlas)
   atlasDir = returnAtlasDir(atlas);
 
   switch lower(atlas)
-
+      
     case 'wang'
+        
+        roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
-      roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
+    case 'neuromorphometrics'
+
+      roiLabelLUT = spm_load(fullfile(returnAtlasDir(),...
+          'space-IXI549Space_desc-neuromorphometrics_dseg.csv'));
+       
 
     case 'anatomy_toobox'
 

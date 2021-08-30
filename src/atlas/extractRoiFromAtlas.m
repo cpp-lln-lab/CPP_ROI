@@ -11,7 +11,13 @@ function roiImage = extractRoiFromAtlas(roiDir, atlas, roiName, hemisphere)
     else
       sourceImage = maxProbaFiles(2, :);
     end
-
+    
+  elseif   strcmp(atlas, 'neuromorphometrics')
+      
+      sourceImage = fullfile(returnAtlasDir(), 'space-IXI549Space_desc-neuromorphometrics_dseg.nii');
+      
+      roiLabels = getRoiLabelLookUpTable(atlas);
+    
   end
 
   roiIdx = strcmp(roiName, roiLabels.ROI);
