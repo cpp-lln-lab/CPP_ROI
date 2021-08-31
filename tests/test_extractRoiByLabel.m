@@ -8,7 +8,7 @@ function test_suite = test_extractRoiByLabel() %#ok<*STOUT>
   initTestSuite;
 end
 
-function test_lut_wang()
+function test_lut_neuromorphometrics()
 
   [atlasFile, lut] = getAtlasAndLut('neuromorphometrics');
 

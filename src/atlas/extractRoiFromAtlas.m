@@ -1,49 +1,78 @@
-function roiImage = extractRoiFromAtlas(roiDir, atlas, roiName, hemisphere)
+function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
+  %
+  % Outputs a ROI image and side car json for a given atlas, roi name (as
+  % defined in the look up table of that atlas) and a hemisphere
+  %
+  % USAGE::
+  %
+  %   roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
+  %
+  % :param outputDir:
+  % :param atlasName: ``wang``, ``neuromorphometrics``
+  % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
+  % :param hemisphere: ``L`` or ``R``
+  % :type outputDir: string
+  % :type atlasName: string
+  % :type roiName: string
+  % :type hemisphere: string
   %
   % (C) Copyright 2021 CPP ROI developers
 
-  if strcmp(atlas, 'wang')
+  [atlasFile, lut] = getAtlasAndLut(atlasName);
 
-    [maxProbaFiles, roiLabels] = getRetinoProbaAtlas();
+  if strcmp(atlasName, 'wang')
 
     if strcmp(hemisphere, 'L')
-      sourceImage = maxProbaFiles(1, :);
+      atlasFile = atlasFile(1, :);
     else
-      sourceImage = maxProbaFiles(2, :);
+      atlasFile = atlasFile(2, :);
     end
 
-  elseif   strcmp(atlas, 'neuromorphometrics')
+    roiIdx = strcmp(roiName, lut.ROI);
 
-    sourceImage = fullfile(returnAtlasDir(), 'space-IXI549Space_desc-neuromorphometrics_dseg.nii');
+  elseif strcmp(atlasName, 'neuromorphometrics')
 
-    roiLabels = getRoiLabelLookUpTable(atlas);
+    roiName = regexprep(roiName, '(Left )|(Right )', '');
+
+    if strcmp(hemisphere, 'L')
+      prefix = 'Left ';
+    elseif strcmp(hemisphere, 'L')
+      prefix = 'Right ';
+    end
+
+    roiIdx = strcmp([prefix roiName], lut.ROI);
 
   end
 
-  roiIdx = strcmp(roiName, roiLabels.ROI);
-  label = roiLabels.label(roiIdx);
+  % create ROI
+  if isempty(roiIdx) || ~any(roiIdx)
+    disp(lut.ROI);
+    error('No ROI named %s for atlas %s. See list of available ROIs above', ...
+          roiName, atlasName);
+  end
+  label = lut.label(roiIdx);
 
-  labelStruct = struct('ROI', [hemisphere roiName], ...
+  labelStruct = struct('ROI', roiName, ...
                        'label', label);
 
-  roiImage = extractRoiByLabel(sourceImage, labelStruct);
+  roiImage = extractRoiByLabel(atlasFile, labelStruct);
 
+  % rename file
   entities = struct('space', 'MNI', ...
                     'hemi', hemisphere, ...
                     'label', roiName, ...
-                    'desc', atlas);
+                    'desc', atlasName);
   nameStructure = struct('entities', entities, ...
                          'suffix', 'mask', ...
                          'ext', '.nii');
-
   nameStructure.use_schema = false;
-
   newName = bids.create_filename(nameStructure);
 
-  movefile(roiImage, fullfile(roiDir, newName));
+  movefile(roiImage, fullfile(outputDir, newName));
 
-  roiImage = fullfile(roiDir, newName);
-
+  % create side car json
+  roiImage = fullfile(outputDir, newName);
   json = bids.derivatives_json(roiImage);
   bids.util.jsonencode(json.filename, json.content);
+
 end
