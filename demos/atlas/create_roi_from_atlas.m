@@ -6,7 +6,7 @@ opt.roi.dir = fullfile(pwd, 'derivatives', 'cpp_roi', 'group');
 
 spm_mkdir(opt.roi.dir);
 
-hemi = {'lh', 'rh'};
+hemi = {'L', 'H'};
 
 for iHemi = 1:numel(hemi)
 
