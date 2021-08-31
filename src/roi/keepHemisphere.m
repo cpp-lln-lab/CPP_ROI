@@ -15,6 +15,8 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   %
   % (C) Copyright 2021 CPP ROI developers
 
+  % TODO change the hemi entity
+
   hdr = spm_vol(inputImage);
   vol = spm_read_vols(hdr);
 

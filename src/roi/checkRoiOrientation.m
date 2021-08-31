@@ -1,9 +1,15 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function [sts, images] = checkRoiOrientation(referenceImage, imagesToCheck)
-
-  % referenceImage - better if fullfile path
-  % imagesToCheck - better if fullfile path
+  %
+  % USAGE::
+  %
+  %  [sts, images] = checkRoiOrientation(referenceImage, imagesToCheck)
+  %
+  % :param referenceImage: better if fullfile path
+  % :type referenceImage: string
+  % :param imagesToCheck: better if fullfile path
+  % :type imagesToCheck: string
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   % TODO
   % - make it possible to pass several images in imagesToCheck at one
