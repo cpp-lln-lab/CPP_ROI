@@ -1,9 +1,9 @@
 function I = get_item_struct(o, item)
 % get whole item structure, including parameters
 % FORMAT I = get_item_struct(o, item)
-% 
+%
 % This is used internally, and might be useful for debugging
-% 
+%
 % o       - object
 % item    - item name
 %

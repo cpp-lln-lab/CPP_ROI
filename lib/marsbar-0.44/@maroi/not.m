@@ -1,5 +1,5 @@
 function o = not(o1)
-% overloaded not function 
+% overloaded not function
 %
 % $Id$
 

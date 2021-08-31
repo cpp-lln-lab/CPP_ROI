@@ -19,7 +19,7 @@ function [o, others] = mardo_5(params, others, varargin)
 % The constructor can also be called to give class functions, where the
 % name of the class function is a character string which is one of:
 %    'spm_filter' - applies spm_filter routine to passed args
-% 
+%
 % $Id: mardo_5.m 607 2006-03-30 20:54:55Z matthewbrett $
 
 myclass = 'mardo_5';
@@ -55,7 +55,7 @@ if ischar(params)
             params));
   end
 end
-    
+
 % Deal with passed objects of this (or child) class
 if isa(params, myclass)
   o = params;
@@ -87,7 +87,7 @@ if ~isa(uo, 'mardo') % mardo object not passed
 else
   % fill params with other parameters
   params = mars_struct('ffillmerge', params, others);
-end  
+end
 
 % parse parameters into those for this object, children
 [params, others] = mars_struct('ffillsplit', defstruct, params);

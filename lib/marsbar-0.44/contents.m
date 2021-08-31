@@ -30,7 +30,7 @@
 %   @mardo/block_means           - method returns means for blocks in design
 %   @mardo/cd_images             - method for changing path to image files in design
 %   @mardo/contrasts             - method to get or set contrasts
-%   @mardo/data                  - method to get or set data object 
+%   @mardo/data                  - method to get or set data object
 %   @mardo/des_struct            - get/set method for des_struct field
 %   @mardo/descrip               - method gets cell string description of design
 %   @mardo/design_matrix         - method returns design matrix from design
@@ -54,7 +54,7 @@
 %   @mardo/has_images            - returns 1 if design contains images, NaN if not known
 %   @mardo/has_whitener          - returns 1 if design has whitening filter
 %   @mardo/image_names           - method returning image file names for design
-%   @mardo/images                - method to get or set images 
+%   @mardo/images                - method to get or set images
 %   @mardo/is_fmri               - method returns 1 if this is an fmri design
 %   @mardo/is_mars_estimated     - method returns 1 if design has been estimated in MarsBaR
 %   @mardo/is_marsed             - returns 1 if design has been processed with MarsBaR
@@ -83,10 +83,10 @@
 %   @mardo/subsref               - method to overload the . notation.
 %   @mardo/summary               - method returns cell array of strings describing design
 %   @mardo/swd                   - method to get/set design directory
-%   @mardo/swd_writable          - returns true if swd directory can be written to 
+%   @mardo/swd_writable          - returns true if swd directory can be written to
 %   @mardo/type                  - returns SPM version string corresponding to design type
 %   @mardo/ui_et_edit            - method to edit invidual event types in design
-%   @mardo/ui_et_edit_cb         - method to handle callbacks from ui_et_edit 
+%   @mardo/ui_et_edit_cb         - method to handle callbacks from ui_et_edit
 %   @mardo/ui_event_types        - ui method for selection / editing of event types
 %   @mardo/ui_event_types_cb     - method to handle callbacks from ui_event_types
 %   @mardo/ui_ft_design_data     - method plots FT of design and data to graphics window
@@ -98,7 +98,7 @@
 %   @mardo/private/pr_refresh_et - Refreshes data and display of event type window after edit
 %   @mardo/private/pr_sort_evs   - function to sort event according to sort type
 %
-%   @mardo_2/add_trial_f       - method to add trial-specific F contrasts  
+%   @mardo_2/add_trial_f       - method to add trial-specific F contrasts
 %   @mardo_2/apply_filter      - applies filter in design to data
 %   @mardo_2/autocorr          - method to set autocorrelation types for design
 %   @mardo_2/bf_dt             - method returns length of time bin for basis functions
@@ -109,12 +109,12 @@
 %   @mardo_2/convert_vols      - method that converts vol structs in design and converts to format 'ver'
 %   @mardo_2/design_vol        - returns vols in appropriate format for saving in design
 %   @mardo_2/estimate          - estimate method - estimates GLM for SPM2 model
-%   @mardo_2/event_cols        - method gets design columns for single event 
+%   @mardo_2/event_cols        - method gets design columns for single event
 %   @mardo_2/event_onsets      - method gets onsets and durations for event/session
-%   @mardo_2/event_regressor   - method gets estimated regressor for single event 
+%   @mardo_2/event_regressor   - method gets estimated regressor for single event
 %   @mardo_2/event_specs       - method to return event specifications for all event in model
 %   @mardo_2/event_x_fir       - method to return FIR design matrix columns for session
-%   @mardo_2/fill              - fills missing entries from SPM FMRI design matrix 
+%   @mardo_2/fill              - fills missing entries from SPM FMRI design matrix
 %   @mardo_2/fwhm              - method returns FWHM, or empty if not available
 %   @mardo_2/get_images        - method to get image vols from design
 %   @mardo_2/has_autocorr      - returns 1 if object contains autocorrelation specification
@@ -131,7 +131,7 @@
 %   @mardo_2/tr                - method returns TR in seconds, or empty if not available
 %   @mardo_2/type              - returns SPM version string corresponding to design type
 %   @mardo_2/ui_build          - method to create / fill design via GUI
-%   @mardo_2/ui_get_event      - method to select an event 
+%   @mardo_2/ui_get_event      - method to select an event
 %   @mardo_2/ui_get_filter     - method to get filter via GUI
 %   @mardo_2/ui_report         - method for SPM2 design reporting
 %   @mardo_2/ui_report_fmri    - Interactive review of fMRI design matrix
@@ -160,7 +160,7 @@
 %   @mardo_5/autocorr       - method to set autocorrelation types for design
 %   @mardo_5/convert_vols   - method that converts vol structs in design and converts to format 'ver'
 %   @mardo_5/estimate       - estimate method - estimates GLM for SPM2 model
-%   @mardo_5/fill           - fills missing entries from SPM FMRI design matrix 
+%   @mardo_5/fill           - fills missing entries from SPM FMRI design matrix
 %   @mardo_5/mardo_5        - class constructor for SPM5 MarsBaR design object
 %   @mardo_5/native_vol_ver - return string specifying native vol type
 %   @mardo_5/type           - returns SPM version string corresponding to design type
@@ -196,7 +196,7 @@
 %   @mardo_5/private/pr_stat_compute       - private function to compute statistics for SPM2 design
 %   @mardo_5/private/pr_stat_compute_mv    - private function to compute mutlivariate statistics across ROIs
 %
-%   @mardo_99/add_trial_f       - method to add trial-specific F contrasts  
+%   @mardo_99/add_trial_f       - method to add trial-specific F contrasts
 %   @mardo_99/apply_filter      - applies filter in design to data
 %   @mardo_99/autocorr          - method to report lack of autocorrelation options for SPM99
 %   @mardo_99/bf_dt             - method returns length of time bin for basis functions
@@ -207,12 +207,12 @@
 %   @mardo_99/convert_vols      - method that converts vol structs in design and converts to format 'ver'
 %   @mardo_99/design_vol        - returns vols in appropriate format for saving in design
 %   @mardo_99/estimate          - estimate method - estimates GLM for SPM99 model
-%   @mardo_99/event_cols        - method gets design columns for single event 
+%   @mardo_99/event_cols        - method gets design columns for single event
 %   @mardo_99/event_onsets      - method gets (estimated) onsets and durations for event/session
-%   @mardo_99/event_regressor   - method gets estimated regressor for single event 
+%   @mardo_99/event_regressor   - method gets estimated regressor for single event
 %   @mardo_99/event_specs       - method to return event specifications for all event in model
 %   @mardo_99/event_x_fir       - method to return FIR design matrix columns for session
-%   @mardo_99/fill              - fills missing entries from SPM FMRI design matrix 
+%   @mardo_99/fill              - fills missing entries from SPM FMRI design matrix
 %   @mardo_99/fwhm              - method returns FWHM, or empty if not available
 %   @mardo_99/get_images        - method to get image vols from design
 %   @mardo_99/has_autocorr      - returns 1 if object contains autocorrelation specification
@@ -227,7 +227,7 @@
 %   @mardo_99/tr                - method returns TR in seconds, or empty if not available
 %   @mardo_99/type              - returns SPM version string corresponding to design type
 %   @mardo_99/ui_build          - method to create / fill design via GUI
-%   @mardo_99/ui_get_event      - method to select an event 
+%   @mardo_99/ui_get_event      - method to select an event
 %   @mardo_99/ui_get_filter     - method to get filter via GUI
 %   @mardo_99/ui_report         - mathod for SPM99 design reporting
 %   @mardo_99/ui_report_fmri    - Interactive review of fMRI design matrix
@@ -272,38 +272,38 @@
 %   @marmoire/private/pr_isempty    - private function returns 1 if there is no data, or filename
 %   @marmoire/private/pr_needs_save - private function returning 1 if item data needs save
 %
-%   @maroi/and           - overloaded add function 
+%   @maroi/and           - overloaded add function
 %   @maroi/are_same      - returns 1 if rois are the same
 %   @maroi/back2base     - back2base method - check for spacebase, transform thereto
 %   @maroi/binarize      - binarize - returns / sets binarize value for object
 %   @maroi/c_o_m         - c_o_m method - calculates unweighted centre of mass
 %   @maroi/classdata     - classdata method - sets/gets class data
 %   @maroi/descrip       - name - returns / sets name value for object
-%   @maroi/display       - display - method 
-%   @maroi/eq            - overloaded eq function 
+%   @maroi/display       - display - method
+%   @maroi/eq            - overloaded eq function
 %   @maroi/flip_lr       - flips ROI left / right
-%   @maroi/ge            - overloaded ge function 
+%   @maroi/ge            - overloaded ge function
 %   @maroi/get_marsy     - gets data in ROIs from images
-%   @maroi/getdata       - getdata method - fetches time series data for ROI from images 
-%   @maroi/gt            - overloaded gt (greater than) function 
+%   @maroi/getdata       - getdata method - fetches time series data for ROI from images
+%   @maroi/gt            - overloaded gt (greater than) function
 %   @maroi/has_space     - has_space method - returns true if object has a native space
 %   @maroi/history       - history - returns / sets history value for object
 %   @maroi/label         - label - returns / sets label value for object
-%   @maroi/le            - overloaded le (less than or equal to) function 
+%   @maroi/le            - overloaded le (less than or equal to) function
 %   @maroi/loadobj       - loadobj method - fills fields needed for backwards compatibility
-%   @maroi/lt            - overloaded lt (less than) function 
+%   @maroi/lt            - overloaded lt (less than) function
 %   @maroi/maroi         - maroi - class constructor for umbrella ROI object
 %   @maroi/maroi_matrix  - maroi_matrix method - converts roi to maroi matrix type
-%   @maroi/minus         - overloaded minus function 
-%   @maroi/mrdivide      - overloaded mrdivide (matrix right divide) function 
-%   @maroi/mtimes        - overloaded mtimes function 
+%   @maroi/minus         - overloaded minus function
+%   @maroi/mrdivide      - overloaded mrdivide (matrix right divide) function
+%   @maroi/mtimes        - overloaded mtimes function
 %   @maroi/native_space  - native_space method - returns native space of object
-%   @maroi/ne            - overloaded ne function 
-%   @maroi/not           - overloaded not function 
-%   @maroi/or            - overloaded or function 
+%   @maroi/ne            - overloaded ne function
+%   @maroi/not           - overloaded not function
+%   @maroi/or            - overloaded or function
 %   @maroi/paramfields   - returns struct with fields from maroi object useful for copying objects
-%   @maroi/plus          - overloaded plus function 
-%   @maroi/rdivide       - overloaded rdivide function 
+%   @maroi/plus          - overloaded plus function
+%   @maroi/rdivide       - overloaded rdivide function
 %   @maroi/realpts       - realpts method - returns 3xN XYZ matrix in mm
 %   @maroi/rle           - run length encoding method
 %   @maroi/roithresh     - roithresh - returns / sets roithresh value for object
@@ -312,9 +312,9 @@
 %   @maroi/saveroi       - saveroi method - checks fname, sets source field, saves object
 %   @maroi/source        - source - returns / sets source value for object
 %   @maroi/spm_hold      - hold - returns / sets hold value for object
-%   @maroi/times         - overloaded times function 
+%   @maroi/times         - overloaded times function
 %   @maroi/volume        - volume method - returns volume of ROI in mm
-%   @maroi/xor           - overloaded xor function 
+%   @maroi/xor           - overloaded xor function
 %
 %   @maroi/private/my_classdata - my_classdata method - sets/gets class data
 %   @maroi/private/my_loadroi   - my_loadroi function - loads ROI from file, sets source field
@@ -349,7 +349,7 @@
 %   @maroi_matrix/spm_mat        - spm_mat method - returns mat file defining orientation etc
 %   @maroi_matrix/voxpts         - voxpts method - returns 3xN ijk matrix in voxels
 %
-%   @maroi_matrix/private/my_rld - function to do run length decoding 
+%   @maroi_matrix/private/my_rld - function to do run length decoding
 %   @maroi_matrix/private/my_rle - method to do run length encoding on matrix
 %
 %   @maroi_pointlist/flip_lr         - flips ROI left / right
@@ -396,7 +396,7 @@
 %   @marsy/n_regions           - get number of regions
 %   @marsy/n_time_points       - get number of time_points
 %   @marsy/ne                  - method overrides ~= operator
-%   @marsy/region              - gets / sets data for region or regions 
+%   @marsy/region              - gets / sets data for region or regions
 %   @marsy/region_data         - method gets or sets data for region(s) as cell array
 %   @marsy/region_descrip      - method gets or sets descrip for region(s) as cell array
 %   @marsy/region_field        - method gets or sets data for region field
@@ -416,7 +416,7 @@
 %   @marsy/summary_size        - method returns number of time points x number of regions
 %   @marsy/ui_plot             - method plots data in various formats
 %   @marsy/verbose             - get/set method for verbose field
-%   @marsy/xyz                 - gets XYZ coordinates for region 
+%   @marsy/xyz                 - gets XYZ coordinates for region
 %   @marsy/y_struct            - get/set method for y_struct field
 %
 %   @marsy/private/pr_sum_func - creates summary stats for region data
@@ -438,6 +438,6 @@
 %   spm99/mars_veropts    - returns SPM version specific parameters
 %   spm99/spm_close_vol   - Close image volume - for SPM2 / SPM99 compatibility
 %   spm99/spm_create_vol  - Wrapper for spm_create_image, for compatibility with SPM2
-%   spm99/spm_read_hdr    - SPM2 routine to read (SPM customised) Analyze header 
+%   spm99/spm_read_hdr    - SPM2 routine to read (SPM customised) Analyze header
 %   spm99/spm_write_plane - Write a transverse plane of image data.
 %   spm99/spm_write_vol   - Write an image volume to disk, setting scales and offsets as appropriate

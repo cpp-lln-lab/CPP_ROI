@@ -63,7 +63,7 @@ if V == 1, return, end
 
 % 2nd order terms
 %---------------------------------------------------------------------------
-for i = 1:length(U) 
+for i = 1:length(U)
 for j = i:length(U)
 	ind   = [];
 	for p = 1:size(bf,2)
@@ -77,7 +77,7 @@ for j = i:length(U)
 		X      = [X x.*y];
 
 		% indices and regressor names
-		%-----------------------------------------------------------	
+		%-----------------------------------------------------------
 		str            = sprintf('%s*bf(%i)x%s*bf(%i)',...
 					      U(i).name{1},p,...
 					      U(j).name{1},q);

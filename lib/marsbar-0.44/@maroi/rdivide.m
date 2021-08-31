@@ -1,5 +1,5 @@
 function o = rdivide(o1, o2)
-% overloaded rdivide function 
+% overloaded rdivide function
 %
 % $Id$
 

@@ -2,7 +2,7 @@ function pt = c_o_m(o, sp, pt_type)
 % c_o_m method - calculates centre of mass
 %
 % $Id$
-  
+
 if nargin < 2
   sp = '';
 end

@@ -2,7 +2,7 @@ function o = maroi_box(params)
 % maroi_box - class constructor
 % inputs [defaults]
 %  params  - a structure containing any fields for a maroi parent and
-%            .centre - a 1x3 coordinate in mm 
+%            .centre - a 1x3 coordinate in mm
 %            .widths - 1x3 widths in X Y Z in mm
 %
 % $Id$

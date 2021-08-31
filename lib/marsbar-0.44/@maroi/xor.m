@@ -1,5 +1,5 @@
 function o = xor(o1, o2)
-% overloaded xor function 
+% overloaded xor function
 %
 % $Id$
 

@@ -16,7 +16,7 @@ if length(obj) > 1 % array of objects
     disp(' ');
     disp(src);
     disp(' ');
-  end    
+  end
 else % single object
   X = char(summary(obj));
   if isequal(get(0,'FormatSpacing'),'compact')
@@ -31,5 +31,5 @@ else % single object
     disp(' ');
     disp(X)
     disp(' ');
-  end    
+  end
 end

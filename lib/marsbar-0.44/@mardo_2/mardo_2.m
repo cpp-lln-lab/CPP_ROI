@@ -15,7 +15,7 @@ function [o, others] = mardo_2(params, others, varargin)
 % if the contained design is an SPM2 design, returns
 % the object unchanged if not.  If it is an SPM2
 % design, it claims ownership of the passed object.
-% 
+%
 % Note the third argument.  If this call is a call as a constructor (i.e
 % not an action string call), this can be the 'child_pass_f', which is 1
 % if this call is from a child, passing a mardo object to be handled by
@@ -25,7 +25,7 @@ function [o, others] = mardo_2(params, others, varargin)
 % The constructor can also be called to give class functions, where the
 % name of the class function is a character string which is one of:
 %    'spm_filter' - applies spm_filter routine to passed args
-% 
+%
 % $Id$
 
 myclass = 'mardo_2';
@@ -66,7 +66,7 @@ if ischar(params)
             params));
   end
 end
-    
+
 % Deal with passed objects of this (or child) class
 if isa(params, myclass)
   o = params;
@@ -79,7 +79,7 @@ if isa(params, myclass)
   return
 end
 
-% Set child_pass_f 
+% Set child_pass_f
 child_pass_f = arg3;
 
 % normal call is via mardo constructor
@@ -104,7 +104,7 @@ if ~isa(uo, 'mardo') % mardo object not passed
 else
   % fill params with other parameters
   params = mars_struct('ffillmerge', params, others);
-end  
+end
 
 % parse parameters into those for this object, children
 [params, others] = mars_struct('ffillsplit', defstruct, params);

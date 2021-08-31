@@ -21,7 +21,7 @@ function [hrf,p] = pr_spm_hrf(RT,P);
 
 % global parameter
 %-----------------------------------------------------------------------
-global fMRI_T; 
+global fMRI_T;
 if isempty(fMRI_T), fMRI_T = 16; end;
 
 % default parameters

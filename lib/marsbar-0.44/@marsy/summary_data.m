@@ -1,6 +1,6 @@
 function [Y,Yvar,o] = summary_data(o, sumfunc_str)
 % method to get summary data, maybe set sumfunc
-% 
+%
 % Inputs
 % o              - marsy data object
 % sumfunc_str    - [optional] summary function string; one of
@@ -13,12 +13,12 @@ function [Y,Yvar,o] = summary_data(o, sumfunc_str)
 % Yvar           - [optional] variance time course
 % o              - possibly changed marsy data object
 %
-% e.g. 
+% e.g.
 % Y = summary_data(o);
 % [Y Yvar o] = summary_data(o, 'median');
-% 
+%
 % $Id$
-  
+
 if nargin > 1
   o = sumfunc(o, sumfunc_str);
 end
@@ -27,15 +27,15 @@ if isempty(s_f)
   error('No summary function specified');
 end
 
-% Get a copy of object structure 
+% Get a copy of object structure
 st = y_struct(o);
 
-% refresh summary data if necessary 
+% refresh summary data if necessary
 % (if sumfunc passed, OR if data is not yet available)
 if nargin > 1 | ...              % sumfunc passed
       ~isfield(st, 'Y') | ...    % Y not yet calculated
       (nargout > 2 & ~isfield(st, 'Yvar')) % Yvar needed
-  
+
   % If we only have one (or zero) columns per ROI, job is simple
   Ys      = region_data(o);
   sz      = summary_size(o);
@@ -55,7 +55,7 @@ if nargin > 1 | ...              % sumfunc passed
       if isempty(Ys{i}) % set to NaN if no data to summarize
 	Y(:,i) = NaN;
 	Yvar(:,i) = NaN;
-      else      
+      else
 	[Y(:,i) Yvar(:,i)] = pr_sum_func(Ys{i}, s_f, Ws{i});
       end
     end
@@ -74,5 +74,3 @@ else % not recalculated
     Yvar = st.Yvar;
   end
 end
-
-

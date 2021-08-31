@@ -1,16 +1,16 @@
 function tf = save_spm(D, fname);
 % method to save design as SPM format design structure
 % FORMAT tf = save_spm(D, fname);
-% 
+%
 % Inputs
 % D      - design object
 % fname  - filename
-% 
+%
 % Outputs
 % tf     - flag ==1 if successful
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   if is_spm_estimated(D)
     fname = 'SPM.mat';
@@ -37,7 +37,7 @@ else
   SPM.swd = fileparts(fname);
 end
 
-try 
+try
   if verbose(D)
     fprintf('Saving design to file %s\n', fname);
   end

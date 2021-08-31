@@ -1,21 +1,21 @@
 function [res, o] = do_save(o, item, flags, filename)
 % method  to save data for item
 % FORMAT [res, o] = do_save(o, item, flags, filename)
-% 
+%
 % o        - object
 % item     - item name
 % flags    - flags for save (see save_item_data.m for details)
 % filename - (maybe) filename for save
-% 
+%
 % Returns
 % saved_f  - flag set to 1 if save done, 0 not done, -1 if cancel
-% o        - possibly modified object 
+% o        - possibly modified object
 %
 % The function is written like this so that, in the future, we can use
 % callbacks in this code to manipulate all the objects in the armoire
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need item');
 end
@@ -49,7 +49,7 @@ if pr_needs_save(item_struct) || isfield(flags, 'force') % force flag
     % Work out prompt
     if isfield(flags, 'prompt')
       prompt = flags.prompt;
-    else 
+    else
       prompt = item_struct.title;
     end
     if isfield(flags, 'prompt_prefix')
@@ -61,16 +61,16 @@ if pr_needs_save(item_struct) || isfield(flags, 'force') % force flag
     if isfield(flags, 'ync')
       save_yn = questdlg(['Save ' prompt '?'],...
 			 'Save', 'Yes', 'No', 'Cancel', 'Yes');
-      if strcmp(save_yn, 'Cancel'), res = -1; return, end      
+      if strcmp(save_yn, 'Cancel'), res = -1; return, end
       if strcmp(save_yn, 'No')
 	if isfield(flags, 'no_no_save')
 	  o  = set_item_param(o, item, 'has_changed', 0);
 	end
-	res = 0; 
+	res = 0;
 	return
       end
     end
-    pr = ['Filename to save ' prompt]; 
+    pr = ['Filename to save ' prompt];
     [f p] = mars_uifile('put', item_struct.filter_spec, pr, filename);
     if all(f==0), res = -1; return, end
     filename = fullfile(p, f);

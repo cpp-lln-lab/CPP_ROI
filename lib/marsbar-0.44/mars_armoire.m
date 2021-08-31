@@ -2,45 +2,45 @@ function varargout = mars_armoire(action, item, data, filename)
 % multifunction function to get/set various stores of stuff
 % (armoire is the French for cupboard).
 % FORMAT varargout = mars_armoire(action, item, data, filename)
-%  
-% This cupboard is to put items which I will want to fish out 
+%
+% This cupboard is to put items which I will want to fish out
 % from time to time.
-% 
+%
 % The items may well be associated with a filename
-% If they are associated with a filename when set, they 
+% If they are associated with a filename when set, they
 % are assumed to have been saved already.
 % If not, they are flagged as awaiting a save
 %
-% If the data changes, you can indicate this with the 
+% If the data changes, you can indicate this with the
 % update method, which changes the data, and flags for a save
-% 
+%
 % In terms of the program structure, the function acts an object container,
 % but where the objects are only half implemented, in this case as fields in
-% a global variable MARMOIRE. 
+% a global variable MARMOIRE.
 %
 % The permissable actions are:
 %
 % add            - add an item to the armoire
 % exist          - ask if there an exists an item of given name
 % add_if_absent  - adds item if it does not yet exist
-% set            - sets data for item 
+% set            - sets data for item
 % get            - gets data from item
 % set_ui         - sets data, getting via UI
 % save           - save data for item, if required
 % save_ui        - saves, using GUI to ask for filename
 %                  For save and save_ui, the 'data' argument
-%                  can contain a structure with flags.  
+%                  can contain a structure with flags.
 %                  Fields in flag structure can be
 %                  'force' - force save even if not flagged as needed
 %                  'warn_empty' - GUI warn if no data to save
 %                  'ync' - start save with save y/n/cancel dialog
-%                  'prompt' - prompt for save; 
+%                  'prompt' - prompt for save;
 %                  'prompt_suffix - suffix for prompt
 %                  'prompt_prefix - prefix for prompt
 %                  'ui' - use UI prompts for save - forced if save_ui
 %                  'no_no_save' - if 'no' is chosen in the save dialog,
 %                     contents are flagged as not needing a save in
-%                     the future (has_changed flag set to 0)  
+%                     the future (has_changed flag set to 0)
 % save 'all'     - saves data for all items, if required
 % update         - updates data, sets flag to show change
 % clear          - clears data for item
@@ -49,17 +49,17 @@ function varargout = mars_armoire(action, item, data, filename)
 %
 % And for use in debugging:
 % dump           - returns contents of the underling variable
-%   
+%
 % for any other action string, mars_armoire will look to see if the action
 % matches any of the field names in the structures and get/set this
 % fieldname value (set if data is not empty, get otherwise)
-%                 
+%
 % Each item is stored in a field in the global variable
 %
 % The name of the field is the 'item' argument to this function
 % Each item field requires the following fields
-%                 
-% data            - the data 
+%
+% data            - the data
 %                   (or a filename which loads as the data - see the
 %                   char_is_filename field)
 % has_changed     - flag, if set, means data has changed since first set
@@ -67,17 +67,17 @@ function varargout = mars_armoire(action, item, data, filename)
 %                   save is requested.  Saves can also be forced.
 % leave_as_file   - flag, if set, will attempt to leave the data, defined
 %                   by the filename, on the disk, not in memory, and only
-%                   load the data for a 'get'.  
+%                   load the data for a 'get'.
 %                   Otherwise, if a set occurs, and the data field is
 %                   empty, will load data into the global variable when
 %                   'set'ing field and leave it there.
 %                   If the data changes, and requires a save, this field
 %                   has no function, until the next save.
 % file_name       - file name of .mat file containing data
-%                   If data is empty, and file_name is not, 
+%                   If data is empty, and file_name is not,
 %                   an attempt to 'get' data will load contents of
 %                   file_name
-% default_file_name - default filename offered for save 
+% default_file_name - default filename offered for save
 % file_type       - type of file to load ('mat' or 'ascii')
 % char_is_filename - flag, if set, char data is assumed to be a filename
 % filter_spec     - filter spec for uigetfile (see help uigetfile)
@@ -93,30 +93,30 @@ function varargout = mars_armoire(action, item, data, filename)
 %                   well as 'set'
 % set_action_if_clear - flag, if set, applied set_action for 'clear' as
 %                   well as 'set'
-% 
+%
 % $Id$
-  
+
 % Programmers' notes
 % ------------------
 % set_action callbacks
 % callbacks should be one of the following two formats;
 %
 % [data errf msg] = my_function(args)  or
-% [item_field errf msg] = my_function(args) 
+% [item_field errf msg] = my_function(args)
 %
-% The first form just returns the data desired to be set, 
+% The first form just returns the data desired to be set,
 % the second returns the whole item field, where the data
 % is contained in the field 'data'.
-% if 'errf' is set, the routine warns, and abort the set with 
+% if 'errf' is set, the routine warns, and abort the set with
 % the 'msg'.
 %
 % The available args are:
 % I      - proposed whole item field contents
-% data   - proposed data to be inserted 
+% data   - proposed data to be inserted
 % passed_filename - filename passed to function
-% 
+%
 % and anything else...
-  
+
 % NaN for an argument signals it has not been passed
 % empty means that it was passed, but was empty
 if nargin < 1 % no action
@@ -178,7 +178,7 @@ switch lower(action)
   i_down_dump(data);
  case 'add_if_absent'
   if ~mars_armoire('exist', item)
-    mars_armoire('add', item, data); 
+    mars_armoire('add', item, data);
   end
  case 'exist'
   varargout = {ismember(item, i_item_list)};
@@ -204,7 +204,7 @@ switch lower(action)
   i_contents.has_changed = 1;
   i_down_dump(i_contents);
  case 'clear'
-  varargout = {i_set(i_contents, [], '')}; 
+  varargout = {i_set(i_contents, [], '')};
  case 'save'
   if is_nix(filename) & ...
 	isempty(i_contents.file_name)
@@ -270,7 +270,7 @@ function res = i_set(I, data, filename)
 
 % Keep copy of passed filename for set_action call
 passed_filename = filename;
-  
+
 % optionally, treat char data as filename
 % but passed filename overrides char data
 if I.char_is_filename & ischar(data)
@@ -302,7 +302,7 @@ if is_nan(filename)
   if ~is_update
     filename = '';
   end
-end  
+end
 I.file_name = filename;
 
 % If this was a clear, don't flag for save
@@ -313,7 +313,7 @@ is_clear = strcmp(I.last_action, 'clear');
 if ~isempty(I.set_action) & ...
       (ismember(I.last_action, {'get','set','set_ui'}) | ...
        (is_update & I.set_action_if_update) | ...
-       (is_clear & I.set_action_if_clear))  
+       (is_clear & I.set_action_if_clear))
   [tmp errf msg] = eval(I.set_action);
   if errf
       res = [];
@@ -331,7 +331,7 @@ end
 % return set data
 res = I.data;
 
-% possibly remove data from structure 
+% possibly remove data from structure
 if ~I.has_changed & I.leave_as_file
   I.data = [];
 end
@@ -350,7 +350,7 @@ return
 
 function res = i_save_ui(I, flags, filename)
 if ~isstruct(flags), flags = []; end
-if i_isempty(I) & isfield(flags, 'warn') 							
+if i_isempty(I) & isfield(flags, 'warn')
   msgbox('Nothing to save', [I.title ' is not set'], 'warn');
   res = 0;
   return
@@ -370,7 +370,7 @@ if i_need_save(I) | isfield(flags, 'force') % force flag
     % Work out prompt
     if isfield(flags, 'prompt')
       prompt = flags.prompt;
-    else 
+    else
       prompt = I.title;
     end
     if isfield(flags, 'prompt_prefix')
@@ -382,17 +382,17 @@ if i_need_save(I) | isfield(flags, 'force') % force flag
     if isfield(flags, 'ync')
       save_yn = questdlg(['Save ' prompt '?'],...
 			 'Save', 'Yes', 'No', 'Cancel', 'Yes');
-      if strcmp(save_yn, 'Cancel'), res = -1; return, end      
+      if strcmp(save_yn, 'Cancel'), res = -1; return, end
       if strcmp(save_yn, 'No')
 	if isfield(flags, 'no_no_save')
-	  I.has_changed = 0; 
+	  I.has_changed = 0;
 	  i_down_dump(I);
 	end
-	res = 0; 
+	res = 0;
 	return
       end
     end
-    pr = ['Filename to save ' prompt]; 
+    pr = ['Filename to save ' prompt];
     [f p] = mars_uifile('put', I.filter_spec, pr, filename);
     if all(f==0), res = -1, return, end
     filename = fullfile(p, f);
@@ -446,7 +446,7 @@ return
 
 function I = i_down_dump(I)
 global MARMOIRE
-MARMOIRE = setfield(MARMOIRE, I.name, I); 
+MARMOIRE = setfield(MARMOIRE, I.name, I);
 return
 
 function fns = g_fieldnames

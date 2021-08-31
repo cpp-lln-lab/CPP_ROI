@@ -5,7 +5,7 @@ function [VY,row] = mars_image_scaling(marsD)
 %
 % Inputs
 % marsD      - design matrix to (optionally) get parameters from
-% 
+%
 % Returns
 % VY         - SPM vol structs with selected scaling
 % row        - cell array, one per subject/session giving corresponding
@@ -35,9 +35,9 @@ switch mod_code
   dGM =   0;
   sess_str = 'Subject';
 end
-  
+
 VY = [];
-Global = [];  
+Global = [];
 
 [Finter,Fgraph,CmdLine] = spm('FnUIsetup','Extract data from ROI(s)');
 
@@ -62,14 +62,14 @@ end
 
 if isempty(VY)  % need to know about images
   % no of sessions / subjects
-  nsess = spm_input(sprintf('No of %ss', sess_str), '+1', 'r', 1, 1); 
+  nsess = spm_input(sprintf('No of %ss', sess_str), '+1', 'r', 1, 1);
   % select files for each session
   for s = 1:nsess
     simgs = spm_get(Inf, mars_veropts('get_img_ext'), ...
 		    sprintf('Data images %s %d', sess_str, s));
     row{s} = (1:size(simgs, 1))'+size(VY,1);
     VY = strvcat(VY, simgs);
-  end 
+  end
 end  % of image get routines
 if isempty(VY), return, end
 
@@ -90,7 +90,7 @@ if spmf
       Global = 'None';
     elseif tmp == 3
       Global = 'Scale';
-    elseif tmp == 4  
+    elseif tmp == 4
       Global = [];
     end
   end
@@ -122,8 +122,8 @@ if ischar(VY)
 end
 
 % Apply scaling options if necessary
-if ~isempty(Global)  
-  
+if ~isempty(Global)
+
 %-Compute Global variate
 %-----------------------------------------------------------------------
 q      = length(VY);
@@ -155,6 +155,3 @@ end
 for  i = 1:q, VY(i).pinfo(1:2,:) = VY(i).pinfo(1:2,:)*gSF(i); end
 
 end % of global options
-
-
-  

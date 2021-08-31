@@ -4,7 +4,7 @@ function [o, errf] = clear_item_data(o, item)
 %
 % o        - object
 % item     - name of item to clear data for
-% 
+%
 % Returns
 % o        - object with data cleared for this item
 % errf     - flag is 1 if data was not cleared for some reason

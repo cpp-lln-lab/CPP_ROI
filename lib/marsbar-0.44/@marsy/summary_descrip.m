@@ -1,8 +1,8 @@
 function res = summary_descrip(o, descrip)
 % get/set method for summary data description
-% 
-% $Id$ 
-  
+%
+% $Id$
+
 st = y_struct(o);
 if nargin < 2 % get
   res = '';

@@ -1,16 +1,16 @@
 function d = pr_ev_diff(ev_tc, diff_func, varargin)
 % method to calculate event height for % signal change
 % FORMAT d = pr_ev_diff(ev_tc, diff_func, varargin)
-% 
+%
 % Inputs
 % ev_tc     - event time course
 % diff_func - difference function; one of
 %             'max'     - the maximum of the time course
 %             'max-min' - the max minus the min
 %             'abs max' - if abs(max) > abs(min) => max otherwise => min
-%             'abs max-min' -  if abs(max) > abs(min) => (max - min) 
-%                              otherwise => (min - max) 
-%  
+%             'abs max-min' -  if abs(max) > abs(min) => (max - min)
+%                              otherwise => (min - max)
+%
 % $Id$
 
 if nargin < 2

@@ -1,13 +1,13 @@
 function varargout = mars_struct(action, varargin)
 % multifunction function for manipulating structures
 %
-% To help the exposition a bit: 
-% 'fill' in a name, means that values empty or missing 
+% To help the exposition a bit:
+% 'fill' in a name, means that values empty or missing
 % in one structure are fetched from another
-% 
+%
 % 'merge' means simply that missing fields are added, with
 % values, from a second structure (but not filled if empty)
-%   
+%
 % Each function needs to deal with the case of empty arguments
 %
 % FORMAT c = mars_struct('fillafromb', a, b, fieldns, flags)
@@ -20,7 +20,7 @@ function varargout = mars_struct(action, varargin)
 % fields in b overwrite those in a)
 % flags may also contain 'r', which Restricts fields to write from b, to
 % those that are already present in a
-% 
+%
 % FORMAT [c, d] = mars_struct('split', a, b)
 % split structure a into two, according to fields in b
 % so that c becomes a structure which contains the fields
@@ -29,7 +29,7 @@ function varargout = mars_struct(action, varargin)
 % or a cell array of fieldnames
 %
 % FORMAT [d] = mars_struct('strip', a, b)
-% strips all fields present in b from those in a, 
+% strips all fields present in b from those in a,
 % returning denuded structure as d. b can be a structure
 % or a cell array of fieldnames.  'strip' is just 'split'
 % but returning only the second argument
@@ -39,17 +39,17 @@ function varargout = mars_struct(action, varargin)
 %
 % FORMAT [c,d] = mars_struct('ffillsplit', a, b)
 % force fill, followed by split
-% All fields from a, that are also present in b, and not empty in b, 
-% are replaced with the values in b; the result is returned as c  
+% All fields from a, that are also present in b, and not empty in b,
+% are replaced with the values in b; the result is returned as c
 % Any fields present in b, but not present in a, are returned in d
 % So, let's say you have a default structure D, and you want to fill this
 % in with any interesting data in a passed structure P, you could use:
 % [good_struct not_recognized]= mars_struct('ffillsplit', D, P);
-%  
+%
 % FORMAT c = mars_struct('ffillmerge', a, b)
 % force fill followed by merge
 % performs 'ffillsplit' on a and b, then merges a and b
-% All fields present in a or b are returned in c, but 
+% All fields present in a or b are returned in c, but
 % any fields present in both, now have the value from b
 %
 % FORMAT [c d] = mars_struct('splitmerge', a, b)
@@ -64,7 +64,7 @@ function varargout = mars_struct(action, varargin)
 % The call is recursive if more than two arguments are passed
 % Thus with structure s = struct('one', struct('two', 3))
 % mars_struct('isthere', s, 'one', 'two') returns 1
-%   
+%
 % FORMAT z = mars_struct('getifthere', a, b [, c [, d ...])
 % returns value of field named in b from a or [] if absent
 % Call is recursive, like 'isthere' above.
@@ -72,7 +72,7 @@ function varargout = mars_struct(action, varargin)
 % FORMAT strs = mars_struct('celldisp', a)
 % returns output like disp(a) as a cell array
 % Useful for printing text description of structure
-% 
+%
 % $Id$
 
 if nargin < 1
@@ -86,38 +86,38 @@ if nargin < 3
 end
 [a b] = deal(varargin{1:2});
 
-switch lower(action)  
+switch lower(action)
  case 'fillafromb'
   % Return for empty passed args
   if isempty(a), varargout = {b}; return, end
   if isempty(b), varargout = {a}; return, end
   if nargin < 4, fieldns = []; else fieldns = varargin{3}; end
   if isempty(fieldns)
-    if ~isstruct(b), error('Need struct as 2nd argument'); end 
-    fieldns = fieldnames(b); 
+    if ~isstruct(b), error('Need struct as 2nd argument'); end
+    fieldns = fieldnames(b);
   end
   if nargin < 5, flags = ''; else flags = varargin{4}; end
   if isempty(flags), flags = ' ';end
-  
+
   if ischar(fieldns), fieldns=cellstr(fieldns);end
-  
+
   af = fieldnames(a)';
   bf = fieldns';
-  
+
   % classify fields 0 = a~b, 1 = a&b, 2=b~a
   cf = af;
   ftype = ismember(af, bf);
   if ~any(flags == 'r')
     b_not_a = find(~ismember(bf, af));
-    cf =  {cf{:} bf{b_not_a}}; 
+    cf =  {cf{:} bf{b_not_a}};
     ftype = [ftype ones(1, length(b_not_a))*2];
   end
-  
+
   % cope with arrays of structures
   alen = prod(size(a));
   blen = prod(size(b));
   maxlen = max(alen, blen);
-  
+
   for si=1:maxlen
     ctmp = [];
     for i=1:length(cf)
@@ -148,81 +148,81 @@ switch lower(action)
       end
     end
     c(si) = ctmp;
-    
+
     if si == blen % reached end of bs, rest of b~a fields are empty
       ftype = (ftype == 2) * 3;
     elseif si == alen % end of a's rest of a~b fields are empty
       ftype = (ftype == 0) * 2 + 1;
     end
-    
+
   end
   varargout = {c};
-  
+
  case 'split'
   if isempty(a), varargout = {a,a}; return, end
   if isempty(b), varargout = {b,a}; return, end
   d = a;
   c = [];
-  
+
   if ischar(b), b = {b};end
   if isstruct(b), b = fieldnames(b);end
-  
+
   for bf = b(:)'
     if isfield(a, bf{1})
       c = setfield(c, bf{1}, getfield(a, bf{1}));
       d = rmfield(d, bf{1});
     end
-  end  
+  end
   varargout = {c, d};
-  
+
  case 'strip'
   [c d] = mars_struct('split', a, b);
   varargout = {d};
- 
+
  case 'merge'
   if isempty(a), varargout = {b}; return, end
   if isempty(b), varargout = {a}; return, end
   c = a;
-  
+
   for bf = fieldnames(b)';
     if ~isfield(a, bf{1})
       c = setfield(c, bf{1}, getfield(b, bf{1}));
     end
   end
   varargout = {c};
-  
+
  case 'ffillsplit'
   if isempty(a) || isempty(b)
     % Nothing in common, return unchanged
     varargout = {a, b}; return
   end
   c = a; d = b;
-  
+
   cf = fieldnames(c);
   for i=1:length(cf)
     if isfield(d, cf{i})
       dfc = getfield(d,cf{i});
-      if ~isempty(dfc) 
+      if ~isempty(dfc)
 	c = setfield(c, cf{i}, dfc);
       end
       d = rmfield(d, cf{i});
     end
   end
   varargout = {c,d};
-  
+
  case 'ffillmerge'
   [a b] = mars_struct('ffillsplit', a, b);
   varargout = {mars_struct('merge', a, b)};
-  
+
  case 'splitmerge'
   [a c] = mars_struct('split', a, b);
   varargout = {mars_struct('merge', a, b) c};
-  
+
  case 'isthere'
   if isempty(a), varargout = {0}; return, end
   c = mars_struct('getifthere', varargin{:});
   varargout = {~isempty(c)};
-  
+
  case 'getifthere'
   if isempty(a), varargout = {[]}; return, end
   if isempty(b), varargout = {[]}; return, end
@@ -235,7 +235,7 @@ switch lower(action)
     a = getfield(a, b);
   end
   varargout = {a};
-  
+
  case 'celldisp'
   if isempty(a), varargout = {{}}; return, end
   af = fieldnames(a);
@@ -258,7 +258,7 @@ switch lower(action)
     c{f} = sprintf(pad_str, af{f}, d);
   end
   varargout = {c};
-  
+
  otherwise
   error(['Suspicious action was ' action]);
 end % switch

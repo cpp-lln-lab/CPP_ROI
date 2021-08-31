@@ -142,7 +142,7 @@ for i = 1:v
 
 	% peri-stimulus times {seconds}
 	%---------------------------------------------------------------
-	pst   = [1:k]*T*dt - ons(1)*TR;			
+	pst   = [1:k]*T*dt - ons(1)*TR;
 	for j = 1:length(ons)
 		w      = [1:k]*T*dt - ons(j)*TR;
 		v      = find(w >= -1);
@@ -155,7 +155,7 @@ for i = 1:v
 
 	% get parameter stucture xP
 	%----------------------------------------------------------------
-	try 
+	try
 		xP          = U(i).P;
 		Pname       = xP(1).name;
 
@@ -228,7 +228,7 @@ for i = 1:v
 	%---------------------------------------------------------------
 	u          = pr_spm_orth(u);
 
-	% and scale so sum(u*dt) = number of events, if event-related 
+	% and scale so sum(u*dt) = number of events, if event-related
 	%---------------------------------------------------------------
 	if ~any(dur)
 		u  = u/dt;

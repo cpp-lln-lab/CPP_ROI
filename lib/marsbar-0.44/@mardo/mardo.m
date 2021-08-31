@@ -26,13 +26,13 @@ function [o, others] = mardo(params, others, passf)
 % D = mardo(struct('des_struct', SPM, 'verbose', 0));
 % % or
 % D = mardo(SPM, struct('verbose', 0));
-% 
+%
 % mardo is an object to contain SPM designs. It allows us to deal with
 % different design formats by overloading functions in child objects, here
 % for harmonizing between SPM2 and SPM99 designs.  It is transparent, in
 % the sense that it can be referenced as a structure, so to the user, it
 % can appear as if the design continues to be the familiar old SPM structure.
-% 
+%
 % This constructor first checks for strings; it treats strings as filenames
 % containing SPM designs, and loads the file.  By now it should have an SPM
 % design structure (passed or loaded). It then labels itself as a mardo
@@ -40,7 +40,7 @@ function [o, others] = mardo(params, others, passf)
 % designs) for these classes to further claim the object.  If the (99 or 2)
 % classes claim the object, they return an object of class (99 or 2), which
 % inherits the mardo class just created in this call to the object.
-% 
+%
 % Note the "passf" input flag; this is a trick to allow the other mardo
 % classes (99 and 2) to create a mardo object for them to inherit, without
 % this constructor passing the mardo object back to the other classes,
@@ -55,7 +55,7 @@ function [o, others] = mardo(params, others, passf)
 % field information can be passed to child objects for processing (or
 % parent objects, but mardo does not have a parent).
 %
-% Fields 
+% Fields
 % des_struct  - structure containing SPM design
 % verbose     - flag; if 1, display text messages during processing
 % flip_option - flag; only used on creation of the object.  If 1, and the
@@ -72,7 +72,7 @@ function [o, others] = mardo(params, others, passf)
 % is_fmri      - returns 1 if design is modality 'fmri'
 % is_marsed    - returns 1 if design has been processed with MarsBaR
 % is_mars_estimated - returns 1 if design has Mars estimation data
-% is_spm_estimated - returns 1 if design has SPM estimation data  
+% is_spm_estimated - returns 1 if design has SPM estimation data
 % modality     - returns one of 'fmri','pet','unknown'
 % verbose      - whether reporting is verbose or not (1 or 0)
 % type         - returns design version string 'SPM2' or 'SPM99'
@@ -84,34 +84,34 @@ function [o, others] = mardo(params, others, passf)
 % n_effects    - number of columns (effects) in design
 % ui_report    - display design report and query menu in UI
 % ui_report_fmri - design report + inspection tools for FMRI
-% 
+%
 % savestruct   - saves design structure to file, with fields as variables
 % des_struct   - sets or gets design structure
-%  
+%
 % has_filter   - returns 1 if the design contains a filter, NaN if not known
 % apply_filter - applies design filter to data
 % ui_get_filter - gets filter and stocks in design
 % fill          - fills design with filter, images, or default values
-% 
+%
 % data          - get/set data in estimated design
 % get_data      - get data
 % set_data      - set_data
 %
-% contrasts     - get/set contrasts 
+% contrasts     - get/set contrasts
 % has_contrasts - returns 1 if the design contains contrasts
 % set_contrasts - set contrasts to design
 % get_contrasts - returns contrasts if present
 % add_contrasts - adds contrasts from a design, xCon struct or passed values
 % ui_get_contrasts - runs spm_conman to choose contrasts, returns indices
-% 
+%
 % has_images   - returns 1 if the design contains images, NaN if not known
 % images       - gets / sets images in design
 % get_images   - gets image vol structs if present
-% set_images   - sets images 
-% image_names  - gets image names as cell array 
+% set_images   - sets images
+% image_names  - gets image names as cell array
 % cd_images    - changes root directory to design images
 % prefix_images - adds, removes prefix from images names (e.g. 's')
-% 
+%
 % estimate     - estimates design, given data
 % compute_contrasts - computes contrasts, returns statistics structure
 % stat_table   - return statistic table report and structures for
@@ -126,7 +126,7 @@ function [o, others] = mardo(params, others, passf)
 % event_cols   - returns column in design from given event
 %
 % $Id$
-  
+
 myclass = 'mardo';
 cvs_v   = marsbar('ver'); % was CVS version; now marsbar version
 
@@ -260,7 +260,7 @@ end
 dt = type(o);
 sv = mars_utils('spm_version');
 maybe_flip = ~strcmp(dt, sv) & ismember('SPM99', {dt, sv});
-if ~is_marsed(o) 
+if ~is_marsed(o)
   if sf_tf(has_images(o)) & maybe_flip
     flippo = flip_option(o);
     switch flippo
@@ -281,7 +281,7 @@ if ~is_marsed(o)
 		  dt, sv, dt, sv, add_str);
     end
   end % has_images, design/running SPM version differ
-  % Add Mars tag 
+  % Add Mars tag
   o = mars_tag(o, struct(...
       'flipped', flip_option(o)));
 end
@@ -293,7 +293,7 @@ D = o.des_struct;
 if isfield(D, 'ResMS')
   if verbose(o)
     msg = {'Compatibility trivia: processed ResMS to ResidualMS'};
-    fprintf('\n%s',sprintf('%s\n',msg{:})); 
+    fprintf('\n%s',sprintf('%s\n',msg{:}));
   end
   D.ResidualMS = D.ResMS .^ 2;
   D = rmfield(D, 'ResMS');

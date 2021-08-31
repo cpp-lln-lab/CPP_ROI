@@ -4,7 +4,7 @@ function [o, errf] = set_item_data_ui(o, item)
 %
 % o        - object
 % item     - name of item to set for
-% 
+%
 % Returns
 % o        - object with data set (probably)
 % errf     - flag is 1 if data was not set

@@ -56,7 +56,7 @@ Q     = C;
 %---------------------------------------------------------------------------
 m     = length(Q);
 dFdh  = zeros(m,1);
-W     = zeros(m,m); 
+W     = zeros(m,m);
 C     = [];
 for i = 1:m
 	C = [C Q{i}(:)];
@@ -68,7 +68,7 @@ h     = inv(C'*C)*(C'*I(:));
 %---------------------------------------------------------------------------
 for k = 1:32
 
-	% Q are variance components		
+	% Q are variance components
 	%------------------------------------------------------------------
 	Ce    = sparse(n,n);
 	for i = 1:m
@@ -81,7 +81,7 @@ for k = 1:32
         iCeX  = iCe*X;
         Cby   = inv(X'*iCeX);
 
-	% M-step: ReML estimate of hyperparameters 
+	% M-step: ReML estimate of hyperparameters
 	%===================================================================
 
 	% Gradient dFd/h (first derivatives)
@@ -90,7 +90,7 @@ for k = 1:32
 	PCy   = Cy*P'- speye(n,n);
 	for i = 1:m
 
-		% dF/dh = -trace(dF/diCe*iCe*Q{i}*iCe) = 
+		% dF/dh = -trace(dF/diCe*iCe*Q{i}*iCe) =
 		%---------------------------------------------------
 		PQ{i}   = P*Q{i};
 		dFdh(i) = sum(sum(PCy.*PQ{i}))/2;

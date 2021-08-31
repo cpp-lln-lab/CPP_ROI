@@ -2,7 +2,7 @@ function [m,n] = summary_size(o, dim)
 % method returns number of time points x number of regions
 %
 % $Id$
-  
+
 st = o.y_struct;
 sz = [0 0];
 if isfield(st, 'Y')
@@ -22,7 +22,7 @@ if nargin < 2
   else
     m = sz;
   end
-else  
+else
   if dim > 2
     m = (m+n > 0)
   else

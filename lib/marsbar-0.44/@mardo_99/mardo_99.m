@@ -1,7 +1,7 @@
 function [o, others] = mardo_99(params, others, varargin)
 % class constructor for SPM99 MarsBaR design object
 % FORMAT [o, others] = mardo_99(params, others, varargin)
-% Inputs 
+% Inputs
 % params  - structure,containing fields, or SPM/MarsBaR design
 % others  - structure, containing other fields to define
 %
@@ -19,9 +19,9 @@ function [o, others] = mardo_99(params, others, varargin)
 % The constructor can also be called to give class functions, where the
 % name of the class function is a character string which is one of:
 %    'spm_filter' - applies spm_filter routine to passed args
-% 
+%
 % $Id$
-  
+
 myclass = 'mardo_99';
 cvs_v   = marsbar('ver'); % was CVS version; now marsbar version
 
@@ -57,7 +57,7 @@ if ischar(params)
             params));
   end
 end
-    
+
 % Deal with passed objects of this (or child) class
 if isa(params, myclass)
   o = params;
@@ -69,7 +69,7 @@ if isa(params, myclass)
   [p others] = mars_struct('split', others, defstruct);
   return
 end
-    
+
 % normal call is via mardo constructor
 if isa(params, 'mardo')
   % Check to see if this is a suitable design, return if not
@@ -88,7 +88,7 @@ if ~isa(uo, 'mardo') % mardo object not passed
 else
   % fill params with other parameters
   params = mars_struct('ffillmerge', params, others);
-end  
+end
 
 % parse parameters into those for this object, children
 [params, others] = mars_struct('ffillsplit', defstruct, params);

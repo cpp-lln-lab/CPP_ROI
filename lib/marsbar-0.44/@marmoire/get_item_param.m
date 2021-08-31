@@ -8,9 +8,9 @@ function value = get_item_param(o, item, param)
 %
 % Returns
 % value - value for parameter
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need item name');
 end

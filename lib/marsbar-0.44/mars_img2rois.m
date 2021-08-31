@@ -8,11 +8,11 @@ function mars_img2rois(P, roipath, rootn, flags)
 % flags   - none or more of: [default = 'i']
 %             'i' - id image, voxel values identify ROIs
 %             'c' - cluster image, clusters identified by location
-%             'x' - label clusters by location of maximum 
+%             'x' - label clusters by location of maximum
 %                   (default is location of centre of mass)
 %
 % $Id$
-  
+
 if nargin < 1
   P = '';
 end
@@ -77,7 +77,7 @@ XYZ = [X; Y;Z] +1;
 % collect clusters
 vals = img(pts);
 
-% select cluster or id 
+% select cluster or id
 if any(flags == 'i')
   cl_vals = vals;
 else
@@ -94,7 +94,7 @@ for c = unique(cl_vals)
   if ~isempty(cXYZ)
       % location label for cluster images
       if any(flags == 'c')
-          if any(flags == 'x') % maximum 
+          if any(flags == 'x') % maximum
               [mx maxi] = max(vals(t_cl_is));
               mi = t_cl_is(maxi);
               % voxel coordinate of max

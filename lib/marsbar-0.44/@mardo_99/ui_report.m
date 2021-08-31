@@ -1,9 +1,9 @@
 function varargout = ui_report(D, varargin)
 % mathod for SPM99 design reporting
 %
-% Copied with minor edits from:  
+% Copied with minor edits from:
 % @(#)spm_DesRep.m	2.22 Andrew Holmes 01/03/14
-% 
+%
 % See that file for detailed commentary
 %
 % $Id$
@@ -11,7 +11,7 @@ function varargout = ui_report(D, varargin)
 %-Format arguments
 %-----------------------------------------------------------------------
 if nargin < 2
-  action = 'desrepui'; 
+  action = 'desrepui';
 else
   action = varargin{1};
 end
@@ -402,7 +402,7 @@ end
 
 %-Filenames
 % ( Show at most 32, showing every 2nd/3rd/4th/... as necessary to pair )
-% ( down to <32 items. Always show last item so #images is indicated.   )     
+% ( down to <32 items. Always show last item so #images is indicated.   )
 if desmtx & ~isempty(fnames)
 	axes('Position',[.68 .4 .3 .4],'Visible','off',...
 		'DefaultTextFontSize',FS(8),...
@@ -444,7 +444,7 @@ else
 	hDesO   = axes('Position',[.07 .18 .6 .2]);
 	tmp = 1-abs(O); tmp(logical(tril(ones(nPar),-1))) = 1;
 	hDesOIm = image(tmp*64);
-	
+
 	set(hDesO,'Box','off','TickDir','out',...
 		'XaxisLocation','top','XTick',PTick,'XTickLabel','',...
 		'YaxisLocation','right','YTick',PTick,'YTickLabel','',...
@@ -496,14 +496,14 @@ if ~isempty(xs)
 	set(hAx,'Units','points');
 	AxPos = get(hAx,'Position');
 	set(hAx,'YLim',[0,AxPos(4)])
-	
+
 	dy = FS(9); y0 = floor(AxPos(4)) -dy; y = y0;
 
 	text(0.3,y,str,...
 		'HorizontalAlignment','Center',...
 		'FontWeight','Bold','FontSize',FS(11))
 	y=y-2*dy;
-	
+
 	for sf = fieldnames(xs)'
 		text(0.3,y,[strrep(sf{1},'_',' '),' :'],...
 			'HorizontalAlignment','Right','FontWeight','Bold',...
@@ -606,11 +606,11 @@ for i = 1:length(xC)
 	%-Descriptions
 	%---------------------------------------------------------------
 	hDAx = axes('Position',[0.03,0.1,0.94,0.30],'Visible','off');
-	
+
 	set(hDAx,'Units','points');
 	tmp = get(hDAx,'Position');
 	set(hDAx,'YLim',[0,tmp(4)])
-	
+
 	dy = FS(9); y0 = floor(tmp(4)) -dy; y = y0;
 
 	%-Description strings from xC(i).descrip
@@ -695,7 +695,7 @@ case 'scantick'
 %=======================================================================
 % ui_report(D, 'ScanTick',nScan,lim)
 % ( Show at most 32, showing every 2nd/3rd/4th/... as necessary to pair )
-% ( down to <32 items. Always show last item so #images is indicated.    )     
+% ( down to <32 items. Always show last item so #images is indicated.    )
 if nargin<4, lim=32; else, lim=varargin{3}; end
 if nargin<3, error('insufficient arguments'), end
 nScan = varargin{2};

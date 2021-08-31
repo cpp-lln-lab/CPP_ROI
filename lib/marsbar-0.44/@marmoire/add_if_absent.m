@@ -1,8 +1,8 @@
 function o = add_if_absent(o, item, data)
 % Adds item only if not already present
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need name of item to add');
 end

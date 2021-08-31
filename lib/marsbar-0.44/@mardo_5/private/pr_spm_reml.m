@@ -131,7 +131,7 @@ for k = 1:64
     %----------------------------------------------------------------------
     dFdh  = dFdh  - hP*(h - hE);
     dFdhh = dFdhh - hP;
-    
+
     % Fisher scoring: update dh = -inv(ddF/dhh)*dF/dh
     %----------------------------------------------------------------------
     Ph    = -dFdhh;
@@ -144,7 +144,7 @@ for k = 1:64
         dh = max(dh,-8);
     end
     h     = h + dh;
-    
+
     % Convergence (1% change in log-evidence)
     %======================================================================
     w     = dFdh'*dh;
@@ -170,4 +170,3 @@ end
 if OPT
     h  = exp(h);
 end
-    

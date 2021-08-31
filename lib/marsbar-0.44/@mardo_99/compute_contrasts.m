@@ -1,7 +1,7 @@
 function [marsS] = compute_contrasts(marsDe, Ic)
 % compute and return stats
 % FORMAT marsS = compute_contrasts(marsDe, Ic)
-% 
+%
 % marsDe     - design object
 % Ic         - indices into contrast structure
 %
@@ -20,10 +20,10 @@ function [marsS] = compute_contrasts(marsDe, Ic)
 %              'y_pre'    - predicted temporal response
 %              'y_obs'    - observerd temporal response
 %              'Pf'       - probabability for last (rank of subspace)
-%                           eigenvalues  
+%                           eigenvalues
 %              'u'        - principle components
 %              'ds'       - component weights (diag(S))
-%              'df'       - degrees of freedom for Pf              
+%              'df'       - degrees of freedom for Pf
 % 'columns'  - names of regions
 % 'rows'     - cell array of structs, one per contrast calculated,
 %              with fields:
@@ -34,7 +34,7 @@ function [marsS] = compute_contrasts(marsDe, Ic)
 
 SPM = des_struct(marsDe);
 xCon = SPM.xCon;
-  
+
 if nargin < 2
   Ic = 1:length(xCon);
 end
@@ -53,4 +53,3 @@ for i = 1:length(Ic)
   marsS.rows{i}.name = xCon(Ic(i)).name;
   marsS.rows{i}.stat = xCon(Ic(i)).STAT;
 end
-  

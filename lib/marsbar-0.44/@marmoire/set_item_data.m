@@ -4,11 +4,11 @@ function [o, errf] = set_item_data(o, item, data, filename)
 %
 % o        - object
 % item     - name of item to set for
-% data     - data to set 
+% data     - data to set
 % filename - filename for data
-% 
+%
 % If neither data nor filename are set, then GUI set is assumed
-% 
+%
 % Returns
 % o        - object with data set
 % errf     - flag is 1 if data was not set

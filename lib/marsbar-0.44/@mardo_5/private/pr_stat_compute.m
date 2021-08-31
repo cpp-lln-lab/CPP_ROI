@@ -1,7 +1,7 @@
 function [con,stat,Ps,Pc] = pr_stat_compute(SPM,Ic)
 % private function to compute statistics for SPM2 design
 % FORMAT [con stat Ps Pc] = pr_stat_compute(SPM,Ic)
-% 
+%
 % Input
 % SPM       - SPM design structure
 % Ic        - indices into contrast structure (xCon in SPM)
@@ -50,18 +50,18 @@ for i = 1:length(Ic)
   X1o           = spm_FcUtil('X1o',xCon(ic),SPM.xX.xKXs);
   [trMV,trMVMV] = spm_SpUtil('trMV',X1o,SPM.xX.V);
   df(1)         = trMV^2/trMVMV; % eidf
-  
+
   switch(xCon(ic).STAT)
-    
+
    case {'T'} %-Implement contrast as sum of betas
-    
+
     con(i,:)   = xCon(ic).c'*betas;
-    VcB        = xCon(ic).c'*SPM.xX.Bcov*xCon(ic).c; 
+    VcB        = xCon(ic).c'*SPM.xX.Bcov*xCon(ic).c;
     stat(i,:)  = con(i,:)./sqrt(Hp*VcB);
     Ps(i,:)    = 1 - spm_Tcdf(stat(i,:),df(2));
 
-   case 'F'  %-Implement ESS 
-    
+   case 'F'  %-Implement ESS
+
     %-Residual (in parameter space) forming mtx
     %-----------------------------------------------------------
     h          = spm_FcUtil('Hsqr',xCon(ic),SPM.xX.xKXs);
@@ -72,11 +72,10 @@ for i = 1:length(Ic)
    otherwise
     %---------------------------------------------------------------
     error(['unknown STAT "',xCon(ic).STAT,'"'])
-    
+
   end % (switch(xCon...)
 end
 
 % Compute corrected Bonferroni (corrected for number of regions)
 n  = size(betas, 2);
 Pc = 1-(1-Ps).^n;
-

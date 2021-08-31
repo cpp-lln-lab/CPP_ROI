@@ -51,7 +51,7 @@ if ~isfield(V,'private') | ~isfield(V.private,'fid') | isempty(V.private.fid),
 	mach = 'native';
 	if swapped(dt),
 		if spm_platform('bigend'), mach = 'ieee-le'; else, mach = 'ieee-be'; end;
-	end; 
+	end;
 	[pth,nam,ext] = fileparts(V.fname);
 	fname         = fullfile(pth,[nam, '.img']);
 	fid           = fopen(fname,'r+',mach);

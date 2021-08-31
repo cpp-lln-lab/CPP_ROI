@@ -5,7 +5,7 @@ function [fn,pn,fi] = mars_uifile(action, filter_spec, prompt, filename, varargi
 % uigetfile and uiputfile in matlab 5.3 does not support the use of multiple
 % filters, in the filter_spec array.
 % Matlab < 6.5 does not allow the passing of a seperate filename default
-% as a third argument. 
+% as a third argument.
 % Matlab < 6.5 does not return a third argument (file index)
 %
 % mars_uifile acts as a wrapper for calls to uiputfile and uigetfile, so
@@ -13,7 +13,7 @@ function [fn,pn,fi] = mars_uifile(action, filter_spec, prompt, filename, varargi
 % 6.1 if 5.3 or 6.1 is running.
 %
 % $Id$
-  
+
 if nargin < 1
   error('Need action');
 end
@@ -30,12 +30,12 @@ if isnumeric(filename)
   varargin = [{filename} varargin];
   filename = '';
 end
-  
+
 mlv = version; mlv = str2num(mlv(1:3));
-if mlv < 6.5 
+if mlv < 6.5
   % If we have a default filename, we cannot use it with the filterspec,
   % so use filename instead of filterspec
-  if ~isempty(filename) 
+  if ~isempty(filename)
     filter_spec = filename;
   elseif mlv < 6 % only allowed string filterspec
     if iscell(filter_spec)
@@ -53,20 +53,20 @@ else % (so matlab >= 6.5)
   % - all uigetfile filters need to be of form '*.<ext>', where <ext> is
   % the file extension.  This is not so for the one version of matlab 7
   % on windows that I tested (matlab 7.1.0.253 or something).  I'm
-  % guessing that other Unices may have the same problem though. 
+  % guessing that other Unices may have the same problem though.
   if mlv >= 7 & usejava('jvm') & isunix
     for fsn = 1:size(filter_spec, 1)
       [pn fn ext] = fileparts(filter_spec{fsn, 1});
       filter_spec{fsn, 1} = ['*' ext];
     end
   end
-    
+
   if isempty(filename) % matlab 7 does not tolerate empty filenames
     arglist = {filter_spec, prompt, varargin{:}};
   else
     arglist = {filter_spec, prompt, filename, varargin{:}};
   end
-end  
+end
 
 fi = [];
 switch lower(action)
@@ -82,6 +82,6 @@ switch lower(action)
   else
     [fn pn fi] = uiputfile(arglist{:});
   end
- otherwise 
+ otherwise
    error(['Strange desire for ' action]);
 end

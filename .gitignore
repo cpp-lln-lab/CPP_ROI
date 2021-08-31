@@ -23,6 +23,3 @@ envs/*
 demos/*/*.json
 demos/*/*/*.json
 demos/*/derivatives
-
-
-

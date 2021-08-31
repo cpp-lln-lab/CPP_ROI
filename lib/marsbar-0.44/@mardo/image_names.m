@@ -3,7 +3,7 @@ function P = image_names(D)
 % Returns cell array of same dimension of image list
 %
 % $Id$
-  
+
 P = {};
 if has_images(D)
   VY = get_images(D);

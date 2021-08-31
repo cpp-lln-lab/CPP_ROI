@@ -1,18 +1,18 @@
 function F = pr_refresh_et(D, ic, F, hList, hEdit)
 % Refreshes data and display of event type window after edit
 % FORMAT F = pr_refresh_et(D, ic, F, hList)
-% 
+%
 % D              - design object
 % ic             - indices to events to select
 % F              - (optional) figure handle
 % hList          - (optional) handle to list uicontrol
 % hEdit          - (optional) handle to Edit uicontrol
-% 
+%
 % Returns
 % F              - figure handle (in case you didn't have it)
 %
 % $Id$
-  
+
 if nargin < 1
   error('Need object');
 end

@@ -6,8 +6,8 @@ function [SPM] = pr_fmri_design(SPM)
 % @(#)spm_fMRI_design.m	2.27   Karl Friston 99/09/29
 % See that (SPM99) version for comments etc
 %
-% $Id$ 
-  
+% $Id$
+
 %-GUI setup
 %-----------------------------------------------------------------------
 SPMid    = spm('SFnBanner',mfilename,marsbar('ver'));
@@ -23,12 +23,12 @@ STOC   = 0;
 
 % global parameters
 %-----------------------------------------------------------------------
-global fMRI_T; 
-global fMRI_T0; 
+global fMRI_T;
+global fMRI_T0;
 if isempty(fMRI_T),  fMRI_T  = 16; end;
 if isempty(fMRI_T0), fMRI_T0 = 1;  end;
 
-% get nscan and RT 
+% get nscan and RT
 %-----------------------------------------------------------------------
 spm_input('Basic parameters...',1,'d',mfilename)
 RT = spm_input('Interscan interval {secs}','+1','r',[],1);
@@ -64,7 +64,7 @@ for s = 1:nsess
 		Fstr = sprintf('Session %d/%d',s,nsess);
 	end
 
-	% Event/epoch related responses			
+	% Event/epoch related responses
 	%===============================================================
 	k     = nscan(s);
 
@@ -121,7 +121,7 @@ for s = 1:nsess
 			%-----------------------------------------------
 			for   i = 1:ntrial
 				on     = find(SF{i}(:,1))*dt;
-				pst    = [1:k]*RT - on(1);			
+				pst    = [1:k]*RT - on(1);
 				for  j = 1:length(on)
 					u      = [1:k]*RT - on(j);
 					v      = find(u >= -1);
@@ -136,7 +136,7 @@ for s = 1:nsess
 			%-----------------------------------------------
 			str   = 'interactions among trials (Volterra)';
 			if spm_input(str,'+1','y/n',[1 0])
-  
+
 			    [X Xn IND BF name] = pr_spm_volterra(SF,BF,Cname,2);
 
 			else
@@ -175,7 +175,7 @@ for s = 1:nsess
 
 
 
-		% Confounds: Session effects 
+		% Confounds: Session effects
 		%=======================================================
 		B      = ones(k,1);
 		Bn{1}  = sprintf('constant');
@@ -201,11 +201,11 @@ for s = 1:nsess
 	% Append names
 	%---------------------------------------------------------------
 	q     = length(Xname);
-	for i = 1:length(Xn) 
+	for i = 1:length(Xn)
 		Xname{q + i}  = [sprintf('Sn(%i) ',s) Xn{i}];
 	end
 	q     = length(Bname);
-	for i = 1:length(Bn) 
+	for i = 1:length(Bn)
 		Bname{q + i}  = [sprintf('Sn(%i) ',s) Bn{i}];
 	end
 
@@ -240,4 +240,3 @@ SPM = struct('SPMid', SPMid, ...
 	     'Sess', {Sess});
 fprintf('%30s\n\n','...saved')                    %-#
 spm_input('!DeleteInputObj')
-
