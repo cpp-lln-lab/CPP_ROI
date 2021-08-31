@@ -7,7 +7,7 @@ function o = loadobj(o)
 % setting into the matrix.  After this, the processed
 % natrix data becomes an image snapshot for the memory
 % lifetime of the object
-  
+
 [img errstr] = my_vol_func(o);
 if isempty(img)
   if strcmp(errstr, 'Cant open image file.')
@@ -18,5 +18,5 @@ if isempty(img)
   error(errstr);
 end
 
-% set using maroi_matrix object to avoid object conversion 
-o.maroi_matrix = matrixdata(o.maroi_matrix,img); 
+% set using maroi_matrix object to avoid object conversion
+o.maroi_matrix = matrixdata(o.maroi_matrix,img);

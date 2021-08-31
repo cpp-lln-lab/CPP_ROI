@@ -5,7 +5,7 @@ function [K, LFstr, HFstr] = pr_get_filter(RT, row)
 % FORMAT [K, LFstr, HFstr]= pr_get_filter(RT, Sess)
 %
 % $Id$
-  
+
 if nargin < 2
   error('Need TR, row / Sess matrix');
 end
@@ -105,4 +105,3 @@ end
 % Construct K struct
 %=======================================================================
 K       = pr_spm_filter('set',K);
-        

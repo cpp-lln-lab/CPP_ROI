@@ -9,9 +9,9 @@ function o = set_item_param(o, item, param, value)
 %
 % Returns
 % o     - object
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need item name');
 end

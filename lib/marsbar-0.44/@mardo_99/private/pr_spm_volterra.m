@@ -57,7 +57,7 @@ if N == 1, return, end
 % 2nd order terms
 %---------------------------------------------------------------------------
 k     = length(name);
-for i = 1:size(SF,2) 
+for i = 1:size(SF,2)
 	for j = i:size(SF,2)
 
 		% ensure events can interact
@@ -83,7 +83,7 @@ for i = 1:size(SF,2)
 					y      = conv(full(y),BF{j}(:,q));
 					x      = x(d);
 					y      = y(d);
-					X      = [X x.*y];		
+					X      = [X x.*y];
 					ind    = [ind size(X,2)];
 					Xn{end + 1} = [ni ' x ' nj];
 					bf     = [bf {BF{i}(:,p)*BF{j}(:,q)'}];

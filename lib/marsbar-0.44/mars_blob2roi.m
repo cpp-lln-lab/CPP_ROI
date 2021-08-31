@@ -7,7 +7,7 @@ function mars_blob2roi(xSPM, pt)
 %                  title
 %                  XYZ   - voxel coordinates of activated points
 %                  Z     - statistic values for activated points
-%                  M     - 4x4 matrix from voxels to mm 
+%                  M     - 4x4 matrix from voxels to mm
 %
 % $Id$
 
@@ -24,7 +24,7 @@ if isempty(vx_i)
   return
 end
 Clusters = spm_clusters(xSPM.XYZ);
-cXYZ = xSPM.XYZmm(:, Clusters==Clusters(vx_i));  
+cXYZ = xSPM.XYZmm(:, Clusters==Clusters(vx_i));
 if isempty(cXYZ), return, end
 d = sprintf('%s cluster at [%0.1f %0.1f %0.1f]', xSPM.title, pt);
 l = sprintf('%s_%0.0f_%0.0f_%0.0f', xSPM.title, pt);

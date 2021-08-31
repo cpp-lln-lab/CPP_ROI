@@ -1,8 +1,8 @@
 function tf = eq(Y1, Y2)
 % method overrides == operator
-% 
+%
 % $Id$
-  
+
 tf = 0;
 if ~isa(Y1, 'marsy') | ~isa(Y2, 'marsy'), return, end
 if ~all(summary_size(Y1) == summary_size(Y2)), return, end
@@ -17,5 +17,3 @@ else
   y2 = [y2{:}];
 end
 tf = all(all(y1 == y2));
-
-  

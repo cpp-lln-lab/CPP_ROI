@@ -28,7 +28,7 @@ warning off
 if any(i ~= j)
       n = length(C);
       a = exp(H/n);
-      H = H + log(det(C/a));           
+      H = H + log(det(C/a));
 end
 warning(w)
 

@@ -38,7 +38,7 @@ clusters = spm_clusters(xSPM.XYZ);
 
 for c = unique(A(:)')
   % maximum maximum for this cluster
-  tmp = Z; tmp(A~=c) = -Inf; 
+  tmp = Z; tmp(A~=c) = -Inf;
   [tmp mi] = max(tmp);
   % voxel coordinate of max
   vco = maxes(:, mi);

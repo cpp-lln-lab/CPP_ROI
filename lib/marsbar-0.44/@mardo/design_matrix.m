@@ -1,6 +1,6 @@
 function X = design_matrix(D)
 % method returns design matrix from design
-% 
+%
 % $Id$
 
 SPM = des_struct(D);

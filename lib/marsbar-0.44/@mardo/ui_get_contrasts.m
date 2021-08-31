@@ -26,7 +26,7 @@ function varargout=ui_get_contrasts(D, varargin)
 %   .STAT      - character describing statistic required: 'T' or 'F'
 %   .c         - contrast weights (column) vector / matrix
 %
-% STATmode   - string indicating STAT modes to allow contrast 
+% STATmode   - string indicating STAT modes to allow contrast
 %              selection/definition for:
 %            - 'T' to limit to (1-dimensional) contrasts defined for SPM{t}
 %            - 'F' to limit to contrasts defined for SPM{F}
@@ -50,7 +50,7 @@ function varargout=ui_get_contrasts(D, varargin)
 %
 % I          - Index (or indices) of contrasts selected
 %
-% D (out)    - Design with modified contrast definitions structure array 
+% D (out)    - Design with modified contrast definitions structure array
 % changef    - flag set to 1 if contrast definitions have changed
 %
 %                           ----------------
@@ -63,7 +63,7 @@ function varargout=ui_get_contrasts(D, varargin)
 %              'off'   - hides mConMan window
 %              'reset' - hides and resets mConMan window
 %              'on'    - initialises mConMan window using arguments given
-% STATmode   - string indicating STAT modes to allow contrast 
+% STATmode   - string indicating STAT modes to allow contrast
 % n          - number of contrasts to select, Inf for unlimited
 % Prompt     - Prompt string
 % Mcstr      - string to describe multiple contrast selection
@@ -76,7 +76,7 @@ function varargout=ui_get_contrasts(D, varargin)
 % hConList   - handle of GUI ListBox object
 % STAT       - STAT character: 'T' or 'F' or empty (show all)
 % I          - indices of currently selected contrasts
-% 
+%
 % FORMAT ui_get_contrasts(D, 'GraphCons',xCon,I,F)
 % Utility function to display contrast image/bar-graph & setup "surfing"
 % xCon       - contrast definitions structure array
@@ -105,7 +105,7 @@ function varargout=ui_get_contrasts(D, varargin)
 % Initialisation of 'T','F' or 'any' STAT selection RadioButtons & STATmode
 % F          - handle of 'mConMan' figure
 % STAT       - STAT character: 'T' or 'F' of empty (all)
-% STATmode   - string indicating STAT modes to allow contrast 
+% STATmode   - string indicating STAT modes to allow contrast
 %
 % FORMAT ui_get_contrasts(D, 'FConMenu_CB')
 % CallBack to set state of mConMan contrast selection figure context menu
@@ -119,14 +119,14 @@ function varargout=ui_get_contrasts(D, varargin)
 % X          - design matrix
 % STAT       - 'T' or 'F' (for contrast checking)
 % c          - contrast weights matrix
-% I          - logical validity indicator: indicates which rows of 
-%              cellstr(cstr) generated valid contrasts which were 
+% I          - logical validity indicator: indicates which rows of
+%              cellstr(cstr) generated valid contrasts which were
 %              included in c
 % emsg       - cellstr of error messages produced during parsing
-% imsg       - cellstr of information messages for valid contrasts 
+% imsg       - cellstr of information messages for valid contrasts
 % msg        - cellstr of all messages produced during parsing,
 %              one cell per string in cstr
-% 
+%
 % FORMAT [iX0,I,emsg,imsg] = ui_get_contrasts(D, 'ParseIStr',str,max)
 % DesMtx column index parser: Catch eval errors and invalid indices
 % str        - string for evaluation to get column indices
@@ -184,9 +184,9 @@ function varargout=ui_get_contrasts(D, varargin)
 % reset button).
 %
 % Edited from @(#)spm_conman.m	2.18 Andrew Holmes 02/09/10
-% 
+%
 % $Id$
-  
+
 % simplify access to design
 xCon = get_contrasts(D);
 
@@ -308,7 +308,7 @@ case 'on'
 		H.hNew      = findobj(F,'Tag','New');
 	end
 	varargout = {F,cF};				%-Return figure handles
-	
+
 	%-Set up xX for display etc
 	%---------------------------------------------------------------
 	SPM = des_struct(D);
@@ -486,13 +486,13 @@ if nargin<3,	F = findobj(get(0,'Children'),'Flat','Tag','mConMan');
 if nargin<4
 	n = get(findobj(F,'Tag','Prompt'),'UserData');
 	m = length(get(findobj(F,'Tag','ConList'),'Value'));
-	
+
 	str = sprintf('Selected %d contrast',m);
 	if m~=1, str=[str,'s']; end
-	
+
 	Mcstr = get(findobj(F,'Tag','StatusLine'),'UserData');
 	if m>1, str=[str,Mcstr{1}]; else, str=[str,Mcstr{2}]; end
-	
+
 	if m==0
 		if n<0
 			str = [str,', press "Done" when finished.'];
@@ -661,7 +661,7 @@ else     %-Additional UI setup for  DNew contrast definition interface
     hD_ConInfo = findobj(F,'Tag','D_ConInfo');
     HD_Ttxt    = findobj(F,'Tag','D_Ttxt');
     HD_Ftxt    = findobj(F,'Tag','D_Ftxt');
-    
+
     %-Set interface for new STAT
     %-------------------------------------------------------------------
     set(hD_ConMtx,'String',{},'UserData',[])            %-Clear ConMtx box
@@ -669,7 +669,7 @@ else     %-Additional UI setup for  DNew contrast definition interface
     set([hD_ConErrs,hD_ConInfo],'String',{},'Value',[]) %-Clear parsing boxes
     ui_get_contrasts(D, 'GraphCons',[],[],F)                     %-Clear contrast plot
     ui_get_contrasts(D, 'D_Status',F)                            %-Set StatusLine
-    
+
     switch STAT
     case 'T'
         set(hD_ConMtx,'Max',1)
@@ -1266,7 +1266,7 @@ uimenu(h,'Label','crash out','Separator','on',...
 	'Interruptible','off','BusyAction','Cancel');
 set(h,'CallBack',[cb 'ui_get_contrasts(conD, ''FConMenu_CB'')'],...
 	'Interruptible','off','BusyAction','Cancel');
-	
+
 
 %-Draw contrast definition GUI
 %-----------------------------------------------------------------------
@@ -1523,5 +1523,4 @@ if nargin < 3, F = get(findobj('Tag', 'mConMan'),'UserData'); end
 hD_Reset = findobj(F,'Tag','D_Reset');
 set(F, 'UserData', D);
 set(hD_Reset, 'UserData', changef);
-return  
-  
+return

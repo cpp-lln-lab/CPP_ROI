@@ -1,10 +1,10 @@
 function [xc, ic] = get_contrast_by_name(D, cname)
 % get named contrast(s) from design contrast structure
 % FORMAT [xc, ic] = get_contrast_by_name(D, cname)
-% 
+%
 % D      - design object
 % cname  - contrast name(s) (string or cell array)
-% 
+%
 % Returns
 % xc     - xCon structure containing only named contrast
 % ic     - index of contrast in design contrast structure
@@ -20,7 +20,7 @@ if ischar(cname)
   cname = cellstr(cname);
 end
 
-xc = get_contrasts(D); 
+xc = get_contrasts(D);
 if isempty(xc)
   ic = [];
 else

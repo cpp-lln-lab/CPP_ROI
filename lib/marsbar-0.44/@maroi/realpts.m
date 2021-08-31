@@ -6,7 +6,7 @@ function [pts, vals] = realpts(o,sp)
 if nargin < 2
   error('Need space definition to find voxels');
 end
-[pts vals] = voxpts(o, sp); 
+[pts vals] = voxpts(o, sp);
 
 if ~isempty(pts)
   pts = sp.mat * [pts; ones(1, size(pts,2))];

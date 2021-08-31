@@ -1,6 +1,6 @@
 function varargout = mars_orthviews(action,varargin)
 % Display Orthogonal Views of a Normalized Image
-% MarsBaR version of spm_orthviews with very minor modifications 
+% MarsBaR version of spm_orthviews with very minor modifications
 % FORMAT H = mars_orthviews('Image',filename[,position])
 % filename - name of image to display
 % area     - position of image
@@ -77,7 +77,7 @@ function varargout = mars_orthviews(action,varargin)
 % Adds blobs from a matrix to the image specified by the handle(s).
 % handle   - image number to add blobs to
 % matrix   - voxel matrix
-% mat      - matrix from matrix coordinates to millimeters 
+% mat      - matrix from matrix coordinates to millimeters
 % colour   - the 3 vector containing the colour that the blobs should be
 %
 % FORMAT mars_orthviews('RemoveBlobs',handle)
@@ -107,41 +107,41 @@ function varargout = mars_orthviews(action,varargin)
 %         fig      - the figure that everything is displayed in
 %         mode     - the position/orientation of the sagittal view.
 %                    - currently always 1
-% 
+%
 %         st.registry.hReg \_ See spm_XYZreg for documentation
 %         st.registry.hMe  /
-% 
+%
 % For each of the displayed images, there is a non-empty entry in the
 % vols cell array.  Handles returned by "mars_orthviews('Image',.....)"
 % indicate the position in the cell array of the newly created ortho-view.
 % Operations on each ortho-view require the handle to be passed.
-% 
+%
 % When a new image is displayed, the cell entry contains the information
 % returned by spm_vol (type help spm_vol for more info).  In addition,
 % there are a few other fields, some of which I will document here:
-% 
+%
 %         premul - a matrix to premultiply the .mat field by.  Useful
 %                  for re-orienting images.
 %         window - either 'auto' or an intensity range to display the
 %                  image with.
-% 
+%
 %         ax     - a cell array containing an element for the three
 %                  views.  The fields of each element are handles for
 %                  the axis, image and crosshairs.
-% 
+%
 %         blobs - optional.  Is there for using to superimpose blobs.
 %                 vol     - 3D array of image data
 %                 mat     - a mapping from vox-to-mm (see spm_vol, or
 %                           help on image formats).
 %                 max     - maximum intensity for scaling to.  If it
 %                           does not exist, then images are auto-scaled.
-% 
+%
 %                 There are two colouring modes: full colour, and split
 %                 colour.  When using full colour, there should be a
 %                 'colour' field for each cell element.  When using
 %                 split colourscale, there is a handle for the colorbar
 %                 axis.
-% 
+%
 %                 colour  - if it exists it contains the
 %                           red,green,blue that the blobs should be
 %                           displayed in.
@@ -271,7 +271,7 @@ case 'addimage',
 
 case 'addcolouredimage',
 	addcolouredimage(varargin{1}, varargin{2},varargin{3});
- 
+
 case 'addtruecolourimage',
  % mars_orthviews('Addtruecolourimage',handle,filename,colourmap,prop,mx,mn)
  % Adds blobs from an image in true colour
@@ -282,7 +282,7 @@ case 'addtruecolourimage',
  % mx   - maximum intensity to scale to [maximum value in activation image]
  % mn   - minimum intensity to scale to [minimum value in activation image]
  %
- 
+
  % For selecting images, later
 img_flt = mars_veropts('get_img_ext');
 
@@ -443,7 +443,7 @@ return;
 %_______________________________________________________________________
 %_______________________________________________________________________
 function addtruecolourimage(handle,vol,colourmap,prop,mx,mn)
-% adds true colour image to current displayed image  
+% adds true colour image to current displayed image
 global st
 mat = vol.mat;
 if isstruct(vol) & isfield(vol, 'vol'), vol = vol.vol;end
@@ -503,9 +503,9 @@ else,
 end;
 for i=valid_handles(1:24),
 	for j=1:3,
-		set(st.vols{i}.ax{j}.lx,'Visible',opt); 
-		set(st.vols{i}.ax{j}.ly,'Visible',opt);  
-	end; 
+		set(st.vols{i}.ax{j}.lx,'Visible',opt);
+		set(st.vols{i}.ax{j}.ly,'Visible',opt);
+	end;
 end;
 return;
 %_______________________________________________________________________
@@ -859,13 +859,13 @@ for i = valid_handles(arg1),
 				    st.vols{1}.blobs{1}.colour.cmap;
 				actp = ...
 				    st.vols{1}.blobs{1}.colour.prop;
-				
+
 				% scale grayscale image, not finite -> black
 				imgt = scaletocmap(imgt,mn,mx,gryc,65);
 				imgc = scaletocmap(imgc,mn,mx,gryc,65);
 				imgs = scaletocmap(imgs,mn,mx,gryc,65);
 				gryc = [gryc; 0 0 0];
-				
+
 				% get max for blob image
 				vol = st.vols{i}.blobs{1}.vol;
 				mat = st.vols{i}.premul*st.vols{i}.blobs{1}.mat;
@@ -881,14 +881,14 @@ for i = valid_handles(arg1),
 				tmpt = spm_slice_vol(vol,inv(TM0*(st.Space\M)),TD,[0 NaN])';
 				tmpc = spm_slice_vol(vol,inv(CM0*(st.Space\M)),CD,[0 NaN])';
 				tmps = spm_slice_vol(vol,inv(SM0*(st.Space\M)),SD,[0 NaN])';
-				
+
 				% actimg scaled round 0, black NaNs
                                 topc = size(actc,1)+1;
 				tmpt = scaletocmap(tmpt,-cmx,cmx,actc,topc);
 				tmpc = scaletocmap(tmpc,-cmx,cmx,actc,topc);
 				tmps = scaletocmap(tmps,-cmx,cmx,actc,topc);
 				actc = [actc; 0 0 0];
-				
+
 				% combine gray and blob data to
                                 % truecolour
 				imgt = reshape(actc(tmpt(:),:)*actp+ ...
@@ -900,8 +900,8 @@ for i = valid_handles(arg1),
 				imgs = reshape(actc(tmps(:),:)*actp+ ...
 					       gryc(imgs(:),:)*(1-actp), ...
 					       [size(imgs) 3]);
-				
-				
+
+
 			else,
 				% Add full colour blobs - several sets at once
 				scal = 1/(mx-mn);
@@ -1059,7 +1059,7 @@ if nargin < 5, miscol=1;end
 cml = size(cmap,1);
 scf = (cml-1)/(mx-mn);
 img = round((inpimg-mn)*scf)+1;
-img(find(img<1))=1; 
+img(find(img<1))=1;
 img(find(img>cml))=cml;
 img(~isfinite(img)) = miscol;
 %_______________________________________________________________________

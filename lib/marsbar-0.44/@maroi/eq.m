@@ -1,5 +1,5 @@
 function o = eq(o1, o2)
-% overloaded eq function 
+% overloaded eq function
 %
 % $Id$
 

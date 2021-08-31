@@ -10,7 +10,7 @@ function mars_rois2img(roi_list, img_name, roi_space, flags)
 %             'c' - cluster image, clusters identified by location
 %
 % $Id %
-  
+
 if nargin < 1
   roi_list = '';
 end
@@ -49,11 +49,11 @@ roi_ctr = 1;
 for i = 1:roi_len
   roi = roi_list{i};
   % check ROI contains something
-  if isempty(roi) 
+  if isempty(roi)
     warning(sprintf('ROI %d is missing', i));
   elseif is_empty_roi(roi)
     warning(sprintf('ROI %d:%s is empty', i, label(roi)));
-  else    
+  else
     % convert ROI to matrix
     mo = maroi_matrix(roi, roi_space);
     dat = matrixdata(mo);

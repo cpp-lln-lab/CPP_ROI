@@ -1,5 +1,5 @@
 function o = plus(o1, o2)
-% overloaded plus function 
+% overloaded plus function
 %
 % $Id$
 

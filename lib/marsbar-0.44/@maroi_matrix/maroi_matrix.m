@@ -29,7 +29,7 @@ if isa(params, myclass)
   o = params;
   if nargin < 2 % simple object return call
     return
-  end 
+  end
   % Rebase call
   if isempty(space)
     space = native_space(o);
@@ -39,13 +39,13 @@ if isa(params, myclass)
   else
     space = mars_space(space);
   end
-  
+
   % check if this in fact the same as object native space
   if space == native_space(o), return, end
-  % if not, then rebase 
+  % if not, then rebase
   params = paramfields(o);
-  params.label = [params.label '_rebased']; 
-  params.descrip = [params.descrip ': rebased']; 
+  params.label = [params.label '_rebased'];
+  params.descrip = [params.descrip ': rebased'];
   params.dat = rebase(o,space,'i');
   params.mat = space.mat;
   o = maroi_matrix(params);

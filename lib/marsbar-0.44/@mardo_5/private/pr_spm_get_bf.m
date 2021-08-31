@@ -22,7 +22,7 @@ function [xBF] = pr_spm_get_bf(xBF)
 % spm_get_bf prompts for basis functions to model event or epoch-related
 % responses.  The basis functions returned are unitary and orthonormal
 % when defined as a function of peri-stimulus time in time-bins.
-% It is at this point that the distinction between event and epoch-related 
+% It is at this point that the distinction between event and epoch-related
 % responses enters.
 %_______________________________________________________________________
 % @(#)spm_get_bf.m	2.22  Karl Friston 02/04/19
@@ -101,7 +101,7 @@ switch xBF.name
 	bf    = g;
 	for i = 1:h
 		bf = [bf g.*sin(i*2*pi*pst)];
-		bf = [bf g.*cos(i*2*pi*pst)];	
+		bf = [bf g.*cos(i*2*pi*pst)];
 	end
 
 	case {'Gamma functions'}

@@ -1,6 +1,6 @@
 function varargout=mars_vol_utils(varargin)
 % collection of useful utility functions for vol structs
-% 
+%
 % tf = mars_vol_utils('is_vol', V)
 %    Returns 1 if V may be a vol struct (right fields)
 %
@@ -12,7 +12,7 @@ function varargout=mars_vol_utils(varargin)
 % V = mars_vol_utils('set_type', V, type_info)
 %    Sets type of vol struct, using type_info
 %    type_info can be a number, or a string (see spm_type)
-%  
+%
 % tf = mars_vol_utils('is_swapped', V)
 %    Returns 1 if V contains data that has opposite endianness from
 %    current platform (as given by spm_platform('bigendian')
@@ -27,7 +27,7 @@ function varargout=mars_vol_utils(varargin)
 % tf = mars_vol_utils('is_swapped_wrong', V)
 %    Returns 1 if the vol struct V has the different swapping
 %    information from a fresh mapping from the same file, and thus might
-%    have to be remapped. 
+%    have to be remapped.
 %
 % V = mars_vol_utils('byte_swap', V)
 %    Returns new vols for opposite byte ordering to current spec
@@ -35,7 +35,7 @@ function varargout=mars_vol_utils(varargin)
 % V = mars_vol_utils('convert', V, ver)
 %    Return vol struct(s) V converted to type specified in ver
 %    If ver not specified, convert to current ver type
-% 
+%
 % V = mars_vol_utils('def_vol', ver)
 %    Return default structure for type ver
 %    If ver not specified, use current ver type
@@ -61,7 +61,7 @@ if nargin < 2
   error('Need vol struct to check');
 end
 varargout = {sf_is_vol(V)};
-  
+
 %=======================================================================
 case 'type'                                    % Returns vol type number
 %=======================================================================
@@ -104,7 +104,7 @@ sf_die_no_vol(V);
 varargout = {sf_ver(V)};
 
 %=======================================================================
-case 'current_ver'               % Returns vol type from spm_vol on path 
+case 'current_ver'               % Returns vol type from spm_vol on path
 %=======================================================================
 varargout = {sf_current_ver};
 
@@ -185,8 +185,8 @@ switch ver
  otherwise
   error([ver ' is unacceptable']);
 end
-return 
- 
+return
+
 otherwise
   error([Action ' is beyond my range']);
 end
@@ -213,7 +213,7 @@ function [t, be, sw] = sf_type(V)
 plat_be = spm_platform('bigend');
 V = V(1);
 if sf_same_ver(V, '5') % spm5 vol type
-  t = V.dt(1); 
+  t = V.dt(1);
   be = V.dt(2);
   sw = xor(be, plat_be);
 elseif length(V.dim) > 3 % spm99 style type specifier
@@ -253,7 +253,7 @@ switch sf_ver(V)
   error(['That''s a funny type: ' sf_ver(V)]);
 end
 return
-  
+
 function ver = sf_ver(V)
 % returns version string ('99' or '5')
 if isfield(V, 'dt')

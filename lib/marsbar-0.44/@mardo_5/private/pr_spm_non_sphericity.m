@@ -35,22 +35,22 @@ function [xVi] = pr_spm_non_sphericity(xVi)
 %
 % Independence assumption.
 % In some situations, certain factors may contain random effects.  These induce
-% dependencies or covariance components in the error terms.   If you say no 
+% dependencies or covariance components in the error terms.   If you say no
 % to independence assumptions, you will be asked whether random effects
 % should be modelled for each factor.  A simple example of this would be
 % modelling the random effects of subject.  These cause correlations among the
-% error terms of observation from the same subject.  For simplicity, it is 
-% assumed that the random effects of each factor are i.i.d. 
+% error terms of observation from the same subject.  For simplicity, it is
+% assumed that the random effects of each factor are i.i.d.
 %
 % ReML
 % The ensuing covariance components will be estimated using ReML in spm_spm
-% (assuming the same for all responsive voxels) and used to adjust the 
+% (assuming the same for all responsive voxels) and used to adjust the
 % statistics and degrees of freedom during inference. By default spm_spm
 % will use weighted least squares to produce Gauss-Markov or Maximum
-% likelihood estimators using the non-sphericity structure specified at this 
-% stage. The components will be found in xX.xVi and enter the estimation 
+% likelihood estimators using the non-sphericity structure specified at this
+% stage. The components will be found in xX.xVi and enter the estimation
 % procedure exactly as the serial correlations in fMRI models.
-% 
+%
 %___________________________________________________________________________
 % Copyright (C) 2005 Wellcome Department of Imaging Neuroscience
 

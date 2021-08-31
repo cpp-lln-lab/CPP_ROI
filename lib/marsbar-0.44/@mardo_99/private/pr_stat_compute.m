@@ -1,13 +1,13 @@
 function [Num, Stat, P, Pc] = pr_stat_compute(xCon, Xs, V, betas, ResidualMS);
 % calculates contrast value, stats and p values for contrasts
 % FORMAT [Num, Stat, P, Pc] = pr_stat_compute(xCon, Xs, V, betas, ResidualMS);
-% 
+%
 % xCon      - contrast structure
 % Xs        - design matrix
 % V         - covariance matrix
 % betas     - parameter estimates
 % ResidualMS       - root mean square of residuals
-% 
+%
 % Output
 % Num       - contrast value (ess for F test)
 % Stat      - statistic value
@@ -59,7 +59,7 @@ for ii = 1:nCon
 		T_indices = [T_indices ii];
 
 
-    	   case 'F'  
+    	   case 'F'
 		[trMV trMVMV]= spm_SpUtil('trMV', ...
 				spm_FcUtil('X1o',xCon(ii),Xs), V);
 		dfnum   = [dfnum trMV^2/trMVMV];
@@ -71,7 +71,7 @@ for ii = 1:nCon
 		P(ii,:) = 1 - spm_Fcdf(Stat(ii,:), ...
 					[dfnum(end) erdf]);
 		F_indices       = [F_indices ii];
-		
+
 
 	   otherwise
 	        error(['unknown STAT "',xCon(ii).STAT,'"'])
@@ -79,5 +79,5 @@ for ii = 1:nCon
 end
 
 %- corrected P value for the number of ROI
-%--------------------------------------------------------------------	   
+%--------------------------------------------------------------------
 Pc = ones(nCon, nROI) - (ones(nCon, nROI) - P).^nROI;

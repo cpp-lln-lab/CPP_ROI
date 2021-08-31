@@ -1,13 +1,13 @@
 function o = add_item(o, item_name, item_contents)
 % add item to armoire
 % FORMAT o = add_item(o, item, I)
-% 
+%
 % o              - object
 % item_name     - item name
 % item_contents = item ... contents
 %
 % $Id $
-  
+
 if nargin < 2
   error('Need item name to add');
 end

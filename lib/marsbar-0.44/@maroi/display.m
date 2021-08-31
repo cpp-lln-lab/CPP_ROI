@@ -1,5 +1,5 @@
 function display(obj)
-% display - method 
+% display - method
 %
 % $Id$
 
@@ -12,7 +12,7 @@ if prod(sz)>1
     arr_str = [arr_str 'x' num2str(sz(d))];
   end
   arr_str = [arr_str ' maroi array with first element:'];
-  
+
   if isequal(get(0,'FormatSpacing'),'compact')
     disp(inp_str);
     disp(arr_str);
@@ -50,4 +50,4 @@ else
   disp(bO)
   disp(' ');
   disp(X)
-end    
+end

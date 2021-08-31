@@ -7,7 +7,7 @@ function [SPM] = pr_fmri_design(SPM)
 % See that (SPM2) version for comments etc
 %
 % $Id: pr_fmri_design.m 607 2006-03-30 20:54:55Z matthewbrett $
-  
+
 %-GUI setup
 %-----------------------------------------------------------------------
 SPMid    = spm('SFnBanner',mfilename,marsbar('ver'));
@@ -56,7 +56,7 @@ end
 SPM.xBF.dt = SPM.xY.RT/SPM.xBF.T;
 try
 	SPM.xBF.UNITS;
-catch	
+catch
 	str           = 'specify design in';
 	SPM.xBF.UNITS = spm_input(str,'+1','scans|secs');
 end
@@ -128,7 +128,7 @@ for s = 1:length(SPM.nscan)
 
 		% get user specified regressors
 		%=======================================================
-		try 
+		try
 			C     = SPM.Sess(s).C.C;
 			Cname = SPM.Sess(s).C.name;
 		catch
@@ -158,7 +158,7 @@ for s = 1:length(SPM.nscan)
 		X      = [X spm_detrend(C)];
 		Xn     = {Xn{:}   Cname{:}};
 
-		% Confounds: Session effects 
+		% Confounds: Session effects
 		%=======================================================
 		B      = ones(k,1);
 		Bn{1}  = sprintf('constant');
@@ -176,10 +176,10 @@ for s = 1:length(SPM.nscan)
 
 	% Append names
 	%---------------------------------------------------------------
-	for i = 1:length(Xn) 
+	for i = 1:length(Xn)
 		Xname{end + 1} = [sprintf('Sn(%i) ',s) Xn{i}];
 	end
-	for i = 1:length(Bn) 
+	for i = 1:length(Bn)
 		Bname{end + 1} = [sprintf('Sn(%i) ',s) Bn{i}];
 	end
 
@@ -204,4 +204,3 @@ SPM.xX.name   = {Xname{:} Bname{:}};
 %-End
 %-----------------------------------------------------------------------
 spm_input('!DeleteInputObj')
-

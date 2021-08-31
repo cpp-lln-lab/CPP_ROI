@@ -1,7 +1,7 @@
 function o = convert_vols(o, ver)
 % method that converts vol structs in design and converts to format 'ver'
 % FORMAT o = convert_fo(o, ver)
-% 
+%
 % Input
 % o        - design object
 % ver      - optional version for vols from '99' or '5'
@@ -9,14 +9,14 @@ function o = convert_vols(o, ver)
 %
 % Output
 % o        - object with converted vols
-% 
+%
 % Example
 % % Convert vols to current format
 % o = convert_vols(o);
-% 
+%
 % % Convert to native format for SPM99 designs
 % o = convert_vols(o, native_vol_ver(o));
-% 
+%
 % $Id$
 
 if nargin < 2

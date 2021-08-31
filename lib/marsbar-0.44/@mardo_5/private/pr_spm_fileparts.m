@@ -21,4 +21,3 @@ if ~isempty(ind),
     num = ext(ind(1):end);
     ext = ext(1:(ind(1)-1));
 end;
-

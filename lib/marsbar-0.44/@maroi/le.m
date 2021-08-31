@@ -1,5 +1,5 @@
 function o = le(o1, o2)
-% overloaded le (less than or equal to) function 
+% overloaded le (less than or equal to) function
 %
 % $Id$
 

@@ -5,10 +5,10 @@ function [mars, msgstr] = mars_options(optstr, mars, cfg_fname)
 % Input [default]
 % optstr            - option string: one of
 %                     'put','load','save','edit','defaults',
-%                     'basedefaults','fill' [load]  
+%                     'basedefaults','fill' [load]
 % mars              - marsbar options structure [MARS.OPTIONS]
 % cfg_fname         - filename for configuration file [GUI]
-% 
+%
 % Output
 % mars              - possible modified MARS.OPTIONS structure
 % msgstr            - any relevant messages
@@ -16,7 +16,7 @@ function [mars, msgstr] = mars_options(optstr, mars, cfg_fname)
 % Matthew Brett 20/10/00,2/6/01
 %
 % $Id$
-  
+
 if nargin < 1
   optstr = 'load';
 end
@@ -30,17 +30,17 @@ end
 msgstr = '';
 
 % editable fields, and descriptions of fields, in mars options structure
-optfields = {'spacebase','structural','statistics', 'events'}; 
+optfields = {'spacebase','structural','statistics', 'events'};
 optlabs =  {'Base space for ROIs','Default structural','Statistics', ...
 	    'Working with events'};
 
 switch lower(optstr)
-  
+
  % --------------------------------------------------
  case 'put'
   maroi('classdata', 'spacebase', mars_space(mars.spacebase.fname));
   maroi('classdata', 'def_hold', mars.roidefs.spm_hold);
- 
+
  % --------------------------------------------------
  case 'load'
   if isempty(cfg_fname)
@@ -57,7 +57,7 @@ switch lower(optstr)
       end
     end
   end
- 
+
   % --------------------------------------------------
  case 'save'
   if nargin < 3
@@ -76,7 +76,7 @@ switch lower(optstr)
 		      lasterr, cfg_fname))
     end
   end
-  
+
   % --------------------------------------------------
  case 'basedefaults'
   % hardcoded defaults
@@ -88,13 +88,13 @@ switch lower(optstr)
 
   % default image specifying base space for ROIs
   mars.spacebase.fname = mars.structural.fname;
-  
+
   % ROI defaults
   mars.roidefs.spm_hold = 1;
-  
+
   % default summary function for ROI data
   mars.statistics.sumfunc = 'mean';
-  
+
   % flag to indicate voxel data should be used to calculate filter
   mars.statistics.voxfilter = 0;
 
@@ -104,13 +104,13 @@ switch lower(optstr)
 
   % Whether to refresh contrast structure when loading designs
   mars.statistics.refresh_contrasts = 1;
-  
+
   % Difference function to calculate % signal change
   mars.events.diff_func = 'abs max';
-  
+
 % --------------------------------------------------
  case 'edit'
-  
+
   % Edit defaults.  See 'basedefaults' option for other defaults
   defarea = cfg_fname;  % third arg is defaults area, if specified
   if isempty(defarea)
@@ -121,12 +121,12 @@ switch lower(optstr)
       spm_input('Defaults area', '+1', 'm',{optlabs{:} 'Quit'},...
 		{optfields{:} 'quit'},length(optfields)+1));
   end
-  
+
   oldmars = mars;
   switch defarea
    case 'quit'
     return
-   
+
     % display stuff - default structural scan
    case 'structural'
     mars.structural.fname = spm_get(1, mars_veropts('get_img_ext'),...
@@ -141,14 +141,14 @@ switch lower(optstr)
 		  '|Trilinear Interpolation'...
 		  '|Sinc Interpolation'],...
 			     [0 1 -9],2);
-    
+
    % default ROI base space
    case 'spacebase'
     mars.spacebase.fname = spm_get(1, mars_veropts('get_img_ext'),...
 				   'Default ROI image space', ...
 				   fileparts(mars.spacebase.fname));
-    
-   % statistics 
+
+   % statistics
    case 'statistics'
     mars.statistics = getdefs(...
 	mars.statistics,...
@@ -157,7 +157,7 @@ switch lower(optstr)
 	'Data summary function',...
 	{'mean','wtmean','median','ask'},...
 	'Mean|Weighted mean|Median|Always ask');
-	   
+
     tmp = [1 0]; tmpi = find(tmp == mars.statistics.flip_option);
     mars.statistics.flip_option = spm_input('Flip design images SPM99-2',...
 					 '+1','b','Yes|No',tmp, tmpi);
@@ -174,8 +174,8 @@ switch lower(optstr)
 	'Event height function',...
 	{'abs max','abs max-min','max','max-min','window'},...
 	'Abs max|Abs max-min|Max|Max-min|Mean over time window');
-    
-   otherwise 
+
+   otherwise
     error('Unknown defaults area')
   end
 
@@ -183,7 +183,7 @@ switch lower(optstr)
   if spm_input('Accept these settings', '+1', 'b','Yes|No',[0 1],1)
     mars = oldmars;
   end
-  
+
   % --------------------------------------------------
  case 'defaults'                             %-get marsbar defaults
   pwdefs = [];
@@ -201,11 +201,11 @@ switch lower(optstr)
     end
   end
   mars = mars_struct('fillafromb',pwdefs, mars_options('basedefaults'));
-  
+
    % --------------------------------------------------
  case 'fill'                             %-fill from template
   mars = mars_struct('fillafromb',mars,cfg_fname);
-  
+
  otherwise
   error('Don''t recognize options action string')
 end
@@ -214,9 +214,9 @@ return
 
 function s = getdefs(s, defval, fieldn, prompt, vals, labels)
 % sets field in structure given values, labels, etc
-    
+
 if isstruct(defval)
-  defval = getfield(defval, fieldn);  
+  defval = getfield(defval, fieldn);
 end
 
 if ischar(defval)
@@ -229,7 +229,7 @@ v = spm_input(prompt, '+1', 'm', labels, vals, defind);
 if iscell(v) && ischar(defval)
   v = char(v);
 end
-  
+
 s = setfield(s,fieldn,v);
 
 return

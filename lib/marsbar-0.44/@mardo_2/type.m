@@ -1,6 +1,6 @@
 function str = type(o)
 % returns SPM version string corresponding to design type
-% 
-% $Id$ 
-  
+%
+% $Id$
+
 str = 'SPM2';
