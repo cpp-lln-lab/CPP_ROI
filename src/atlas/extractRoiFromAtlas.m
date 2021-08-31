@@ -34,9 +34,10 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
     roiName = regexprep(roiName, '(Left )|(Right )', '');
 
+    prefix = '';
     if strcmp(hemisphere, 'L')
       prefix = 'Left ';
-    elseif strcmp(hemisphere, 'L')
+    elseif strcmp(hemisphere, 'R')
       prefix = 'Right ';
     end
 
