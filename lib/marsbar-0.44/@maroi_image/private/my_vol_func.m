@@ -20,7 +20,7 @@ img = [];
 errstr = '';
 
 if ischar(vol) % filename passed?
-  try 
+  try
     vol = spm_vol(vol);
   catch
     errstr = lasterr;
@@ -40,8 +40,8 @@ if ~isfield(vol, 'fname')
   errstr = 'vol does not contain fname field';
   return
 end
-  
-try 
+
+try
   % load image into matrix
   img = spm_read_vols(vol);
 catch
@@ -52,14 +52,14 @@ end
 % apply and check function if passed
 if ~isempty(func)
   sz = size(img);
-  try 
+  try
     img = double(eval(func));
   catch
     errstr = lasterr;
     img = [];
     return
   end
-  
+
   % check that the image has not changed size
   sz2 = size(img);
   if length(sz) ~= length(sz2) | any(sz ~= sz2)

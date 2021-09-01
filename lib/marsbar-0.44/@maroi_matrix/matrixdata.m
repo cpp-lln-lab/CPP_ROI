@@ -3,11 +3,11 @@ function dat = matrixdata(o, dat)
 %
 % $Id$
 
-% a warning here about empty matrices  
+% a warning here about empty matrices
 if nargin > 1 % call to set matrix data
   % change to maroi_matrix type before setting data
   o = maroi_matrix(o);
-  
+
   % apply implied thresholding
   tmp = find(isnan(dat) | abs(dat) < roithresh(o));
   if binarize(o), dat(:) = 1; end

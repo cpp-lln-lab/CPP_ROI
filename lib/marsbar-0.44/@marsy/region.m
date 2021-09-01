@@ -1,25 +1,25 @@
 function [rs,r_nos] = region(o, r_nos, new_data, fieldname)
-% gets / sets data for region or regions 
+% gets / sets data for region or regions
 % FORMAT [rs r_nos] = region(o, r_nos) (set) OR
 % FORMAT [rs r_nos]= region(o, r_nos, new_data, fieldname) (get)
-% 
+%
 % Inputs
 % o              - marsy object
-% r_nos          - region number 
+% r_nos          - region number
 %                  or array of region numbers
 %                  or empty - giving all regions
 % new_data       - cell array containing new data to set for region
 % fieldname      - optional string, to identify field to be set
 %                  using data in new_data
-%   
+%
 % Returns
 % (get call)
 % rs             - cell array of region structures
 % (set_call)
 % rs             - new marsy object with fields set
-%   
+%
 % r_nos          - region nos (empty now -> all region nos)
-% 
+%
 % $Id$
 
 r = n_regions(o);
@@ -28,7 +28,7 @@ if nargin < 2
 end
 if isempty(r_nos)
   r_nos = 1:r;
-end    
+end
 if any(r_nos > r)
   error('Region numbers too large');
 end
@@ -63,7 +63,7 @@ if nargin < 3
     rs{i} = r_st;
   end
   return
-end 
+end
 
 % set call
 if nargin > 3
@@ -95,7 +95,7 @@ for i = 1:r_len
   else % structure call
     n_st = new_data{i};
   end
-  
+
   % check if Y or weights are being set
   % if so, we will have to resummarize
   if isfield(n_st, 'Y')
@@ -107,7 +107,7 @@ for i = 1:r_len
   if isfield(n_st, 'weights')
     if strcmp(sum_func, 'wtmean')
       re_sum_f = 1;
-    end	  
+    end
     if ~isempty(n_st.weights) & size(n_st.weights, 1) ~= N
       error('Incorrect number of time points in weight set call');
     end
@@ -117,7 +117,7 @@ end
 
 if re_sum_f
   st = mars_struct('strip', st, {'Y','Yvar'});
-  rs = resummarize(y_struct(o, st)); 
+  rs = resummarize(y_struct(o, st));
 else
-  rs = y_struct(o, st); 
+  rs = y_struct(o, st);
 end

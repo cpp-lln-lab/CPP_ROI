@@ -1,13 +1,13 @@
 function D = autocorr(D, autocorr_type, varargin)
 % method to set autocorrelation types for design
 % FORMAT D = autocorr(D, autocorr_type, varargin)
-% 
+%
 % D             - design object
 % autocorr_type - autocorrelation type specification, one of
 %                 'SPM'
 %                 'fmristat'
 %                 'none'
-% varargin      - parameters defining autocorrelation model.  
+% varargin      - parameters defining autocorrelation model.
 %                 If autocorr type is 'SPM':
 %                   varargin{1} should be vector with estimated AR
 %                      coefficients (default is [0.2])
@@ -16,9 +16,9 @@ function D = autocorr(D, autocorr_type, varargin)
 %                 If autocorr type is 'fmristat'
 %                   varargin{1} is scalar value for order of fmristat
 %                   model (default is 1);
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need autocorr type');
 end
@@ -46,7 +46,7 @@ switch lower(autocorr_type)
   SPM.xVi.Vi = struct('type', 'fmristat', 'order', cVi);
   cVi        = sprintf('fmristat AR(%d)',cVi);
   f2cl       = 'V'; % Field to CLear
-  
+
  case 'spm'
   % SPM AR coefficient(s) to be specified
   if nargin < 3, varargin{1} = 0.2; end
@@ -57,19 +57,19 @@ switch lower(autocorr_type)
   end
   SPM.xVi.Vi = pr_spm_ce(nscan, cVi);
   cVi        = sprintf('AR(%0.1f)',cVi(1));
-  f2cl       = 'V'; 
+  f2cl       = 'V';
   if varargin{2}
     SPM.xVi.cov_calc = 'vox';
   end
-  
- case 'none'		
+
+ case 'none'
   %  xVi.V is i.i.d
   %---------------------------------------------------------------
   SPM.xVi.V  = speye(sum(nscan));
   cVi        = 'i.i.d';
-  f2cl       = 'Vi'; 
-  
- otherwise		
+  f2cl       = 'Vi';
+
+ otherwise
   error(['Eccentric autocorr type ' autocorr_type]);
 end
 

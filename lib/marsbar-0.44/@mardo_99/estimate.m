@@ -34,7 +34,7 @@ end
 
 % get SPM design structure
 SPM = des_struct(marsD);
-  
+
 % do estimation
 SPM       = pr_estimate(SPM, marsY);
 SPM.marsY = marsY;
@@ -46,4 +46,3 @@ SPM.SPMid  = sprintf('SPM99: MarsBaR estimation. mardo_99 version %s', ...
 
 % return modified structure
 marsD = des_struct(marsD, SPM);
-

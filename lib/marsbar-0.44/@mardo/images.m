@@ -1,8 +1,8 @@
 function r = images(o, imgs)
-% method to get or set images 
-% 
+% method to get or set images
+%
 % $Id$
-  
+
 if nargin < 2
   r = get_images(o);
 else

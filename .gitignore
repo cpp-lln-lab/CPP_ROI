@@ -20,7 +20,6 @@ envs/*
 # visual studio code stuff
 .vscode
 
-
-
-
-
+demos/*/*.json
+demos/*/*/*.json
+demos/*/derivatives

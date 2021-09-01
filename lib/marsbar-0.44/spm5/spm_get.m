@@ -4,7 +4,7 @@ function varargout = spm_get(Action, varargin)
 % SPM5 uses a function called spm_select to do file selection instead of
 % the spm_get of versions 96-2.  This breaks a lot of old code; here we
 % wrap the most common calls to spm_get so that we can use
-% spm_select. I've only wrapped the spm_get calls used in marsbar.  
+% spm_select. I've only wrapped the spm_get calls used in marsbar.
 %
 % Usually, file / directory selection call is of format:
 % FORMAT P = spm_get(N, ext, prompt, newwdir)
@@ -133,7 +133,7 @@ for c = old_str
    case '?'
     nc = '.';
    case {'.', '^', '$', '+'}
-    nc = ['\' c]; 
+    nc = ['\' c];
    otherwise
     nc = c;
   end
@@ -141,4 +141,3 @@ for c = old_str
 end
 new_str = [new_str '$'];
 return
-  

@@ -1,22 +1,22 @@
 function [D, ic, status] = ui_event_types(D)
 % ui method for selection / editing of event types
 % FORMAT [D, ic, status] = ui_event_types(D)
-% 
+%
 % Input
 % D          - design object
-% 
-% Returns  
+%
+% Returns
 % D          - possibly modified design object
 % ic         - indices of selected event types (empty for none)
 % status     - 0 for Cancel or window quit
 %              1 for OK, but no edits to event types
 %              2 for OK, with edits to event types
-% 
+%
 % The routine sets up the event type window, and waits until that window
 % is done, then returns with the modified values.
-% 
+%
 % $Id$
-  
+
 % Put up window and initialize callbacks
 [F hDone hList hEdit] = sf_start_window(D);
 
@@ -47,11 +47,11 @@ function [F, hDone, hList, hEdit] = sf_start_window(D)
 
 % Window tag
 w_tag = 'ui_event_types';
-  
+
 % Close any event_types windows currently open
 close(findobj('Tag', w_tag))
-  
-%-Generic CallBack code to get embedded object 
+
+%-Generic CallBack code to get embedded object
 cb = ['et_D = get(findobj(''Tag'', ''' w_tag '''),''UserData''); '];
 
 %-Create window, compute scaling for screen size
@@ -68,7 +68,7 @@ ratio_dor   = (1 + sqrt(5))/2;
 % Button sizes and positions
 n_buttons   = 5;
 button_sz_x = 75;
-button_border = [12 12]; 
+button_border = [12 12];
 button_sz   = [button_sz_x button_sz_x / ratio_dor];
 button_x    = win_sz(1) - button_sz(1) - button_border(1);
 l_b         = button_border(2);

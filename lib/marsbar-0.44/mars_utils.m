@@ -1,6 +1,6 @@
 function varargout=mars_utils(varargin)
 % collection of useful utility functions for MarsBaR etc
-% 
+%
 % fname = mars_utils('str2fname', str)
 %    accepts string, attempts return of string for valid filename
 %    The passed string should be without path or extension
@@ -10,7 +10,7 @@ function varargout=mars_utils(varargin)
 %    returns 1 for yes.
 %
 % P = mars_utils('get_img_name', fname, flags);
-%    gets name of image, if image exists, checks for overwrite  
+%    gets name of image, if image exists, checks for overwrite
 %    returns filename, or empty string if overwrite not wanted
 %
 % XYZ = mars_utils('e2xyz', els, dims);
@@ -21,9 +21,9 @@ function varargout=mars_utils(varargin)
 % absf = mars_utils('isabspath', path);
 %    Takes path name, and returns flag, 1 if path is absolute on this
 %    system, 0 if relative or empty
-% 
+%
 % mars_utils('graphic_text', strs, [title_str, [, figure_str]])
-%    Displays cell array of text (strs) in SPM graphics window 
+%    Displays cell array of text (strs) in SPM graphics window
 %    with optional title (char) title_string.  Can also set to display to
 %    other figure window (string or figure handle).
 %
@@ -33,7 +33,7 @@ function varargout=mars_utils(varargin)
 %    directory.  If optional flag check_global is zero, does _not_ check
 %    global SPM_VER variable for version, and tries to get directly from
 %    spm.m / Contents.m pairs.
-% 
+%
 % tf = mars_utils('is_swapped_wrong', V)
 %    Deprecated - see version in mars_vol_utils
 %
@@ -51,7 +51,7 @@ end
 Action = lower(varargin{1});
 
 switch(Action)
-  
+
 %=======================================================================
 case 'str2fname'                                   %-string to file name
 %=======================================================================
@@ -62,7 +62,7 @@ str = varargin{2};
 % forbidden chars in file name
 badchars = unique([filesep '/\ :;.''"~*?<>|&']);
 
-tmp = find(ismember(str, badchars));   
+tmp = find(ismember(str, badchars));
 if ~isempty(tmp)
   str(tmp) = '_';
   dt = diff(tmp);
@@ -71,7 +71,7 @@ if ~isempty(tmp)
   end
 end
 varargout={str};
- 
+
 %=======================================================================
 case 'is_valid_varname'        %- tests if string is valid variable name
 %=======================================================================
@@ -79,7 +79,7 @@ if nargin < 2
   error('Need to specify string');
 end
 str = varargin{2};
-try 
+try
   eval([str '= [];']);
   varargout={1};
 catch
@@ -96,7 +96,7 @@ else
 end
 if nargin < 3
   flags = '';
-else 
+else
   flags = varargin{3};
 end
 if isempty(flags)
@@ -190,13 +190,13 @@ y     = y0 - FS(14);
 %------------------------
 for i = 1:prod(size(S))
   d = S{i};
-  
+
   %-For some reason, '|' characters cause a CR.
   d = strrep(d,'|','I');
   h = text(0,y,d,'FontName',PF.courier,'FontSize',FS(10));
   y = y - dy;
 end
- 
+
 %=======================================================================
 case 'spm_version'                   % Robust get for SPM version string
 %=======================================================================
@@ -252,13 +252,13 @@ vs = {v1, v2};
 for v = 1:2
   ns = vs{v};
   if ~ischar(ns), ns = num2str(ns); end
-  ns = sf_str_to_nums(ns); 
+  ns = sf_str_to_nums(ns);
   cmp_mat(v, 1:length(ns)) = ns;
 end
 dp = diff(cmp_mat) * -1;
 for i = 1:length(dp)
   if dp(i)<0, tf = 1; return, end
-  if dp(i)>0, tf = 0; return, end 
+  if dp(i)>0, tf = 0; return, end
 end
 tf = 0;
 return

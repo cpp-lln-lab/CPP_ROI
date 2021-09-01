@@ -1,6 +1,14 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function atlasDir = returnAtlasDir(atlas)
+  %
+  % USAGE::
+  %
+  %   atlasDir = returnAtlasDir(atlas)
+  %
+  % :parameter atlas: atlas to use (``''``, ``wang``, ``anatomy_toobox``,
+  % ``neuromorphometric``)
+  % :type atlas: string
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   atlasDir = fullfile(fileparts(mfilename('fullpath')), '..', '..', 'atlas');
 

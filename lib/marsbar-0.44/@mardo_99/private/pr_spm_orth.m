@@ -3,8 +3,8 @@ function bf = pr_spm_orth(BF)
 % FORMAT bf = pr_spm_orth(bf)
 %
 % From spm_get_bf.m, see that file for credits
-% 
-% $Id$ 
+%
+% $Id$
 
 if nargin < 1
   error('Need BF');
@@ -19,5 +19,3 @@ for i = 2:size(BF,2)
     bf = [bf D/sqrt(mean(D.^2))];
   end
 end
-
-

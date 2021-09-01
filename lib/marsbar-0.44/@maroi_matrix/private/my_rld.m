@@ -1,5 +1,5 @@
 function mat = my_rld(rlem, dim)
-% function to do run length decoding 
+% function to do run length decoding
 %
 % $Id$
 

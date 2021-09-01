@@ -1,7 +1,7 @@
 function tf = are_same(roi1, roi2, sp)
 % returns 1 if rois are the same
 % FORMAT tf = are_same(roi1, roi2)
-% 
+%
 % $Id$
 
 if nargin < 2

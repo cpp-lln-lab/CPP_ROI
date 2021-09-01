@@ -11,7 +11,7 @@ function [argout] = pr_spm_filter(K,Y)
 % K(s).HParam - cut-off period in seconds
 %
 % K(s).X0     - low frequencies to be removed (DCT)
-% 
+%
 % Y           - data matrix
 %
 % K           - filter structure
@@ -20,7 +20,7 @@ function [argout] = pr_spm_filter(K,Y)
 %
 % spm_filter implements high-pass filtering in an efficient way by
 % using the residual forming matrix of X0 - low frequency confounds
-%.spm_filter also configures the filter structure in accord with the 
+%.spm_filter also configures the filter structure in accord with the
 % specification fields if called with one argument
 %___________________________________________________________________________
 % Copyright (C) 2005 Wellcome Department of Imaging Neuroscience
@@ -88,4 +88,3 @@ else
 	%if any(~isfinite(Y)), warning('Found non-finite values in Y (could be the data).'); end;
 	argout = Y;
 end
-

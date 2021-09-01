@@ -8,29 +8,29 @@ function r = ui_plot(o, plot_spec, plot_params)
 % plot_spec    - can be a
 %                string, in which case it has the same meaning as
 %                    the structure version below, with only field 'types'
-%                    set to this value, OR 
+%                    set to this value, OR
 %                structure, with none ore more of fields
 %                (in all cases, field missing is the same as the field
 %                being empty)
-%                r_nos      - region number(s) 
+%                r_nos      - region number(s)
 %                             (if empty, -> all regions)
-%                b_nos      - session/subject numbers 
-%                             (if empty, -> all blocks)  
+%                b_nos      - session/subject numbers
+%                             (if empty, -> all blocks)
 %                types      - string, or cell arrays of strings
 %                             specifying plot type(s).  Plot types can be
-%                             one or more of: 
-%                  'raw'    - plots raw time series 
+%                             one or more of:
+%                  'raw'    - plots raw time series
 %                  'acf     - plots autocorrelation function
 %                  'fft'    - plots fourier analysis of time series
-%                  'all'    - all of the above 
+%                  'all'    - all of the above
 %                  (defaults to 'raw')
-%                graphics_obj - graphics object(s) for plot.  
+%                graphics_obj - graphics object(s) for plot.
 %                            If empty, becomes handle SPM graphics
 %                            window, otherwise, can be a handle to
 %                            figure, or enough handles to axes for all
 %                            requested plots.  This is useful for putting
-%                            the plot on a convenient figure or axis 
-%   
+%                            the plot on a convenient figure or axis
+%
 % plot_params  - (optional) Parameters to pass to plots
 %                Can be empty (giving defaults) or structure, or
 %                cell array of structures, one per requested plot
@@ -46,7 +46,7 @@ function r = ui_plot(o, plot_spec, plot_params)
 %                'fft'.  Cell array, one cell per plot.
 %
 % Examples
-% ui_plot(Y, 'all')  plots all plot types for all regions and sessions 
+% ui_plot(Y, 'all')  plots all plot types for all regions and sessions
 % ui_plot(Y, 'acf')  just plots ACF, for all regions
 % ui_plot(Y, struct('types', 'fft', 'r_nos', 1))
 %                    will plot fft for region 1 only
@@ -56,8 +56,8 @@ function r = ui_plot(o, plot_spec, plot_params)
 %                    plots ACF for all regions, with lag of 8 rather than
 %                    the default of 10
 %
-% $Id$ 
-  
+% $Id$
+
 % Get, check data from object
 [n_rows n_cols] = summary_size(o);
 if ~prod([n_rows n_cols]), warning('No data to plot'), return, end
@@ -89,7 +89,7 @@ if strcmp('all', plot_types{1})
   plot_types = {'raw','acf','fft'};
 end
 n_p_t   = length(plot_types);
-n_plots = n_p_t * length(plot_spec.r_nos); 
+n_plots = n_p_t * length(plot_spec.r_nos);
 
 % Check passed graphics object(s)
 gr_ob = plot_spec.graphics_obj;
@@ -133,11 +133,11 @@ if length(plot_params) == 1
 elseif length(plot_params) < n_p_t
   error(sprintf('You need %d plot_param entries', n_p_t));
 end
- 
+
 % Default string, bin_length for fft plots
 if mars_struct('isthere', info, 'TR')
   bin_length = info.TR;
-  bin_str = 'Hz';	
+  bin_str = 'Hz';
 else
   bin_length = 1;
   bin_str = 'cycles per time point';
@@ -148,13 +148,13 @@ for c = plot_spec.r_nos
   for p = 1:n_p_t
     switch o_t
      case 'figure'
-      subplot(n_plots, 1, p_ctr); 
+      subplot(n_plots, 1, p_ctr);
      case 'axes'
       axes(gr_ob(p_ctr));
     end
 
     y = Y(:,c);
-    
+
     switch lower(plot_types{p})
      case 'raw'
       a_r = [];
@@ -175,7 +175,7 @@ for c = plot_spec.r_nos
       ylabel(['Signal intensity' S])
       xlabel('Time point');
       r{p_ctr} = y;
-      
+
      case 'acf'
       if isfield(plot_params{p}, 'lags')
 	lags = plot_params{p}.lags;
@@ -196,7 +196,7 @@ for c = plot_spec.r_nos
 	Cs      = corrcoef(ty);
 	C       = [C Cs(1,:)];
 	n       = nb_rows - 2;                   % df for correlation
-	t_th    = spm_invTcdf(1-0.025, n);       % t for two tailed p=0.05 
+	t_th    = spm_invTcdf(1-0.025, n);       % t for two tailed p=0.05
 	r_th(s) = sqrt(1/(n/t_th.^2+1));         % r equivalent
       end
       stem(C);
@@ -246,7 +246,7 @@ for c = plot_spec.r_nos
 	plot([St(s) St(s)]-0.5, Prg, 'k-');
       end
       axis tight
-      % Rename tick labels 
+      % Rename tick labels
       xt  = get(gca, 'xtick');
       xt  =  xt(xt==fix(xt));
       set(gca, 'xtick', xt);
@@ -262,10 +262,9 @@ for c = plot_spec.r_nos
       error(['What is this plot type: ' plot_types{p} '?']);
     end
     title(N{c}, 'interpreter', 'none');
-  
+
     p_ctr = p_ctr + 1;
   end
 end
 
 return
-

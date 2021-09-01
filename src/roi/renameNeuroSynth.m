@@ -1,21 +1,39 @@
-% (C) Copyright 2021 CPP ROI developers
-
 function outputImage = renameNeuroSynth(inputImage)
-  % give the neurosynth map a name that is more bids friendly
   %
-  % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
+  % give a neurosynth map a name that is more bids friendly
   %
+  % USAGE::
+  %
+  %   outputImage = renameNeuroSynth(inputImage)
+  %
+  % EXAMPLE::
+  %
+  %   inputImage = fullfile(pwd, 'motion_association-test_z_FDR_0.01.nii.gz');
+  %   outputImage = renameNeuroSynth(inputImage);
+  %
+  %   outputImage
+  %   >>
+  %     fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii.gz');
+  %
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
   p.filename = spm_file(inputImage, 'filename');
-  p.type = 'probseg';
+  p.suffix = 'probseg';
   p.ext = '.nii';
-  p.space = 'MNI';
+  if strcmp(spm_file(inputImage, 'ext'), 'gz')
+    p.ext = [p.ext '.gz'];
+  end
+  % TODO: find the actual MNI space neurosynth images are in
+  p.entities.space = 'MNI';
 
   basename = spm_file(inputImage, 'basename');
   parts = strsplit(basename, '_');
-  p.label = ['neurosynth ' parts{1}];
+  p.entities.label = ['neurosynth ' parts{1}];
 
-  newName = createFilename(p);
+  p.use_schema = false;
+
+  newName = bids.create_filename(p);
 
   outputImage = spm_file(inputImage, 'filename', newName);
 

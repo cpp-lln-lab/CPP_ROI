@@ -1,7 +1,7 @@
 function s = event_signal(D, e_spec, dur, diff_func, varargin)
 % method to compute % signal change from fMRI events
 % FORMAT s = event_signal(D, e_spec, dur, diff_func, varargin)
-% 
+%
 % D          - design
 % e_spec     - 2 by N array specifying events to combine
 %                 with row 1 giving session number
@@ -11,18 +11,18 @@ function s = event_signal(D, e_spec, dur, diff_func, varargin)
 % diff_func  - function to calculate signal change from canonical event
 %              one of 'max', 'max-min', 'abs max', 'abs max-min', 'window'
 % varargin   - any needed arguments for diff_func
-%              No arguments are needed for 
+%              No arguments are needed for
 %              'max', 'max-min', 'abs max','abs max-min'
 %              For 'window', you need a 1x2 vector with the time in
 %              seconds over which to take the mean, and the length in
 %              seconds of a time bin for the basis functions (returned
 %              for example by bf_dt(my_design)
-%  
+%
 % Returns
 % s          - average % signal change over the events
 %              1 by n_regions vector
 %
-% $Id$ 
+% $Id$
 
 if nargin < 2
   error('Need event specification');

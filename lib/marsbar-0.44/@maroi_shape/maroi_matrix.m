@@ -8,7 +8,7 @@ if nargin < 2
 end
 if isempty(space)
    space = native_space(o);
-end	
+end
 if isempty(space)
    error('Need space to create maroi_matrix');
 end

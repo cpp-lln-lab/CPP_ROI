@@ -16,7 +16,7 @@ function Y = apply_filter(D, Y, flags)
 % Y      - filtered data
 %
 % $Id$
-  
+
 if nargin < 2
   error('Need data to filter');
 end
@@ -48,7 +48,7 @@ if isfield(flags, 'sessions')
       error('Sessions appear to be out of range');
     end
     K = K(ss);
-    K{1}.row = blk_rows{ss} - blk_rows{ss}(1) + 1; 
+    K{1}.row = blk_rows{ss} - blk_rows{ss}(1) + 1;
   end
 end
 

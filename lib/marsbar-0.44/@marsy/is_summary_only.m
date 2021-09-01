@@ -1,6 +1,6 @@
 function tf = is_summary_only(o)
 % method returns 1 if object only contains summary data
-% 
+%
 % $Id$
 
 tf = 0;

@@ -1,5 +1,5 @@
 function o = ge(o1, o2)
-% overloaded ge function 
+% overloaded ge function
 %
 % $Id$
 

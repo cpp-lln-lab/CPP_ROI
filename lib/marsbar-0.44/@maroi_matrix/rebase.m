@@ -49,6 +49,6 @@ for z=1:sp.dim(3),
   end
 end
 if ~any(flags == 'i')
-  pts =  [pts{:}];  
+  pts =  [pts{:}];
   vals = [multvc{:}];
 end

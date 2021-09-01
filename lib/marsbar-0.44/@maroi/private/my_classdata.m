@@ -3,7 +3,7 @@ function cdata = my_classdata(fieldname, value)
 % maroi class data is implemented with a persistent variable
 % CLASSDATA  This is a structure containing fields
 %
-% spacebase  - space in which to do ROI combination 
+% spacebase  - space in which to do ROI combination
 % fileend    - filename end with extension for ROI files
 % def_binthresh - default roithresh for binarize ROIs
 % def_wtthresh  - default roithresh for non-binarize ROIs
@@ -17,7 +17,7 @@ function cdata = my_classdata(fieldname, value)
 % maroi('classdata', struct) where struct contains fields matching those
 % in CLASSDATA
 %
-% The same functionality results from 
+% The same functionality results from
 % classdata(maroi_obj, fieldname) etc.
 %
 % Matthew Brett 1/8/01 (MRD+)
@@ -28,7 +28,7 @@ persistent CLASSDATA
 if isempty(CLASSDATA)
   % default space is that of the SPM templates
   t1mat = [2     0     0   -92; ...
-	   0     2     0  -128; ... 
+	   0     2     0  -128; ...
 	   0     0     2   -74; ...
 	   0     0     0     1];
   CLASSDATA = struct(...
@@ -45,16 +45,16 @@ if nargin < 1 % simple classdata call
   return
 end
 if nargin < 2 && ~isstruct(fieldname) % fieldname get call
-  if isfield(CLASSDATA, fieldname) 
+  if isfield(CLASSDATA, fieldname)
     cdata = getfield(CLASSDATA,fieldname);
-  else 
-    cdata = []; 
+  else
+    cdata = [];
   end
   return
 end
 
 % some sort of set call
-if ~isstruct(fieldname) 
+if ~isstruct(fieldname)
   fieldname = struct(struct(fieldname, value));
 end
 for field = fieldnames(fieldname)

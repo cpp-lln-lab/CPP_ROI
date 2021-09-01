@@ -3,7 +3,7 @@ function o = mardo_2(o)
 %
 % Heavily based with thanks on work by Jeff Cooper:
 % Written June 2003 by Jeff Cooper (jcooper@stanford.edu)
-% 
+%
 % $Id$
 
 % Process design
@@ -30,43 +30,43 @@ SPM.xCon = mars_struct('getifthere', SPM99, 'xCon');
 if isfield(SPM99, 'Sess'), Sess = SPM99.Sess; else Sess = []; end
 for i = 1:length(Sess)
     currsess = Sess{i};
-    
+
     % indices for this session's row in design matrix
-    SPM.Sess(i).row = currsess.row;      
-    
+    SPM.Sess(i).row = currsess.row;
+
     % indices for this session's cols in design matrix
-    SPM.Sess(i).col = currsess.col;      
-    
+    SPM.Sess(i).col = currsess.col;
+
     % number of scans in this session
     SPM.nscan(i) = length(currsess.row);
-    
+
     % We can use the length of the onset cell array as an
     % effective number of conditions variable - only 'true'
     % conditions have onset vectors, not Volterra items or
     % user-specified covariates.
-    for j = 1:length(currsess.ons) 
-      
+    for j = 1:length(currsess.ons)
+
       % Try getting onsets and durations from design
       [ons dur] = event_onsets(D, [i j]);
-      
+
       % time bin length in seconds
       SPM.Sess(i).U(j).dt = xX.dt;
-      
+
       % name of trial type
       SPM.Sess(i).U(j).name = {currsess.name{j}};
-      
+
       % vector of onsets
       SPM.Sess(i).U(j).ons = ons;
-      
-      % duration of trials 
+
+      % duration of trials
       SPM.Sess(i).U(j).dur = dur;
-      
+
       % actual stick functions - SPM2 uses 32-bin offset.
       SPM.Sess(i).U(j).u = [zeros(32,1); currsess.sf{j}];
-      
+
       % peristimulus time course (seconds)
       SPM.Sess(i).U(j).pst = currsess.pst{j};
-      
+
       % parameter name
       SPM.Sess(i).U(j).P.name = currsess.Pname{j};
       if isempty(currsess.Pname{j})
@@ -94,7 +94,7 @@ for i = 1:length(Sess)
       % specified conditions with onsets and such.
       % Note that Volterra items aren't included in
       % onsets, either, but they are included in 'the 'name'
-      % field - so we want to use that as our chopping 
+      % field - so we want to use that as our chopping
       % point for finding covariate columns - everything
       % after name is a covariate.
       reg_indices = currsess.col((length(currsess.name)+1):end);
@@ -119,7 +119,7 @@ if ~isempty(Sess)
   %%%%%%%%%%
   % SPM.xBF - basis function structure
   %%%%%%%%%%
-  
+
   % NOTE on the BF structure - where SPM99 allows the
   % individual specification of basis functions for each trial
   % type, SPM2 just has one basis function set for the whole
@@ -133,7 +133,7 @@ if ~isempty(Sess)
   % below to get the one to their liking...
   sess_idx_for_bf = 1;
   cond_idx_for_bf = 1;
-  
+
   SPM.xBF.T = xX.RT / xX.dt;
 
   % # of time bins per scan
@@ -163,20 +163,20 @@ if ~isempty(Sess)
   SPM.xBF.UNITS = 'scans';
   if length(SPM.Sess(1).U) < length(SPM.Sess(1).Fc)
     % Volterra flag [1=no Volterra, 2=Volterra modeled]
-    SPM.xBF.Volterra = 2;                   
+    SPM.xBF.Volterra = 2;
   else
     SPM.xBF.Volterra = 1;
   end
   SPM.xBF.dt = xX.dt;                         % time bin length in seconds
   SPM.xBF.name = '';                          % string: type of basis function - not saved by SPM99 batching
-  SPM.xBF.bf = Sess{sess_idx_for_bf}.bf(cond_idx_for_bf);     
-  % the actual basis function matrix    
+  SPM.xBF.bf = Sess{sess_idx_for_bf}.bf(cond_idx_for_bf);
+  % the actual basis function matrix
   % SPM99 doesn't explicitly save length or order of basis
   % functions, but this below should work for all non-Fourier,
   % non-Gamma basis fns, and maybe even some of them...
   SPM.xBF.length = xX.dt*size(SPM.xBF.bf, 1);        % window length of basis fn in secs
   SPM.xBF.order = size(SPM.xBF.bf,2);                % order of basis fn
-  
+
 end
 
 %%%%%%%%%%
@@ -193,14 +193,14 @@ end
 
 switch xX.xVi.Form
  case 'none'
-  SPM.xVi.form = 'i.i.d';                 % string description of xVi   
+  SPM.xVi.form = 'i.i.d';                 % string description of xVi
   % covariance constraints - sparse identity matrix in this option for both SPM99 and SPM2.
-  SPM.xVi.Vi = {xX.xVi.Vi};               
+  SPM.xVi.Vi = {xX.xVi.Vi};
   SPM.xVi.V = speye(size(xX.xVi));         % estimated non-sphericity itself.
  case 'AR(1)'
   SPM.xVi.form = 'AR(0.2)';               % string description of xVi - this is parallel to what SPM2 does
   SPM.xVi.Vi = {xX.xVi.Vi}                % covariance constraints
-  
+
   % I don't think this will actually make a
   % difference, as the whitening matrix W is always
   % going to be identity.  But it may be useful to
@@ -272,19 +272,19 @@ if isfield(SPM99, 'swd')
       SPM.VResMS = spm_vol(SPM99.VResMS);
       SPM.VM = spm_vol(SPM99.VM);
     end
-    for i = 1:length(SPM.xCon) 
+    for i = 1:length(SPM.xCon)
       if ~isempty(SPM.xCon(i).Vcon)
 	SPM.xCon(i).Vcon = spm_vol(SPM.xCon(i).Vcon);
       end
       if ~isempty(SPM.xCon(i).Vspm)
-	SPM.xCon(i).Vspm = spm_vol(SPM.xCon(i).Vspm);   
+	SPM.xCon(i).Vspm = spm_vol(SPM.xCon(i).Vspm);
       end
     end
     if isfield(SPM99, 'M')
       % Now deal with RPV image
       if exist('RPV.img', 'file')
 	% filehandle of resels per voxel image
-	SPM.xVol.VRpv = spm_vol('RPV.img'); 
+	SPM.xVol.VRpv = spm_vol('RPV.img');
       else
 	% Don't really understand this one...
 	SPM.xVol.VRpv.fname = ['../' SPM.xVol.VRpv.fname];

@@ -4,8 +4,8 @@ function Vo = spm_close_vol(Vi)
 %
 % SPM99 seems to use spm_create_image to close volumes
 %
-% $Id$  
-  
+% $Id$
+
 for i=1:prod(size(Vi)),
   Vo(i) = spm_create_image(Vi(i));
 end

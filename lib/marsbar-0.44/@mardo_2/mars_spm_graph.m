@@ -16,7 +16,7 @@ function [r_st,marsD,changef] = mars_spm_graph(marsD,rno,Ic)
 %
 % rno    - region number (index for marsD.marsY)
 % Ic     - contrast number (optional)
-% 
+%
 % Returns
 % r_st   - return structure, with fields
 %          Y      - fitted   data for the selected voxel
@@ -44,7 +44,7 @@ if nargin < 3
 end
 changef = 0;
 
-% make values ready for return 
+% make values ready for return
 def_r_st = struct(...
     'Y', [],...
     'y', [],...
@@ -57,9 +57,9 @@ cbeta = []; PSTH = [];
 % get stuff from object
 SPM = des_struct(marsD);
 xCon = SPM.xCon;
-  
+
 % Check if we want to, and can, assume region no is 1
-if isempty(rno) 
+if isempty(rno)
   if n_regions(SPM.marsY) > 1
     error('Need to specify region number');
   end
@@ -143,7 +143,7 @@ Cplot = {	'Contrast estimates and 90% C.I.',...
 try
 	Sess  = SPM.Sess;
 catch
-	Cplot = Cplot(1:2);	
+	Cplot = Cplot(1:2);
 end
 Cplot  = Cplot{spm_input('Plot',-1,'m',Cplot)};
 
@@ -308,7 +308,7 @@ case 'Fitted responses'
 	if all(diff(x(q)))
 		plot(x(q),Y(q),'LineWidth',4,'Color',Col(2,:));
 		plot(x(q),y(q),':','Color',Col(1,:));
-		plot(x(q),y(q),'.','MarkerSize',8, 'Color',Col(3,:)); 
+		plot(x(q),y(q),'.','MarkerSize',8, 'Color',Col(3,:));
 
 	else
 		plot(x(q),Y(q),'.','MarkerSize',16,'Color',Col(1,:));
@@ -393,7 +393,7 @@ case 'Event-related responses'
 	x     = ([1:size(X,1)] - 1)*dt;
 	j     = Sess(s).col(Sess(s).Fc(u).i(1:size(X,2)));
 	B     = beta(j);
-	
+
 	% fitted responses with standard error
 	%--------------------------------------------------------------
 	Y     = X*B;

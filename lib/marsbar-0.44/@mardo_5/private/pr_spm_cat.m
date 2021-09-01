@@ -21,16 +21,16 @@ function [x] = pr_spm_cat(x,d)
 
 % Karl Friston
 % $Id: spm_cat.m 258 2005-10-18 18:21:07Z karl $
- 
+
 % check x is not already a matrix
 %--------------------------------------------------------------------------
 if ~iscell(x), return, end
- 
+
 % if concatenation over a specific dimension
 %--------------------------------------------------------------------------
 [n m] = size(x);
 if nargin > 1
- 
+
     % concatenate over first dimension
     %----------------------------------------------------------------------
     if d == 1
@@ -38,16 +38,16 @@ if nargin > 1
         for i = 1:m
             y{i} = pr_spm_cat(x(:,i));
         end
- 
+
     % concatenate over second
     %----------------------------------------------------------------------
     elseif d == 2
- 
+
         y = cell(n,1);
         for i = 1:n
             y{i} = pr_spm_cat(x(i,:));
         end
- 
+
     % only viable for 2-D arrays
     %----------------------------------------------------------------------
     else
@@ -55,9 +55,9 @@ if nargin > 1
     end
     x      = y;
     return
- 
+
 end
- 
+
 % find dimensions to fill in empty partitions
 %--------------------------------------------------------------------------
 for i = 1:n
@@ -72,7 +72,7 @@ end
 end
 I     = max(I,[],2);
 J     = max(J,[],1);
- 
+
 % sparse and empty partitions
 %--------------------------------------------------------------------------
 [n m] = size(x);
@@ -87,7 +87,7 @@ for j = 1:m
     end
 end
 end
- 
+
 % concatenate
 %--------------------------------------------------------------------------
 for i = 1:n

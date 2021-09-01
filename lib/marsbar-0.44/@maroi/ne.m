@@ -1,5 +1,5 @@
 function o = ne(o1, o2)
-% overloaded ne function 
+% overloaded ne function
 %
 % $Id$
 

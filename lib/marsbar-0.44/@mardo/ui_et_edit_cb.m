@@ -1,5 +1,5 @@
 function varargout = ui_et_edit_cb(D, action, varargin)
-% method to handle callbacks from ui_et_edit 
+% method to handle callbacks from ui_et_edit
 % FORMAT varargout = ui_et_edit_cb(D, action, varargin)
 %
 % $Id$
@@ -22,12 +22,12 @@ switch action
   end
   % Check if name has been changed
   if ~strcmp(new_name, old_name)
-    % Check name has not been used 
+    % Check name has not been used
     ets = event_types(D);
     if ~isempty(ets)
       if ismember(new_name, {ets(:).name})
 	msgbox(['Event type ' new_name ' already exists']); return
-      end    
+      end
     end
   end
   % Check events not empty
@@ -77,7 +77,3 @@ switch action
 end
 
 return
-
-
-  
-  

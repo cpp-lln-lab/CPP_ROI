@@ -1,8 +1,8 @@
 function o_arr = split(o)
 % method splits regions in object into separate objects
-% 
-% $Id$ 
-  
+%
+% $Id$
+
 r = region(o);
 st = y_struct(o);
 is_s = isfield(st, 'Y') & isfield(st, 'Yvar');

@@ -1,6 +1,6 @@
 function model_file = configure_er_model(sess_dir, sesses, sdirname)
 % batch script wrapper to configure model for MarsBaR ER data
-% 
+%
 % sess_dir        - directory containing session directories
 % sesses          - string or cell array of session directory names
 % sdirname        - subdirectory name to put model in
@@ -13,9 +13,9 @@ function model_file = configure_er_model(sess_dir, sesses, sdirname)
 % If only one session directory is passed, and sdirname is not an absolute
 % path, then the function assumes sdirname is a subdirectory of the session
 % directory
-% 
+%
 % $Id: configure_er_model.m,v 1.1.1.1 2004/08/14 00:07:52 matthewbrett Exp $
-  
+
 if nargin < 1
   error('Need directory containing session subdirectories');
 end
@@ -69,11 +69,11 @@ switch spm('ver')
       'm_file', ms);
   spm_bch('do_bch_wrapper');
   model_file = fullfile(ana_dir, 'SPMcfg.mat');
-  
+
  otherwise
   er_model_spm2(sess_dir, sesses, ana_dir);
   model_file = fullfile(ana_dir, 'SPM.mat');
-  
+
 end
 
 return

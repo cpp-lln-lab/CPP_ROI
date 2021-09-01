@@ -60,7 +60,7 @@ end
 
 % Keep copy of passed filename for set_action call
 passed_filename = filename;
-  
+
 % optionally, treat char data as filename
 % but passed filename overrides char data
 if item_struct.char_is_filename & ischar(data)
@@ -92,7 +92,7 @@ if pr_is_nan(filename)
   if ~is_update
     filename = '';
   end
-end  
+end
 item_struct.file_name = filename;
 
 % If this was a clear, don't flag for save
@@ -101,7 +101,7 @@ if pr_isempty(item_struct), item_struct.has_changed = 0; end
 % Put processed stuff into object, and copy old object
 % This so we can pass the candidate new object to the set_action routines
 % for checking and/or changing, but still roll back if we need to.
-old_o = o; 
+old_o = o;
 o = set_item_struct(o, item, item_struct);
 
 % and here is where we do the rules stuff
@@ -109,7 +109,7 @@ is_clear = strcmp(action, 'clear');
 if ~isempty(item_struct.set_action) & ...
       (ismember(action, {'get','set','set_ui'}) | ...
        (is_update & item_struct.set_action_if_update) | ...
-       (is_clear & item_struct.set_action_if_clear))  
+       (is_clear & item_struct.set_action_if_clear))
   [tmp errf msg] = eval(item_struct.set_action);
   if errf
     o = old_o;
@@ -134,7 +134,7 @@ if strcmp(action, 'update')
   item_struct.has_changed = 1;
 end
 
-% possibly remove data from structure 
+% possibly remove data from structure
 if ~item_struct.has_changed & item_struct.leave_as_file
   item_struct.data = [];
 end

@@ -3,7 +3,7 @@ function [o, others] = maroi(params, varargin)
 % Can be called as a simple contructor:
 % inputs [defaults]
 % params  - a structure, containing fields to construct the object
-%  
+%
 % or to load objects of this (or child) type)
 % o = maroi('load', fname);
 % or
@@ -11,10 +11,10 @@ function [o, others] = maroi(params, varargin)
 % (where fname is a string)
 % or
 % o_cell_arr = maroi(name_cell_arr);
-% (where 
+% (where
 % o_cell_arr is a cell array of ROI objects and
 % name_cell_arr is a cell array of filenames)
-% or 
+% or
 % o_cell_arr = maroi('load_cell', fnames)
 % to load strings/cell array of strings into cell array of objects
 %
@@ -32,7 +32,7 @@ function [o, others] = maroi(params, varargin)
 % a point list - a list of points which are within the region, maybe with
 %                associated values (see below)
 % a volume - a 3D volume, containing values for the ROI at each point
-%           e.g. matrix, image 
+%           e.g. matrix, image
 %
 % Usually, the ROI will be binary; i.e. any point that is within the
 % region will have a value of 1, and all points outside have a value of
@@ -52,12 +52,12 @@ function [o, others] = maroi(params, varargin)
 % region will be considered to have the value 0 in resampling.  Values of
 % NaN and 0 will always be assumed to be outside the region after
 % resampling
-% 
+%
 % At the moment, each ROI is saved as a separate mat file, with filename
 % <name>_roi.mat
 %
 % $Id$
-  
+
 % Programmers' notes
 %
 % maroi is the parent for all ROI objects. It can contain no useful ROI
@@ -68,7 +68,7 @@ function [o, others] = maroi(params, varargin)
 % the stripped structure to the caller, so that it can use any extra
 % arguments to set child properties, etc
 %
-% Fields are [defaults - which may well be overidden by children]: 
+% Fields are [defaults - which may well be overidden by children]:
 % source   - filename for roi object ['']
 % label    - 16 character label for outputting
 % descrip  - (maybe) prolix description of ROI ['']
@@ -126,7 +126,7 @@ if ischar(params)
     o = my_loadroi(varargin{1});
    case 'load_cell'
     params = varargin{1};
-    if ischar(params), params = cellstr(params); 
+    if ischar(params), params = cellstr(params);
     elseif ~iscell(params), params = {params}; end
     o = maroi(params);
    case 'filename'
@@ -159,7 +159,7 @@ if isfield(params, 'binarize') && ~isempty(params.binarize) && ...
       isempty(params.roithresh))
   pparams.roithresh = my_classdata('def_wtthresh');
 end
-  
+
 % add version tag (was CVS; now marsbar version)
 pparams.cvs_version = marsbar('ver');
 

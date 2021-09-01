@@ -17,7 +17,7 @@ newM = mat * spm_matrix(st-1);
 
 % set voxels in block
 dat1 = zeros(dsz);
-dpts = pts - (st'-1) * ones(1, size(pts,2)); 
+dpts = pts - (st'-1) * ones(1, size(pts,2));
 dinds = dpts(1,:) + ...
 	(dpts(2,:)-1) * dsz(1) + ...
 	(dpts(3,:)-1) * dsz(1)*dsz(2);

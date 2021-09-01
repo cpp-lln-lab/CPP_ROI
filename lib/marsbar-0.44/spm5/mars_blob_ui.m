@@ -1,7 +1,7 @@
 function mars_blob_ui(action)
 % Displays SPM results, and ROI menu in SPM input window
 % FORMAT mars_blob_ui(action)
-% 
+%
 % This is the SPM2 / SPM5 version
 %
 % action     - action string; can be
@@ -12,8 +12,8 @@ function mars_blob_ui(action)
 % This routine does SPM version specific stuff, the main
 % work is in mars_blob2roi.m and mars_blobs2rois.m
 %
-% $Id: mars_blob_ui.m 184 2004-01-18 11:26:08Z matthewbrett $  
-  
+% $Id: mars_blob_ui.m 184 2004-01-18 11:26:08Z matthewbrett $
+
 if nargin < 1
   action = 'init';
 end

@@ -2,15 +2,15 @@ function [D,descrip] = ui_get_filter(D)
 % method to get filter via GUI
 % FORMAT [D,descrip] = ui_get_filter(D)
 %
-% Input 
+% Input
 % D       - design
-% 
+%
 % Returns
-% D       - design with modified filter 
+% D       - design with modified filter
 % descrip - cell array of strings describing filter
 %
-% $Id$  
-  
+% $Id$
+
 SPM = des_struct(D);
 [K Hf Lf] = pr_get_filter(SPM.xX.RT, SPM.Sess);
 SPM.xX.K = K;

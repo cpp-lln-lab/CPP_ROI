@@ -1,6 +1,6 @@
 function e = error_df(D)
 % method returns error df from design
-% 
+%
 % $Id$
 
 SPM = des_struct(D);

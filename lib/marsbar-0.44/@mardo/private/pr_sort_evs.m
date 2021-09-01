@@ -7,12 +7,12 @@ function evs = pr_sort_evs(evs, sort_type, downf)
 %              'e_spec': row1 = session row2 = event number
 % sort_type  - one of 'session' 'event' 'name'
 % downf      - 1 if descending sort, 0 otherwise (0 default)
-% 
+%
 % Returns
 % evs        - sorted event structure
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need event specs and sort type');
 end

@@ -10,7 +10,7 @@ function [o, others] = maroi_pointlist(params, type)
 %            specifies if XYZ matrix is in real (mm) or voxel space
 %
 % $Id$
-  
+
 myclass = 'maroi_pointlist';
 defstruct = struct('XYZ', [],...
 		   'mat', eye(4),...
@@ -21,7 +21,7 @@ if nargin < 1
   params = [];
 end
 if nargin < 2
-  type = 'real';  
+  type = 'real';
 end
 if isa(params, myclass)
   o = params;
@@ -48,7 +48,7 @@ if size(pparams.XYZ, 1) == 1
   pparams.XYZ = pparams.XYZ';
 end
 
-if strcmp(type, 'real') | strcmp(type, 'mm') 
+if strcmp(type, 'real') | strcmp(type, 'mm')
   % point list is in real space -> convert
   pparams.XYZ = inv(pparams.mat) * ...
       [pparams.XYZ; ones(1, size(pparams.XYZ,2))];

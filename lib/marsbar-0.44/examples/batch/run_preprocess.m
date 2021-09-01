@@ -1,6 +1,6 @@
 % Run smoothing and SPM analysis for MarsBaR ER sample data
 %
-% $Id: run_preprocess.m,v 1.2 2004/08/15 01:19:43 matthewbrett Exp $ 
+% $Id: run_preprocess.m,v 1.2 2004/08/15 01:19:43 matthewbrett Exp $
 
 % Start marsbar to make sure spm_get works
 marsbar('on')

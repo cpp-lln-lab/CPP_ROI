@@ -1,14 +1,14 @@
-function varargout=marsbar(varargin) 
+function varargout=marsbar(varargin)
 % Startup, callback and utility routine for Marsbar
 %
-% MarsBaR: Marseille Boite a Regions d'interet 
-%          Marseille Region of Interest Toolbox 
+% MarsBaR: Marseille Boite a Regions d'interet
+%          Marseille Region of Interest Toolbox
 %
 % MarsBaR (the collection of files listed by contents.m) is copyright under
 % the GNU general public license.  Please see mars_licence.man for details.
-% 
-% Marsbar written and copyright claimed by 
-% Jean-Luc Anton, Matthew Brett, Jean-Baptiste Poline, Romain Valabregue 
+%
+% Marsbar written and copyright claimed by
+% Jean-Luc Anton, Matthew Brett, Jean-Baptiste Poline, Romain Valabregue
 %
 % Portions of the code rely heavily on (or are copied from) SPM
 % (http://www.fil.ion.ucl.ac.uk/spm), which is also released under the GNU
@@ -19,7 +19,7 @@ function varargout=marsbar(varargin)
 % helpful; if you find it so, please let us know by sending a Mars bar to:
 % The Jean-Luc confectionery collection, Centre IRMf, CHU La Timone, 264,
 % Rue Saint Pierre 13385 Marseille Cedex 05, France
-% 
+%
 % If you find that it actively hinders your work, do send an
 % elderly sardine to the same address.
 %
@@ -32,7 +32,7 @@ function varargout=marsbar(varargin)
 % -----------------
 % For a list of the functions implemented here, try
 % grep "^case " marsbar.m
-  
+
 % Marsbar version
 MBver = '0.44';  % First release for SPM12 and earlier
 
@@ -120,7 +120,7 @@ mars_veropts('defaults');
 % set up the ARMOIRE stuff
 % see marmoire help for details
 if isfield(MARS, 'ARMOIRE')
-  o = MARS.ARMOIRE; 
+  o = MARS.ARMOIRE;
 else
   o = marmoire;
 end
@@ -133,7 +133,7 @@ filter_specs  = {[spm_design_filter(1,:);...
 		 {'*_mres.mat', 'MarsBaR results (*_mres.mat)'}};
 
 o = add_if_absent(o, 'def_design', ...
-		  struct('default_file_name', 'untitled_mdes.mat',...	  
+		  struct('default_file_name', 'untitled_mdes.mat',...
 			 'filter_spec', {filter_specs{1}},...
 			 'title', 'Default design',...
 			 'set_action','mars_arm_call(''set_design'',o,item,old_o)'));
@@ -172,7 +172,7 @@ end
 maroi;
 
 %=======================================================================
-case 'off'                                              %-Unload MarsBaR 
+case 'off'                                              %-Unload MarsBaR
 %=======================================================================
 % res = marsbar('Off')
 %-----------------------------------------------------------------------
@@ -216,7 +216,7 @@ case 'cfgfile'                                  %-finds MarsBaR cfg file
 %=======================================================================
 % cfgfn  = marsbar('cfgfile')
 cfgfile = 'marsbarcfg.mat';
-varargout = {which(cfgfile), cfgfile}; 
+varargout = {which(cfgfile), cfgfile};
 
 %=======================================================================
 case 'createmenuwin'                          %-Draw MarsBaR menu window
@@ -310,7 +310,7 @@ uicontrol(Fmenu,'Style','PopUp',...
 		    '|Explore',...
 		    '|Frequencies (event+data)',...
 		    '|Add images to FMRI design',...
-		    '|Add/edit filter for FMRI design',...	
+		    '|Add/edit filter for FMRI design',...
 		    '|Check image names in design',...
 		    '|List image names to console',...
 		    '|Change design path to images',...
@@ -344,7 +344,7 @@ uicontrol(Fmenu,'Style','PopUp',...
 		    '|Extract ROI data (full options)',...
 		    '|Default region...',...
 		    '|Plot data (simple)',...
-		    '|Plot data (full)',...		    
+		    '|Plot data (full)',...
 		    '|Import data',...
 		    '|Export data',...
 		    '|Split regions into files',...
@@ -389,7 +389,7 @@ uicontrol(Fmenu,'Style','PopUp',...
 		    '|Statistic table',...
 		    '|% signal change',...
 		    '|Fitted event time course',...
-		    '|FIR event time course',...		    
+		    '|FIR event time course',...
 		    '|Add event types by name',...
 		    '|Set results from file',...
 		    '|Save results to file',...
@@ -414,7 +414,7 @@ funcs = {['global MARS; '...
 	  'MARS.OPTIONS=mars_options(''load'');mars_options(''put'');'],...
 	 'mars_options(''save'');'...
 	};
-	 
+
 uicontrol(Fmenu,'Style','PopUp',...
 	  'String',['Options...'...
 		    '|Edit options'...
@@ -454,7 +454,7 @@ case 'splash'                                       %-show splash screen
 %=======================================================================
 % marsbar('splash')
 %-----------------------------------------------------------------------
-% Shows splash screen  
+% Shows splash screen
 WS   = spm('WinScale');		%-Window scaling factors
 [X,map] = imread('marsbar.jpg');
 aspct = size(X,1) / size(X,2);
@@ -477,7 +477,7 @@ set(ax,'plotboxaspectratiomode','manual',...
 set(h,'visible','on');
 pause(2);
 close(h);
- 
+
 %=======================================================================
 case 'buildroi'                                     %-build and save ROI
 %=======================================================================
@@ -633,7 +633,7 @@ end
 % save ROI
 if isa(o, 'maroi')
   o = label(o, func);
-  o = marsbar('saveroi', o); 
+  o = marsbar('saveroi', o);
   if ~isempty(o)
     fprintf('\nSaved ROI as %s\n', source(o));
   end
@@ -656,11 +656,11 @@ o = maroi('load', roilist);
 o = flip_lr(o);
 
 % save ROI
-o = marsbar('saveroi', o, 'l'); 
+o = marsbar('saveroi', o, 'l');
 fprintf('\nSaved ROI as %s\n', source(o));
 
 %=======================================================================
-case 'show_volume'                  %- shows ROI volume in mm to console 
+case 'show_volume'                  %- shows ROI volume in mm to console
 %=======================================================================
 % marsbar('show_volume')
 %-----------------------------------------------------------------------
@@ -673,7 +673,7 @@ end
 return
 
 %=======================================================================
-case 'roi_as_image'                               %- writes ROI as image 
+case 'roi_as_image'                               %- writes ROI as image
 %=======================================================================
 % marsbar('roi_as_image')
 %-----------------------------------------------------------------------
@@ -733,7 +733,7 @@ end
 if nargin < 3
   rois = spm_get([0 Inf], ['*' maroi('classdata', 'fileend')], ...
 		 'Select ROIs to attach image to');
-  
+
   if isempty(rois), return, end
 else
   rois = varargin{2};
@@ -741,7 +741,7 @@ end
 if ischar(V), V = spm_vol(V); end
 for i = 1:size(rois, 1)
   n = deblank(rois(i,:));
-  try 
+  try
     r = maroi('load', n);
   catch
     r = []
@@ -968,7 +968,7 @@ if strcmp(etype, 'default')
   row = block_rows(marsD);
 else  % full options extraction
   % question for design
-  
+
   marsD = [];
   if spm_input('Use SPM design?', '+1', 'b', 'Yes|No', [1 0], 1)
     marsD = mars_arm('get', 'def_design');
@@ -1027,7 +1027,7 @@ if strcmp(p_type, 'full')
     if has_filter(D)
       if spm_input('Use design filter?', '+1', 'y/n', [1 0], 1)
 	flags = {};
-	if has_whitener(D) 
+	if has_whitener(D)
 	  if ~spm_input('Use whitening filter?', '+1', 'y/n', [1 0], 1)
 	    flags = 'no_whitening';
 	  end
@@ -1075,7 +1075,7 @@ if ~isempty(which('xlsread'))
 end
 
 src = spm_input('Import fron?', '+1', 'm', Ls, Os, 1);
-  
+
 switch src{1}
  case 'matlab'
   Y = spm_input('Matlab expression', '+1', 'e');
@@ -1116,7 +1116,7 @@ if r_f   % region data
 		'sumfunc', s_f);
   marsY = marsy({Y},r_st, s_st);
   pref = '';  % Region name prefix not used, as names are set
-else     % summary data  
+else     % summary data
   s_st = struct('descrip', ['Summary data loaded from ' pn_fn]);
   marsY = marsy(Y, '', s_st);
   pref = spm_input('Prefix for region names', '+1', 's', [fn '_']);
@@ -1223,7 +1223,7 @@ end
 disp(['Data saved to ' fn]);
 
 %=======================================================================
-case 'split_data'                %- splits data into one file per region 
+case 'split_data'                %- splits data into one file per region
 %=======================================================================
 % marsbar('split_data')
 %-----------------------------------------------------------------------
@@ -1254,7 +1254,7 @@ for i = 1:length(mYarr)
 end
 
 %=======================================================================
-case 'join_data'                %- joins many data files into one object 
+case 'join_data'                %- joins many data files into one object
 %=======================================================================
 % marsbar('join_data')
 %-----------------------------------------------------------------------
@@ -1308,7 +1308,7 @@ case 'set_results'          %-sets estimated design into global stucture
 
 varargout = {0};
 
-% Check if there's anything we don't want to write over 
+% Check if there's anything we don't want to write over
 if sf_prev_save('est_design') == -1, return, end
 if sf_prev_save('roi_data') == -1, return, end
 
@@ -1316,7 +1316,7 @@ if sf_prev_save('roi_data') == -1, return, end
 mars_arm('set_ui', 'est_design');
 if mars_arm('isempty', 'est_design'), return, end
 
-% Get design, set ROI data 
+% Get design, set ROI data
 marsRes = mars_arm('get', 'est_design');
 mars_arm('set', 'roi_data', get_data(marsRes));
 
@@ -1368,9 +1368,9 @@ if isempty(marsRes), return, end
 Ic = mars_struct('getifthere',MARS, 'WORKSPACE', 'default_contrast');
 if isempty(Ic)
   cname = '[Not set]';
-else 
+else
   xCon = get_contrasts(marsRes);
-  cname = xCon(Ic).name; 
+  cname = xCon(Ic).name;
 end
 spm_input(cname, 1, 'd', 'Default contrast');
 opts = {'Quit', 'Set new default'};
@@ -1416,7 +1416,7 @@ switch spm_input('What to do?', '+1', 'm', opts, [1:length(opts)], 1);
  case 1
  case 2
   rno = marsbar('get_region', ns);
-  disp(['Default region set to: ' ns{rno}]); 
+  disp(['Default region set to: ' ns{rno}]);
  case 3
   rno = [];
 end
@@ -1455,7 +1455,7 @@ elseif isempty(names)
   rno = []
 else
   % listbox
-  rno = spm_input(prompt, '+1', 'm', names);  
+  rno = spm_input(prompt, '+1', 'm', names);
 end
 varargout = {rno};
 
@@ -1496,7 +1496,7 @@ end
 
 % Store if changed
 if changef
-  mars_arm('update', 'est_design', marsRes); 
+  mars_arm('update', 'est_design', marsRes);
 end
 
 %=======================================================================
@@ -1511,12 +1511,12 @@ if ~isempty(Ic)
   xCon = get_contrasts(marsRes);
   fprintf('Using default contrast: %s\n', xCon(Ic).name);
 end
-[strs marsS marsRes changef] = ... 
+[strs marsS marsRes changef] = ...
     stat_table(marsRes, Ic);
 disp(char(strs));
 assignin('base', 'marsS', marsS);
 if changef
-  mars_arm('update', 'est_design', marsRes); 
+  mars_arm('update', 'est_design', marsRes);
 end
 
 %=======================================================================
@@ -1544,7 +1544,7 @@ dur       = spm_input('Event duration', '+1', 'e', 0);
 % Choose event difference function
 diff_func = mars_struct('getifthere', MARS, 'OPTIONS', ...
 			'events', 'diff_func');
-if isempty(diff_func), diff_func = 'max abs'; 
+if isempty(diff_func), diff_func = 'max abs';
 elseif strcmp(diff_func, 'window')
   spm_input('Event signal change window...', '+1','d', mfilename);
   times = spm_input('Mean signal between times', ...
@@ -1650,7 +1650,7 @@ ic_len = length(ic);
 % If all the events have zero duration, the model is already single, and
 % there is no point in asking.  If any of the durations are different
 % across events, then the single model is invalid.
-d_a = []; opts = []; 
+d_a = []; opts = [];
 for i = 1:ic_len
   e_spec = et(ic(i)).e_spec;
   for j = 1:size(e_spec, 2)
@@ -1720,7 +1720,7 @@ et = event_types(D);
 et = [et event_types_named(D)];
 D  = event_types(D, et);
 mars_arm('update', 'est_design', D);
- 
+
 %=======================================================================
 case 'merge_contrasts'                                %-import contrasts
 %=======================================================================
@@ -1743,7 +1743,7 @@ D2 = mardo(fname);
 if ~has_contrasts(D2)
   error(['Cannot find contrasts in design/contrast file ' fname]);
 end
-  
+
 % now try to trap case of contrast only file
 if ~is_valid(D2)
   D2 = get_contrasts(D2);
@@ -1782,7 +1782,7 @@ disp('Done');
 if changef
   mars_arm('update', 'est_design', D);
 end
- 
+
 %=======================================================================
 case 'error_log'                  %- makes file to help debugging errors
 %=======================================================================
@@ -1805,12 +1805,12 @@ end
 disp(['Saved error log as ' fname]);
 
 %=======================================================================
-case 'mars_menu'                     %-menu selection of marsbar actions 
+case 'mars_menu'                     %-menu selection of marsbar actions
 %=======================================================================
 % marsbar('mars_menu',tstr,pstr,tasks_str,tasks)
 %-----------------------------------------------------------------------
 
-[tstr pstr optfields optlabs] = deal(varargin{2:5}); 
+[tstr pstr optfields optlabs] = deal(varargin{2:5});
 if nargin < 6
   optargs = cell(1, length(optfields));
 else
@@ -1852,4 +1852,3 @@ if btn == 0
   mars_arm('set_param', obj_name, 'has_changed', 0);
 end
 return
-

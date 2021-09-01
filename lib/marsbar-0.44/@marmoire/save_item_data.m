@@ -8,23 +8,23 @@ function [saved_f, o] = save_item_data(o, item, flags, filename)
 %                  'force' - force save even if not flagged as needed
 %                  'warn_empty' - GUI warn if no data to save
 %                  'ync' - start save with save y/n/cancel dialog
-%                  'prompt' - prompt for save; 
+%                  'prompt' - prompt for save;
 %                  'prompt_suffix - suffix for prompt
 %                  'prompt_prefix - prefix for prompt
 %                  'ui' - use UI prompts for save - forced if save_ui
 %                  'no_no_save' - if 'no' is chosen in the save dialog,
 %                     contents are flagged as not needing a save in
-%                     the future (has_changed flag set to 0)  
+%                     the future (has_changed flag set to 0)
 % filename - filename for save
-% 
+%
 % Returns
 % saved_f  - flag set to 1 if save done, 0 not done, -1 if cancel
 %            Note that, if saving with more than one item, then the value
 %            is from the last value saved/not saved.  Cancel aborts the
 %            attempt to save.
 % o        - possibly modified object (changed filename, maybe data is
-%            left as a file, and data field made empty) 
-% 
+%            left as a file, and data field made empty)
+%
 % $Id$
 
 if nargin < 2
@@ -45,7 +45,7 @@ if strcmp(item, 'all')
     warning('Ignoring passed filename for multiple save');
     filename = NaN;
   end
-else 
+else
   item_list = {item};
 end
 
@@ -55,16 +55,16 @@ for i_no = 1:n_items
   item = item_list{i_no};
   I = get_item_struct(o, item);
   tmp_flags = flags;
-  
+
   % If there is no valid filename, do UI save
   if pr_is_nix(filename) && ...
 	isempty(I.file_name)
     tmp_flags.ui = 1;
   end
-  
+
   % Try save
   [saved_f o] = do_save(o, item, tmp_flags, filename);
-  
+
   % Stop if cancel
   if saved_f == -1, return, end
 end

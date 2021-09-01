@@ -1,7 +1,7 @@
 function et = event_types_named(D)
 % method returns event types structures for events with same names
 % FORMAT et = event_types_named(D)
-% 
+%
 % $Id$
 
 [e_s enames] = event_specs(D);

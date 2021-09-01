@@ -13,7 +13,7 @@ function reslicedImages = resliceRoiImages(referenceImage, imagesToCheck)
 
   else
 
-    matlabbatch = [];
+    matlabbatch = {};
     matlabbatch = setBatchReslice(matlabbatch, referenceImage, imagesToCheck);
     spm_jobman('run', matlabbatch);
 

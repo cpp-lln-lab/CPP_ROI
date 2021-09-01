@@ -4,24 +4,24 @@ function [m,n] = region_size(o, r_no, dim)
 %
 % Input
 % o        - marsy object
-% r_no     - region number OR vector of region numbers 
-%            OR 'all' ['all' is default] 
+% r_no     - region number OR vector of region numbers
+%            OR 'all' ['all' is default]
 % dim      - [optional] dimension size to return
 %
 % Output
 % m        - as for matlab SIZE call
 % n        -
 %
-% e.g 
-% % returns total number of timepoints (sz(1) and samples (sz(2) 
+% e.g
+% % returns total number of timepoints (sz(1) and samples (sz(2)
 % % in all regions
-% sz = region_size(o); 
+% sz = region_size(o);
 % % same thing
 % sz = region_size(o, 'all');
 % % number of samples in region 2
 % n = region_size(o, 2, 2);
 %
-% $Id$ 
+% $Id$
 
 r = n_regions(o);
 if nargin < 2
@@ -54,7 +54,7 @@ for r = r_no
   if isfield(r_st, 'Y')
     [m n_r] = size(r_st.Y);
     n = n + n_r;
-  elseif y_f    
+  elseif y_f
     m = size(st.Y, 1);
     n = n + 1;
   else
@@ -66,7 +66,7 @@ if nargin < 3
   if nargout < 2
     m = [m n];
   end
-else  
+else
   if dim == 2
     m = n;
   elseif dim > 2

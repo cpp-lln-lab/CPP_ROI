@@ -72,7 +72,7 @@ if nargin > 0 && ischar(varargin{1})
             filt    = struct('code',0,'frames',[],'ext',{{'.*'}},...
                              'filt',{{varargin{3}}});
             [t,sts] = listfiles(varargin{2},filt);
-        otherwise 
+        otherwise
             error('Inappropriate usage.');
     end
 else
@@ -499,16 +499,16 @@ function dr = current_dir(lb,varargin)
 vl  = get(lb,'Value');
 str = get(lb,'String');
 pd  = get(sib(lb,'edit'),'String');
-while ~isempty(pd) & strcmp(pd(end),filesep) 
+while ~isempty(pd) & strcmp(pd(end),filesep)
     pd=pd(1:end-1);      % Remove any trailing fileseps
-end 
+end
 sel = deblank(str(vl,:));
-if strcmp(sel,'..'),     % Parent directory 
+if strcmp(sel,'..'),     % Parent directory
     dr = fileparts(pd);
-elseif strcmp(sel,'.'),  % Current directory 
+elseif strcmp(sel,'.'),  % Current directory
     dr = pd;
 else
-    dr = fullfile(pd,sel);    
+    dr = fullfile(pd,sel);
 end;
 return;
 %=======================================================================
@@ -668,7 +668,7 @@ set(lb,'Value',min(vl(1),size(str2,1)),'String',str2);
 lim = get(sib(lb,'files'),'UserData');
 if size(str2,1)>= lim(1) && size(str2,1)<= lim(2),
     set(sib(lb,'D'),'Enable','on');
-else 
+else
     set(sib(lb,'D'),'Enable','off');
 end;
 
@@ -1149,4 +1149,3 @@ end;
 %=======================================================================
 
 %=======================================================================
-

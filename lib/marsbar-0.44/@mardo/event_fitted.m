@@ -1,19 +1,19 @@
 function [tc, dt] = event_fitted(D, e_spec, dur)
 % method to compute fitted event time course
 % FORMAT [tc dt]  = event_fitted(D, e_spec, dur)
-% 
+%
 % D          - design
 % e_spec     - 2 by N array specifying events to combine
 %                 with row 1 giving session number
 %                 and row 2 giving event number in session
 %                 This may in due course become an object type
 % dur        - duration in seconds of event to estimate for
-% 
+%
 % Returns
 % tc         - fitted event time course, averaged over events
 % dt         - time units (seconds per row in X)
 %
-% $Id$ 
+% $Id$
 
 if nargin < 2
   error('Need event specification');
@@ -41,14 +41,14 @@ for e_i = 1:e_s_l
   [X dt]= event_regressor(D, es, dur);
   B     = betas(event_cols(D, es), :);
   Yh    = X*B;
-  
+
   % Sum over events
   sz    = size(Yh, 1);
   szo   = size(tc, 1);
   if sz > szo
     tc(end+1:sz, :) = 0;
   end
-  tc(1:sz,:) = tc(1:sz,:) + Yh;  
-  
+  tc(1:sz,:) = tc(1:sz,:) + Yh;
+
 end
 tc = tc / e_s_l;

@@ -5,7 +5,7 @@ function ui_report_fmri(D,s,i)
 % Copied with minor edits from:
 % @(#)spm_fMRI_design_show.m	2.17	2.16 Karl Friston 99/09/20
 % see that file for comments
-% 
+%
 % $Id$
 
 SPM = des_struct(D);
@@ -26,7 +26,7 @@ for j = 1:length(Sess)
 end
 
 
-%-Defaults: Setup GUI 
+%-Defaults: Setup GUI
 %-----------------------------------------------------------------------
 if nargin < 3
 	s = 1;

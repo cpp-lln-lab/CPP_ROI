@@ -1,10 +1,12 @@
+% (C) Copyright 2021 CPP ROI developers
+
 opt.roi.atlas = 'wang';
 opt.roi.name = {'V1v', 'V1d'};
 opt.roi.dir = fullfile(pwd, 'derivatives', 'cpp_roi', 'group');
 
 spm_mkdir(opt.roi.dir);
 
-hemi = {'lh', 'rh'};
+hemi = {'L', 'H'};
 
 for iHemi = 1:numel(hemi)
 

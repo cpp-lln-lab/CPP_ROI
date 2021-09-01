@@ -14,7 +14,7 @@ function [o,errf,msg] = mars_arm_call(action, o, item, old_o)
 % msg        - message to examplain error
 %
 % $Id$
-  
+
 if nargin < 1
   error('Need action');
 end
@@ -28,7 +28,7 @@ if nargin < 4
   error('Need old object');
 end
 
-errf = 0; msg = ''; 
+errf = 0; msg = '';
 
 item_struct = get_item_struct(o, item);
 
@@ -41,16 +41,16 @@ switch lower(action)
 			      struct('ync', 1, ...
 				     'prompt_prefix','previous '));
   if btn == -1
-    errf = 1; 
-    msg = 'Cancelled save of previous design'; 
+    errf = 1;
+    msg = 'Cancelled save of previous design';
     return
   end
-  
+
   % Make design into object, do conversions
   [item_struct.data errf msg] = sf_check_design(item_struct.data);
   if errf, o = []; return, end
   o = set_item_struct(o, item, item_struct);
-  
+
   % Unload roi data if design has been set, and data exists
   % and data is not the same size as design
   if ~isempty_item_data(o, 'roi_data')
@@ -63,7 +63,7 @@ switch lower(action)
       fprintf('Reset of design, cleared ROI data...\n');
     end
   end
-  
+
  case 'set_data'
   % callback for setting data
 
@@ -73,14 +73,14 @@ switch lower(action)
 				     'prompt_prefix','previous '));
   if btn == -1
     errf = 1; o = [];
-    msg = 'Cancelled save of current data'; 
+    msg = 'Cancelled save of current data';
     return
   end
-  
+
   % Make data into object, do conversions
   [item_struct.data errf msg] = sf_check_data(item_struct.data);
   if errf, o = []; return, end
-  o = set_item_struct(o, item, item_struct);  
+  o = set_item_struct(o, item, item_struct);
 
   % Check data matches default design; clear if not
   if ~isempty_item_data(o, 'def_design')
@@ -100,23 +100,23 @@ switch lower(action)
     MARS.WORKSPACE.default_region = [];
     fprintf('Reset of data, cleared default region...\n');
   end
-  
+
  case 'set_results'
-  % callback for setting results 
+  % callback for setting results
 
   % Need to set default data from results, and load contrast file
   % if not present (this is so for old MarsBaR results)
 
   data = item_struct.data;
   if isempty(data), return, end
-  
+
   % Check for save of current design
   [btn o] = save_item_data_ui(old_o, 'est_design', ...
 			      struct('ync', 1, ...
 				     'prompt_prefix','previous '));
   if btn == -1
     errf = 1;
-    msg = 'Cancelled save of current design'; 
+    msg = 'Cancelled save of current design';
     return
   end
 
@@ -143,7 +143,7 @@ switch lower(action)
   % Put data into object
   item_struct.data = data;
   o = set_item_struct(o, item, item_struct);
-  
+
  otherwise
   error(['Peverse request for ' action]);
 end
@@ -153,7 +153,7 @@ function [d,errf,msg] = sf_check_design(d)
 errf = 0; msg = {};
 d = mardo(d);
 if ~is_valid(d)
-  errf = 1; 
+  errf = 1;
   msg = 'This does not appear to be a valid design';
 end
 return
@@ -163,7 +163,7 @@ function [d,errf,msg] = sf_check_data(d)
 errf = 0; msg = {};
 d = marsy(d);
 if ~is_valid(d)
-  errf = 1; 
+  errf = 1;
   msg = 'This does not appear to be a valid data structure';
 end
 return
