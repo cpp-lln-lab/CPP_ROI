@@ -4,7 +4,7 @@ function varargout=mars_display_roi(action_str, varargin)
 %
 % Usual call displays one or more ROIs on structural image:
 % FORMAT mars_display_roi('display', roi_obj, structv, cmap)
-% 
+%
 % roi_obj   - single ROI object, or cell array of objects, or strings
 % structv   - structural image or spm_vol struct for image
 %             [marsbar default structural if not passed]
@@ -14,7 +14,7 @@ function varargout=mars_display_roi(action_str, varargin)
 % V0.3 - string input allowed, actionstrs as first arg, service callback
 %
 % $Id$
-  
+
 global st; % global variable from spm_orthviews
 
 if nargin < 1
@@ -25,7 +25,7 @@ if isempty(action_str), action_str = 'display'; end
 switch lower(action_str), case 'display'             %-Display ROIs
 if nargin < 2
   roi_obj = spm_get([0 Inf],'*roi.mat','Select ROI(s) to view');
-else 
+else
   roi_obj = varargin{1};
 end
 if isempty(roi_obj), return, end
@@ -70,9 +70,9 @@ mo = [];
 roi_ctr = 1;
 for i = 1:olen
   roi = roi_obj{i};
-  
+
   % check ROI contains something
-  if isempty(roi) 
+  if isempty(roi)
     warning(sprintf('ROI %d is missing', i));
   elseif is_empty_roi(roi)
     warning(sprintf('ROI %d:%s is empty', i, label(roi)));
@@ -82,7 +82,7 @@ for i = 1:olen
     if isempty(nsp)
       nsp = sp;
     end
-    
+
     % convert ROI to matrix
     mo = maroi_matrix(roi, nsp);
     dat = matrixdata(mo);
@@ -93,7 +93,7 @@ for i = 1:olen
       dat(dat == 0) = NaN;
       % add to image to display
       mars_orthviews('AddColouredMatrix', 1, dat, nsp.mat, cmap(col_inds(i),:));
-  
+
       % Information for display
       XYZ = realpts(roi,nsp);
       mx = max(XYZ, [], 2); mn = min(XYZ, [], 2);
@@ -124,7 +124,7 @@ fg = spm_figure('GetWin','Graphics');
 uicontrol(fg,'Style','Frame','Position',[305 360 280 240].*WS);
 
 % ROI selection menu
-rl = length(roi_info); 
+rl = length(roi_info);
 labs = [num2str([1:rl]') repmat(': ', rl, 1) strvcat(roi_info(:).label)];
 uicontrol(fg,'Style','popupmenu' ,'Position',[320 570 250 20].*WS,...
 	  'String', cellstr(labs),...
@@ -192,9 +192,9 @@ if isfield(st, 'mars')
   mars_orthviews('Reposition', st.mars.roi_info(v).c_o_m);
   mars_display_roi('show_info', v);
 end
- 
+
 case 'show_info'    % show info for ROI, from ROI info structure
-v = varargin{1};  
+v = varargin{1};
 if isfield(st, 'mars')
   if ~isempty(v)
     set(st.mars.txt.label, 'String', ...
@@ -217,11 +217,11 @@ if isfield(st, 'mars')
     set(st.mars.txt.maxx, 'String','');
     set(st.mars.txt.maxy, 'String','');
     set(st.mars.txt.maxz, 'String','');
-  end 
+  end
 end
 
 case 'orthcb'           % callback service from mars_orthviews
-  
+
 % This copied from mars_orthviews 'shopos' function
 
 % The position of the crosshairs has been moved.
@@ -232,7 +232,7 @@ if isfield(st,'mp'),
     set(st.mp,'String',sprintf('%.1f %.1f %.1f',mars_orthviews('pos')));
     pos = mars_orthviews('pos',1);
     set(st.vp,'String',sprintf('%.1f %.1f %.1f',pos));
-    
+
     % Set intensity to ROI list
     in_str = '';
     roi_p = [];
@@ -248,15 +248,15 @@ if isfield(st,'mp'),
       end
     end
     set(st.in,'String',in_str);
-    
+
     % find, and show info for ROI
     if ~isempty(roi_p)
       v = find(roi_p(end) == [st.mars.roi_info(:).num]);
       mars_display_roi('show_info', v);
     else
       mars_display_roi('show_info', []);
-    end      
-    
+    end
+
   else,
     st.Callback = ';';
     rmfield(st,{'mp','vp','in'});

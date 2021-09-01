@@ -1,16 +1,16 @@
 function [D, changef] = add_trial_f(D)
-% method to add trial-specific F contrasts  
-% 
+% method to add trial-specific F contrasts
+%
 % D         - design to put contrasts into
 %
 % Returns
 % D         - design with any added contrasts
 % changef   - set to 1 if any contrasts have been added
-%  
+%
 % The routine only adds contrasts that are not already present
 %
 % $Id$
-  
+
 if ~strcmp(modality(D), 'fmri')
   error('Can only set trial-specific F contrasts for FMRI designs');
 end

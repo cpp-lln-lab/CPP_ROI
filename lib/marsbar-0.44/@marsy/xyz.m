@@ -1,20 +1,20 @@
 function [XYZ, M]= xyz(o, r_no, xyz_type)
-% gets XYZ coordinates for region 
+% gets XYZ coordinates for region
 % FORMAT [XYZ M]= xyz(o, r_no, xyz_type)
-% 
+%
 % Inputs
 % o         - marsy object
 % r_no      - region number
-% xyz_type  - string, one of 'mm','real','vox' 
+% xyz_type  - string, one of 'mm','real','vox'
 %             where 'real' is a synonym for 'mm'
 %             and 'mm' is the default (if not passed)
 %             'mm' results in coordinates in mm
 %             'vox' gives coordinates in voxels
-% 
+%
 % Outputs
 % XYZ       - coordinates in specified reference
 % M         - 4x4 transformation mapping voxels to mm
-% 
+%
 % $Id$
 
 r = n_regions(o);

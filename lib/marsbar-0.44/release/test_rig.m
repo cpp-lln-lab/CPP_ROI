@@ -1,7 +1,7 @@
 function res = test_rig(design_paths, params)
 % runs tests on MarsBaR using specified designs
 % FORMAT res = test(design_paths, params)
-% 
+%
 % Inputs
 % design_paths     - path(s) to SPM design files
 % params           - structure giving params to pass to estimate method,
@@ -9,10 +9,10 @@ function res = test_rig(design_paths, params)
 %                    Default is
 %                    params = struct('redo_covar', 0, ...
 %                      		  'redo_whitening', 0);
-% 
+%
 % Outputs
 % res              - 1 if all tests passed, 0 otherwise
-% 
+%
 % The function depends on the SPM design having estimated contrasts to
 % play with.  It uses these to:
 % Get the maximum voxel in the first F and first T contrast
@@ -20,11 +20,11 @@ function res = test_rig(design_paths, params)
 % Makes an ROI out of this voxel
 % Estimates in MarsBaR
 % Checks the statistic value is that same.
-% 
+%
 % Along the way, it uses much of the MarsBaR machinery
-% 
-% $Id$ 
-  
+%
+% $Id$
+
 if nargin < 1
   design_paths = spm_get([0 Inf], 'SPM*.mat', 'Select SPM designs');
 end
@@ -43,7 +43,7 @@ return
 
 function res = sf_test_design(d_path, params)
 % tests one design
-  
+
 % Check for SPM estimated design, with estimated contrasts
 D = mardo(d_path);
 if ~is_spm_estimated(D)

@@ -1,12 +1,12 @@
 function hC = mars_blob_menu
 % puts up ROI menu to add to SPM results interface
 % FORMAT hC = mars_blob_menu
-% 
-% Returns 
+%
+% Returns
 % hC              - handle of menu
-% 
+%
 % $Id$
-  
+
 % Tag
 tg = 'blob_menu';
 

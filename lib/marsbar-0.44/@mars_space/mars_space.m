@@ -2,7 +2,7 @@ function [o, others] = mars_space(params, params2)
 % mars_space - class constructor for space defining object
 % FORMAT [o, others] = mars_space(params, params2)
 % Inputs [defaults]
-% params  - either 
+% params  - either
 %           a structure, containing fields to construct the object
 %           an spm vol struct (see spm_vol)
 %           a string, giving and image name (see spm_vol)
@@ -12,7 +12,7 @@ function [o, others] = mars_space(params, params2)
 %           [eye(4)]
 %
 % $Id$
-  
+
 myclass = 'mars_space';
 defstruct = struct('dim', [1 1 1],...
 		   'mat', eye(4));
@@ -36,11 +36,11 @@ if ~isstruct(params)
   if ischar(inp1) % maybe it is an image filename
     params = spm_vol(inp1);
     params.dim = params.dim(1:3);
-  elseif prod(size(inp1)) == 3 
+  elseif prod(size(inp1)) == 3
     % could be the dimensions of a space
     params.dim = inp1(:)';
     if ~isempty(params2), params.mat = params2; end
-  else						       
+  else
     % lets hope it's a useful matrix, but with a mat parameter, quoi
     if isempty(params2)
       error(['Need to pass a ''mat'' definition with a'...

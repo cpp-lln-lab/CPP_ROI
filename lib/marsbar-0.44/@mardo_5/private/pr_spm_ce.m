@@ -3,7 +3,7 @@ function [C] = pr_spm_ce(v,a)
 % FORMAT [C] = pr_spm_ce(v,a)
 % v  - (1 x l) v(i) = number of observations for ith block
 % a  - AR coefficient expansion point  (default a = [])
-% 
+%
 %  C{1} = h(1)*AR(a)
 %  C{2} = h(1)*AR(a) + h(2)*dAR(a)/da(1);
 %  C{3} = h(1)*AR(a) + h(2)*dAR(a)/da(1) + h(3)*dAR(a)/da(2);

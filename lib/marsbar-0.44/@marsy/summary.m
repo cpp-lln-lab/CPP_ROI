@@ -1,8 +1,8 @@
 function strs = summary(M)
 % method returns cell array of strings describing marsy object
-% 
+%
 % $Id$
-  
+
 strs{1} = sprintf('Description:           \t%s',  summary_descrip(M));
 strs{2} = sprintf('Number of time points: \t%d',  n_time_points(M));
 strs{3} = sprintf('Number of regions:     \t%d',  n_regions(M));

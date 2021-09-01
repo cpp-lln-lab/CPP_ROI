@@ -1,13 +1,13 @@
 function [D, ic] = ui_et_edit(D, ic)
 % method to edit invidual event types in design
 % FORMAT [D, ic] = ui_et_edit(D, ic)
-% 
+%
 % D         - design object
 % ic        - index identifying event type to edit (or edited)
-% 
+%
 % In this case, the return of an empty ic means that the routine was
 % cancelled, as this makes no sense otherwise.
-% 
+%
 % The object method idea here is rather a hack, because the passed object is
 % used only to pull in the object methods for the callback.
 %
@@ -16,7 +16,7 @@ function [D, ic] = ui_et_edit(D, ic)
 % rest go to the bottom (OUT) panel.  Event names and definitions
 % (session, event number pairs) are always sorted according to the
 % current sort mode, which is set from the GUI.
-% 
+%
 % $Id$
 
 et = event_types(D);
@@ -75,11 +75,11 @@ function [F, hDone, hListIN, hName] = sf_start_edit_window(D, my_event)
 
 % Window tag
 w_tag = 'ui_et_edit';
-  
+
 % Close any et_edit windows currently open
 close(findobj('Tag', w_tag))
-  
-%-Generic CallBack code to get embedded object 
+
+%-Generic CallBack code to get embedded object
 cb = ['ete_D = get(findobj(''Tag'', ''' w_tag '''),''UserData''); '];
 
 % Get events IN and events OUT
@@ -118,7 +118,7 @@ button_sz_y = button_sz_x / b_ratio;
 button_sz   = [button_sz_x button_sz_y];
 
 % Text sizes, locations
-label_gap    = 4;   % y gap between label and control it refers to 
+label_gap    = 4;   % y gap between label and control it refers to
 label_sz_y   = text_sz *1.5;
 control_gap  = 14;   % default y gap between controls
 text_box_sz  = label_sz_y * 1.5;

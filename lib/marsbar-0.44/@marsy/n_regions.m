@@ -1,6 +1,6 @@
 function n = n_regions(o)
 % get number of regions
-% 
-% $Id$ 
+%
+% $Id$
 
 n = summary_size(o, 2);

@@ -3,7 +3,7 @@ function o = mars_build_roi
 %
 % $Id$
 
-o = [];  
+o = [];
 [Finter,Fgraph,CmdLine] = spm('FnUIsetup','Build ROI', 0);
 
 % get ROI type
@@ -42,16 +42,16 @@ switch roitype
   end
   o = maroi_image(struct('vol', spm_vol(imgname), 'binarize',binf,...
 			 'func', func));
-  
+
   % convert to matrix format to avoid delicacies of image format
   o = maroi_matrix(o);
-  
+
  case 'voxel'
   not_donef = 1;
   while not_donef
     XYZ = spm_input('Coordinate(s)', '+1', 'e', []);
     if size(XYZ,1) == 1, XYZ = XYZ'; end
-    if size(XYZ,1) ~= 3, warning('Need 3xN or Nx3 matrix'); 
+    if size(XYZ,1) ~= 3, warning('Need 3xN or Nx3 matrix');
     else not_donef = 0; end
   end
   v = char(spm_input('Coordinate(s) in','+1','b','mm|voxels',{'mm','vox'}, 1));
@@ -76,20 +76,20 @@ switch roitype
   d = sprintf('points; %s (%s) [%0.1f %0.1f %0.1f]',coord_lbl,v,pos);
   l = sprintf('points_%s_%s_%0.0f_%0.0f_%0.0f',coord_lbl,v,pos);
  case 'sphere'
-  c = spm_input('Centre of sphere (mm)', '+1', 'e', [], 3); 
+  c = spm_input('Centre of sphere (mm)', '+1', 'e', [], 3);
   r = spm_input('Sphere radius (mm)', '+1', 'r', 10, 1);
   d = sprintf('%0.1fmm radius sphere at [%0.1f %0.1f %0.1f]',r,c);
   l = sprintf('sphere_%0.0f-%0.0f_%0.0f_%0.0f',r,c);
   o = maroi_sphere(struct('centre',c,'radius',r));
  case 'box_cw'
-  c = spm_input('Centre of box (mm)', '+1', 'e', [], 3); 
+  c = spm_input('Centre of box (mm)', '+1', 'e', [], 3);
   w = spm_input('Widths in XYZ (mm)', '+1', 'e', [], 3);
   d = sprintf('[%0.1f %0.1f %0.1f] box at [%0.1f %0.1f %0.1f]',w,c);
   l = sprintf('box_w-%0.0f_%0.0f_%0.0f-%0.0f_%0.0f_%0.0f',w,c);
   o = maroi_box(struct('centre',c,'widths',w));
  case 'box_lims'
-  X = sort(spm_input('Range in X (mm)', '+1', 'e', [], 2)); 
-  Y = sort(spm_input('Range in Y (mm)', '+1', 'e', [], 2)); 
+  X = sort(spm_input('Range in X (mm)', '+1', 'e', [], 2));
+  Y = sort(spm_input('Range in Y (mm)', '+1', 'e', [], 2));
   Z = sort(spm_input('Range in Z (mm)', '+1', 'e', [], 2));
   A = [X Y Z];
   c = mean(A);

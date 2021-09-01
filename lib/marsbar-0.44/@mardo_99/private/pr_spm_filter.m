@@ -22,7 +22,7 @@ function [vargout] = pr_spm_filter(Action,K,Y)
 %
 % K{s}.HP       - low frequencies to be removed
 % K{s}.LP       - sparse toepltz low-pass convolution matrix
-% 
+%
 % Y         - data matrix
 %
 % K         - filter structure

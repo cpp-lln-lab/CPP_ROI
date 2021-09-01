@@ -1,5 +1,5 @@
 function o = times(o1, o2)
-% overloaded times function 
+% overloaded times function
 %
 % $Id$
 

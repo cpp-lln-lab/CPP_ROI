@@ -1,14 +1,14 @@
 function Xn = event_x_fir(D, e_spec, bin_length, bin_no, opts)
 % method to return FIR design matrix columns for session
 % FORMAT Xn = event_x_fir(D, e_spec, bin_length, bin_no, opts)
-% 
+%
 % D          - design object
 % e_spec     - event specification for single event
 %                [session no; event no]
 % bin_length - bin length in seconds  [TR]
 % bin_no     - number of bins for FIR [25 seconds / bin_length]
 % opts       - structure, containing fields with options
-%                'single' - if field present, gives single FIR 
+%                'single' - if field present, gives single FIR
 %                 This option removes any duration information, and
 %                 returns a simple per onset FIR model, where ones in the
 %                 design matrix corresponds to 1 event at the given
@@ -76,7 +76,7 @@ return
 
 function sf = sf_ones_ons(U, xBF, k)
 % Return onsets with only 1s in start time bin for each event
-  
+
 ons   = U.ons;
 T     = xBF.T;
 dt    = xBF.dt;

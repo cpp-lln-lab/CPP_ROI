@@ -9,11 +9,13 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   %
   % :param image:
   % :type image: string
-  % :param hemisphere: ``'lh'`` or ``'rh'``
+  % :param hemisphere: ``'L'`` or ``'R'``
   % :type hemisphere: string
   %
   %
   % (C) Copyright 2021 CPP ROI developers
+
+  % TODO change the hemi entity
 
   hdr = spm_vol(inputImage);
   vol = spm_read_vols(hdr);
@@ -21,19 +23,23 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   xDim = hdr.dim(1);
   xMid = round(xDim / 2);
 
-  switch lower(hemisphere)
+  switch hemisphere
 
-    case 'lh'
+    case 'L'
       discard = 1:xMid;
 
-    case 'rh'
+    case 'R'
       discard = xMid:xDim;
+
+    otherwise
+      error('hemisphere must be L or R.');
+
   end
 
   vol(discard, :, :) = NaN;
 
   p = bids.internal.parse_filename(inputImage);
-  p.entities.hs = lower(hemisphere);
+  p.entities.hemi = hemisphere;
   p.use_schema = false;
   newName = bids.create_filename(p);
 

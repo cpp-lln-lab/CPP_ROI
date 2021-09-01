@@ -5,7 +5,7 @@ function res = event_types(D, et)
 %
 % FORMAT D  = event_types(D, et)
 % to set event types for design
-% 
+%
 % $Id$
 
 SPM = des_struct(D);

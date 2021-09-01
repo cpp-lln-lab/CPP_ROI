@@ -1,23 +1,23 @@
 function o = mardo_99(o)
 % method to convert SPM2 design to SPM99 design
-% 
+%
 % The conversion is crude, and only transfers those fields
 % known to be of use in MarsBaR estimation
 %
 % $Id$
-  
+
 % Process design
 params = paramfields(o);
 des = params.des_struct;
-  
+
 % Transfer images, if present
-if isfield(des,'xY') 
+if isfield(des,'xY')
   des = mars_struct('merge', des, ...
-		    mars_struct('split', des.xY, {'VY', 'RT'})); 
+		    mars_struct('split', des.xY, {'VY', 'RT'}));
   des = rmfield(des, 'xY');
 end
 
-% move names 
+% move names
 des.xX.Xnames = des.xX.name;
 
 % Strip unused fields
@@ -48,16 +48,16 @@ if isfield(des, 'Sess')
       S2{s}.ind{t}  = Ss.Fc(t).i;
       S2{s}.bf{t}   = bf;
       % Parametric modulation
-      if Ss.U(t).P.h 
+      if Ss.U(t).P.h
 	S2{s}.Pname{t} = Ss.U(t).P.name;
-	S2{s}.Pv{t}    = Ss.U(t).P.P; 
+	S2{s}.Pv{t}    = Ss.U(t).P.P;
       else
 	S2{s}.Pname{t} = '';
 	S2{s}.Pv{t}    = [];
       end
     end
     % Not sensibly set stuff
-    S2{s}.rep = 0;    
+    S2{s}.rep = 0;
   end
   des.Sess = S2;
 end
@@ -103,6 +103,3 @@ des.SPMid = ['SPM99: Results imported from SPM2 design: ' des.SPMid];
 % put into parent object
 params.des_struct = des;
 o = mardo_99(params);
-
-
-

@@ -4,13 +4,13 @@ function [onsets, durations] = event_onsets(D, e_spec)
 %
 % D          - design object
 % e_spec     - event specification (see event_fitted for details)
-% 
+%
 % Returns
 % onsets     - onset times in TRs
 % durations  - duration of events in TRs
 %
 % $Id$
-  
+
 if nargin < 2
   error('Need design and event spec');
 end
@@ -18,7 +18,7 @@ if ~is_fmri(D)
   error('Needs FMRI design');
 end
 if prod(size(e_spec)) > 2
-  error('Can only deal with one event at a time'); 
+  error('Can only deal with one event at a time');
 end
 dt = bf_dt(D);
 TR = tr(D);
@@ -55,6 +55,6 @@ end
 sc = dt / TR;
 onsets    = (onsets - 1) * sc;
 durations = (durations - 1) * sc;
-       
+
 % In fact, the above is durations, as entered by the users.  The durations
 % as expressed in the design matrix are given by (durations) * sc

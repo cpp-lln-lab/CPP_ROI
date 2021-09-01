@@ -4,7 +4,7 @@ function D = ui_build(D, dtype)
 %
 % D      - design object
 % dtype  - one of 'PET', 'FMRI', 'Basic')
-% 
+%
 % Returns
 % D      - design object with new design
 %

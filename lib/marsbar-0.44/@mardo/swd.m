@@ -2,7 +2,7 @@ function res = swd(D, dir)
 % method to get/set design directory
 % FORMAT dir = swd(D);      % get
 % FORMAT D   = swd(D, dir); % set
-% 
+%
 % $Id$
 
 SPM = des_struct(D);

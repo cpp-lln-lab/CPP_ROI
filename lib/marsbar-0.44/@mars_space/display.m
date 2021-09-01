@@ -2,7 +2,7 @@ function display(obj)
 % display method for mars_space object
 %
 % $Id$
-  
+
 X = struct(obj);
 src = ['[mars_space object]'];
 if isequal(get(0,'FormatSpacing'),'compact')
@@ -16,4 +16,4 @@ else
   disp(src);
   disp(' ');
   disp(X)
-end    
+end

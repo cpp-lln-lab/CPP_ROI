@@ -1,7 +1,7 @@
 function mars_blob_ui(action)
 % Displays SPM results, and ROI menu in SPM input window
 % FORMAT mars_blob_ui(action)
-% 
+%
 % This is the SPM99 version
 %
 % action     - action string; can be
@@ -12,8 +12,8 @@ function mars_blob_ui(action)
 % This routine does SPM version specific stuff, the main
 % work is in mars_blob2roi.m and mars_blobs2rois.m
 %
-% $Id$  
-  
+% $Id$
+
 if nargin < 1
   action = 'init';
 end
@@ -23,7 +23,7 @@ errstr = sprintf(['''Cannot find SPM struct in the workspace; '...
 
 switch lower(action)
  case 'init'
-  try % and find valid SPM results stuff 
+  try % and find valid SPM results stuff
     evalin('base', 'SPM;');
     evalin('base', 'VOL.M;');
     hReg = evalin('base', 'hReg;');

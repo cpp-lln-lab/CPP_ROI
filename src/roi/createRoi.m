@@ -20,48 +20,46 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %
   % :param type: ``'mask'``, ``'sphere'``, ``'intersection'``, ``'expand'``
   % :type type: string
-  % :param specification: depending on the chosen ``type`` this can be:
-  %
-  %         :param roiImage: fullpath of the roi image for ``'mask'``
-  %         :type roiImage: string
-  %         :param sphere: defines the charateristic for ``'sphere'``
-  %         :type sphere: structure
-  %                ``sphere.location``: X Y Z coordinates in millimeters
-  %                ``sphere.radius``: radius in millimeters
-  %         :param specification: defines the charateristic for ``'intersection'`` and ``'expand'``
-  %         :type sphere: structure
-  %                ``sphere.location``: X Y Z coordinates in millimeters
-  %                ``sphere.radius``: radius in millimeters
-  %
   % :param volumeDefiningImage: fullpath of the image that will define the space
   %                             (resolution, ...) if the ROI is to be saved.
   % :type volumeDefiningImage: string
   % :param saveImg: Will save the resulting image as binary mask if set to
   %                 ``true``
   % :type saveImg: boolean
+  % :param specification: depending on the chosen ``type`` this can be:
+  %
+  %   :roiImage: - :string: fullpath of the roi image for ``'mask'``
+  %   :sphere: - :structure: defines the charateristic for ``'sphere'``
+  %                          - ``sphere.location``: X Y Z coordinates in millimeters
+  %                          - ``spehere.radius``: radius in millimeters
+  %   :specification: - :structure: defines the charateristic for ``'intersection'`` and ``'expand'``
+  %                                 - ``sphere.location``: X Y Z coordinates in millimeters
+  %                                 - ``sphere.radius``: radius in millimeters
+  %
   %
   % :returns:
   %
-  %      mask   - structure for the volume of interest adapted from ``spm_ROI``
+  %      :mask: - :structure: the volume of interest adapted from ``spm_ROI``
   %
-  %      mask.def           - VOI definition [sphere, mask]
-  %      mask.rej           - cell array of disabled VOI definition options
-  %      mask.xyz           - centre of VOI {mm} (for sphere)
-  %      mask.spec          - VOI definition parameters (radius for sphere)
-  %      mask.str           - description of the VOI
+  %      - ``mask.def``:    VOI definition [sphere, mask]
+  %      - ``mask.rej``:    cell array of disabled VOI definition options
+  %      - ``mask.xyz`` :   centre of VOI {mm} (for sphere)
+  %      - ``mask.spec``:   VOI definition parameters (radius for sphere)
+  %      - ``mask.str`` :   description of the VOI
+  %      - ``mask.descrip``
+  %      - ``mask.label``
+  %      - ``mask.roi``
   %
-  %      mask.descrip
-  %      mask.label
+  %        - ``mask.roi.size``:   number of voxel in ROI
+  %        - ``mask.roi.XYZ`` :   voxel coordinates
+  %        - ``mask.roi.XYZmm`` : voxel world coordinates
   %
-  %      mask.roi.size      - number of voxel in ROI
-  %      mask.roi.XYZ       - voxel coordinates
-  %      mask.roi.XYZmm     - voxel world coordinates
+  %      - ``mask.global``
   %
-  %      mask.global.hdr    - header of the "search space" where the roi is
-  %                           defined
-  %      mask.global.img
-  %      mask.global.XYZ
-  %      mask.global.XYZmm
+  %        - ``mask.global.hdr`` : header of the "search space" where the roi is defined
+  %        - ``mask.global.img``
+  %        - ``mask.global.XYZ``
+  %        - ``mask.global.XYZmm``
   %
   %
   % (C) Copyright 2021 CPP ROI developers

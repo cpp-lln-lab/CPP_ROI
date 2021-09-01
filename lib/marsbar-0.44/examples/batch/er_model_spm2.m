@@ -5,10 +5,10 @@ function SPM = er_model_spm2(sess_dir, sesses, ana_dir)
 % sess_dir        - directory containing session directories
 % sesses          - string or cell array of session directory names
 % ana_dir         - analysis directory
-% 
+%
 % Returns
 % SPM             - SPM model structure after configuration
-% 
+%
 % The script is specific to this design...
 %
 % $Id: er_model_spm2.m,v 1.1.1.1 2004/08/14 00:07:52 matthewbrett Exp $
@@ -32,7 +32,7 @@ cd(ana_dir);
 % load SPM defaults
 if ~exist('defaults', 'var')
   global defaults;
-  spm_defaults; 
+  spm_defaults;
 end
 
 % Specify some design stuff
@@ -63,7 +63,7 @@ SPM.xVi.form       = 'AR(1) + w';
 %         'Finite Impulse Response'
 %---------------------------------------------------------------------------
 SPM.xBF.name       = 'hrf (with time derivative)';
-SPM.xBF.length     = 24;                % length in seconds 
+SPM.xBF.length     = 24;                % length in seconds
 SPM.xBF.order      = 1;                 % order of basis set
 SPM.xBF.T          = 16;                % number of time bins per scan
 SPM.xBF.T0         = 1;                 % first time bin (see slice timing)
@@ -87,7 +87,7 @@ for ss = 1:nsessions
   condons = spm_load(condfile);
   tmp = condons(:,2); % get stimulus column
   tmp(tmp < 0) = 0; % correct negative onsets
-  stimons{1} = tmp;  
+  stimons{1} = tmp;
 
   for cno = 1:nconds
     SPM.Sess(ss).U(cno).name      =condnames(cno);
@@ -95,12 +95,12 @@ for ss = 1:nsessions
     SPM.Sess(ss).U(cno).ons = stimons{cno};
     SPM.Sess(ss).U(cno).dur = 0;
   end
-    
+
   % file selection
   P         = spm_get('files',fildir,Filter);
   SPM.nscan(ss) = size(P,1);
-  
-  % covariates 
+
+  % covariates
   SPM.Sess(ss).C.C    = [];       % [n x c double] covariates
   SPM.Sess(ss).C.name = {};       % [1 x c cell]   names
 

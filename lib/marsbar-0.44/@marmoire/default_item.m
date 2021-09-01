@@ -1,8 +1,8 @@
 function I = default_item(o)
 % returns default item
-% 
+%
 % $Id$
-  
+
 I = struct('data', [],...
 	   'file_name', '',...
 	   'default_file_name','',...

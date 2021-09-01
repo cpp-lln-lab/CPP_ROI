@@ -5,7 +5,7 @@ function o = domaths(func, dat1, dat2)
 % ROI reslicing thresholds are set from defaults
 %
 % $Id$
-  
+
 if nargin < 2
   error('Need function and object');
 end
@@ -18,7 +18,7 @@ d2 = describething(dat2);
 if isa(dat1, 'maroi')
   o = dat1; dat1 = dat1.dat;
 else % second must be an object
-  o = dat2; 
+  o = dat2;
 end
 if isa(dat2, 'maroi')
   dat2 = dat2.dat;
@@ -95,7 +95,7 @@ elseif isnumeric(o)
     d = num2str(o);
   else
     d = '[matrix]';
-  end	
+  end
 else
   d = '[non numeric input]';
 end

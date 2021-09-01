@@ -1,5 +1,5 @@
 function o = mrdivide(o1, o2)
-% overloaded mrdivide (matrix right divide) function 
+% overloaded mrdivide (matrix right divide) function
 %
 % $Id$
 

@@ -24,7 +24,7 @@ if v < 0.35
 end
 
 % SPM version check. We need this to guess which model directory to use and
-% to get the SPM configured design name. 
+% to get the SPM configured design name.
 spm_ver = spm('ver');
 sdirname = [spm_ver '_ana'];
 if strcmp(spm_ver, 'SPM99')
@@ -129,7 +129,7 @@ sesses = {'sess1', 'sess3'};
 event_session_no = 1;
 event_type_no = 1;
 event_spec = [event_session_no; event_type_no];
-event_duration = 0; % default SPM event duration 
+event_duration = 0; % default SPM event duration
 
 clear model_file
 for roi_no = 1:length(roi_array)
@@ -164,7 +164,7 @@ for roi_no = 1:length(roi_array)
   fprintf('Session %d; contrast value %5.4f; t stat %5.4f\n', vals);
   % Show fitted event time courses
   figure
-  secs = [0:length(tc) - 1] * dt; 
+  secs = [0:length(tc) - 1] * dt;
   plot(secs, tc)
   title(['Time courses for ' label(roi)], 'Interpreter', 'none');
   xlabel('Seconds')

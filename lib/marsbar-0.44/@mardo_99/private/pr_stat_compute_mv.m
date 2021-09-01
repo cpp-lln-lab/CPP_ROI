@@ -7,21 +7,21 @@ function [MVres]= pr_stat_compute_mv(xCon, Xs, V, betas, ResidualMS, Y)
 % V         - covariance matrix
 % betas     - parameter estimates
 % ResidialMS  - mean sum of squares of residuals
-% Y         - data natrix 
-%  
+% Y         - data natrix
+%
 % Output
 % MVres     - result structure
 %
 % $Id$
-  
+
 [nBetas nROI]   = size(betas);
 nCon          = length(xCon);
 [trRV trRVRV] = spm_SpUtil('trRV',Xs,V);
 erdf = trRV^2/trRVRV;
 RMS = sqrt(ResidualMS);
-%--------------------------------------------------------------------	   
+%--------------------------------------------------------------------
 %- Multivariate analysis
-%--------------------------------------------------------------------	   
+%--------------------------------------------------------------------
 
 MVres = struct('y_pre',[], 'y_obs', [], 'Pf', [], 'u', [], 'ds', [] );
 
@@ -31,15 +31,15 @@ YpY     = Y'*Y;
 
 for ii = 1:nCon
 
-	 xC  = xCon(ii); 
+	 xC  = xCon(ii);
 
 	 %--------------------------------------------------------------------
 	 [NF, nu, h, d, M12, XG, sXG] = sf_model_mlm(Xs, V, nROI, xC, erdf);
 
 	 %--------------------------------------------------------------------
-	 %- Compute svd 
+	 %- Compute svd
 	 %--------------------------------------------------------------------
-	 %- fprintf('%-40s\n','Computing Principal Components') 
+	 %- fprintf('%-40s\n','Computing Principal Components')
 
 	 Z	= ((NF*betas)./(ones(size(NF,1),1)*RMS));
 	 S	= Z*Z';
@@ -64,22 +64,22 @@ for ii = 1:nCon
 	 Pf	= 1 - spm_Fcdf(Fq,nu1,nu2);
 
 
-	 %- fprintf('%-40s\n','Computing predicted and observed temporal reponse') 
+	 %- fprintf('%-40s\n','Computing predicted and observed temporal reponse')
 %keyboard
 
 	 y_pre	= (pinv(XG)'* M12 * u)*diag(sqrt(ds)); % predicted temporal reponse
-	 
+
 	 gV = (diag(1./sqrt(ds))*Z)'*u;
 	 y_obs	= (Y./(ones(size(Y,1),1)*RMS)/nROI)*gV;
-	 
+
 	%- save results for this constrast
 	MVres(ii).y_pre  = y_pre;
 	MVres(ii).y_obs  = y_obs;
 	MVres(ii).Pf     = Pf;
 	MVres(ii).u      = u;
 	MVres(ii).ds     = ds;
-	MVres(ii).df     = [nu1 nu2];	
-	
+	MVres(ii).df     = [nu1 nu2];
+
 end
 
 
@@ -89,7 +89,7 @@ end
 
 %===================================================================
 function [NF,nu,h,d,M12,XG,sXG] = sf_model_mlm(Xs, V, nROI, xC, erdf);
-% Set sub-space of interest and the related matrix of normalisation. 
+% Set sub-space of interest and the related matrix of normalisation.
 % FORMAT [NF,nu,h,d,M12,XG] = mm_model();
 %- nu, h, d : degrees of freedom
 %- NF : matrix of normalisation
@@ -121,7 +121,7 @@ M_12	= pinv(M12);
 NF	= M_12*spm_sp('X',Xs)'*spm_sp('r',sXG,spm_sp('X',Xs));
 
 %- degrees of freedom
-%- nROI : number of ROI (corresponds to the number of Resels) 
+%- nROI : number of ROI (corresponds to the number of Resels)
 %--------------------------------------------------------------------
 d	= nROI*(4*log(2)/pi)^(3/2);
 h	= sX1o.rk; %-rank of the sub-space of interest.

@@ -30,7 +30,3 @@ for i = 1:n
   U = fullfile(pth,['s' nm xt]);
   spm_smooth(Q,U,fwhm);
 end
-
-
-
-

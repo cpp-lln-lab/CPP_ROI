@@ -1,6 +1,6 @@
 function strs = summary(D)
 % method returns cell array of strings describing design
-% 
+%
 % $Id$
 
 strs{1} = sprintf('SPM working dir    \t%s',  swd(D));

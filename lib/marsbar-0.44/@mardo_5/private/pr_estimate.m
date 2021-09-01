@@ -1,7 +1,7 @@
 function SPM = pr_estimate(SPM, marsY)
 % Estimation of a General Linear Model
 % FORMAT SPM = pr_estimate(SPM, marsY)
-% Inputs 
+% Inputs
 % SPM      - SPM design structure
 % marsY    - marsY data object, or 2D data (Y) matrix
 %
@@ -17,18 +17,18 @@ function SPM = pr_estimate(SPM, marsY)
 % a cell array, in which case it is standard SPM covariance components,
 % or a struct array, in which case it can specify other methods of
 % estimating the covariance, in particular, real AR(n) estimation
-% 
+%
 % 2) The design will specify if the covariance should be calculated from
 % the summarized time course(s), or from the component voxels, then
 % averaged.  Voxel time courses are used by default, and if
 % SPM.xVi.cov_calc is set to 'vox', but summary time
-% courses can be used by setting SPM.xVi.cov_calc to 'summary'. 
-% 
+% courses can be used by setting SPM.xVi.cov_calc to 'summary'.
+%
 % 3) Normally, if the W matrix is present, the V matrix should also be
 % present.  Because it is boring to calculate the V matrix and then WVW,
 % if we know WVW is I, V can be present, but empty, in which case WVW is
 % assumed to be I.  It just saves time.
-% 
+%
 % $Id: pr_estimate.m 543 2004-12-14 08:58:05Z matthewbrett $
 
 %-Say hello
@@ -55,7 +55,7 @@ try
   %---------------------------------------------------------------
   xVi   = SPM.xVi;
 catch
-  
+
   %-otherwise assume i.i.d.
   %---------------------------------------------------------------
   xVi   = struct(	'form',  'i.i.d.',...
@@ -85,7 +85,7 @@ if ~have_V
   else
     cov_type = Vi.type;
   end
-  
+
   % Covariance calculated on summary or voxel time courses
   cov_vox = 1;
   if isfield(xVi, 'cov_calc')
@@ -143,7 +143,7 @@ end
 xX.xKXs = spm_sp('Set',pr_spm_filter(xX.K,W*xX.X));		% KWX
 xX.pKX  = spm_sp('x-',xX.xKXs);				% projector
 
-%-If xVi.V is not defined compute Hsqr 
+%-If xVi.V is not defined compute Hsqr
 %-----------------------------------------------------------------------
 if ~isfield(xVi,'V')
   Fcname = 'effects of interest';
@@ -182,7 +182,7 @@ fprintf('%-40s: %30s','Model','...start')    %-#
 
 n_roi = n_regions(marsY);
 
-%-Intialise variables used in the loop 
+%-Intialise variables used in the loop
 %=======================================================================
 [n S] = size(Y);                                    % no of time courses
 Cy    = 0;					    % <Y*Y'> spatially whitened
@@ -221,7 +221,7 @@ if ~have_V
     Cy = Y*Y';
   end
 end % have_V
-		
+
 %-if we are saving the WLS parameters
 %-------------------------------------------------------
 if have_W
@@ -230,7 +230,7 @@ if have_W
   %-----------------------------------------------
   CY         = Y*Y';
   EY         = sum(Y,2);
-    
+
 end % have_W
 clear Y				%-Clear to save memory
 
@@ -257,11 +257,11 @@ if ~have_V
   str    = 'Temporal non-sphericity (over voxels)';
   fprintf('%-40s: %30s\n',str,'...estimation') %-#
   Cy            = Cy/S;
-  
+
   % Estimate for separable designs and covariance components
   %---------------------------------------------------------------
   if isstruct(xX.K)
-    
+
     switch cov_type
      case 'SPM'
       % Store hyperparameters
@@ -270,24 +270,24 @@ if ~have_V
      case 'fmristat'
       % Store AR coefficients
       h     = zeros(length(xX.K), Vi.order);
-     otherwise 
+     otherwise
       error(['Did not recognize covariance type: ' cov_type]);
     end
-    
-    V     = sparse(nScan,nScan); 
+
+    V     = sparse(nScan,nScan);
     for i = 1:length(xX.K)
-      
+
       % extract blocks from bases
       %-----------------------------------------------
       q     = xX.K(i).row;
-      
-      % design space for estimation (with confounds in filter)	
+
+      % design space for estimation (with confounds in filter)
       %-----------------------------------------------
       Xp         = xX.X(q,:);
       try
 	Xp = [Xp xX.K(i).X0];
       end
-      
+
       switch cov_type
        case 'SPM'
 	% REML: extract blocks from bases
@@ -307,7 +307,7 @@ if ~have_V
 	[Vp,hp]  = pr_spm_reml(Cy(q,q),Xp,Qp);
 	V(q,q)   = V(q,q) + Vp;
 	h(p)     = hp;
-       
+
        case 'fmristat'
 	% AR estimation
 	[h(i,:) W(q,q)]  = pr_fmristat_ar(res(q,:),Xp,Vi.order);
@@ -317,7 +317,7 @@ if ~have_V
   else
     [V,h] = pr_spm_reml(Cy,xX.X,xVi.Vi);
   end
-  
+
   switch cov_type
    case 'SPM'
     % normalize non-sphericity and save hyperparameters
@@ -329,12 +329,12 @@ if ~have_V
     V           = [];
     SPM.xX.W    = W;
   end
-  
+
   xVi.h       = h;
   xVi.V       = V;			% Save non-sphericity xVi.V
   xVi.Cy      = Cy;			%-spatially whitened <Y*Y'>
   SPM.xVi     = xVi;			% non-sphericity structure
-  
+
   % If xX.W is not specified use W*W' = inv(V) to give ML estimators
   %---------------------------------------------------------------
   if ~have_W
@@ -358,7 +358,7 @@ xX.erdf         = trRV^2/trRVRV;				% approximation
 xX.Bcov         = xX.pKX*xX.V*xX.pKX';				% Cov(beta)
 
 
-%-scale ResSS by 1/trRV 
+%-scale ResSS by 1/trRV
 %-----------------------------------------------------------------------
 ResMS           = ResSS/xX.trRV;
 
@@ -379,12 +379,12 @@ xX.nKX        = spm_DesMtx('sca',xX.xKXs.X,xX.name);
 %-place fields in SPM
 %-----------------------------------------------------------------------
 SPM.betas                = ones(nBeta, n_roi) + NaN;
-SPM.betas(:, in_cols)    = beta;	
+SPM.betas(:, in_cols)    = beta;
 SPM.ResidualMS           = ones(1, n_roi) + NaN;
-SPM.ResidualMS(in_cols)  = ResMS;	
+SPM.ResidualMS(in_cols)  = ResMS;
 
 SPM.xVi        = xVi;				% non-sphericity structure
-SPM.xVi.CY     = CY;				%-<(Y - <Y>)*(Y - <Y>)'> 
+SPM.xVi.CY     = CY;				%-<(Y - <Y>)*(Y - <Y>)'>
 
 SPM.xX         = xX;				%-design structure
 

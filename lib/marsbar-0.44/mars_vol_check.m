@@ -34,7 +34,7 @@ for i = 1:numel(varargin),
         fnames = {fnames{:}, vols(:).fname};
     end
 end
-  
+
 nimgs = size(dims, 3);
 if nimgs < 2,
     return;
@@ -68,4 +68,3 @@ end
 strs = strs(:)';
 strs = [strs; repmat({sep}, 1, length(strs))];
 s    = [strs{1:end-1}];
-

@@ -506,7 +506,7 @@ if xVi.iid
 	xVi.V    = speye(nScan);
 
 else
-	% otherwise, we have repeated measures design 
+	% otherwise, we have repeated measures design
 	%===============================================================
 	nL      = max(I);		% number of levels
 	mL      = find(nL > 1);		% multilevel factors
@@ -637,24 +637,24 @@ if any(iGloNorm == [1:7])
 	otherwise				%-unknown iGC
 		error('unexpected iGC value')
 	end
-	
-	
+
+
 	%-AnCova - add scaled centred global to DesMtx `G' partition
 	%---------------------------------------------------------------
-	rcname     = 'global'; 
+	rcname     = 'global';
 	tI         = [eval(CFIforms{iGloNorm,1}),g - gc];
 	tConst     = CFIforms{iGloNorm,2};
 	tFnames    = [eval(CFIforms{iGloNorm,3}),{rcname}];
 	[f,gnames]  = spm_DesMtx(tI,tConst,tFnames);
 	clear tI tConst tFnames
-	
+
 	%-Save GX info in xC struct for reference
 	%---------------------------------------------------------------
 	str     = {sprintf('%s: %s',dstr{2},rcname)};
 	if any(iGMsca==[1:7]), str=[str;{['(after ',sGMsca,')']}]; end
 	if iGC ~= 8, str=[str;{['used centered ',sCC{iGC}]}]; end
 	if iGloNorm > 1
-		str=[str;{['fitted as interaction ',sCFI{iGloNorm}]}]; 
+		str=[str;{['fitted as interaction ',sCFI{iGloNorm}]}];
 	end
 	tmp  = struct(	'rc',rg.*gSF,		'rcname',rcname,...
 			'c',f,			'cname'	,{gnames},...
@@ -811,7 +811,7 @@ for j4  = 1:n4
     if isinf(Dn(3)), n3=spm_input([sF4P,'#',DsF{3},'''s'],'+1','n1');
 	    else, n3 = Dn(3); end
     bL3 = n3>1;
-    
+
     if DbaTime & Dn(2)>1
 	%disp('NB:selecting in time order - manually specify conditions')
 	%-NB: This means f2 levels might not be 1:n2
