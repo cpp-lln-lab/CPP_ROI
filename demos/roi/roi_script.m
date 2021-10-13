@@ -14,7 +14,7 @@ run ../../initCppRoi;
 
 %% ASSUMPTION
 %
-% This assumes that the 2 immages are in the same space (MNI, individual)
+% This assumes that the 2 images are in the same space (MNI, individual)
 % but they might not necessarily have the same resolution.
 %
 % In SPM lingo this means they are coregistered but not necessarily resliced.
@@ -29,7 +29,7 @@ run ../../initCppRoi;
 % You can use the resliceRoiImages for that.
 
 %%
-zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
+zMap = fullfile(pwd, 'inputs', 'visual_motion_association-test_z_FDR_0.01.nii');
 dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;
@@ -44,7 +44,7 @@ end
 % all of these functions can be found below and show you how to create ROIs and
 % / or ROIs to extract data from an image.
 %
-[roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap);
+[roiName, zMap] = prepareDataAndROI(opt, dataImage, zMap);
 
 data_mask = getDataFromMask(dataImage,  roiName);
 data_sphere = getDataFromSphere(opt, dataImage);
@@ -136,7 +136,7 @@ end
 
 %% HELPER FUNCTION
 
-function [roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap)
+function [roiName, zMap] = prepareDataAndROI(opt, dataImage, zMap)
 
   if opt.unzip.do
     gunzip(fullfile('inputs', '*.gz'));
