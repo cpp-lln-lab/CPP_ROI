@@ -27,7 +27,7 @@ end
 
 function matlabbatch = setBatchReslice(matlabbatch, referenceImg, sourceImages)
 
-  interp = 1;
+  interp = 4;
   write.roptions.interp = interp;
 
   if ischar(referenceImg)
