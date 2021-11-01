@@ -1,8 +1,8 @@
 function I = event_cols(D, e_spec)
-% method gets design columns for single event 
-% 
+% method gets design columns for single event
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need design and event spec');
 end

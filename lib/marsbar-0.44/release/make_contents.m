@@ -1,13 +1,13 @@
 function make_contents(aString, flags, start_dir)
 % MAKECONTENTS makes Contents file, usually in current working directory.
-%   MAKECONTENTS(STRING [FLAGS [START_DIR]]) 
+%   MAKECONTENTS(STRING [FLAGS [START_DIR]])
 %   creates a standard "Contents.m" file in the
 %   current directory by assembling the first comment (H1) line in
-%   each function found in the current working directory.  If a 
+%   each function found in the current working directory.  If a
 %   "Contents.m" file exists, it is renamed to "Contents.old", before
-%   a new "Contents.m" file is created.  STRING is inserted as the 
-%   first line of the "Contents.m" file;  if omitted, a blank line 
-%   is inserted instead.  The function changes permission on the 
+%   a new "Contents.m" file is created.  STRING is inserted as the
+%   first line of the "Contents.m" file;  if omitted, a blank line
+%   is inserted instead.  The function changes permission on the
 %   resultant "Contents.m" file to rw-r--r-- on Unix systems.
 %
 %   FLAGS can contain none or more of
@@ -16,9 +16,9 @@ function make_contents(aString, flags, start_dir)
 %      'c'    - use filename 'contents.m' instead of 'Contents.m'
 %      'r'    - recursively list subdirectory contents also
 %      'i'    - include starting directory from file name path list
-%      'p'    - save contents file in current rather than listed directory 
-%      'd'    - don't make backup of old contents file  
-% 
+%      'p'    - save contents file in current rather than listed directory
+%      'd'    - don't make backup of old contents file
+%
 %   START_DIR can be omitted, giving a listing of current working
 %       directory, or it can specify the directory to list
 %
@@ -30,7 +30,7 @@ function make_contents(aString, flags, start_dir)
 %
 % $Id$
 
-% Author(s): L. Bertuccioli 
+% Author(s): L. Bertuccioli
 %            A. Prasad
 
 % Based on mkcontents.m by Denis Gilbert
@@ -65,8 +65,8 @@ else
 end
 disp(['Creating "' cont_file '" in ' cont_dir])
 cont_path = fullfile(cont_dir, cont_file);
-if ~any(flags == 'd')  
-  if exist(cont_path, 'file') 
+if ~any(flags == 'd')
+  if exist(cont_path, 'file')
     copyfile(cont_path, ...
 	     fullfile(cont_dir, [cont_file(1:end-1) 'old']));
     delete(cont_path)
@@ -79,10 +79,10 @@ fcontents = fopen(cont_path,'wt');
 if fcontents == -1
   error(['Could not open file: ' cont_path]);
 end
-fprintf(fcontents,'%s\n',line1);     
+fprintf(fcontents,'%s\n',line1);
 if ~any(flags == 'n')
   line2 = ['% Path ->  ' start_dir];
-  fprintf(fcontents,'%s\n',line2);     
+  fprintf(fcontents,'%s\n',line2);
 end
 
 % set first past flag
@@ -103,11 +103,11 @@ function do_list(dirname, fcontents, flags)
 persistent START_DIR ST_D_LEN;
 if any(flags == '1') % first pass through
   START_DIR = dirname;
-  ST_D_LEN = length(dirname) + 2; 
+  ST_D_LEN = length(dirname) + 2;
 end
 
 if any(flags == 'r')
-  % find directories  
+  % find directories
   dirlist = dir(dirname);
   dirnames = {dirlist([dirlist.isdir]).name};
   dirnames = dirnames(~(strcmp('.', dirnames) | strcmp('..', dirnames)));
@@ -116,9 +116,9 @@ else
 end
 
 % find m files
-files = what(dirname);  
+files = what(dirname);
 
-% fix apparent bug in what function 
+% fix apparent bug in what function
 files = files(1);
 
 % exclude any contents files
@@ -127,10 +127,10 @@ if length(files.m)==0
      warning(['No m-files found in directory ' dirname])
      return
 end
-fprintf(fcontents,'%%\n'); 
+fprintf(fcontents,'%%\n');
 
 % maybe exclude starting path from listing
-if ~any(flags == 'i')  
+if ~any(flags == 'i')
   dirlab = dirname(ST_D_LEN:end);
   if ~any(flags == '1') % not first pass
     dirlab = [dirlab filesep];
@@ -138,13 +138,13 @@ if ~any(flags == 'i')
 else % not excluding starting directory
   dirlab = [dirname filesep];
 end
-    
+
 maxlen = size(char(files.m),2) + length(dirlab);
 
 % Write first lines to Contents.m if they exist
 for i = 1:length(files.m)
   fname = fullfile(files.path, files.m{i});
-  fid=fopen(fname, 'rt'); 
+  fid=fopen(fname, 'rt');
   if fid == -1, error(['Error opening file: ' fname]); end
   aLine = '';
   while(isempty(aLine) | length(aLine) < 8)
@@ -152,10 +152,10 @@ for i = 1:length(files.m)
   end
   if strcmp(aLine(1:8),'function'),
     count_percent = 0;
-    while count_percent < 1 & feof(fid)==0; 
+    while count_percent < 1 & feof(fid)==0;
       line = fgetl(fid);
-      if length(line) > 0 
-	if ~isempty(findstr(line,'%')) 
+      if length(line) > 0
+	if ~isempty(findstr(line,'%'))
 	  count_percent = count_percent + 1;
 	  rr=line(2:length(line));
 	  if ~any(flags == 'f') % remove first word
@@ -168,18 +168,18 @@ for i = 1:length(files.m)
 	  fprintf(fcontents,'%s\n',line);
 	end % if ~isempty
       end % if length
-      if feof(fid)==1  
+      if feof(fid)==1
 	fn = [dirlab strtok(char(files.m(i)),'.')];
 	n = maxlen - length(fn) - 1;
 	line = ['%   ' fn blanks(n) '- (No help available)'];
-	fprintf(fcontents,'%s\n',line); 
+	fprintf(fcontents,'%s\n',line);
       end % if feof
     end % while
   end % if strcmp
   fclose(fid);
 end
 % recurse down directory tree
-flags = flags(flags ~= '1'); % reset first pass flag 
+flags = flags(flags ~= '1'); % reset first pass flag
 for d = 1:length(dirnames)
   do_list(fullfile(dirname, dirnames{d}), fcontents, flags);
 end

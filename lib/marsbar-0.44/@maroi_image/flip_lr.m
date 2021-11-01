@@ -1,7 +1,7 @@
 function o = flip_lr(o)
 % flips ROI left / right
 %
-% $Id  
+% $Id
 
 % Requires change to ROI data -> return as maroi_matrix
 

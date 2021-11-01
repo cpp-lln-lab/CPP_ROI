@@ -3,7 +3,7 @@ function [o, others] = maroi_sphere(params)
 % FORMAT [o, others] = maroi_sphere(params)
 % Inputs [defaults]
 % params  - a structure containing any fields for a maroi parent and
-%            .centre - a 1x3 coordinate in mm 
+%            .centre - a 1x3 coordinate in mm
 %            .radius - a 1x1 radius in mm
 %
 %

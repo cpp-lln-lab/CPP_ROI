@@ -1,21 +1,27 @@
-% (C) Copyright 2021 CPP BIDS SPM-pipeline developers
-
-function roiName = thresholdToMask(sourceImage, threshold)
-
+function outputImage = thresholdToMask(inputImage, threshold)
+  %
   % TODO
   % allow threshold to be inferior than, greater than or both
+  %
+  %
+  %
+  % (C) Copyright 2021 CPP ROI developers
 
-  hdr = spm_vol(sourceImage);
+  hdr = spm_vol(inputImage);
   img = spm_read_vols(hdr);
 
-  roi_hdr = hdr;
-  basename = spm_file(roi_hdr.fname, 'basename');
-  roi_hdr.fname = spm_file(roi_hdr.fname, 'basename', [basename '-mask']);
+  p = bids.internal.parse_filename(inputImage);
+  p.suffix = 'mask';
+  p.use_schema = false;
+  newName = bids.create_filename(p);
 
+  hdr.fname = spm_file(hdr.fname, 'filename', newName);
   img = img > threshold;
+  spm_write_vol(hdr, img);
 
-  spm_write_vol(roi_hdr, img);
+  outputImage = hdr.fname;
 
-  roiName = roi_hdr.fname;
+  json = bids.derivatives_json(outputImage);
+  bids.util.jsonencode(json.filename, json.content);
 
 end

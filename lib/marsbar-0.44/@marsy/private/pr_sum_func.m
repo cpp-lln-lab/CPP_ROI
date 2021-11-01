@@ -1,9 +1,9 @@
 function [sumY, varY] = pr_sum_func(y, sumfunc, wt)
 % creates summary stats for region data
 % FORMAT [sumY, varY] = pr_sum_func(y, sumfunc, wt)
-% 
+%
 % $Id$
-  
+
 if nargin < 2
   error('Need data matrix and summary function');
 end
@@ -34,7 +34,7 @@ switch sumfunc
  case 'wtmean'
   % Formulae from GNU scientific library
   % $\hat\mu = (\sum w_i x_i) / (\sum w_i)$
-  % \hat\sigma^2 = ((\sum w_i)/((\sum w_i)^2 - \sum (w_i^2))) 
+  % \hat\sigma^2 = ((\sum w_i)/((\sum w_i)^2 - \sum (w_i^2)))
   %                \sum w_i (x_i - \hat\mu)^2$
   swt = sum(wt);
   sumY = y*wt/swt;
@@ -45,10 +45,10 @@ switch sumfunc
   %varY = (y - (sumY * ones(1,n))).^2 * wt / ((nwt-1) * swt / nwt);
  case 'median'
   sumY = median(y, 2);
- case 'eigen1'    
+ case 'eigen1'
   % code taken from spm_regions.m l 230-247, with thanks
   % @(#)spm_regions.m	2.7 Karl Friston 00/10/04
-  
+
 % compute regional response in terms of first eigenvariate
 %-----------------------------------------------------------------------
 if m > n
@@ -68,7 +68,7 @@ v       = v*d;
 sumY       = u*sqrt(s(1)/n);
 
 % end of paste from spm_regions
-      
+
  otherwise
   error(['Do not recognize summary function ' sumfunc]);
 end

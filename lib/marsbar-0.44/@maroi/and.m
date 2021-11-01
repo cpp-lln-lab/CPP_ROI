@@ -1,5 +1,5 @@
 function o = and(o1, o2)
-% overloaded add function 
+% overloaded add function
 %
 % $Id$
 

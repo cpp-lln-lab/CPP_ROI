@@ -13,13 +13,13 @@ function D = prefix_images(D, action, prefix, flags)
 %                              the first image in the image list
 %              'check_swap'  - if not 0, checks if images with new
 %                      filenames need byte swapping, and swaps if so
-%             
+%
 % $Id$
-  
+
 def_flags = struct('check_exist', 'none', ...
 		   'check_all',   1, ...
 		   'check_swap',  0);
-  
+
 if nargin < 2
   action = 'remove';
 end
@@ -39,7 +39,7 @@ if ~has_images(D)
 end
 VY = get_images(D);
 
-% remove prefix 
+% remove prefix
 files  = strvcat(VY(:).fname);
 fpaths = spm_str_manip(files, 'h');
 fns    = spm_str_manip(files, 't');
@@ -97,4 +97,3 @@ if flags.check_swap
 end
 
 D = set_images(D, VY);
-

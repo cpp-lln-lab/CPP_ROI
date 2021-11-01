@@ -1,22 +1,22 @@
 function Xn = event_x_fir(D, e_spec, bin_length, bin_no, opts)
 % method to return FIR design matrix columns for session
 % FORMAT Xn = event_x_fir(D, e_spec, bin_length, bin_no, opts)
-% 
+%
 % D          - design object
 % e_spec     - event specification for single event
 %                [session no; event no]
 % bin_length - bin length in seconds
 % bin_no     - number of bins for FIR
 % opts       - structure, containing fields with options
-%                'single' - if field present, gives single FIR 
+%                'single' - if field present, gives single FIR
 %                 This option removes any duration information, and
 %                 returns a simple per onset FIR model, where ones in the
 %                 design matrix corresponds to 1 event at the given
 %                 offset. See event_fitted_fir.m for more details.
-% 
+%
 % Returns
 % Xn         - columns in design matrix for FIR model
-% 
+%
 % Note that we have a problem, in that the assumed start bin is not saved
 % in the SPM99 design format, so we have to hope it has not changed from
 % the current defaults.
@@ -24,8 +24,8 @@ function Xn = event_x_fir(D, e_spec, bin_length, bin_no, opts)
 % $Id$
 
 % global parameters
-global fMRI_T; 
-global fMRI_T0; 
+global fMRI_T;
+global fMRI_T0;
 if isempty(fMRI_T),  fMRI_T  = 16; end;
 if isempty(fMRI_T0), fMRI_T0 = 1;  end;
 

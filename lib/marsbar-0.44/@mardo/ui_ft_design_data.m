@@ -1,7 +1,7 @@
 function ui_ft_design_data(D, mY, e_s, opts)
 % method plots FT of design and data to graphics window
 % FORMAT ui_ft_design_data(D, mY, e_s, opts)
-% 
+%
 % Inputs
 % D           - design object
 % mY          - marsy data object
@@ -12,7 +12,7 @@ function ui_ft_design_data(D, mY, e_s, opts)
 %               'fig'    - figure handle to plot to
 %
 % $Id$
-  
+
 if ~is_fmri(D)
   disp('Need an FMRI design for design/data plot');
   return
@@ -35,8 +35,8 @@ if isempty(e_s)
   [e_s e_n] = ui_get_event(D);
 end
 if isfield(opts, 'fig')
-  Fgraph = opts.fig; 
-else 
+  Fgraph = opts.fig;
+else
   Fgraph = spm_figure('GetWin');
 end
 e_n_tmp = mars_struct('getifthere', opts, 'event_name');
@@ -60,14 +60,14 @@ Y         = Y(r,:);
 if isfield(opts, 'filter')
     R = apply_filter(D, R, struct('sessions', s));
     Y = apply_filter(D, Y, struct('sessions', s));
-end 
+end
 
 TR        = tr(D);
 if isempty(TR)
-  b_len = 1; 
+  b_len = 1;
   b_str   = 'cycles per time point';
 else
-  b_len = TR; 
+  b_len = TR;
   b_str   = 'Hz';
 end
 q         = length(r);
@@ -97,4 +97,3 @@ ylabel('Relative spectral density')
 title('Region data');
 legend(region_name(mY));
 axis tight
-

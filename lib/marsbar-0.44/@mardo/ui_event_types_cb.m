@@ -47,13 +47,9 @@ switch lower(action)
     et(ic) = [];
     D = event_types(D, et);
     pr_refresh_et(D, 1, F, hList);
-  end  
+  end
  otherwise
   error([ action ' is deviant' ]);
 end
 
 return
-
-
-  
-  

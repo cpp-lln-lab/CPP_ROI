@@ -1,11 +1,11 @@
 function [dim2, mat2, vox2] = mars_new_space(dim, mat, vox)
 % make a new image space to contain image with rotations etc
 % FORMAT [dim2, mat2, vox2] = mars_new_space(dim, mat, vox)
-% 
+%
 % dim        - original dimensions in voxels
 % mat        - orignal mat file (4x4 transformation matrix)
 % vox        - required ouput voxel size
-% 
+%
 % OUTPUT
 % dim2       - new dimensions
 % mat2       - new mat file
@@ -26,7 +26,7 @@ end
 [sz mn_mx] = mmsz(dim, mat);
 
 % select new voxel size if needed
-if isempty(vox) 
+if isempty(vox)
   % original voxel size
   vox = sqrt(sum(mat(1:3,1:3).^2));
 
@@ -59,13 +59,13 @@ mat2 = diag([vox2 1]);
 
 % translations are from left post inf vox co-ord to mm coord
 % left post inf corner of new image
-mat2(1:3,4) = [mn_mx(1,:) - vox2]'; 
+mat2(1:3,4) = [mn_mx(1,:) - vox2]';
 
 return
 
 function [sz, mn_mx]  = mmsz(dim, mat);
 % returns size in mm of matrix dim;
-  
+
 % 8 corners in voxels of original image
 i = [1 1 1; eye(3)];
 i = logical([i; ~i]);
@@ -81,4 +81,3 @@ mn_mx = mm_c([1 end],:);
 
 % size is the difference
 sz = diff(mn_mx);
-  

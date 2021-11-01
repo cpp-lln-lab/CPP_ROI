@@ -13,7 +13,7 @@ function [vargout] = pr_spm_filter(K,Y)
 % K(s).HParam - cut-off period in seconds
 %
 % K(s).X0     - low frequencies to be removed (DCT)
-% 
+%
 % Y           - data matrix
 %
 % K           - filter structure
@@ -22,7 +22,7 @@ function [vargout] = pr_spm_filter(K,Y)
 %
 % pr_spm_filter implements high-pass filtering in an efficient way by
 % using the residual forming matrix of X0 - low frequency confounds
-%.pr_spm_filter also configures the filter structure in accord with the 
+%.pr_spm_filter also configures the filter structure in accord with the
 % specification fields if called with one argument
 %___________________________________________________________________________
 % @(#)pr_spm_filter.m	2.10 Karl Friston 03/03/04
@@ -42,7 +42,7 @@ if nargin == 1 & isstruct(K)
 		n       = fix(2*(k*K(s).RT)/K(s).HParam + 1);
 		X0      = spm_dctmtx(k,n);
 		K(s).X0 = X0(:,2:end);
-		
+
 		% make low pass filter
 		%-----------------------------------------------------------
 		if isfield(K(s), 'LChoice')
@@ -106,7 +106,7 @@ else
 			% select data
 			%---------------------------------------------------
 			y = Y(K(s).row,:);
-			
+
 			% apply low pass filter
 			%---------------------------------------------------
 			if isfield(K(s), 'KL')
@@ -134,5 +134,3 @@ else
 	vargout   = Y;
 
 end
-
-

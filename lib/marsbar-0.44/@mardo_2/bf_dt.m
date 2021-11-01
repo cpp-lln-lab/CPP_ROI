@@ -1,6 +1,6 @@
 function d = bf_dt(D)
 % method returns length of time bin for basis functions
-% 
+%
 % $Id$
 
 SPM = des_struct(D);

@@ -2,10 +2,10 @@ function V = design_vol(D, imgs)
 % returns vols in appropriate format for saving in design
 % FORMAT V = design_vol(D, imgs)
 %
-% Input 
+% Input
 % D           - mardo design object
 % imgs        - image names or vol structs
-% 
+%
 % Output
 % V           - paths relative to swd
 %
@@ -26,4 +26,3 @@ if ischar(imgs)
 else
   error('Odd input format for images');
 end
-

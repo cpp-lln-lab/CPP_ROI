@@ -1,22 +1,22 @@
 function [rho,Vmhalf,V] = pr_fmristat_ar(res,X,nlags)
 % function returns estimated AR coefficients using fmristat algorithm
 % FORMAT [rho,Vmhalf,V] = pr_fmristat_ar(res,X,nlags)
-% 
+%
 % See http://www.math.mcgill.ca/keith/fmristat/ and
 % fmrilm.m in fmristat package for code, and
 % Worsley, K.J., Liao, C., Aston, J., Petre, V., Duncan, G.H., Morales,
 % F., Evans, A.C. (2002). A general statistical analysis for fMRI
 % data. NeuroImage, 15:1-15 - for description of the algorithm
-%  
+%
 % $Id$
 
 % This is the copyright notice from fmrilm:
 %############################################################################
 % COPYRIGHT:   Copyright 2002 K.J. Worsley
 %              Department of Mathematics and Statistics,
-%              McConnell Brain Imaging Center, 
+%              McConnell Brain Imaging Center,
 %              Montreal Neurological Institute,
-%              McGill University, Montreal, Quebec, Canada. 
+%              McGill University, Montreal, Quebec, Canada.
 %              worsley@math.mcgill.ca, liao@math.mcgill.ca
 %
 %              Permission to use, copy, modify, and distribute this
@@ -27,7 +27,7 @@ function [rho,Vmhalf,V] = pr_fmristat_ar(res,X,nlags)
 %              software for any purpose.  It is provided "as is" without
 %              express or implied warranty.
 %############################################################################
-  
+
 if nargin < 2
   error('Need covariance and design');
 end
@@ -41,7 +41,7 @@ R  = spm_sp('r', sX);
 nlp1     = nlags+1;
 [n nvox] = size(res);
 
-% Bias reduction 
+% Bias reduction
 M=zeros(nlp1);
 for i=1:(nlp1)
   for j=1:(nlp1)

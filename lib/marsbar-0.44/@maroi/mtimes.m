@@ -1,5 +1,5 @@
 function o = mtimes(o1, o2)
-% overloaded mtimes function 
+% overloaded mtimes function
 %
 % $Id$
 

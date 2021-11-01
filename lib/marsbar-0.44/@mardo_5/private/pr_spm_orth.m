@@ -18,4 +18,3 @@ for i = 2:size(X,2)
                 x = [x D];
         end
 end
-

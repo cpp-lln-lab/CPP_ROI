@@ -5,12 +5,12 @@ function [rep_strs, marsS, marsD, changef] = stat_table(marsD, Ic)
 % Inputs
 % marsD                - MarsBaR design structure
 % Ic                   - indices for contrasts to be displayed
-% 
+%
 % Outputs
 % rep_strs             - Cell array containing table report
 % marsS                - MarsBaR statistics structure
 % marsD                - design, including contrast structure (which
-%                                might have changed)  
+%                                might have changed)
 % changef              - flag to indicate if design has changed
 %
 % $Id$

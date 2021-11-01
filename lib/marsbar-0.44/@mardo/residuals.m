@@ -2,7 +2,7 @@ function r = residuals(D)
 % method returns residuals from model
 %
 % $Id$
-  
+
 if ~is_mars_estimated(D)
   error('Need estimated model');
 end
@@ -15,7 +15,7 @@ if ~is_summarized(Y)
 end
 y = summary_data(Y);
 
-if is_fmri(D) 
+if is_fmri(D)
   if ~has_filter(D)
     error('FMRI design lacks filter');
   end
@@ -28,6 +28,3 @@ r   = marsy(spm_sp('r',SPM.xX.xKXs,y), ...
 	    struct('info',   summary_info(Y),...
 		   'descrip', ['Residuals for ' summary_descrip(Y)],...
 		   'block_rows', {block_rows(D)}));
-
-
-

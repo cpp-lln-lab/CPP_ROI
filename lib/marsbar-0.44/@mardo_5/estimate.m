@@ -4,16 +4,16 @@ function [marsD] = estimate(marsD, marsY, params)
 % marsD           - SPM design object
 % marsY           - MarsBaR data object or 2D data matrix
 % params          - struct containing options, as fields
-%                   redo_covar     - if 1, remodels covariance 
+%                   redo_covar     - if 1, remodels covariance
 %                   redo_whitening - if 1, recalcalates whitening
 %                   (by default, both are set to 1)
-% 
+%
 % e.g.
 % % Estimate model on design D and data Y, using original covariance and
 % % whitening
 % E = estimate(D, Y, struct('reco_covar', 0, ...
 %                           'redo_whitening', 0);
-%  
+%
 % $Id: estimate.m 515 2004-11-17 02:04:34Z matthewbrett $
 
 def_params = struct(...
@@ -51,7 +51,7 @@ SPM = des_struct(marsD);
 
 % process params
 if params.redo_covar
-  if isfield(SPM, 'xVi') 
+  if isfield(SPM, 'xVi')
     if isfield(SPM.xVi, 'V') & isfield(SPM.xVi, 'Vi')
       SPM.xVi = rmfield(SPM.xVi, 'V');
       if verbose(marsD)
@@ -81,9 +81,9 @@ return
 
 function params = sf_call_compat(params)
 % Replicates old calling behaviour, for backwards compatibility
-  
+
 % Replicate result of passing empty cell array, but warn that this
-% will be removed soon  
+% will be removed soon
 if ischar(params) | iscell(params)
   warning(['Cell / char form of params deprecated, ' ...
 	   'please use struct form instead']);
@@ -97,7 +97,7 @@ if iscell(params) & isempty(params)
 end
 if ischar(params)params = {params}; end
 if iscell(params)
-  params = params(:); 
+  params = params(:);
   params = cell2struct(num2cell(ones(size(params))), params, 1);
 end
 return

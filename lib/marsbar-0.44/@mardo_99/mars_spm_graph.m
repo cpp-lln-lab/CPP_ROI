@@ -16,7 +16,7 @@ function [r_st,marsD,changef] = mars_spm_graph(marsD,rno,Ic)
 %
 % rno    - region number (index for marsD.marsY)
 % Ic     - contrast number (optional)
-% 
+%
 % Returns
 % r_st   - return structure, with fields
 %          Y      - fitted   data for the selected voxel
@@ -46,7 +46,7 @@ if nargin < 3
 end
 changef = 0;
 
-% make values ready for return 
+% make values ready for return
 def_r_st = struct(...
     'Y', [],...
     'y', [],...
@@ -60,7 +60,7 @@ mRes = des_struct(marsD);
 xCon = mRes.xCon;
 
 % Check if we want to, and can, assume region no is 1
-if isempty(rno) 
+if isempty(rno)
   if n_regions(mRes.marsY) > 1
     error('Need to specify region number');
   end
@@ -76,7 +76,7 @@ Fgraph = spm_figure('GetWin','Graphics');
 spm_results_ui('Clear',Fgraph,2);
 
 % Get required data
-sY   = summary_data(mRes.marsY); 
+sY   = summary_data(mRes.marsY);
 y    = apply_filter(marsD, sY(:, rno));
 
 % Get design matrix for convenience

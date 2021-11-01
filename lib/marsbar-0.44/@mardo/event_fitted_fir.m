@@ -1,7 +1,7 @@
 function [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
 % method to compute fitted event time courses using FIR
 % FORMAT [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
-% 
+%
 % (defaults are in [])
 % D          - design
 % e_spec     - 2 by N array specifying events to combine
@@ -11,14 +11,14 @@ function [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
 % bin_length  - duration of time bin for FIR in seconds [TR]
 % bin_no      - number of time bins [24 seconds / TR]
 % opts       - structure, containing fields with options
-%                'single' - if field present, gives single FIR 
+%                'single' - if field present, gives single FIR
 %                  This option removes any duration information, and
 %                  returns a simple per onset FIR model, where 1s in the
 %                  design matrix corresponds to 1 event at the given
-%                  offset.  
+%                  offset.
 %                'percent' - if field present, gives results as percent
 %                  of block means
-% 
+%
 % Returns
 % tc         - fitted event time course, averaged over events
 % dt         - time units (seconds per row in tc = bin_length)
@@ -27,7 +27,7 @@ function [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
 % you have an event of duration 10 seconds, and you want an FIR model.  To
 % make things simple, let's say the TR is 1 second, and that a standard
 % haemodynamic response function (HRF) lasts 24 seconds.
-%  
+%
 % In order to do the FIR model, there are two ways to go.  The first is to
 % make an FIR model which estimates the signal (say) at every second (TR)
 % after event onset, where your model (Impulse Response) lasts long enough
@@ -39,7 +39,7 @@ function [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
 % and the length of your FIR model (Impulse response) is just the length of
 % the HRF (24 seconds).  This second approach I will call a 'stacked' FIR
 % model, because the events are stacking up one upon another.
-% 
+%
 % The single and stacked models are the same thing, if you specify a
 % duration of 0 for all your events.  If your events have different
 % durations, it is very difficult to model the event response sensibly with
@@ -57,8 +57,8 @@ function [tc, dt] = event_fitted_fir(D, e_spec, bin_length, bin_no, opts)
 % There is an added problem for the stacked models, which is what to do
 % about the actual height of the regressors.  That problem also requires
 % a bit of exposition which I hope to get down to in due course.
-%  
-% $Id$ 
+%
+% $Id$
 
 if nargin < 2
   error('Need event specification');
@@ -113,19 +113,19 @@ for s = 1:length(blk_rows)
   X           = [];
   n_s_e       = length(sess_events);
   if isempty(n_s_e), break, end
-  
+
   for ei = 1:n_s_e
     e           = sess_events(ei);
-    
+
     % New design bit for FIR model for this trial type
     Xn          = event_x_fir(D, [s e]', bin_length, bin_no, opts);
-    
+
     % Columns from original design that need to be removed
     iX_out      = [iX_out event_cols(D, [s e])];
-    
+
     % Columns in new design matrix for basic FIR model
     iX_in(ei,:) = size(X, 2) + [1:size(Xn,2)];
-    
+
     X           = [X Xn];
   end
 
@@ -135,24 +135,24 @@ for s = 1:length(blk_rows)
   iX0(iX_out) = [];
   aX          = [X oX(brX,iX0)];
   KX          = apply_filter(D, aX, struct('sessions', s));
-  
+
   % Reestimate to get FIR time courses
   %------------------------------------------------------
   xX          = spm_sp('Set',KX);
   pX          = spm_sp('x-',xX);
   betas       = pX*y(brX,:);
   tc_s        = betas(1:size(X,2), :);
-  
-  % Sum over events  
+
+  % Sum over events
   tc_s        = reshape(tc_s, bin_no, n_s_e, n_rois);
-  tc_s        = squeeze(sum(tc_s, 2));  
-  
+  tc_s        = squeeze(sum(tc_s, 2));
+
   % Do percent if necessary
   if isfield(opts, 'percent'), tc_s = tc_s / blk_mns(s) * 100; end
-  
+
   % Sum over sessions
   tc            = tc + tc_s;
-  
+
 end
 tc = tc / e_s_l;
 dt = bin_length;

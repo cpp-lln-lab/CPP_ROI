@@ -1,7 +1,7 @@
 function [J] = pr_spm_diff(varargin)
 % matrix differential
 % FORMAT [dfdx] = pr_spm_diff(f,x,...,P,n)
-% 
+%
 % f   - [inline] function f(x,P)
 % x   - argument[s]
 % P   - parameter[s]

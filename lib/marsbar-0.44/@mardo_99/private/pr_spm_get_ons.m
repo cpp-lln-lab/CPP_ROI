@@ -21,7 +21,7 @@ function [sf,Cname,Pv,Pname,DSstr] = pr_spm_get_ons(k,T,dt,STOC,Fstr,v,Cname,s)
 % spm_get_ons contructs a cell of sparse delta functions specifying the
 % onset of events or epochs (or both). These are convolved with a basis set
 % at a later stage to give regressors that enter into the design matrix.
-% Interactions of evoked responses with some parameter (time or a specified 
+% Interactions of evoked responses with some parameter (time or a specified
 % variate Pv) enter at this stage as additional columns in sf with each delta
 % function multiplied by the [expansion of the] trial-specific parameter.
 % If parametric modulation is modeled, P contains the original variate and
@@ -33,11 +33,11 @@ function [sf,Cname,Pv,Pname,DSstr] = pr_spm_get_ons(k,T,dt,STOC,Fstr,v,Cname,s)
 %        events or epochs in the design.  Generally the baseline condition
 %        (epoch-related) or null event (event-related) should not be included
 %        e.g. for a simple ABABAB.. design enter 1
-% 
+%
 % STOCHASTIC DESIGNS
 %
 % 'stochastic design': If you want a random design select yes.  The ensuing
-%        design matrix and onset times in Sess are then used in 
+%        design matrix and onset times in Sess are then used in
 %        subsequent analysis of the data and stimulus design respectively.
 %
 %       'include a null event': for stochastic designs a null event should
@@ -72,11 +72,11 @@ function [sf,Cname,Pv,Pname,DSstr] = pr_spm_get_ons(k,T,dt,STOC,Fstr,v,Cname,s)
 %
 %        'variable durations'.  If you want to model trains of
 %                onsets then select 'yes'.  You will then be prompted for
-%                a vector of durations for each onset.  This is useful when 
+%                a vector of durations for each onset.  This is useful when
 %                modeling short epochs of variable duration.
-% 
+%
 %        'SOA (scans)' and 'first trial (scans)':  If the SOA is fixed you
-%                only have to specify what it is and when the first condition 
+%                only have to specify what it is and when the first condition
 %ses in terms of an interaction with the specified
 %         variate.
 %
@@ -142,7 +142,7 @@ end
 
 % event/epoch-related responses
 %-----------------------------------------------------------------------
-if v    
+if v
 
 
         % stochastic designs
@@ -176,7 +176,7 @@ if v
                 if spm_input(str,'+1','stationary|modulated',[1 0])
                         DSstr = [DSstr '(stationary) '];
                         P     = P(:)*ones(1,ns);
- 
+
                 % occurence probabilities - modulated (32 sec period)
                 %-------------------------------------------------------
                 else
@@ -248,7 +248,7 @@ if v
                         str   = ['vector of onsets (scans) - ' Cname{i}];
                         on    = spm_input(str,3);
                         if ~iscell(on), on = {on}; end
-        
+
                         % get durationa
                         %-----------------------------------------------
                         dur   = {};
@@ -364,7 +364,7 @@ if v
 
         for i = spm_input(str,'+1','e',1)
                          %-----------------
-			 sillyvar=sillyvar+1;    
+			 sillyvar=sillyvar+1;
                 spm_input(Cname{i},Ypos,'d',Fstr);
                 on    = find(sf{i}(:,1));
                 ns    = length(on);

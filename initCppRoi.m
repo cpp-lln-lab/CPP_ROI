@@ -2,11 +2,27 @@
 
 function initCppRoi()
 
-  % directory with this script becomes the current directory
-  WD = fileparts(mfilename('fullpath'));
+  global CPP_ROI_INITIALIZED
 
-  % we add all the subfunctions that are in the sub directories
-  addpath(genpath(fullfile(WD, 'src')));
-  addpath(genpath(fullfile(WD, 'lib', 'marsbar-0.44')));
+  if isempty(CPP_ROI_INITIALIZED)
+
+    % directory with this script becomes the current directory
+    WD = fileparts(mfilename('fullpath'));
+
+    % we add all the subfunctions that are in the sub directories
+    addpath(genpath(fullfile(WD, 'src')));
+    addpath(fullfile(WD, 'lib', 'marsbar-0.44'));
+    marsbar('on');
+    try
+      marsbar('splash');
+    catch
+    end
+
+    CPP_ROI_INITIALIZED = true();
+
+  else
+    fprintf('\n\nCPP_ROI already initialized\n\n');
+
+  end
 
 end

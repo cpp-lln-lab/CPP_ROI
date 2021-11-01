@@ -1,7 +1,7 @@
 function SPM = pr_estimate(SPM, marsY)
 % Estimation of a General Linear Model
 % FORMAT SPM = pr_estimate(SPM, marsY)
-% Inputs 
+% Inputs
 % SPM      - SPM design structure
 % marsY    - marsY data object, or 2D data (Y) matrix
 %
@@ -15,18 +15,18 @@ function SPM = pr_estimate(SPM, marsY)
 %-Say hello
 %-----------------------------------------------------------------------
 Finter   = spm('FigName','Stats: estimation...'); spm('Pointer','Watch');
-    
+
 %-------------------------------------------------------------------------
 %- set the methods
 
 COV_estim = 'assumed';           % covariance is assumed to be imposed by filter K
-GLM_resol = 'OLS';               % ordinary least square 
- 
+GLM_resol = 'OLS';               % ordinary least square
+
 
 %-------------------------------------------------------------------------
 %- get the design structure, the filter and the data
-xX = SPM.xX;  
-if ~isfield(xX,'X'), 
+xX = SPM.xX;
+if ~isfield(xX,'X'),
   error('The design does not contain a design matrix');
 end
 
@@ -57,7 +57,7 @@ switch COV_estim
 		%- compute the temporal cov of Y (V) with AR(p)
 		if ~isfield(xX,'xVi')
 		   xX.xVi = struct(	'Vi', speye(size(xX.X,1)),...
-					'Form',	'AR(p)'); 
+					'Form',	'AR(p)');
 		end
 		% xX.xVi = estimate_cov(Y,xX);
 
@@ -65,7 +65,7 @@ switch COV_estim
 	case {'assumed'}
 		if ~isfield(xX,'xVi')
 		   xX.xVi = struct(	'Vi', speye(size(xX.X,1)),...
-					'Form',	'none'); 
+					'Form',	'none');
 		end
 		%- else, the covariance structure is supposed to be
 		%- stored in xX.xVi
@@ -79,22 +79,22 @@ switch GLM_resol
 
 	case {'OLS'}
 		fprintf('Using OLS\n');
-		%- no filter already defined 
+		%- no filter already defined
 		if ~isfield(xX,'K')
 		   xX.K  = speye(size(xX.X,1));
 		end
 		% else assume that the filter is xX.K
-	
-		KVi    = pr_spm_filter('apply', xX.K, xX.xVi.Vi); 
-		V      = pr_spm_filter('apply', xX.K, KVi'); 
+
+		KVi    = pr_spm_filter('apply', xX.K, xX.xVi.Vi);
+		V      = pr_spm_filter('apply', xX.K, KVi');
 		Y      = pr_spm_filter('apply', xX.K, Y);
 		fprintf('Setting filter...');
 		KXs    = spm_sp('Set', pr_spm_filter('apply', xX.K, xX.X));
 		fprintf('Done.\n');
 		clear KVi;
 
-	case {'MaxLik'} 
-		'MaxLik' 
+	case {'MaxLik'}
+		'MaxLik'
 		%- compute the inverse filter -  put it in K ?
 		%- filter data and design
 		%- V = speye(size(xX.X,1));
@@ -103,11 +103,11 @@ switch GLM_resol
 		warning('GLM_resol does not exist');
 end
 
-%- compute GLM 
+%- compute GLM
 fprintf('Computing estimates...');
 if ~spm_sp('isspc',KXs), Xs = spm_sp('set',KXs); else Xs = KXs;  end
 
-[trRV trRVRV] = spm_SpUtil('trRV',Xs,V); 
+[trRV trRVRV] = spm_SpUtil('trRV',Xs,V);
 beta          = spm_sp('x-', Xs, Y);                 %-Parameter estimates
 res           = spm_sp('r', Xs, Y);                  %-Residuals
 ResMS         = sum(res.^2)./trRV;                   %-Res variance estimation
@@ -123,19 +123,19 @@ xX.pKXV  = xX.pKX*xX.V;				%-for contrast variance weight
 xX.Bcov  = xX.pKXV*xX.pKX';			%-Variance of est. param.
 [xX.trRV,xX.trRVRV] ...				%-Variance expectations
          = spm_SpUtil('trRV',xX.xKXs,xX.V);
-xX.nKX   = spm_DesMtx('sca',xX.xKXs.X,xX.Xnames);% scaled design matrix for display 
+xX.nKX   = spm_DesMtx('sca',xX.xKXs.X,xX.Xnames);% scaled design matrix for display
 
 % Put back into design
 nBeta                    = size(xX.X, 2);
 SPM.betas                = ones(nBeta, n_roi) + NaN;
-SPM.betas(:, in_cols)    = beta;	
+SPM.betas(:, in_cols)    = beta;
 SPM.ResidualMS           = ones(1, n_roi) + NaN;
-SPM.ResidualMS(in_cols)  = ResMS;	
+SPM.ResidualMS(in_cols)  = ResMS;
 
 SPM.xX    = xX;
 SPM.marsY = marsY;
 
-%-Default F-contrasts (in contrast structure) 
+%-Default F-contrasts (in contrast structure)
 %=======================================================================
 F_iX0 = [];
 if isfield(SPM, 'F_iX0')

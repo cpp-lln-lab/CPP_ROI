@@ -1,6 +1,6 @@
 function o = join(varargin)
 % joins marsy objects into one object
-% 
+%
 % $Id$
 
 % assemble all input object into a cell array
@@ -12,7 +12,7 @@ for v = 1:nargin
   o_arr = varargin{v};
   for i = 1:prod(size(o_arr))
     ctr = ctr + 1;
-    
+
     % Check number of time points
     n = n_time_points(o_arr(i));
     if isempty(n_n), n_n = n;
@@ -23,7 +23,7 @@ for v = 1:nargin
 	    ctr, ctr-1));
       end
     end
-    
+
     o_c_a{ctr} = o_arr(i);
   end
 end

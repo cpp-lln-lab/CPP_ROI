@@ -16,7 +16,7 @@ function [BF,BFstr] = pr_spm_get_bf(name,T,dt,Fstr,n_s,n_c)
 % spm_get_bf prompts for basis functions to model event or epoch-related
 % responses.  The basis functions returned are unitary and orthonormal
 % when defined as a function of peri-stimulus time in time-bins.
-% It is at this point that the distinction between event and epoch-related 
+% It is at this point that the distinction between event and epoch-related
 % responses enters.
 %_______________________________________________________________________
 % @(#)spm_get_bf.m	2.20  Karl Friston 01/08/22
@@ -105,7 +105,7 @@ switch Rov
 		bf    = g;
 		for i = 1:h
 			bf = [bf g.*sin(i*2*pi*pst)];
-			bf = [bf g.*cos(i*2*pi*pst)];	
+			bf = [bf g.*cos(i*2*pi*pst)];
 		end
 
 	elseif Cov == 6 | Cov == 7
@@ -129,7 +129,7 @@ switch Rov
 
 		% Finite Impulse Response
 		%-------------------------------------------------------
-		bin   = spm_input('bin size (seconds)',3,'e',2);	
+		bin   = spm_input('bin size (seconds)',3,'e',2);
 		nb    = spm_input('number of bins',4,'e',8);
 
 		bf    = kron(eye(nb),ones(round(bin/dt),1));
@@ -204,7 +204,7 @@ switch Rov
 	%---------------------------------------------------------------
 	str   = 'add temporal derivatives';
 	TD    = spm_input(str,4,'b','yes|no',[1 0]);
- 
+
 
 	% Assemble basis functions for each trial type
 	%---------------------------------------------------------------
@@ -221,13 +221,13 @@ switch Rov
 
 			bf    = [];
 			for j = 0:(h - 1)
-				bf = [bf cos(j*pi*pst)];	
+				bf = [bf cos(j*pi*pst)];
 			end
 
 		% Mean and exponential
 		%-------------------------------------------------------
 		elseif Cov == 2
-		
+
 			bf    = [ones(size(pst)) exp(-pst/4)];
 
 		% Half sine wave

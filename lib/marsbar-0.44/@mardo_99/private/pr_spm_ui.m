@@ -240,7 +240,7 @@ for i=1:2			% 1:covariates of interest, 2:nuisance variables
 	%-Construct description string for covariate
 	str = {sprintf('%s: %s',str,rcname)};
 	if size(rc,2)>1, str = {sprintf('%s (block of %d covariates)',...
-		str{:},size(rc,2))}; 
+		str{:},size(rc,2))};
 	end
 	if iCC<8, str=[str;{['used centered ',sCC{iCC}]}]; end
 	if iCFI>1, str=[str;{['fitted as interaction ',sCFI{iCFI}]}]; end
@@ -600,9 +600,9 @@ if any(iGloNorm==[1:7])
 	otherwise				%-unknown iGC
 		error('unexpected iGC value')
 	end
-	
+
 	for i = 1:nVar
-	
+
 		%-AnCova - add scaled centred global to DesMtx `G' partition
 		%-------------------------------------------------------
 		rcname='global'; if nVar>1, rcname=sprintf('global-%d',i); end
@@ -611,13 +611,13 @@ if any(iGloNorm==[1:7])
 		tFnames    = [eval(CFIforms{iGloNorm,3}),{rcname}];
 		[f,gname]  = spm_DesMtx(tI,tConst,tFnames);
 		clear tI tConst tFnames
-	
+
 		%-Save GX info in xC struct for reference
 		str = {sprintf('%s: %s',dstr{2},rcname)};
 		if any(iGMsca==[1:7]), str=[str;{['(after ',sGMsca,')']}]; end
 		if iGC~=8, str=[str;{['used centered ',sCC{iGC}]}]; end
 		if iGloNorm > 1
-			str=[str;{['fitted as interaction ',sCFI{iGloNorm}]}]; 
+			str=[str;{['fitted as interaction ',sCFI{iGloNorm}]}];
 		end
 		tmp  = struct(	'rc',rg(:,i).*gSF(:,i),	'rcname',rcname,...
 				'c',f,			'cname'	,{gname},...
@@ -625,10 +625,10 @@ if any(iGloNorm==[1:7])
 				'type',			3,...
 				'cols',[1:size(f,2)]+size([H C B G],2),...
 				'descrip',		{str}		);
-	
+
 		G = [G,f]; Gnames = [Gnames; gname];
 		if isempty(xC), xC = tmp; else, xC = [xC,tmp]; end
-		
+
 	end
 
 elseif iGloNorm==8 | iGXcalc>1
@@ -780,7 +780,7 @@ for j4  = 1:n4
     if isinf(Dn(3)), n3=spm_input([sF4P,'#',DsF{3},'''s'],'+1','n1');
 	    else, n3 = Dn(3); end
     bL3 = n3>1;
-    
+
     if DbaTime & Dn(2)>1
 	%disp('NB:selecting in time order - manually specify conditions')
 	%-NB: This means f2 levels might not be 1:n2

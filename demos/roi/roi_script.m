@@ -1,4 +1,4 @@
-% (C) Copyright 2020 CPP BIDS SPM-pipeline developers
+% (C) Copyright 2020 CPP ROI developers
 
 %% examples to create ROIs and extract data
 %
@@ -10,6 +10,8 @@
 clear;
 clc;
 
+run ../../initCppRoi;
+
 %% ASSUMPTION
 %
 % This assumes that the 2 immages are in the same space (MNI, individual)
@@ -20,15 +22,6 @@ clc;
 
 %% IMPORTANT: for saving ROIs
 %
-% To save the ROIs, MarsBar must be installed: http://marsbar.sourceforge.net/
-%  - either in the "spm12/toolbox" folder
-%  - in the "cpp_spm/lib" folder
-%
-% https://sourceforge.net/projects/marsbar/files/marsbar/0.44/marsbar-0.44.zip/download
-%
-% cp -r /home/myhome/marsbar-0.44/* \
-%       /usr/local/spm/spm12/toolbox/marsbar
-%
 % If you want to save the ROI you are creating, you must make sure that the ROI
 % image you are using DOES have the same resolution as the image you will
 % sample.
@@ -36,18 +29,23 @@ clc;
 % You can use the resliceRoiImages for that.
 
 %%
-probabilityMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
+zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;
 opt.save.roi = true;
+opt.outputDir = []; % if this is empty new masks are saved in the current directory.
 if opt.save.roi
   opt.reslice.do = true;
 else
   opt.reslice.do = false;
 end
 
-[roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabilityMap);
+% all of these functions can be found below and show you how to create ROIs and
+% / or ROIs to extract data from an image.
+%
+[roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap);
+
 data_mask = getDataFromMask(dataImage,  roiName);
 data_sphere = getDataFromSphere(opt, dataImage);
 data_intersection = getDataFromIntersection(opt, dataImage,  roiName);
@@ -74,7 +72,7 @@ function data_sphere = getDataFromSphere(opt, dataImage)
   sphere.location = location;
   sphere.radius = radius;
 
-  mask = createRoi('sphere', sphere, dataImage, opt.save.roi);
+  mask = createRoi('sphere', sphere, dataImage, opt.outputDir, opt.save.roi);
 
   data_sphere = spm_summarise(dataImage, mask);
 
@@ -88,6 +86,11 @@ function data_sphere = getDataFromSphere(opt, dataImage)
 end
 
 function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
+  %
+  % Gets the voxels at the intersection of:
+  % - a binary mask and user defined sphere
+  % - TODO: 2 binary masks
+  %
 
   % X Y Z coordinates of right V5 in millimeters
   location = [44 -67 0];
@@ -95,13 +98,24 @@ function data_intersection = getDataFromIntersection(opt, dataImage,  roiName)
   sphere.location = location;
   sphere.radius = 5;
 
-  mask = createRoi('intersection', roiName, sphere, dataImage, opt.save.roi);
+  specification  = struct( ...
+                          'mask1', roiName, ...
+                          'mask2', sphere);
+
+  mask = createRoi('intersection', specification, dataImage, opt.outputDir, opt.save.roi);
 
   data_intersection = spm_summarise(dataImage, mask.roi.XYZmm);
 
 end
 
 function data_expand = getDataFromExpansion(opt, dataImage,  roiName)
+  %
+  % will expand a ROI with a series of expanding spheres but within the
+  % constrains of a binary mask
+  %
+  % the expansion stops once the number of voxels goes above a user defined
+  % threshold.
+  %
 
   % X Y Z coordinates of right V5 in millimeters
   location = [44 -67 0];
@@ -110,7 +124,11 @@ function data_expand = getDataFromExpansion(opt, dataImage,  roiName)
   sphere.radius = 1; % starting radius
   sphere.maxNbVoxels = 50;
 
-  mask = createRoi('expand', roiName, sphere, dataImage, opt.save.roi);
+  specification  = struct( ...
+                          'mask1', roiName, ...
+                          'mask2', sphere);
+
+  mask = createRoi('expand', specification, dataImage, opt.outputDir, opt.save.roi);
 
   data_expand = spm_summarise(dataImage, mask.roi.XYZmm);
 
@@ -118,11 +136,17 @@ end
 
 %% HELPER FUNCTION
 
-function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabilityMap)
+function [roiName, zMap] = preprareDataAndROI(opt, dataImage, zMap)
 
   if opt.unzip.do
     gunzip(fullfile('inputs', '*.gz'));
   end
+
+  % give the neurosynth map a name that is more bids friendly
+  %
+  % space-MNI_label-neurosynthKeyWordsUsed_probseg.nii
+  %
+  zMap = renameNeuroSynth(zMap);
 
   if opt.reslice.do
     % If needed reslice probability map to have same resolution as the data image
@@ -131,12 +155,13 @@ function [roiName, probabilityMap] = preprareDataAndROI(opt, dataImage, probabil
     %
     % if you read the data with spm_summarise,
     % then the 2 images do not need the same resolution.
-    probabilityMap = resliceRoiImages(dataImage, probabilityMap);
+    zMap = resliceRoiImages(dataImage, zMap);
   end
 
   % Threshold probability map into a binary mask
   % to keep only values above a certain threshold
   threshold = 10;
-  roiName = thresholdToMask(probabilityMap, threshold);
+  roiName = thresholdToMask(zMap, threshold);
+  roiName = removeSpmPrefix(roiName, spm_get_defaults('realign.write.prefix'));
 
 end

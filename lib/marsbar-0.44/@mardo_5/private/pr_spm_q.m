@@ -6,21 +6,21 @@ function [Q] = pr_spm_q(A,n)
 % n  - size of Q
 %__________________________________________________________________________
 % spm_Q uses a Yule-Walker device to compute K where:
-% 
+%
 % y = K*z
-% 
-% such that y is an AR(n) process generated from an i.i.d innovation 
+%
+% such that y is an AR(n) process generated from an i.i.d innovation
 % z.  This means
-% 
+%
 % cov(y) = <K*z*z'*K> = K*K'
-% 
-% Critically, this is not the correlation because if cov(z) = eye(n) 
+%
+% Critically, this is not the correlation because if cov(z) = eye(n)
 % then trace(cov(y)) ~= n.  This is why the normalization is required
-% 
+%
 % corr(y) = D*K*K'*D';
-% 
-% The reason the diagonals of corr(y)  are not constant is that we 
-% are modeling finite length AR sequences, which incur boundary effects 
+%
+% The reason the diagonals of corr(y)  are not constant is that we
+% are modeling finite length AR sequences, which incur boundary effects
 % at the beginning and end of the sequence.
 %__________________________________________________________________________
 % Copyright (C) 2005 Wellcome Department of Imaging Neuroscience

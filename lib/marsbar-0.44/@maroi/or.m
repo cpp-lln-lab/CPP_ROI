@@ -1,5 +1,5 @@
 function o = or(o1, o2)
-% overloaded or function 
+% overloaded or function
 %
 % $Id$
 

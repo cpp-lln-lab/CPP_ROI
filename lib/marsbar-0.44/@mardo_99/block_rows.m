@@ -2,7 +2,7 @@ function rows = block_rows(D)
 % returns cell array of rows for each (subject/session) block
 %
 % $Id$
-  
+
 SPM = des_struct(D);
 if strcmp(modality(D), 'fmri')
   Sess = SPM.Sess;

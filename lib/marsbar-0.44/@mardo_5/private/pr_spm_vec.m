@@ -9,7 +9,7 @@ function [vX] = pr_spm_vec(varargin)
 % spm_vec({eye(2) 3}) = [1 0 0 1 3]'
 %__________________________________________________________________________
 % Copyright (C) 2005 Wellcome Department of Imaging Neuroscience
- 
+
 % Karl Friston
 % $Id: spm_vec.m 279 2005-11-08 19:11:28Z karl $
 
@@ -31,7 +31,7 @@ if isstruct(X)
     end
     return
 end
- 
+
 % vectorise cells into numerical arrays
 %--------------------------------------------------------------------------
 if iscell(X)
@@ -41,10 +41,9 @@ if iscell(X)
     end
     return
 end
- 
+
 % vectorise numerical arrays
 %--------------------------------------------------------------------------
 if isnumeric(X)
     vX = X(:);
 end
-

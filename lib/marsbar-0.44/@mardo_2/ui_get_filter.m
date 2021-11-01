@@ -2,15 +2,15 @@ function [D,descrip] = ui_get_filter(D)
 % method to get filter via GUI
 % FORMAT [D,descrip] = ui_get_filter(D)
 %
-% Input 
+% Input
 % D       - design
-% 
+%
 % Returns
 % D       - design with modified filter
 % descrip - cell array of strings describing filter
 %
-% $Id$  
-  
+% $Id$
+
 SPM = des_struct(D);
 [SPM.xX.K str] = pr_get_filter(SPM.xY.RT, SPM.Sess);
 if ~isfield(SPM, 'xsDes')
