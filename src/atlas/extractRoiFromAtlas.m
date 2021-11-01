@@ -66,13 +66,12 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
   nameStructure = struct('entities', entities, ...
                          'suffix', 'mask', ...
                          'ext', '.nii');
-  nameStructure.use_schema = false;
-  newName = bids.create_filename(nameStructure);
+  bidsFile = bids.File(nameStructure);
 
-  movefile(roiImage, fullfile(outputDir, newName));
+  movefile(roiImage, fullfile(outputDir, bidsFile.filename));
 
   % create side car json
-  roiImage = fullfile(outputDir, newName);
+  roiImage = fullfile(outputDir, bidsFile.filename);
   json = bids.derivatives_json(roiImage);
   bids.util.jsonencode(json.filename, json.content);
 

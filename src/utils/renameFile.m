@@ -16,8 +16,8 @@ function newName = renameFile(inputFile, specification)
   %
   % (C) Copyright 2021 CPP ROI developers
 
-  specification.use_schema = false;
-  newName = bids.create_filename(specification, inputFile);
+  bidsFile = bids.File(inputFile, false, specification);
+  newName = bidsFile.filename;
 
   outputFile = spm_file(inputFile, 'filename', newName);
 
