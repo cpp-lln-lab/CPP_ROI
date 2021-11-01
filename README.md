@@ -57,7 +57,6 @@ as a submodule, and intitialized when running `initCppSpm`.
 
 ### Dependencies
 
-<<<<<<< HEAD
 =======
 TODO
 
@@ -100,9 +99,6 @@ Also includes:
 
 -   Yeo's 7 networks "atlas"
     -   add REF and URL
-
->>>>>>> 4a2a3830905dfad9b61804bf99e2941a49e4e2fa
-
 
 ## Contributing
 
