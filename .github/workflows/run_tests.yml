@@ -18,8 +18,10 @@ on:
   push:
     branches:
       - dev
+      - main
+      - master
   pull_request:
-    branches: '*'
+    branches: ['*']
   schedule:
     - cron: "* * 1 * *"
 
