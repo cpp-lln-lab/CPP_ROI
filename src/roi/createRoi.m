@@ -121,25 +121,14 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
 
     case 'intersection'
 
-      % Ugly hack
-      % ideally we want to loop over the masks and figure out
-      % if they are binary images or spheres...
-      if ischar(specification.mask1)
-        roiImage = specification.mask1;
-        sphere = specification.mask2;
-      else
-        roiImage = specification.mask1;
-        sphere = specification.mask2;
-      end
+      mask1 = sphereOrMask(specification.mask1);
+      mask2 = sphereOrMask(specification.mask2);
 
-      mask = createRoi('mask', roiImage);
-      mask2 = createRoi('sphere', sphere);
+      locationsToSample = mask1.global.XYZmm;
 
-      locationsToSample = mask.global.XYZmm;
+      [~, mask1.roi.XYZmm] = spm_ROI(mask2, locationsToSample);
 
-      [~, mask.roi.XYZmm] = spm_ROI(mask2, locationsToSample);
-
-      mask = setRoiSizeAndType(mask, type);
+      mask = setRoiSizeAndType(mask1, type);
 
       mask = createRoiLabel(mask);
 
@@ -210,6 +199,21 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   outputFile = [];
   if saveImg
     outputFile = saveRoi(mask, volumeDefiningImage, outputDir);
+  end
+
+end
+
+function mask = sphereOrMask(field)
+
+  if ischar(field) % is mask
+    if ~exist(field, 'file')
+      error('this file does not exist: %s', field);
+    end
+    mask = createRoi('mask', field);
+
+  else % is sphere
+    mask = createRoi('sphere', field);
+
   end
 
 end
