@@ -14,7 +14,7 @@ run ../../initCppRoi;
 
 %% ASSUMPTION
 %
-% This assumes that the 2 immages are in the same space (MNI, individual)
+% This assumes that the 2 images are in the same space (MNI, individual)
 % but they might not necessarily have the same resolution.
 %
 % In SPM lingo this means they are coregistered but not necessarily resliced.
