@@ -14,14 +14,14 @@ function initCppRoi()
     CPP_ROI_PATHS = genpath(fullfile(thisDirectory, 'src'));
     CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, ':', ...
                 fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
+    addpath(CPP_ROI_PATHS, '-begin');
     
     marsbar('on');
     try
       marsbar('splash');
     catch
     end
-
-    addpath(CPP_ROI_PATHS, '-begin');
+    
     CPP_ROI_INITIALIZED = true();
 
   else
