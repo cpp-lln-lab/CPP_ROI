@@ -10,9 +10,13 @@ function initCppRoi()
     % directory with this script becomes the current directory
     thisDirectory = fileparts(mfilename('fullpath'));
 
+    pathSep = ':';
+    if ~isunix
+        pathSep = ';';
+    end
     % we add all the subfunctions that are in the sub directories
     CPP_ROI_PATHS = genpath(fullfile(thisDirectory, 'src'));
-    CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, ':', ...
+    CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
                 fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
     addpath(CPP_ROI_PATHS, '-begin');
     
