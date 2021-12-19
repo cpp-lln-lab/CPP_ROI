@@ -45,6 +45,8 @@ function outputImage = thresholdToMask(varargin)
   p = bids.internal.parse_filename(inputImage);
 
   p.suffix = 'mask';
+  
+  % add peakThreshold and clusterSizeInfo to desc
   if ~isfield(p.entities, 'desc')
     p.entities.desc = '';
   end
