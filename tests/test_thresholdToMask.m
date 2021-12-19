@@ -17,7 +17,7 @@ function test_thresholdToMask_default()
 
   inputImage = setUp(image);
 
-  peakThreshold = 5;
+  peakThreshold = 5.0;
   outputImage = thresholdToMask(inputImage, peakThreshold);
 
   % check that we have certain number voxels in the mask

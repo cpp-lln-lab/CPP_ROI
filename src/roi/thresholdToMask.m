@@ -38,16 +38,27 @@ function outputImage = thresholdToMask(varargin)
   peakThreshold = p.Results.peakThreshold;
   clusterSize = p.Results.clusterSize;
 
+  [l2, num] = getClusters(inputImage, peakThreshold);
+  vol = sortAndThresholdClusters(l2, num, clusterSize);
+
   % create output name
   p = bids.internal.parse_filename(inputImage);
+
   p.suffix = 'mask';
+  if ~isfield(p.entities, 'desc')
+    p.entities.desc = '';
+  end
+  descSuffix = sprintf('p%05.2f', peakThreshold);
+  if clusterSize > 0
+    descSuffix = [descSuffix, sprintf('k%03.0f', clusterSize)];
+  end
+  descSuffix = strrep(descSuffix, '.', 'pt');
+  p.entities.desc = [p.entities.desc descSuffix];
+
   bidsFile = bids.File(p);
   hdr = spm_vol(inputImage);
   hdr.fname = spm_file(hdr.fname, 'filename', bidsFile.filename);
   outputImage = hdr.fname;
-
-  [l2, num] = getClusters(inputImage, peakThreshold);
-  vol = sortAndThresholdClusters(l2, num, clusterSize);
 
   spm_write_vol(hdr, vol);
 
