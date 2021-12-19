@@ -1,18 +1,18 @@
-
 .DS_Store
 
 *.nii
-
+*.xml
+*.log
 *.asv
 *.m~
 *.mat
 
-<<<<<<< HEAD
+*.html
+
 # files in the demo folder related to running the demo analysis
 # demos/roi
-=======
+
 atlas/visual_topography_probability_atlas/
->>>>>>> 4a2a3830905dfad9b61804bf99e2941a49e4e2fa
 
 # test folder and dummy data
 
@@ -28,3 +28,5 @@ envs/*
 demos/*/*.json
 demos/*/*/*.json
 demos/*/derivatives
+
+atlas/*.json
