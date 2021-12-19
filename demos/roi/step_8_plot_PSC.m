@@ -1,6 +1,8 @@
 % This script will run through the ROIs made for each subject fo a ROI
 % based anaylisis using MarsBar to get a time course of the activations and
 % a percent signal change for each ROI and subject
+%
+% (C) Copyright 2020 CPP ROI developers
 
 % TODO
 % - refactor

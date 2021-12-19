@@ -10,10 +10,15 @@ end
 
 function test_unzipAtlas_default()
 
+  cleanUp();
+
   unzipAtlas('wang');
 
   assertEqual(exist( ...
-                    fullfile(returnAtlasDir('wang'), 'subj_vol_all', 'space-MNI_hemi-lh_dseg.nii'), 'file'), ...
+                    fullfile(returnAtlasDir('wang'), ...
+                             'subj_vol_all', ...
+                             'space-MNI_hemi-lh_dseg.nii'), ...
+                    'file'), ...
               2);
 
   cleanUp();
@@ -27,6 +32,10 @@ function cleanUp()
   if isOctave()
     confirm_recursive_rmdir (true, 'local');
   end
-  rmdir(returnAtlasDir('wang'), 's');
+
+  try
+    rmdir(returnAtlasDir('wang'), 's');
+  catch
+  end
 
 end
