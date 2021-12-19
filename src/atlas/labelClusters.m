@@ -25,8 +25,8 @@ function outputImage = labelClusters(varargin)
 
   default_clusterSize = 0;
 
-  isFile = @(x) exists(x, 'file') == 2;
-  isPositive = @(x) isinteger(x) && X >= 0;
+  isFile = @(x) exist(x, 'file') == 2;
+  isPositive = @(x) isnumeric(x) && x >= 0;
 
   p = inputParser;
 
