@@ -8,6 +8,14 @@ function test_suite = test_unit_returnAtlasDir %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_returnAtlasDir_no_input()
+
+  atlasDir = returnAtlasDir();
+
+  assertEqual(atlasDir, baseAtlasDir());
+
+end
+
 function test_returnAtlasDir_default()
 
   atlasDir = returnAtlasDir('neuromorphometric');
@@ -38,6 +46,6 @@ end
 
 function baseDir = baseAtlasDir()
 
-  baseDir = spm_file(fullfile(fileparts(mfilename('fullpath')), '..', 'atlas'), 'cpath');
+  baseDir = spm_file(fullfile(rootDir(), 'atlas'), 'cpath');
 
 end

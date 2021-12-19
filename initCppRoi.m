@@ -12,20 +12,20 @@ function initCppRoi()
 
     pathSep = ':';
     if ~isunix
-        pathSep = ';';
+      pathSep = ';';
     end
     % we add all the subfunctions that are in the sub directories
     CPP_ROI_PATHS = genpath(fullfile(thisDirectory, 'src'));
     CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
-                fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
+                        fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
     addpath(CPP_ROI_PATHS, '-begin');
-    
+
     marsbar('on');
     try
       marsbar('splash');
     catch
     end
-    
+
     CPP_ROI_INITIALIZED = true();
 
   else

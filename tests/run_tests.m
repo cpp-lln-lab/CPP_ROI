@@ -1,11 +1,14 @@
 % (C) Copyright 2019 CPP ROI developers
 
+% Does not work due to some relative path of the data when testing
+
 warning('OFF');
 
 spm('defaults', 'fMRI');
 
-folderToCover = fullfile(pwd, 'src');
-testFolder = fullfile(pwd, 'tests');
+testFolder = fullfile(fileparts(mfilename('fullpath')));
+
+folderToCover = fullfile(testFolder, '..', 'src');
 
 success = moxunit_runtests( ...
                            testFolder, ...
