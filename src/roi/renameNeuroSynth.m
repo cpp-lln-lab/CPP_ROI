@@ -29,13 +29,11 @@ function outputImage = renameNeuroSynth(inputImage)
 
   basename = spm_file(inputImage, 'basename');
   parts = strsplit(basename, '_');
-  p.entities.label = ['neurosynth ' parts{1}];
+  p.entities.label = bids.internal.camel_case(['neurosynth ' parts{1}]);
 
-  p.use_schema = false;
+  bidsFile = bids.File(p);
 
-  newName = bids.create_filename(p);
-
-  outputImage = spm_file(inputImage, 'filename', newName);
+  outputImage = spm_file(inputImage, 'filename', bidsFile.filename);
 
   movefile(inputImage, outputImage);
 

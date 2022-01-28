@@ -1,22 +1,13 @@
-<!-- lint disable -->
-
-**Documentation**
-
-**Code quality and style**
-
-**Unit tests and coverage**
-
-**How to cite**
-
-**Contributors**
-
 # CPP ROI
 
-## :warning: :warning: :warning:
+---
 
-**This code is fairly unstable (:boom:) and might still change a lot.**
+## :warning:
 
-Also this code currently has 0% test coverage...
+**This code is fairly unstable and might still change.**
+
+So make sure you "pin" which version or commit you are using for a given
+project, if you don't want your code to break in the future.
 
 ---
 
@@ -57,7 +48,7 @@ as a submodule, and intitialized when running `initCppSpm`.
 
 ### Dependencies
 
-TODO
+======= TODO
 
 | Dependencies                                               | Used version |
 | ---------------------------------------------------------- | ------------ |
@@ -97,10 +88,4 @@ TODO
 Also includes:
 
 -   Yeo's 7 networks "atlas"
-    -   add REF and URL
-
-
-
-## Contributing
-
-## Contributors
+  <!-- add REF and URL -->

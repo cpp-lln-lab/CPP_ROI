@@ -23,7 +23,7 @@ copyright = "2021, the CPP ROI dev team"
 author = "the CPP ROI dev team"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.0"
+release = "v0.1.0dev"
 
 
 # -- General configuration ---------------------------------------------------
@@ -31,7 +31,7 @@ release = "v0.1.0"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinxcontrib.matlab", "sphinx.ext.autodoc"]
+extensions = ["sphinxcontrib.matlab", "sphinx.ext.autodoc", "sphinx_copybutton"]
 matlab_src_dir = os.path.dirname(os.path.abspath("../../src"))
 primary_domain = "mat"
 
