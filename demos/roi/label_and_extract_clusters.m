@@ -10,7 +10,7 @@ run ../../initCppRoi;
 
 gunzip(fullfile('inputs', '*.gz'));
 
-zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
+zMap = fullfile(pwd, 'inputs', 'visual_motion_association-test_z_FDR_0.01.nii');
 zMap = renameNeuroSynth(zMap);
 
 peakThreshold = 5;
