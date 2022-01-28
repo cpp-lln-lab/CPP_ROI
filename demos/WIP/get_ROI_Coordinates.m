@@ -1,9 +1,14 @@
 function mni = get_ROI_Coordinates
   % This function gets the individual subject coordniates of the highest peak
-  % within a specified Region of interest (usually coming from the group level univariate analysis)
-
+  % within a specified Region of interest (usually coming
+  % from the group level univariate analysis)
+  %
   % Critical t-value for each experimental condition or mask file
-  CriticalTs = 1;               % Critical t-value for visual condition in L-V5 and R-V5 and bilateral PT
+  % Critical t-value for visual condition in L-V5 and R-V5 and bilateral PT
+  %
+  % (C) Copyright 2021 CPP ROI developers
+
+  CriticalTs = 1;
 
   %% load the data structure
   WD = pwd;
@@ -52,9 +57,17 @@ function mni = get_ROI_Coordinates
         %% the first 4 masks are for the FACE condition, the other 4
         % are from the SCENE condition
         if iMask <= 2
-          result_file = [data_path, '/', SubName, '/stats/ffx_visMotion/ffx_', smoothing, '/spmT_0013.nii']; % HUMAN > BIG_ENV
+          result_file = [data_path, '/', ...
+                         SubName, ...
+                         '/stats/ffx_visMotion/ffx_', ...
+                         smoothing, ...
+                         '/spmT_0013.nii']; % HUMAN > BIG_ENV
         else
-          result_file = [data_path, '/', SubName, '/stats/ffx_audMotion/ffx_', smoothing, '/spmT_0014.nii']; % BIG_ENV > HUMAN
+          result_file = [data_path, '/', ...
+                         SubName, ...
+                         '/stats/ffx_audMotion/ffx_', ...
+                         smoothing, ...
+                         '/spmT_0014.nii']; % BIG_ENV > HUMAN
         end
 
         %%
@@ -78,8 +91,11 @@ function mni = get_ROI_Coordinates
 
           % convert space from slice number to mni
           mni{1, iMask}(subCounter, :) = cor2mni([x y z], mask_path);
-          %               mni{1,iMask}(iSub,1) = mni{1,iMask}(iSub,1)* -1;   % If  masks created from AFNI or FSL,
-          %               the x coordinate could be flipped (multiplied x -1). If this is the case, multiply x with -1.
+
+          %               mni{1,iMask}(iSub,1) = mni{1,iMask}(iSub,1)* -1;
+          % If  masks created from AFNI or FSL,
+          % the x coordinate could be flipped (multiplied x -1).
+          % If this is the case, multiply x with -1.
 
           mni{1, iMask}(subCounter, :);
 

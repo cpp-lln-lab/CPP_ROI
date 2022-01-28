@@ -23,7 +23,7 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   outputVol(vol == labelStruct.label) = true;
 
   p = bids.internal.parse_filename(sourceImage);
-  p.entities.label = labelStruct.ROI;
+  p.entities.label = bids.internal.camel_case(labelStruct.ROI);
   p.suffix = 'mask';
 
   bidsFile = bids.File(p);

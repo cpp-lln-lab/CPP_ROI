@@ -1,5 +1,0 @@
-# Contributing
-
-## Unit testing
-
-## Changelog
