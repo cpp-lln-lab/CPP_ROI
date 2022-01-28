@@ -34,6 +34,9 @@ function newName = renameFile(inputFile, specification)
                          bids.internal.camel_case(specification.entities.(entities{i})));
     end
   end
+  if isfield(specification, 'entity_order')
+    bf = bf.reorder_entities(specification.entity_order);
+  end
 
   bf = bf.update;
 
