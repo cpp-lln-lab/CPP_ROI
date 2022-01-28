@@ -6,7 +6,7 @@ warning('OFF');
 
 spm('defaults', 'fMRI');
 
-testFolder = fullfile(fileparts(mfilename('fullpath')));
+testFolder = fullfile(fileparts(mfilename('fullpath')), 'tests');
 
 folderToCover = fullfile(testFolder, '..', 'src');
 
