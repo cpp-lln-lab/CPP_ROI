@@ -48,7 +48,9 @@ end
 
 function inputImage = setUp(image)
 
-  gzImage = spm_file(fullfile(rootDir(), 'demos', 'roi', 'inputs', image), 'cpath');
+  rootDir = fullfile(fileparts(mfilename('fullpath')), '..');
+
+  gzImage = spm_file(fullfile(rootDir, 'demos', 'roi', 'inputs', image), 'cpath');
   [~, basename] = spm_fileparts(gzImage);
   gunzip(gzImage, pwd);
 
