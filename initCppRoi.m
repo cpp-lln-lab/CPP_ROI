@@ -3,15 +3,25 @@
 function initCppRoi()
 
   global CPP_ROI_INITIALIZED
+  global CPP_ROI_PATHS
 
-  if isempty(CPP_ROI_INITIALIZED)
+  if isempty(CPP_ROI_INITIALIZED) || ~CPP_ROI_INITIALIZED
 
     % directory with this script becomes the current directory
-    WD = fileparts(mfilename('fullpath'));
+    thisDirectory = fileparts(mfilename('fullpath'));
 
+    pathSep = ':';
+    if ~isunix
+      pathSep = ';';
+    end
     % we add all the subfunctions that are in the sub directories
-    addpath(genpath(fullfile(WD, 'src')));
-    addpath(fullfile(WD, 'lib', 'marsbar-0.44'));
+    CPP_ROI_PATHS = genpath(fullfile(thisDirectory, 'src'));
+    CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
+                        fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
+    CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
+                        fullfile(thisDirectory, 'atlas'));
+    addpath(CPP_ROI_PATHS, '-begin');
+
     marsbar('on');
     try
       marsbar('splash');

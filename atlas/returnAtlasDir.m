@@ -10,7 +10,7 @@ function atlasDir = returnAtlasDir(atlas)
   %
   % (C) Copyright 2021 CPP ROI developers
 
-  atlasDir = fullfile(fileparts(mfilename('fullpath')), '..', '..', 'atlas');
+  atlasDir = fileparts(mfilename('fullpath'));
 
   if nargin > 0
 

@@ -351,9 +351,9 @@ function roiName = createRoiName(mask, volumeDefiningImage)
     label = p.entities.label;
   end
 
-  p.entities.label = [label ' ' mask.label];
-  p.use_schema = false;
+  p.entities.label = bids.internal.camel_case([label ' ' mask.label]);
 
-  roiName = bids.create_filename(p);
+  bidsFile = bids.File(p);
+  roiName = bidsFile.filename;
 
 end

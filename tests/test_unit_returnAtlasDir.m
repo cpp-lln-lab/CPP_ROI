@@ -12,7 +12,7 @@ function test_returnAtlasDir_default()
 
   atlasDir = returnAtlasDir('neuromorphometric');
 
-  assertEqual(atlasDir, baseAtlasDir());
+  assertEqual(atlasDir, returnAtlasDir());
 
 end
 
@@ -20,7 +20,7 @@ function test_returnAtlasDir_wang()
 
   atlasDir = returnAtlasDir('wang');
 
-  expected = fullfile(baseAtlasDir(),  'visual_topography_probability_atlas');
+  expected = fullfile(returnAtlasDir(),  'visual_topography_probability_atlas');
 
   assertEqual(atlasDir, expected);
 
@@ -33,11 +33,5 @@ function test_returnAtlasDir_anatomy_toobox()
   expected = fullfile(spm('dir'), 'toolbox', 'Anatomy');
 
   assertEqual(atlasDir, expected);
-
-end
-
-function baseDir = baseAtlasDir()
-
-  baseDir = spm_file(fullfile(fileparts(mfilename('fullpath')), '..', 'atlas'), 'cpath');
 
 end
