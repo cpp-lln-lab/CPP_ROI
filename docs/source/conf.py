@@ -23,7 +23,7 @@ copyright = "2021, the CPP ROI dev team"
 author = "the CPP ROI dev team"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.0dev"
+release = "v0.2.0"
 
 
 # -- General configuration ---------------------------------------------------
