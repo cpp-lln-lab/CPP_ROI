@@ -15,7 +15,7 @@ function test_renameNeuroSynth()
 
   outputImage = renameNeuroSynth(inputImage);
 
-  expected = fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii.gz');
+  expected = fullfile(pwd, 'space-MNI_atlas-neurosynth_label-motion_probseg.nii.gz');
   assertEqual(exist(outputImage, 'file'), 2);
 
   assertEqual(outputImage, expected);
@@ -31,7 +31,7 @@ function test_renameNeuroSynth_unzipped()
 
   outputImage = renameNeuroSynth(inputImage);
 
-  expected = fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii');
+  expected = fullfile(pwd, 'space-MNI_atlas-neurosynth_label-motion_probseg.nii');
   assertEqual(exist(outputImage, 'file'), 2);
 
   assertEqual(outputImage, expected);

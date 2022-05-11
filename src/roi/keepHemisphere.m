@@ -38,11 +38,12 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
 
   vol(discard, :, :) = NaN;
 
-  p = bids.internal.parse_filename(inputImage);
-  p.entities.hemi = hemisphere;
-  bidsFile = bids.File(p);
+  bf = bids.File(inputImage);
+  bf.entity_order = cat(1, 'hemi', fieldnames(bf.entities));
+  bf.entities.hemi = hemisphere;
+  bf = bf.reorder_entities;
 
-  hdr.fname = spm_file(inputImage, 'filename', bidsFile.filename);
+  hdr.fname = spm_file(inputImage, 'filename', bf.filename);
 
   spm_write_vol(hdr, vol);
 
