@@ -8,7 +8,7 @@ function test_suite = test_keepHemisphere %#ok<*STOUT>
   initTestSuite;
 end
 
-function test_renameFile()
+function test_keepHemisphere_basic()
 
   inputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'demos', 'roi');
 
