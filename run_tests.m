@@ -8,6 +8,8 @@ spm('defaults', 'fMRI');
 
 testFolder = fullfile(fileparts(mfilename('fullpath')), 'tests');
 
+addpath(fullfile(testFolder, 'utils'));
+
 folderToCover = fullfile(testFolder, '..', 'src');
 
 success = moxunit_runtests( ...

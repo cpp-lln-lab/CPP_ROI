@@ -23,10 +23,14 @@ end
 
 function test_lut_anat_tb()
 
-  lut = getLookUpTable('anatomy_toobox');
+  if ~isGithubCi
 
-  assertEqual(lut.label(1), 7);
-  assertEqual(lut.ROI{1}, 'Interposed Nucleus');
+    lut = getLookUpTable('anatomy_toobox');
+
+    assertEqual(lut.label(1), 7);
+    assertEqual(lut.ROI{1}, 'Interposed Nucleus');
+
+  end
 
 end
 
