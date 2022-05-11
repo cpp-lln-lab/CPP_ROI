@@ -9,6 +9,7 @@ spm('defaults', 'fMRI');
 testFolder = fullfile(fileparts(mfilename('fullpath')), 'tests');
 
 addpath(fullfile(testFolder, 'utils'));
+addpath(fullfile(fileparts(mfilename('fullpath')), 'atlas'));
 
 folderToCover = fullfile(testFolder, '..', 'src');
 

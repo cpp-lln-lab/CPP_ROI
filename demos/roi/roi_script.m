@@ -29,7 +29,7 @@ run ../../initCppRoi;
 % You can use the resliceRoiImages for that.
 
 %%
-zMap = fullfile(pwd, 'inputs', 'visual_motion_association-test_z_FDR_0.01.nii');
+zMap = fullfile(pwd, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 
 opt.unzip.do = true;

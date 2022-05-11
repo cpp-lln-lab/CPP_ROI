@@ -29,7 +29,8 @@ function outputImage = renameNeuroSynth(inputImage)
 
   basename = spm_file(inputImage, 'basename');
   parts = strsplit(basename, '_');
-  p.entities.label = bids.internal.camel_case(['neurosynth ' parts{1}]);
+  p.entities.atlas = 'neurosynth';
+  p.entities.label = bids.internal.camel_case(parts{1});
 
   bidsFile = bids.File(p);
 
