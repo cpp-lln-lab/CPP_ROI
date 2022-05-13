@@ -79,11 +79,16 @@ end
 function test_createRoiName_sphere_spm()
 
   % spm (ish) output
-  %
-  % https://github.com/cpp-lln-lab/CPP_ROI/issues/6
-  %
 
+  % https://github.com/cpp-lln-lab/CPP_ROI/issues/6
   volumeDefiningImage = fullfile(pwd, 'task-auditory_p-0001_k-0_MC-none_label-001_spmT.nii');
+  mask.def = 'sphere';
+  mask.label = 'sphere5x44yMinus67z0';
+  roiName = createRoiName(mask, volumeDefiningImage);
+  assertEqual(roiName, 'label-sphere5x44yMinus67z0_mask.nii');
+
+  % https://github.com/cpp-lln-lab/CPP_ROI/issues/16
+  volumeDefiningImage = fullfile(pwd, 'con_0001.niii');
   mask.def = 'sphere';
   mask.label = 'sphere5x44yMinus67z0';
   roiName = createRoiName(mask, volumeDefiningImage);

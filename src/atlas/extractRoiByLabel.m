@@ -22,13 +22,11 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   outputVol = false(size(vol));
   outputVol(vol == labelStruct.label) = true;
 
-  p = bids.internal.parse_filename(sourceImage);
-  p.entities.label = bids.internal.camel_case(labelStruct.ROI);
-  p.suffix = 'mask';
+  bf = bids.File(sourceImage);
+  bf.entities.label = bids.internal.camel_case(labelStruct.ROI);
+  bf.suffix = 'mask';
 
-  bidsFile = bids.File(p);
-
-  hdr.fname = spm_file(hdr.fname, 'filename', bidsFile.filename);
+  hdr.fname = spm_file(hdr.fname, 'filename', bf.filename);
 
   spm_write_vol(hdr, outputVol);
   outputImage = hdr.fname;

@@ -26,40 +26,40 @@ function outputImage = thresholdToMask(varargin)
   isFile = @(x) exist(x, 'file') == 2;
   isPositive = @(x) isnumeric(x) && x >= 0;
 
-  p = inputParser;
+  args = inputParser;
 
-  addRequired(p, 'inputImage', isFile);
-  addRequired(p, 'peakThreshold', @isnumeric);
-  addOptional(p, 'clusterSize', default_clusterSize, isPositive);
+  addRequired(args, 'inputImage', isFile);
+  addRequired(args, 'peakThreshold', @isnumeric);
+  addOptional(args, 'clusterSize', default_clusterSize, isPositive);
 
-  parse(p, varargin{:});
+  parse(args, varargin{:});
 
-  inputImage = p.Results.inputImage;
-  peakThreshold = p.Results.peakThreshold;
-  clusterSize = p.Results.clusterSize;
-
+  inputImage = args.Results.inputImage;
+  peakThreshold = args.Results.peakThreshold;
+  clusterSize = args.Results.clusterSize;
   [l2, num] = getClusters(inputImage, peakThreshold);
   vol = sortAndThresholdClusters(l2, num, clusterSize);
 
   % create output name
-  p = bids.internal.parse_filename(inputImage);
+  bf = bids.File(inputImage);
 
-  p.suffix = 'mask';
+  bf.suffix = 'mask';
 
   % add peakThreshold and clusterSizeInfo to desc
-  if ~isfield(p.entities, 'desc')
-    p.entities.desc = '';
+  if ~isfield(bf.entities, 'desc')
+    bf.entities.desc = '';
   end
   descSuffix = sprintf('p%05.2f', peakThreshold);
   if clusterSize > 0
     descSuffix = [descSuffix, sprintf('k%03.0f', clusterSize)];
   end
   descSuffix = strrep(descSuffix, '.', 'pt');
-  p.entities.desc = [p.entities.desc descSuffix];
+  bf.entities.desc = [bf.entities.desc descSuffix];
 
-  bidsFile = bids.File(p);
+  bf = bf.update();
+
   hdr = spm_vol(inputImage);
-  hdr.fname = spm_file(hdr.fname, 'filename', bidsFile.filename);
+  hdr.fname = spm_file(hdr.fname, 'filename', bf.filename);
   outputImage = hdr.fname;
 
   spm_write_vol(hdr, vol);
