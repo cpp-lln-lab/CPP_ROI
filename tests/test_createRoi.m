@@ -19,16 +19,43 @@ function test_createRoi_sphere()
 
   mask = createRoi('sphere', sphere, volumeDefiningImage, outputDir, saveImg);
 
-  assertEqual(exist(fullfile(thisDir(), 'label-sphere5x44yMinus67z0_mask.nii'), 'file'), 2);
-  assertEqual(exist(fullfile(thisDir(), 'label-sphere5x44yMinus67z0_mask.json'), 'file'), 2);
+  basename = 'label-sphere5x44yMinus67z0_mask';
+
+  assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
+  assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
 
   delete(fullfile(thisDir(), '*.nii'));
   delete(fullfile(thisDir(), '*.json'));
 
   mask = createRoi('sphere', sphere, volumeDefiningImage, outputDir, false);
 
-  assertEqual(exist(fullfile(thisDir(), 'label-sphere5x44yMinus67z0_mask.nii'), 'file'), 0);
-  assertEqual(exist(fullfile(thisDir(), 'label-sphere5x44yMinus67z0_mask.json'), 'file'), 0);
+  assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 0);
+  assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 0);
+
+end
+
+function test_createRoi_intersection_mask_sphere()
+
+  [roiFinelname, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage();
+
+  sphere.location = [44 -67 0];
+  sphere.radius = 5;
+
+  specification  = struct('mask1', roiFinelname, ...
+                          'mask2', sphere);
+
+  saveImg = true;
+  outputDir = thisDir();
+
+  mask = createRoi('intersection', specification, volumeDefiningImage, outputDir, saveImg);
+
+  basename = 'rspace-MNI_atlas-neurosynth_label-intersection_desc-p10pt00_mask';
+
+  assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
+  assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
+
+  delete(fullfile(thisDir(), '*.nii'));
+  delete(fullfile(thisDir(), '*.json'));
 
 end
 
@@ -37,6 +64,34 @@ function value = thisDir()
 end
 
 function value = demoDir()
+
   value = fullfile(thisDir(), '..', 'demos', 'roi', 'inputs');
-  gunzip(fullfile(value, '*.gz'));
+
+  if exist(fullfile(value, 'TStatistic.nii'), 'file') == 0
+    gunzip(fullfile(value, '*.gz'));
+  end
+
+end
+
+function  [roiFilename, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage()
+
+  volumeDefiningImage = fullfile(demoDir(), 'TStatistic.nii');
+
+  roiFilename = fullfile(demoDir(), ...
+                         'rspace-MNI_atlas-neurosynth_label-visualMotion_desc-p10pt00_mask.nii');
+
+  if exist(roiFilename, 'file') == 2
+
+  else
+
+    zMap = fullfile(demoDir(), 'visual motion_association-test_z_FDR_0.01.nii');
+
+    zMap = renameNeuroSynth(zMap);
+    zMap = resliceRoiImages(volumeDefiningImage, zMap);
+
+    threshold = 10;
+    roiFilename = thresholdToMask(zMap, threshold);
+
+  end
+
 end

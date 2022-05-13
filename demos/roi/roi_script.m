@@ -124,8 +124,7 @@ function data_expand = getDataFromExpansion(opt, dataImage,  roiName)
   sphere.radius = 1; % starting radius
   sphere.maxNbVoxels = 50;
 
-  specification  = struct( ...
-                          'mask1', roiName, ...
+  specification  = struct('mask1', roiName, ...
                           'mask2', sphere);
 
   mask = createRoi('expand', specification, dataImage, opt.outputDir, opt.save.roi);
@@ -162,6 +161,6 @@ function [roiName, zMap] = prepareDataAndROI(opt, dataImage, zMap)
   % to keep only values above a certain threshold
   threshold = 10;
   roiName = thresholdToMask(zMap, threshold);
-  roiName = removeSpmPrefix(roiName, spm_get_defaults('realign.write.prefix'));
+  roiName = removePrefix(roiName, spm_get_defaults('realign.write.prefix'));
 
 end
