@@ -299,6 +299,16 @@ function mask = createRoiLabel(mask)
 end
 
 function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
+  
+  hdr = spm_vol(volumeDefiningImage);
+  if numel(hdr) > 1
+    err.identifier =  'createRoi:not3DImage';
+    err.message = sprintf(['the volumeDefininigImage:', ...
+                           '\n\t%s\n', ...
+                           'must be a 3D image. It seems to be 4D image with %i volume.'], ...
+                          image, numel(hdr));
+    error(err);
+  end
 
   if strcmp(mask.def, 'sphere')
 
