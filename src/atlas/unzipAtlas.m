@@ -19,8 +19,14 @@ function unzipAtlas(atlas)
                                 '^.*_dseg.nii.gz$');
 
       gunzip(cellstr(labelImages));
-
+        
     end
+    
+  elseif strcmp(atlas, 'visfAtlas')
+      
+      file = fullfile(atlasDir, 'visfAtlas/space-MNI_atlas-visfAtlas_dseg.nii.gz');
+      
+      gunzip(file);
 
   end
 

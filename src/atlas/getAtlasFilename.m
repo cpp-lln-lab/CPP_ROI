@@ -18,7 +18,7 @@ function atlasFilename = getAtlasFilename(atlasName)
 
   atlasDir = returnAtlasDir(atlasName);
 
-  if ~ismember(atlasName, {'wang', 'neuromorphometrics', 'anatomy_toobox'})
+  if ~ismember(atlasName, {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfAtlas'})
     % TODO throw a proper error here
     error('unknown atlas type');
   end
@@ -45,6 +45,10 @@ function atlasFilename = getAtlasFilename(atlasName)
     case 'anatomy_toobox'
 
       error('not implemented yet');
+      
+    case 'visfatlas' 
+          
+      atlasFilename = fullfile(atlasDir, 'space-MNI_atlas-visfAtlas_dseg.nii');
 
   end
 

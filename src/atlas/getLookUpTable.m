@@ -19,7 +19,7 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
   atlasDir = returnAtlasDir(atlasName);
 
-  if ~ismember(atlasName, {'wang', 'neuromorphometrics', 'anatomy_toobox'})
+  if ~ismember(atlasName, {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfAtlas'})
     % TODO throw a proper error here
     error('unknown atlas type');
   end
@@ -54,6 +54,12 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
       roiLabelLUT = struct('ROI', C(1), ...
                            'label', C(2));
+                       
+      case 'visfatlas'
+          
+          unzipAtlas('visfAtlas');
+          
+          roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
   end
 

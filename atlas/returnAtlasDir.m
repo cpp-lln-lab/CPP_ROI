@@ -21,6 +21,9 @@ function atlasDir = returnAtlasDir(atlas)
 
       case 'anatomy_toobox'
         atlasDir = fullfile(spm('dir'), 'toolbox', 'Anatomy');
+        
+      case 'visfAtlas'
+        atlasDir = fullfile(atlasDir, 'visfAtlas');
 
     end
 
