@@ -36,12 +36,12 @@ end
 
 function test_createRoi_intersection_mask_sphere()
 
-  [roiFinelname, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage();
+  [roiFilename, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage();
 
   sphere.location = [44 -67 0];
   sphere.radius = 5;
 
-  specification  = struct('mask1', roiFinelname, ...
+  specification  = struct('mask1', roiFilename, ...
                           'mask2', sphere);
 
   saveImg = true;
@@ -50,6 +50,34 @@ function test_createRoi_intersection_mask_sphere()
   mask = createRoi('intersection', specification, volumeDefiningImage, outputDir, saveImg);
 
   basename = 'rspace-MNI_atlas-neurosynth_label-visualMotionIntersection_desc-p10pt00_mask';
+
+  assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
+  assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
+
+  delete(fullfile(thisDir(), '*.nii'));
+  delete(fullfile(thisDir(), '*.json'));
+
+end
+
+function test_createRoi_expand
+
+  [roiFilename, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage();
+
+  sphere.location = [44 -67 0];
+  sphere.radius = 5;
+  sphere.maxNbVoxels = 50;
+
+  specification  = struct('mask1', roiFilename, ...
+                          'mask2', sphere);
+
+  saveImg = true;
+  outputDir = thisDir();
+
+  mask = createRoi('expand', specification, volumeDefiningImage, outputDir, saveImg);
+
+  basename = 'rspace-MNI_atlas-neurosynth_label-visualMotionExpandVox57_desc-p10pt00_mask';
+
+  assertEqual(mask.roi.size, 57);
 
   assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
   assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
