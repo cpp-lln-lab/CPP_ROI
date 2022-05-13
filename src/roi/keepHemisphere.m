@@ -1,7 +1,7 @@
 function outputImage = keepHemisphere(inputImage, hemisphere)
   %
   % Only keep the values from one hemisphere. Sets the other half to NaN.
-  % Writes an image with an extra entity ``_hs-[hemisphere]``
+  % Writes an image with an extra entity ``_hemi-[R|L]``
   %
   % USAGE::
   %
