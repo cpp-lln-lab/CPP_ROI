@@ -29,7 +29,7 @@ function value = demoDir()
 
   value = fullfile(thisDir(), '..', 'demos', 'roi', 'inputs');
 
-  if exist(fullfile(value, 'TStatistic.nii'), 'file') == 0
+  if exist(fullfile(value, 'visual motion_association-test_z_FDR_0.01.nii'), 'file') == 0
     gunzip(fullfile(value, '*.gz'));
   end
 
@@ -46,7 +46,10 @@ function  [roiFilename, zMap] = prepareRoiAndVolumeDefiningImage()
 
   else
 
+    zMap = fullfile(demoDir(), 'visual motion_association-test_z_FDR_0.01.nii');
+
     zMap = renameNeuroSynth(zMap);
+
     threshold = 10;
     roiFilename = thresholdToMask(zMap, threshold);
 

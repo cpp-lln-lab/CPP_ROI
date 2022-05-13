@@ -110,6 +110,8 @@ function [mask, outputFile] = createRoi(varargin)
 
       roiImage = specification;
 
+      isBinaryMask(roiImage);
+
       mask = struct('XYZmm', []);
       mask = defineGlobalSearchSpace(mask, roiImage);
 
@@ -143,6 +145,8 @@ function [mask, outputFile] = createRoi(varargin)
         sphere = specification.mask2;
       end
 
+      isBinaryMask(roiImage);
+
       mask = createRoi('mask', roiImage);
       mask2 = createRoi('sphere', sphere);
 
@@ -166,6 +170,8 @@ function [mask, outputFile] = createRoi(varargin)
         roiImage = specification.mask1;
         sphere = specification.mask2;
       end
+
+      isBinaryMask(roiImage);
 
       % check that input image has at least enough voxels to include
       maskVol = spm_read_vols(spm_vol(roiImage));
