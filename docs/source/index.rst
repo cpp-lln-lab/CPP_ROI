@@ -2,11 +2,12 @@ Welcome to CPP_ROI documentation!
 *********************************
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Content
 
-   function_description
-
+   install
+   roi
+   atlas
 
 Indices and tables
 ==================

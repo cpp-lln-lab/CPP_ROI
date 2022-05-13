@@ -1,20 +1,11 @@
 .DS_Store
 
 *.nii
+*.json
 *.xml
 *.log
-*.asv
-*.m~
 *.mat
-
 *.html
-
-# files in the demo folder related to running the demo analysis
-# demos/roi
-
-atlas/visual_topography_probability_atlas/
-
-# test folder and dummy data
 
 # ignore content of the build folder of the doc
 docs/build/*
@@ -25,8 +16,49 @@ envs/*
 # visual studio code stuff
 .vscode
 
-demos/*/*.json
-demos/*/*/*.json
+atlas/visual_topography_probability_atlas/
+
 demos/*/derivatives
 
-atlas/*.json
+
+#for testing
+coveragage_html
+lib/bids-matlab
+
+
+## MATLAB / OCTAVE gitignore template
+
+# From : https://github.com/github/gitignore/blob/master/Global/MATLAB.gitignore
+
+
+# Windows default autosave extension
+*.asv
+
+# OSX / *nix default autosave extension
+*.m~
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Simulink code generation folders
+slprj/
+sccprj/
+
+# Matlab code generation folders
+codegen/
+
+# Simulink autosave extension
+*.autosave
+
+# Simulink cache files
+*.slxc
+
+# Octave session info
+octave-workspace

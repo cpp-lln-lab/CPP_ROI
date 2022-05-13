@@ -8,6 +8,18 @@ function test_suite = test_unit_renameNeuroSynth %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_renameNeuroSynth_error()
+
+  inputImage = fullfile(pwd, 'hMT.nii.gz');
+  system(['touch ' inputImage]);
+
+  assertExceptionThrown(@()renameNeuroSynth(inputImage), ...
+                        'renameNeuroSynth:nonValidNeurosynthZmap');
+
+  delete(inputImage);
+
+end
+
 function test_renameNeuroSynth()
 
   inputImage = fullfile(pwd, 'motion_association-test_z_FDR_0.01.nii.gz');

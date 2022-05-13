@@ -1,4 +1,4 @@
-function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
+function [mask, outputFile] = createRoi(varargin)
   %
   % Returns a mask to be used as a ROI by ``spm_summarize``.
   % Can also save the ROI as binary image.
@@ -20,18 +20,23 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %
   % :param type: ``'mask'``, ``'sphere'``, ``'intersection'``, ``'expand'``
   % :type type: string
+  %
   % :param volumeDefiningImage: fullpath of the image that will define the space
   %                             (resolution, ...) if the ROI is to be saved.
   % :type volumeDefiningImage: string
+  %
   % :param saveImg: Will save the resulting image as binary mask if set to
   %                 ``true``
   % :type saveImg: boolean
+  %
   % :param specification: depending on the chosen ``type`` this can be:
   %
   %   :roiImage: - :string: fullpath of the roi image for ``'mask'``
+  %
   %   :sphere: - :structure: defines the charateristic for ``'sphere'``
   %                          - ``sphere.location``: X Y Z coordinates in millimeters
   %                          - ``spehere.radius``: radius in millimeters
+  %
   %   :specification: - :structure: defines the charateristic for ``'intersection'`` and ``'expand'``
   %                                 - ``sphere.location``: X Y Z coordinates in millimeters
   %                                 - ``sphere.radius``: radius in millimeters
@@ -64,17 +69,23 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %
   % (C) Copyright 2021 CPP ROI developers
 
-  if nargin < 5
-    saveImg = false;
-  end
+  args = inputParser;
 
-  if nargin < 4
-    outputDir = pwd;
-  end
+  allowedTypes = @(x) ismember(x, {'mask', 'sphere', 'intersection', 'expand'});
 
-  if nargin < 3
-    volumeDefiningImage = '';
-  end
+  args.addRequired('type', allowedTypes);
+  args.addRequired('specification');
+  args.addOptional('volumeDefiningImage', '', @ischar);
+  args.addOptional('outputDir', pwd, @isdir);
+  args.addOptional('saveImg', false, @islogical);
+
+  args.parse(varargin{:});
+
+  type = args.Results.type;
+  specification = args.Results.specification;
+  volumeDefiningImage = args.Results.volumeDefiningImage;
+  outputDir = args.Results.outputDir;
+  saveImg = args.Results.saveImg;
 
   switch type
 
@@ -98,6 +109,8 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
     case 'mask'
 
       roiImage = specification;
+
+      isBinaryMask(roiImage);
 
       mask = struct('XYZmm', []);
       mask = defineGlobalSearchSpace(mask, roiImage);
@@ -132,6 +145,8 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
         sphere = specification.mask2;
       end
 
+      isBinaryMask(roiImage);
+
       mask = createRoi('mask', roiImage);
       mask2 = createRoi('sphere', sphere);
 
@@ -156,6 +171,8 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
         sphere = specification.mask2;
       end
 
+      isBinaryMask(roiImage);
+
       % check that input image has at least enough voxels to include
       maskVol = spm_read_vols(spm_vol(roiImage));
       totalNbVoxels = sum(maskVol(:));
@@ -163,8 +180,7 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
         error('Number of voxels requested greater than the total number of voxels in this mask');
       end
 
-      specification  = struct( ...
-                              'mask1', roiImage, ...
+      specification  = struct('mask1', roiImage, ...
                               'mask2', sphere);
 
       % take as radius step the smallest voxel dimension of the roi image
@@ -283,6 +299,22 @@ end
 
 function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
 
+  hdr = spm_vol(volumeDefiningImage);
+  if numel(hdr) > 1
+    err.identifier =  'createRoi:not3DImage';
+    err.message = sprintf(['the volumeDefininigImage:', ...
+                           '\n\t%s\n', ...
+                           'must be a 3D image. It seems to be 4D image with %i volume.'], ...
+                          image, numel(hdr));
+    error(err);
+  end
+
+  if ~strcmp(mask.def, 'sphere') && ...
+      exist(mask.spec, 'file') == 2 && ...
+      strcmp(spm_file(mask.spec, 'ext'), 'nii')
+    checkRoiOrientation(volumeDefiningImage, mask.spec);
+  end
+
   if strcmp(mask.def, 'sphere')
 
     [~, mask.roi.XYZmm] = spm_ROI(mask, volumeDefiningImage);
@@ -318,42 +350,5 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
 
   json = bids.derivatives_json(outputFile);
   bids.util.jsonencode(json.filename, json.content);
-
-end
-
-function roiName = createRoiName(mask, volumeDefiningImage)
-
-  if strcmp(mask.def, 'sphere')
-
-    p.filename = '';
-    p.ext = '.nii';
-    p.suffix = 'mask';
-    p.use_schema = false;
-
-    if ~isempty(volumeDefiningImage)
-      tmp = bids.internal.parse_filename(volumeDefiningImage);
-
-      % if the volume defining image has a space entity we reuse it
-      if isfield(p, 'space')
-        p.entities.space = tmp.space;
-      end
-
-    end
-
-  else
-
-    p = bids.internal.parse_filename(mask.global.hdr.fname);
-
-  end
-
-  label = '';
-  if isfield(p, 'label')
-    label = p.entities.label;
-  end
-
-  p.entities.label = bids.internal.camel_case([label ' ' mask.label]);
-
-  bidsFile = bids.File(p);
-  roiName = bidsFile.filename;
 
 end

@@ -1,15 +1,9 @@
+[![miss_hit_style](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_style.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_style.yml)
+[![miss_hit_quality](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_quality.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_quality.yml)
+[![tests and coverage with matlab](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml)
+[![codecov](https://codecov.io/gh/cpp-lln-lab/CPP_ROI/branch/main/graph/badge.svg?token=8IoRQtbFUV)](https://codecov.io/gh/cpp-lln-lab/CPP_ROI)
+
 # CPP ROI
-
----
-
-## :warning:
-
-**This code is fairly unstable and might still change.**
-
-So make sure you "pin" which version or commit you are using for a given
-project, if you don't want your code to break in the future.
-
----
 
 Set of Octave and Matlab functions, demos and scripts to help manage ROIs and to
 play nice with BIDS datasets.
@@ -33,14 +27,12 @@ git clone https://github.com/cpp-lln-lab/CPP_ROI.git
 Fire up Octave or Matlab and type
 
 ```matlab
-
 cd CPP_ROI
 
 % Th following adds the relevant folders to your path.
 % This needs to be done once per session (your path will not be saved)
 
 initCppRoi
-
 ```
 
 If you are using CPP_SPM, you got nothing to do as CPP_ROI is already installed
@@ -48,26 +40,20 @@ as a submodule, and intitialized when running `initCppSpm`.
 
 ### Dependencies
 
-======= TODO
-
-| Dependencies                                               | Used version |
-| ---------------------------------------------------------- | ------------ |
-| [Matlab](https://www.mathworks.com/products/matlab.html)   | 20???        |
-| or [octave](https://www.gnu.org/software/octave/)          | 4.?          |
-| [SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12/) | v7487        |
-
--   bids-matlab (INSERT URL)
-
--   currently still needs some CPP_SPM function but ultimately should be
-    standalone: this will most likely happen when some functions are passed to
-    bids-matlab
+| Dependencies                                                    | Used version |
+| --------------------------------------------------------------- | ------------ |
+| [Matlab](https://www.mathworks.com/products/matlab.html)        | 20???        |
+| or [octave](https://www.gnu.org/software/octave/)               | 4.?          |
+| [SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12/)      | v7487        |
+| [bids-matlab](https://github.com/bids-standard/bids-matlab.git) | >=0.1.0      |
 
 -   Other dependencies (MarsBar) are shipped with CPP_ROI in the `lib` folder.
 
 ## Features
 
 -   create ROI from probability maps
--   create ROI filenames that "BIDS-ish"
+-   create ROI from atlas (see below)
+-   create ROI filenames that are "BIDS-ish"
 -   extract ROI with a given numerical label
 -   extract ROI from one hemisphere
 -   breaks a cluster image into several ROIs with each their own label
@@ -88,4 +74,4 @@ as a submodule, and intitialized when running `initCppSpm`.
 Also includes:
 
 -   Yeo's 7 networks "atlas"
-  <!-- add REF and URL -->
+<!-- add REF and URL -->
