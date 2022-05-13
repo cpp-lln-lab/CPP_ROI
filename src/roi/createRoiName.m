@@ -1,9 +1,26 @@
-function roiName = createRoiName(mask, volumeDefiningImage)
+function roiName = createRoiName(varargin)
   %
+  % creates BIDS like filename for ROIs
+  %
+  % USAGE::
+  %
+  %     roiName = createRoiName(mask, volumeDefiningImage)
   %
   % (C) Copyright 2022 CPP ROI developers
 
-  if strcmp(mask.def, 'sphere')
+  args = inputParser;
+
+  args.addRequired('mask', @isstruct);
+  args.addOptional('volumeDefiningImage', '', @ischar);
+
+  args.parse(varargin{:});
+
+  type = args.Results.mask.def;
+  label = args.Results.mask.label;
+  mask = args.Results.mask;
+  volumeDefiningImage = args.Results.volumeDefiningImage;
+
+  if strcmp(type, 'sphere')
 
     bf = bids.File('');
     bf.extension = '.nii';
@@ -20,12 +37,12 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
     end
 
-    label = '';
+    tmp = '';
     if isfield(bf.entities, 'label')
-      label = bf.entities.label;
+      tmp = bf.entities.label;
     end
 
-    entities.label = bids.internal.camel_case([label ' ' mask.label]);
+    entities.label = bids.internal.camel_case([tmp ' ' label]);
 
     bf.entities = entities;
 
@@ -33,15 +50,19 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
     bf = bids.File(mask.global.hdr.fname);
 
-    label = '';
+    bf.suffix = 'mask';
+
+    tmp = '';
     if isfield(bf.entities, 'label')
-      label = bf.entities.label;
+      tmp = bf.entities.label;
     end
 
-    bf.entities.label = bids.internal.camel_case([label ' ' mask.label]);
+    bf.entities.label = bids.internal.camel_case([tmp ' ' label]);
 
   end
 
+  bf = bf.reorder_entities();
+  bf = bf.update;
   roiName = bf.filename;
 
 end

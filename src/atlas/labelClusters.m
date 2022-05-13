@@ -28,17 +28,17 @@ function outputImage = labelClusters(varargin)
   isFile = @(x) exist(x, 'file') == 2;
   isPositive = @(x) isnumeric(x) && x >= 0;
 
-  p = inputParser;
+  args = inputParser;
 
-  addRequired(p, 'inputImage', isFile);
-  addRequired(p, 'peakThreshold', @isnumeric);
-  addOptional(p, 'clusterSize', default_clusterSize, isPositive);
+  addRequired(args, 'inputImage', isFile);
+  addRequired(args, 'peakThreshold', @isnumeric);
+  addOptional(args, 'clusterSize', default_clusterSize, isPositive);
 
-  parse(p, varargin{:});
+  parse(args, varargin{:});
 
-  inputImage = p.Results.inputImage;
-  peakThreshold = p.Results.peakThreshold;
-  clusterSize = p.Results.clusterSize;
+  inputImage = args.Results.inputImage;
+  peakThreshold = args.Results.peakThreshold;
+  clusterSize = args.Results.clusterSize;
 
   [l2, num] = getClusters(inputImage, peakThreshold);
 
@@ -50,12 +50,11 @@ function outputImage = labelClusters(varargin)
   vol = sortAndLabelClusters(l2, num, clusterSize);
 
   % Write new image with cluster laebelled with their voxel size
-  p = bids.internal.parse_filename(inputImage);
-  p.suffix = 'dseg'; % discrete segmentation
+  bf = bids.File(inputImage);
+  bf.suffix = 'dseg'; % discrete segmentation
 
   hdr = spm_vol(inputImage);
-  bidsFile = bids.File(p);
-  hdr.fname = spm_file(hdr.fname, 'filename', bidsFile.filename);
+  hdr.fname = spm_file(hdr.fname, 'filename', bf.filename);
 
   % Cluster labels as their size.
   spm_write_vol(hdr, vol);
