@@ -1,4 +1,4 @@
-function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage, outputDir, saveImg)
+function [mask, outputFile] = createRoi(varargin)
   %
   % Returns a mask to be used as a ROI by ``spm_summarize``.
   % Can also save the ROI as binary image.
@@ -20,18 +20,23 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %
   % :param type: ``'mask'``, ``'sphere'``, ``'intersection'``, ``'expand'``
   % :type type: string
+  %
   % :param volumeDefiningImage: fullpath of the image that will define the space
   %                             (resolution, ...) if the ROI is to be saved.
   % :type volumeDefiningImage: string
+  %
   % :param saveImg: Will save the resulting image as binary mask if set to
   %                 ``true``
   % :type saveImg: boolean
+  %
   % :param specification: depending on the chosen ``type`` this can be:
   %
   %   :roiImage: - :string: fullpath of the roi image for ``'mask'``
+  %
   %   :sphere: - :structure: defines the charateristic for ``'sphere'``
   %                          - ``sphere.location``: X Y Z coordinates in millimeters
   %                          - ``spehere.radius``: radius in millimeters
+  %
   %   :specification: - :structure: defines the charateristic for ``'intersection'`` and ``'expand'``
   %                                 - ``sphere.location``: X Y Z coordinates in millimeters
   %                                 - ``sphere.radius``: radius in millimeters
@@ -64,17 +69,23 @@ function [mask, outputFile] = createRoi(type, specification, volumeDefiningImage
   %
   % (C) Copyright 2021 CPP ROI developers
 
-  if nargin < 5
-    saveImg = false;
-  end
+  args = inputParser;
 
-  if nargin < 4
-    outputDir = pwd;
-  end
+  allowedTypes = @(x) ismember(x, {'mask', 'sphere', 'intersection', 'expand'});
 
-  if nargin < 3
-    volumeDefiningImage = '';
-  end
+  args.addRequired('type', allowedTypes);
+  args.addRequired('specification');
+  args.addOptional('volumeDefiningImage', '', @ischar);
+  args.addOptional('outputDir', pwd, @isdir);
+  args.addOptional('saveImg', false, @islogical);
+
+  args.parse(varargin{:});
+
+  type = args.Results.type;
+  specification = args.Results.specification;
+  volumeDefiningImage = args.Results.volumeDefiningImage;
+  outputDir = args.Results.outputDir;
+  saveImg = args.Results.saveImg;
 
   switch type
 
