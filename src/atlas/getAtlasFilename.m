@@ -45,9 +45,9 @@ function atlasFilename = getAtlasFilename(atlasName)
     case 'anatomy_toobox'
 
       error('not implemented yet');
-      
-    case 'visfatlas' 
-          
+
+    case 'visfatlas'
+
       atlasFilename = fullfile(atlasDir, 'space-MNI_atlas-visfAtlas_dseg.nii');
 
   end

@@ -54,12 +54,12 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
       roiLabelLUT = struct('ROI', C(1), ...
                            'label', C(2));
-                       
-      case 'visfatlas'
-          
-          unzipAtlas('visfAtlas');
-          
-          roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
+
+    case 'visfatlas'
+
+      unzipAtlas('visfAtlas');
+
+      roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
   end
 

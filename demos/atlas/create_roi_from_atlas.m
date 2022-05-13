@@ -4,7 +4,7 @@ clear all;
 clc;
 
 % options : 'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfAtlas'
-opt.roi.atlas = 'visfAtlas'; 
+opt.roi.atlas = 'visfAtlas';
 
 % to get the list of possible run `getLookUpTable(opt.roi.atlas)`
 opt.roi.name = {'pFus', 'mFus', 'CoS'};
