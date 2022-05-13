@@ -180,8 +180,7 @@ function [mask, outputFile] = createRoi(varargin)
         error('Number of voxels requested greater than the total number of voxels in this mask');
       end
 
-      specification  = struct( ...
-                              'mask1', roiImage, ...
+      specification  = struct('mask1', roiImage, ...
                               'mask2', sphere);
 
       % take as radius step the smallest voxel dimension of the roi image
@@ -310,6 +309,12 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
     error(err);
   end
 
+  if ~strcmp(mask.def, 'sphere') && ...
+      exist(mask.spec, 'file') == 2 && ...
+      strcmp(spm_file(mask.spec, 'ext'), 'nii')
+    checkRoiOrientation(volumeDefiningImage, mask.spec);
+  end
+
   if strcmp(mask.def, 'sphere')
 
     [~, mask.roi.XYZmm] = spm_ROI(mask, volumeDefiningImage);
@@ -345,50 +350,5 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
 
   json = bids.derivatives_json(outputFile);
   bids.util.jsonencode(json.filename, json.content);
-
-end
-
-function roiName = createRoiName(mask, volumeDefiningImage)
-
-  if strcmp(mask.def, 'sphere')
-
-    bf = bids.File('');
-    bf.extension = '.nii';
-    bf.suffix = 'mask';
-
-    if ~isempty(volumeDefiningImage)
-
-      tmp = bids.File(volumeDefiningImage);
-
-      % if the volume defining image has a space entity we reuse it
-      if isfield(tmp.entities, 'space')
-        entities.space = tmp.entities.space;
-      end
-
-    end
-
-    label = '';
-    if isfield(bf.entities, 'label')
-      label = bf.entities.label;
-    end
-
-    entities.label = bids.internal.camel_case([label ' ' mask.label]);
-
-    bf.entities = entities;
-
-  else
-
-    bf = bids.File(mask.global.hdr.fname);
-
-    label = '';
-    if isfield(bf.entities, 'label')
-      label = bf.entities.label;
-    end
-
-    bf.entities.label = bids.internal.camel_case([label ' ' mask.label]);
-
-  end
-
-  roiName = bf.filename;
 
 end
