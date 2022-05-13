@@ -299,7 +299,7 @@ function mask = createRoiLabel(mask)
 end
 
 function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
-  
+
   hdr = spm_vol(volumeDefiningImage);
   if numel(hdr) > 1
     err.identifier =  'createRoi:not3DImage';
@@ -352,35 +352,43 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
   if strcmp(mask.def, 'sphere')
 
-    p.filename = '';
-    p.ext = '.nii';
-    p.suffix = 'mask';
-    p.use_schema = false;
+    spec.filename = '';
+    spec.ext = '.nii';
+    spec.suffix = 'mask';
+    spec.use_schema = false;
 
     if ~isempty(volumeDefiningImage)
-      tmp = bids.internal.parse_filename(volumeDefiningImage);
+      tmp = bids.File(volumeDefiningImage);
 
       % if the volume defining image has a space entity we reuse it
-      if isfield(p, 'space')
-        p.entities.space = tmp.space;
+      if isfield(tmp.entities, 'space')
+        spec.entities.space = tmp.entities.space;
       end
 
     end
 
+    label = '';
+    if isfield(spec, 'label')
+      label = spec.entities.label;
+    end
+
+    spec.entities.label = bids.internal.camel_case([label ' ' mask.label]);
+
+    bf = bids.File(spec);
+
   else
 
-    p = bids.internal.parse_filename(mask.global.hdr.fname);
+    bf = bids.File(mask.global.hdr.fname);
+
+    label = '';
+    if isfield(bf.entities, 'label')
+      label = bf.entities.label;
+    end
+
+    bf.entities.label = bids.internal.camel_case([label ' ' mask.label]);
 
   end
 
-  label = '';
-  if isfield(p, 'label')
-    label = p.entities.label;
-  end
-
-  p.entities.label = bids.internal.camel_case([label ' ' mask.label]);
-
-  bidsFile = bids.File(p);
-  roiName = bidsFile.filename;
+  roiName = bf.filename;
 
 end

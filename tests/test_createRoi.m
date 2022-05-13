@@ -49,7 +49,7 @@ function test_createRoi_intersection_mask_sphere()
 
   mask = createRoi('intersection', specification, volumeDefiningImage, outputDir, saveImg);
 
-  basename = 'rspace-MNI_atlas-neurosynth_label-intersection_desc-p10pt00_mask';
+  basename = 'rspace-MNI_atlas-neurosynth_label-visualMotionIntersection_desc-p10pt00_mask';
 
   assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
   assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
