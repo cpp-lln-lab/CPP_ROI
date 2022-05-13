@@ -16,11 +16,11 @@ function status = isBinaryMask(image)
   hdr = spm_vol(image);
 
   if numel(hdr) > 1
-    err.identifier =  'isBinaryMask:notBinaryImage';
+    err.identifier =  'isBinaryMask:not3DImage';
     err.message = sprintf(['the image:', ...
                            '\n\t%s\n', ...
                            'must be a 3D image. It seems to be 4D image with %i volume.'], ...
-                          image);
+                          image, numel(hdr));
     error(err);
   end
 
