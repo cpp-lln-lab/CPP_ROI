@@ -352,29 +352,29 @@ function roiName = createRoiName(mask, volumeDefiningImage)
 
   if strcmp(mask.def, 'sphere')
 
-    spec.filename = '';
-    spec.ext = '.nii';
-    spec.suffix = 'mask';
-    spec.use_schema = false;
+    bf = bids.File('');
+    bf.extension = '.nii';
+    bf.suffix = 'mask';
 
     if ~isempty(volumeDefiningImage)
+
       tmp = bids.File(volumeDefiningImage);
 
       % if the volume defining image has a space entity we reuse it
       if isfield(tmp.entities, 'space')
-        spec.entities.space = tmp.entities.space;
+        entities.space = tmp.entities.space;
       end
 
     end
 
     label = '';
-    if isfield(spec, 'label')
-      label = spec.entities.label;
+    if isfield(bf.entities, 'label')
+      label = bf.entities.label;
     end
 
-    spec.entities.label = bids.internal.camel_case([label ' ' mask.label]);
+    entities.label = bids.internal.camel_case([label ' ' mask.label]);
 
-    bf = bids.File(spec);
+    bf.entities = entities;
 
   else
 
