@@ -1,4 +1,4 @@
-function image = removeSpmPrefix(image, prefix)
+function image = removePrefix(image, prefix)
   %
   % (C) Copyright 2019 CPP ROI developers
 
