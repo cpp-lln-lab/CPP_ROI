@@ -17,11 +17,11 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
   % :type hemisphere: string
   %
   % (C) Copyright 2021 CPP ROI developers
-  
+
   if ~ismember(hemisphere, {'L', 'R'})
-      
-      error('\n Emisphere label %s not valid, try "L" or "R"', hemisphere);
-      
+
+    error('\n Emisphere label %s not valid, try "L" or "R"', hemisphere);
+
   end
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
