@@ -40,3 +40,19 @@ function test_extractRoiFromAtlas_neuromorphometrics()
   delete(fullfile(pwd, '*.json'));
 
 end
+
+function test_extractRoiFromAtlas_visfAtlas()
+
+  roiImage = extractRoiFromAtlas(pwd, 'wavisfAtlasng', 'pFus', 'L');
+
+  assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-visfAtlas_label-pFus_mask.nii'), ...
+                    'file'), ...
+              2);
+
+  vol =  spm_read_vols(spm_vol(roiImage));
+  assertEqual(sum(vol(:) == 1), 655); % check the ROI has the right number of voxel
+
+  delete(fullfile(pwd, '*.nii'));
+  delete(fullfile(pwd, '*.json'));
+
+end
