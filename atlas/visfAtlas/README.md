@@ -95,12 +95,10 @@ Files
 33 = rh\_v3v\_retinotopic
 
 
-**Import visfAtlas in FSLeyes** 
+**Import visfAtlas in FSLeyes**
 
 The atlas management tab in FSLeyes displays a list of all loaded atlases, and allows you to add and remove atlases from FSLeyes. The name of each atlas is shown in the list, but you can click and hold on an atlas to display the path to the atlas specification file.
 
 You can load a new atlas into FSLeyes by clicking the + button and selecting the FSL atlas (.xml) specification file which describes the atlas. To find the management tab; select Settings – Orto View 1 and check the Atlas panel.
 
 The maximum probability map can be visualized by opening the visfATlas\_volume.nii.gz file and loading the correct color map (visfAtlas\_FSL.cmap) through the overlay display panel.
-
-
