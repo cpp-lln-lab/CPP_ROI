@@ -20,7 +20,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
   if ~ismember(hemisphere, {'L', 'R'})
 
-    error('\n Emisphere label %s not valid, try "L" or "R"', hemisphere);
+    error('\n Hemisphere label %s not valid, try "L" or "R"', hemisphere);
 
   end
 
