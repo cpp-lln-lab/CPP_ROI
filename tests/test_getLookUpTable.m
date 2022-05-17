@@ -43,7 +43,7 @@ function test_lut_neuromorpho()
 
 end
 
-fucntion test_lut_visfAtlas()
+function test_lut_visfAtlas()
 
   lut = getLookUpTable('visfatlas');
 
