@@ -22,9 +22,10 @@ function atlasDir = returnAtlasDir(atlas)
       case 'anatomy_toobox'
         atlasDir = fullfile(spm('dir'), 'toolbox', 'Anatomy');
 
-      case 'visfAtlas'
+      case 'visfatlas'
         atlasDir = fullfile(atlasDir, 'visfAtlas');
-
+otherwise
+  error('unknown atlas type');
     end
 
   end
