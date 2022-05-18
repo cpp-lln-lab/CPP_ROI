@@ -28,14 +28,9 @@ function test_createRoiName_non_sphere()
   roiName = createRoiName(mask);
   assertEqual(roiName, 'one-entity_mask.nii');
 
-  % This will likely break when bids-matlab is updated and the order of entities
-  % is imposed by the schema
-  %
-  % label-foo_one-entity_mask.nii
-  %
   mask.label = 'foo';
   roiName = createRoiName(mask);
-  assertEqual(roiName, 'one-entity_label-foo_mask.nii');
+  assertEqual(roiName, 'label-foo_one-entity_mask.nii');
 
 end
 

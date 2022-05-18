@@ -1,12 +1,18 @@
 % (C) Copyright 2021 CPP ROI developers
 
-opt.roi.atlas = 'wang';
-opt.roi.name = {'V1v', 'V1d'};
+clear all;
+clc;
+
+% options : 'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfAtlas'
+opt.roi.atlas = 'visfAtlas';
+
+% to get the list of possible run `getLookUpTable(opt.roi.atlas)`
+opt.roi.name = {'pFus', 'mFus', 'CoS'};
 opt.roi.dir = fullfile(pwd, 'derivatives', 'cpp_roi', 'group');
 
 spm_mkdir(opt.roi.dir);
 
-hemi = {'L', 'H'};
+hemi = {'L', 'R'};
 
 for iHemi = 1:numel(hemi)
 
