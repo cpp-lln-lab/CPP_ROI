@@ -24,9 +24,9 @@ function atlasDir = returnAtlasDir(atlas)
 
       case 'visfatlas'
         atlasDir = fullfile(atlasDir, 'visfAtlas');
-        
+
       case 'neuromorphometrics'
-        
+
       otherwise
         error('unknown atlas type');
     end
