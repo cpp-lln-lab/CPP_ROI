@@ -24,8 +24,8 @@ function atlasDir = returnAtlasDir(atlas)
 
       case 'visfatlas'
         atlasDir = fullfile(atlasDir, 'visfAtlas');
-otherwise
-  error('unknown atlas type');
+      otherwise
+        error('unknown atlas type');
     end
 
   end
