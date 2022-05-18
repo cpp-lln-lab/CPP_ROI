@@ -14,7 +14,7 @@ function atlasDir = returnAtlasDir(atlas)
 
   if nargin > 0
 
-    switch atlas
+    switch lower(atlas)
 
       case 'wang'
         atlasDir = fullfile(atlasDir, 'visual_topography_probability_atlas');
@@ -24,6 +24,9 @@ function atlasDir = returnAtlasDir(atlas)
 
       case 'visfatlas'
         atlasDir = fullfile(atlasDir, 'visfAtlas');
+        
+      case 'neuromorphometrics'
+        
       otherwise
         error('unknown atlas type');
     end

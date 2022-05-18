@@ -43,7 +43,7 @@ end
 
 function test_extractRoiFromAtlas_visfAtlas()
 
-  roiImage = extractRoiFromAtlas(pwd, 'wavisfAtlasng', 'pFus', 'L');
+  roiImage = extractRoiFromAtlas(pwd, 'visfatlas', 'pFus', 'L');
 
   assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-visfAtlas_label-pFus_mask.nii'), ...
                     'file'), ...

@@ -49,7 +49,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
     roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmp(atlasName, 'visfAtlas')
+  elseif strcmp(atlasName, 'visfatlas')
 
     prefix = '';
     if strcmp(hemisphere, 'L')

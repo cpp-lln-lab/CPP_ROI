@@ -18,7 +18,7 @@ function atlasFilename = getAtlasFilename(atlasName)
 
   atlasDir = returnAtlasDir(atlasName);
 
-  if ~ismember(atlasName, {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfAtlas'})
+  if ~ismember(lower(atlasName), {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfatlas'})
     % TODO throw a proper error here
     error('unknown atlas type');
   end
