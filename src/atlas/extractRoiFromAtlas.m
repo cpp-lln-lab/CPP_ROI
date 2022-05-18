@@ -26,9 +26,9 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
 
-  if strcmp(atlasName, 'wang')
+  if strcmpi(atlasName, 'wang')
 
-    if strcmp(hemisphere, 'L')
+    if strcmpi(hemisphere, 'L')
       atlasFile = atlasFile(1, :);
     else
       atlasFile = atlasFile(2, :);
@@ -36,7 +36,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
     roiIdx = strcmp(roiName, lut.ROI);
 
-  elseif strcmp(atlasName, 'neuromorphometrics')
+  elseif strcmpi(atlasName, 'neuromorphometrics')
 
     roiName = regexprep(roiName, '(Left )|(Right )', '');
 
@@ -49,7 +49,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
 
     roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmp(atlasName, 'visfatlas')
+  elseif strcmpi(atlasName, 'visfatlas')
 
     prefix = '';
     if strcmp(hemisphere, 'L')
