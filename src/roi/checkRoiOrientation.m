@@ -6,6 +6,7 @@ function [sts, images] = checkRoiOrientation(referenceImage, imagesToCheck)
   %
   % :param referenceImage: better if fullfile path
   % :type referenceImage: string
+  %
   % :param imagesToCheck: better if fullfile path
   % :type imagesToCheck: string
   %
