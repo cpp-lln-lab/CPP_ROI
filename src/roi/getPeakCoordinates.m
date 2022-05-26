@@ -7,10 +7,10 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
   %
   %     [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(dataImage, roiImage, threshold)
   %
-  % :param dataImage:
+  % :param dataImage: data image (beta / t / Z map) to find the maximum in
   % :type dataImage: path
   %
-  % :param roiImage:
+  % :param roiImage: binary mask limiting the volume where to find the peak
   % :type roiImage: path
   %
   % :param threshold: threshold above which peak must be found
@@ -31,7 +31,7 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
 
   dataImage = args.Results.dataImage;
   roiImage = args.Results.roiImage;
-  threshold = args.Results.criticalT;
+  threshold = args.Results.threshold;
 
   voxelCoord = nan(1, 3);
   worldCoord = nan(1, 3);
