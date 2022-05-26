@@ -19,6 +19,9 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
   %
   % (C) Copyright 2021 CPP ROI developers
 
+  % TODO
+  % if no threshold is requested images do not need to be at the samre resolution
+
   isFile = @(x) exist(x, 'file') == 2;
 
   args = inputParser;
