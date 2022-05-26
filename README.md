@@ -1,5 +1,4 @@
-[![miss_hit_style](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_style.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_style.yml)
-[![miss_hit_quality](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_quality.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit_quality.yml)
+[![miss_hit](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml)
 [![tests and coverage with matlab](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml)
 [![codecov](https://codecov.io/gh/cpp-lln-lab/CPP_ROI/branch/main/graph/badge.svg?token=8IoRQtbFUV)](https://codecov.io/gh/cpp-lln-lab/CPP_ROI)
 
