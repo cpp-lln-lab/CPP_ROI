@@ -3,7 +3,18 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
   % This function gets the coordinates of a peak within a specified region of
   % interest.
   %
-  % [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(dataImage, roiImage, criticalT)
+  % USAGE::
+  %
+  %     [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(dataImage, roiImage, threshold)
+  %
+  % :param dataImage:
+  % :type dataImage: path
+  %
+  % :param roiImage:
+  % :type roiImage: path
+  %
+  % :param threshold: threshold above which peak must be found
+  % :type threshold: numerical
   %
   %
   % (C) Copyright 2021 CPP ROI developers
@@ -14,13 +25,13 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
 
   args.addRequired('dataImage', isFile);
   args.addRequired('roiImage',  isFile);
-  args.addOptional('criticalT', 0, @isnumeric);
+  args.addOptional('threshold', 0, @isnumeric);
 
   args.parse(varargin{:});
 
   dataImage = args.Results.dataImage;
   roiImage = args.Results.roiImage;
-  criticalT = args.Results.criticalT;
+  threshold = args.Results.criticalT;
 
   voxelCoord = nan(1, 3);
   worldCoord = nan(1, 3);
@@ -31,11 +42,11 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
     return
   end
 
-  if maxVal < criticalT
+  if maxVal < threshold
     warning('getPeakCoordinates:noMaxBeyondThreshold', ...
             'No max value found beyond threshold %f in image:\n %s\n', ...
             dataImage, ...
-            criticalT);
+            threshold);
     return
   end
 
@@ -51,7 +62,7 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
     warning('getPeakCoordinates:severalMaxBeyondThreshold', ...
             'Several equal max value found beyond threshold %f in image:\n %s\n', ...
             dataImage, ...
-            criticalT);
+            threshold);
     return
   end
 

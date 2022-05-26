@@ -22,6 +22,8 @@ function test_getPeakCoordinates_basic()
   assertEqual(voxelCoord, [28 8 24]);
   assertElementsAlmostEqual(maxVal, 1.6212, 'absolute', 1e-3);
 
+  delete('*hemi-L_space-MNI_atlas-wang_label-V1v_mask.*');
+
 end
 
 function value = thisDir()
