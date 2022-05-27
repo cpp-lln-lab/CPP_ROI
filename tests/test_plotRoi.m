@@ -40,6 +40,26 @@ function test_test_plotDataInRoi_many_rois_and_data()
 
 end
 
+function test_test_plotDataInRoi_many_rois_as_cols_and_data()
+
+  mask1 = createDummyMask(1);
+  mask2 = createDummyMask(2);
+  mask3 = createDummyMask(3);
+  mask4 = createDummyMask(4);
+  data1 = createDummyData(1);
+  data2 = createDummyData(2);
+  data3 = createDummyData(3);
+  data4 = createDummyData(4);
+
+  mask = cellstr(cat(1, mask1, mask2, mask3, mask4));
+  data = cellstr(cat(1, data1, data2, data3, data4));
+
+  plotDataInRoi(data, mask, 'roiAs', 'cols');
+
+  delete *.nii;
+
+end
+
 function M = mat()
   M = ...
    [-3     0     0    84; ...
