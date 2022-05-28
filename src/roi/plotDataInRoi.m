@@ -29,6 +29,14 @@ function figHandle = plotDataInRoi(varargin)
   % :param dataLabel: strings to use to label the data rows or columns.
   % :type dataLabel: cellstr
   %
+  % :param maxVox: max of scale for nb of voxels. Default to [].
+  % :type maxVox: positive integer
+  %
+  % :param nbBins: use the same number of bins for all graphs.
+  %                By default based on the number of unique values across all
+  %                the datasets.
+  % :type nbBins: positive integer
+  %
   %
   % EXAMPLE::
   %
@@ -58,6 +66,8 @@ function figHandle = plotDataInRoi(varargin)
   args.addParameter('scaleFactor', 1, @isnumeric);
   args.addParameter('roiAs', 'rows', rowOrCol);
   args.addParameter('dataLabel', {}, @iscellstr);
+  args.addParameter('maxVox', [], @isnumeric);
+  args.addParameter('nbBins', [], @isnumeric);
 
   args.parse(varargin{:});
 
@@ -66,6 +76,7 @@ function figHandle = plotDataInRoi(varargin)
   scaleFactor = args.Results.scaleFactor;
   roiAs = args.Results.roiAs;
   dataLabel = args.Results.dataLabel;
+  nbBins = args.Results.nbBins;
 
   if ischar(dataImages)
     dataImages = {dataImages};
@@ -95,16 +106,11 @@ function figHandle = plotDataInRoi(varargin)
 
   %% collect info to adapt the graphs later on
 
-  % max of scale for data values
-  maxVox = [];
+  nbBinsList = [];
 
-  % limit axis of axis for ROI (as nb of voxels)
+  % limit axis of axis for ROI (nb of voxels)
   MIN = [];
   MAX = [];
-
-  % use the same number of bins for all graphs
-  % based on the number of unique values across all the datasets
-  nbBins = [];
 
   % to plot all the modes
   modes = [];
@@ -133,7 +139,7 @@ function figHandle = plotDataInRoi(varargin)
 
       % modes and nbBins work better on rounded values
       modes(end + 1) = mode(round(data{idxSubplot}));
-      nbBins(end + 1) = numel(unique(round(data{idxSubplot})));
+      nbBinsList(end + 1) = numel(unique(round(data{idxSubplot})));
 
       subplotList(iRow, iCol) = idxSubplot;
 
@@ -143,16 +149,11 @@ function figHandle = plotDataInRoi(varargin)
 
   end
 
-  nbBins = max(nbBins);
-
-  for i = 1:numel(data)
-    tmp = hist(data{i}, nbBins);
-    if isempty(tmp)
-      maxVox(end + 1) = nan;
-    else
-      maxVox(end + 1) = max(tmp);
-    end
+  if isempty(nbBins)
+    nbBins = max(nbBinsList);
   end
+
+  maxVox = getMaxVox(args, data);
 
   %% plot histogram and mode
 
@@ -191,7 +192,11 @@ function figHandle = plotDataInRoi(varargin)
 
   end
 
-  %% label axis
+  labelAxis(roiAs, rows, cols, subplotList, roiImages, dataLabel);
+
+end
+
+function labelAxis(roiAs, rows, cols, subplotList, roiImages, dataLabel)
 
   if strcmp(roiAs, 'rows')
 
@@ -235,6 +240,28 @@ function figHandle = plotDataInRoi(varargin)
       end
       l = ylabel(sprintf('%s', label));
       set(l, 'FontWeight', 'bold');
+
+    end
+
+  end
+
+end
+
+function maxVox = getMaxVox(args, data)
+
+  maxVox = args.Results.maxVox;
+
+  if isempty(maxVox)
+
+    for i = 1:numel(data)
+
+      tmp = hist(data{i}, nbBins);
+
+      if isempty(tmp)
+        maxVox(end + 1) = nan;
+      else
+        maxVox(end + 1) = max(tmp);
+      end
 
     end
 
