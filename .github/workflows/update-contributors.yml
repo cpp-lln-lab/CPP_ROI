@@ -19,12 +19,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Tributors Update
-      
+
         # Important! Update to release https://github.com/con/tributors
         uses: con/tributors@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:        
+        with:
 
           # Single text list (space separated) of parsers, leave unset to auto-detect
           parsers: unset
@@ -62,7 +62,7 @@ jobs:
           git config --global user.email "github-actions@users.noreply.github.com"
 
           git status
- 
+
           # Make sure to add new files or path/*
           git add .tributors
           git add README.md
