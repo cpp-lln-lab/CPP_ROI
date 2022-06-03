@@ -5,8 +5,14 @@ on:
     branches:
       - dev
       - main
+    paths:
+      - '**.m'
+      - '.github/workflows/*.m'      
   pull_request:
     branches: ['*']
+    paths:
+      - '**.m'
+      - '.github/workflows/*.m'       
   schedule:
     - cron: "1 1 1 * *"
 
