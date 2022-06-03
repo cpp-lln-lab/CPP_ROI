@@ -1,9 +1,7 @@
 [![miss_hit](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml)
 [![tests and coverage with matlab](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml)
 [![codecov](https://codecov.io/gh/cpp-lln-lab/CPP_ROI/branch/main/graph/badge.svg?token=8IoRQtbFUV)](https://codecov.io/gh/cpp-lln-lab/CPP_ROI)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)
 
 # CPP ROI
 
@@ -72,11 +70,12 @@ as a submodule, and intitialized when running `initCppSpm`.
             Probabilistic Maps of Visual Topography in Human Cortex. Cerebral
             cortex (New York, N.Y. : 1991), 25(10), 3911–3931.
             https://doi.org/10.1093/cercor/bhu277
-    -   the probabilistic functional atlas of human occipito-temporal visual cortex
-        -   Rosenke, M., van Hoof, R., van den Hurk, J., Grill-Spector, K., & Goebel, R. (2021).
-            A Probabilistic Functional Atlas of Human Occipito-Temporal Visual Cortex.
-            Cerebral cortex (New York, N.Y. : 1991), 31(1), 603–619.
-            https://doi.org/10.1093/cercor/bhaa246
+    -   the probabilistic functional atlas of human occipito-temporal visual
+        cortex
+        -   Rosenke, M., van Hoof, R., van den Hurk, J., Grill-Spector, K., &
+            Goebel, R. (2021). A Probabilistic Functional Atlas of Human
+            Occipito-Temporal Visual Cortex. Cerebral cortex (New York, N.Y. :
+            1991), 31(1), 603–619. https://doi.org/10.1093/cercor/bhaa246
 
 Also includes:
 
