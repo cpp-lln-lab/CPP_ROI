@@ -1,8 +1,8 @@
 .PHONY: clean install_dev
 
-clean:
+clean: clean_lib
 	rm -rf coverage*
-	rm version.txt
+	rm -f version.txt
 
 clean_lib:
 	rm -rf lib/bids-matlab
