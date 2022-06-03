@@ -153,7 +153,7 @@ function figHandle = plotDataInRoi(varargin)
     nbBins = max(nbBinsList);
   end
 
-  maxVox = getMaxVox(args, data);
+  maxVox = getMaxVox(args, data, nbBins);
 
   %% plot histogram and mode
 
@@ -247,7 +247,7 @@ function labelAxis(roiAs, rows, cols, subplotList, roiImages, dataLabel)
 
 end
 
-function maxVox = getMaxVox(args, data)
+function maxVox = getMaxVox(args, data, nbBins)
 
   maxVox = args.Results.maxVox;
 

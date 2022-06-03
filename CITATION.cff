@@ -2,7 +2,7 @@ cff-version: 1.2.0
 
 title: "CPP ROI"
 
-version: v0.2.0dev
+version: 0.2.0dev
 
 abstract: Set of Octave and Matlab functions, demos and scripts to help manage ROIs and to play nice with BIDS datasets.
 

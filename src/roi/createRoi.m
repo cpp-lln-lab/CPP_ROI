@@ -332,21 +332,8 @@ function outputFile = saveRoi(mask, volumeDefiningImage, outputDir)
 
   % use Marsbar to save as a .mat and then convert that to an image
   % in the correct space
-  tempFile = spm_file(roiName, ...
-                      'ext', ...
-                      'mat');
-  saveroi(roiObject, ...
-          fullfile(outputDir, tempFile));
-
   outputFile = fullfile(outputDir, roiName);
-
-  mars_rois2img(fullfile(outputDir, tempFile), ...
-                outputFile, ...
-                spm_vol(volumeDefiningImage));
-  delete(fullfile(outputDir, tempFile));
-
-  % delete label files
-  delete(fullfile(outputDir, '*_mask_labels.mat'));
+  save_as_image(roiObject, outputFile);
 
   json = bids.derivatives_json(outputFile);
   bids.util.jsonencode(json.filename, json.content);
