@@ -12,7 +12,7 @@ function [reslicedImages, matlabbatch] = resliceRoiImages(referenceImage, images
   % :param imagesToCheck:
   % :type imagesToCheck: path or cellstr
   %
-  % :param dryRun: Only returns
+  % :param dryRun: Returns the matlabbatch without running it.
   % :type dryRun: logical
   %
   % (C) Copyright 2021 CPP ROI developers
@@ -20,8 +20,11 @@ function [reslicedImages, matlabbatch] = resliceRoiImages(referenceImage, images
   % TODO
   % - allow option to binarize output?
 
+  if nargin < 3
+    dryRun = false;
+  end
+
   matlabbatch = {};
-  reslicedImages = '';
 
   % check if files are in the same space
   % if not we reslice the ROI to have the same resolution as the data image
