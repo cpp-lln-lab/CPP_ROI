@@ -63,17 +63,9 @@ as a submodule, and intitialized when running `initCppSpm`.
     -   the SPM Anatomy toolbox (INSERT URL)
     -   the SPM neuromorphometric atlas
     -   neurosynth probabilty maps
-    -   the probabilistic maps of visual topography in human cortex:
+    -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
-        -   Wang, L., Mruczek, R. E., Arcaro, M. J., & Kastner, S. (2015).
-            Probabilistic Maps of Visual Topography in Human Cortex. Cerebral
-            cortex (New York, N.Y. : 1991), 25(10), 3911–3931.
-            https://doi.org/10.1093/cercor/bhu277
-    -   the probabilistic functional atlas of human occipito-temporal visual cortex
-        -   Rosenke, M., van Hoof, R., van den Hurk, J., Grill-Spector, K., & Goebel, R. (2021).
-            A Probabilistic Functional Atlas of Human Occipito-Temporal Visual Cortex.
-            Cerebral cortex (New York, N.Y. : 1991), 31(1), 603–619.
-            https://doi.org/10.1093/cercor/bhaa246
+    -   the probabilistic functional atlas of human occipito-temporal visual cortex [@rosenke2020]
 
 Also includes:
 
