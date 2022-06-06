@@ -1,0 +1,87 @@
+{
+    "projectName": "CPP_ROI",
+    "projectOwner": "cpp-lln-lab",
+    "repoType": "github",
+    "repoHost": "https://github.com",
+    "files": [
+        "README.md"
+    ],
+    "imageSize": 100,
+    "commit": true,
+    "commitConvention": "none",
+    "contributors": [
+        {
+            "login": "marcobarilari",
+            "name": "Marco Barilari",
+            "contributions": [
+                "code",
+                "doc",
+                "ideas"
+            ],
+            "profile": "https://github.com/marcobarilari",
+            "avatar_url": [
+                "https://avatars.githubusercontent.com/u/38101692?v=4"
+            ]
+        },
+        {
+            "login": "Remi-Gau",
+            "name": "Remi Gau",
+            "contributions": [
+                "code",
+                "doc",
+                "infra",
+                "design",
+                "review",
+                "bug",
+                "test"
+            ],
+            "profile": "https://github.com/Remi-Gau",
+            "avatar_url": [
+                "https://avatars.githubusercontent.com/u/6961185?v=4"
+            ]
+        },
+        {
+            "login": "JeanneCaronGuyon ",
+            "name": "Jeanne Caron-Guyon ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/8718798?v=4",
+            "profile": "https://github.com/JeanneCaronGuyon",
+            "contributions": [
+                "ideas",
+                "userTesting"
+            ]
+        },
+        {
+            "login": "iqrashahzad14",
+            "name": "Iqra Shahzad",
+            "avatar_url": "https://avatars.githubusercontent.com/u/75671348?v=4",
+            "profile": "https://github.com/iqrashahzad14",
+            "contributions": [
+                "userTesting"
+            ]
+        },
+        {
+            "login": "fedefalag",
+            "name": "Federica Falagiarda",
+            "avatar_url": "https://avatars2.githubusercontent.com/u/50373329?v=4",
+            "profile": "https://github.com/fedefalag",
+            "contributions": [
+                "bug",
+                "userTesting"
+            ]
+        },
+        {
+            "login": "CerenB",
+            "name": "Ceren Battal",
+            "contributions": [
+                "code",
+                "review",
+                "userTesting"
+            ],
+            "profile": "https://github.com/CerenB",
+            "avatar_url": [
+                "https://avatars.githubusercontent.com/u/10451654?v=4"
+            ]
+        }
+    ],
+    "contributorsPerLine": 7
+}
