@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+
+title: "CPP ROI"
+
+version: 0.3.0
+
+abstract: Set of Octave and Matlab functions, demos and scripts to help manage ROIs and to play nice with BIDS datasets.
+
+message: "If you use this software, please cite it as below."
+
+repository-code: "https://github.com/cpp-lln-lab/CPP_ROI"
+
+contact:
+  - affiliation: "Université catholique de Louvain"
+    email: remi.gau@uclouvain.be
+    family-names: Gau
+    given-names: Rémi
+
+authors:
+- family-names: "Gau"
+  given-names: "Rémi"
+  orcid: "https://orcid.org/0000-0002-1535-9767"
+  affiliation: "Université catholique de Louvain"
+
+- family-names: "Barilari"
+  given-names: "Marco"
+  orcid: "https://orcid.org/0000-0002-3313-3120"
+  affiliation: "Université catholique de Louvain"
+
+- family-names: "Battal"
+  given-names: "Ceren"
+  orcid: "https://orcid.org/0000-0002-9844-7630"
+  affiliation: "Université catholique de Louvain"
+
+- family-names: "Falagiarda"
+  given-names: "Federica"
+  orcid: "https://orcid.org/0000-0001-7844-1605"
+  affiliation: "Université catholique de Louvain"
+
+- family-names: "Caron-Guyon"
+  given-names: "Jeanne"
+  orcid: "https://orcid.org/0000-0001-8681-5267"
+  affiliation: "Université catholique de Louvain"
+
+license: GPL-3.0
+
+keywords:
+  - BIDS
+  - brain imaging data structure
+  - neuroimaging
+  - MRI
+  - MATLAB
+  - Octave
+  - SPM
+  - ROI
+  - region of interest

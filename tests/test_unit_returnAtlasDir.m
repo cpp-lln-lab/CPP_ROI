@@ -10,7 +10,7 @@ end
 
 function test_returnAtlasDir_default()
 
-  atlasDir = returnAtlasDir('neuromorphometric');
+  atlasDir = returnAtlasDir('neuromorphometrics');
 
   assertEqual(atlasDir, returnAtlasDir());
 

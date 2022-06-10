@@ -8,6 +8,18 @@ function test_suite = test_unit_renameNeuroSynth %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_renameNeuroSynth_error()
+
+  inputImage = fullfile(pwd, 'hMT.nii.gz');
+  system(['touch ' inputImage]);
+
+  assertExceptionThrown(@()renameNeuroSynth(inputImage), ...
+                        'renameNeuroSynth:nonValidNeurosynthZmap');
+
+  delete(inputImage);
+
+end
+
 function test_renameNeuroSynth()
 
   inputImage = fullfile(pwd, 'motion_association-test_z_FDR_0.01.nii.gz');
@@ -15,7 +27,7 @@ function test_renameNeuroSynth()
 
   outputImage = renameNeuroSynth(inputImage);
 
-  expected = fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii.gz');
+  expected = fullfile(pwd, 'space-MNI_atlas-neurosynth_label-motion_probseg.nii.gz');
   assertEqual(exist(outputImage, 'file'), 2);
 
   assertEqual(outputImage, expected);
@@ -31,7 +43,7 @@ function test_renameNeuroSynth_unzipped()
 
   outputImage = renameNeuroSynth(inputImage);
 
-  expected = fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii');
+  expected = fullfile(pwd, 'space-MNI_atlas-neurosynth_label-motion_probseg.nii');
   assertEqual(exist(outputImage, 'file'), 2);
 
   assertEqual(outputImage, expected);

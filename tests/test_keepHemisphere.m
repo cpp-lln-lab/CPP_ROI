@@ -8,7 +8,7 @@ function test_suite = test_keepHemisphere %#ok<*STOUT>
   initTestSuite;
 end
 
-function test_renameFile()
+function test_keepHemisphere_basic()
 
   inputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'demos', 'roi');
 
@@ -17,14 +17,20 @@ function test_renameFile()
 
   zMap = renameNeuroSynth(zMap);
 
-  % keep only one hemisphere and appends a 'hemi-[hemisphere label]'
+  % keep only one hemisphere and add a 'hemi-[hemisphere label]' entity
   leftRoiImage = keepHemisphere(zMap, 'L');
   rightRoiImage = keepHemisphere(zMap, 'R');
 
+  basename = 'space-MNI_atlas-neurosynth_label-visualMotion_probseg.nii';
+
   assertEqual(exist(fullfile(inputDir, 'inputs', ...
-                             'space-MNI_label-neurosynthVisualMotion_hemi-L_probseg.nii'), 'file'), 2);
+                             ['hemi-L_' basename]), ...
+                    'file'), ...
+              2);
   assertEqual(exist(fullfile(inputDir, 'inputs', ...
-                             'space-MNI_label-neurosynthVisualMotion_hemi-R_probseg.nii'), 'file'), 2);
+                             ['hemi-R_' basename]), ...
+                    'file'), ...
+              2);
 
   % TODO check the data content
 

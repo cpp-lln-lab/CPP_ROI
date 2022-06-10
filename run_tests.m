@@ -6,18 +6,24 @@ warning('OFF');
 
 spm('defaults', 'fMRI');
 
-testFolder = fullfile(fileparts(mfilename('fullpath')), 'tests');
+thisDir = fullfile(fileparts(mfilename('fullpath')));
+
+testFolder = fullfile(thisDir, 'tests');
 
 addpath(fullfile(testFolder, 'utils'));
+addpath(fullfile(thisDir, 'atlas'));
 
-folderToCover = fullfile(testFolder, '..', 'src');
+if isdir(fullfile(thisDir, 'lib', 'bids-matlab'))
+  addpath(fullfile(thisDir, 'lib', 'bids-matlab'));
+end
 
-success = moxunit_runtests( ...
-                           testFolder, ...
+folderToCover = fullfile(thisDir, 'src');
+
+success = moxunit_runtests(testFolder, ...
                            '-verbose', '-recursive', '-with_coverage', ...
                            '-cover', folderToCover, ...
                            '-cover_xml_file', 'coverage.xml', ...
-                           '-cover_html_dir', fullfile(pwd, 'coverage_html'));
+                           '-cover_html_dir', fullfile(thisDir, 'coverage_html'));
 
 if success
   system('echo 0 > test_report.log');

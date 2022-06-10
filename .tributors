@@ -1,0 +1,33 @@
+{
+    "marcobarilari": {
+        "name": "Marco Barilari",
+        "blog": "https://github.com/marcobarilari",
+        "orcid": "0000-0002-3313-3120"
+    },
+    "Remi-Gau": {
+        "name": "Remi Gau",
+        "blog": "https://github.com/Remi-Gau",
+        "orcid": "0000-0002-1535-9767",
+        "affiliation": "Université catholique de Louvain"
+    },
+    "JeanneCaronGuyon ": {
+        "name": "Jeanne Caron-Guyon ",
+        "blog": "https://github.com/JeanneCaronGuyon"
+    },
+    "iqrashahzad14": {
+        "name": "Iqra Shahzad",
+        "blog": "https://github.com/iqrashahzad14"
+    },
+    "fedefalag": {
+        "name": "Federica Falagiarda",
+        "blog": "https://github.com/fedefalag",
+        "orcid": "0000-0001-7844-1605",
+        "affiliation": "Université catholique de Louvain"
+    },
+    "CerenB": {
+        "name": "Ceren Battal",
+        "blog": "https://github.com/CerenB",
+        "orcid": "0000-0002-9844-7630",
+        "affiliation": "Université catholique de Louvain"
+    }
+}

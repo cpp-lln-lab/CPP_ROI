@@ -23,7 +23,8 @@ copyright = "2021, the CPP ROI dev team"
 author = "the CPP ROI dev team"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.2.0"
+with open('../../version.txt', encoding='utf-8') as version_file:
+    release = version_file.read()
 
 
 # -- General configuration ---------------------------------------------------
@@ -31,7 +32,12 @@ release = "v0.2.0"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinxcontrib.matlab", "sphinx.ext.autodoc", "sphinx_copybutton"]
+extensions = [
+    "sphinxcontrib.matlab",
+    "sphinx.ext.autodoc",
+    "sphinx_copybutton",
+    "myst_parser",
+]
 matlab_src_dir = os.path.dirname(os.path.abspath("../../src"))
 primary_domain = "mat"
 

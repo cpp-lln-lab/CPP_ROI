@@ -43,6 +43,15 @@ function test_lut_neuromorpho()
 
 end
 
+function test_lut_visfAtlas()
+
+  lut = getLookUpTable('visfatlas');
+
+  assertEqual(lut.label, [1:33]');
+  assertEqual(lut.ROI{1}, 'lh_mFus');
+
+end
+
 function cleanUp()
 
   pause(1);

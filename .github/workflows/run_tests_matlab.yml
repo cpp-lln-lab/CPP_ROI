@@ -5,9 +5,14 @@ on:
     branches:
       - dev
       - main
-      - master
+    paths:
+      - '**.m'
+      - '.github/workflows/*.m'
   pull_request:
     branches: ['*']
+    paths:
+      - '**.m'
+      - '.github/workflows/*.m'
   schedule:
     - cron: "1 1 1 * *"
 
@@ -41,8 +46,7 @@ jobs:
           git clone https://github.com/MOcov/MOcov.git --depth 1
 
       - name: Add bids-matlab
-        run: |
-          git clone https://github.com/bids-standard/bids-matlab.git --depth 1
+        run: make install_dev
 
       - name: Run commands
         uses: matlab-actions/run-command@v1.0.1

@@ -12,7 +12,7 @@ function test_extractRoiFromAtlas_wang()
 
   roiImage = extractRoiFromAtlas(pwd, 'wang', 'V1v', 'L');
 
-  assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_label-V1v_desc-wang_mask.nii'), ...
+  assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-wang_label-V1v_mask.nii'), ...
                     'file'), ...
               2);
 
@@ -29,12 +29,28 @@ function test_extractRoiFromAtlas_neuromorphometrics()
   roiImage = extractRoiFromAtlas(pwd, 'neuromorphometrics', 'Amygdala', 'L');
 
   assertEqual(exist(fullfile(pwd, ...
-                             'hemi-L_space-MNI_label-Amygdala_desc-neuromorphometrics_mask.nii'), ...
+                             'hemi-L_space-MNI_atlas-neuromorphometrics_label-Amygdala_mask.nii'), ...
                     'file'), ...
               2);
 
   vol =  spm_read_vols(spm_vol(roiImage));
   assertEqual(sum(vol(:) == 1), 375); % check the ROI has the right number of voxel
+
+  delete(fullfile(pwd, '*.nii'));
+  delete(fullfile(pwd, '*.json'));
+
+end
+
+function test_extractRoiFromAtlas_visfAtlas()
+
+  roiImage = extractRoiFromAtlas(pwd, 'visfatlas', 'pFus', 'L');
+
+  assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-visfatlas_label-pFus_mask.nii'), ...
+                    'file'), ...
+              2);
+
+  vol =  spm_read_vols(spm_vol(roiImage));
+  assertEqual(sum(vol(:) == 1), 655); % check the ROI has the right number of voxel
 
   delete(fullfile(pwd, '*.nii'));
   delete(fullfile(pwd, '*.json'));
