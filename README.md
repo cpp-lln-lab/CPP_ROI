@@ -64,18 +64,9 @@ as a submodule, and intitialized when running `initCppSpm`.
     -   the SPM Anatomy toolbox (INSERT URL)
     -   the SPM neuromorphometric atlas
     -   neurosynth probabilty maps
-    -   the probabilistic maps of visual topography in human cortex:
+    -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
-        -   Wang, L., Mruczek, R. E., Arcaro, M. J., & Kastner, S. (2015).
-            Probabilistic Maps of Visual Topography in Human Cortex. Cerebral
-            cortex (New York, N.Y. : 1991), 25(10), 3911–3931.
-            https://doi.org/10.1093/cercor/bhu277
-    -   the probabilistic functional atlas of human occipito-temporal visual
-        cortex
-        -   Rosenke, M., van Hoof, R., van den Hurk, J., Grill-Spector, K., &
-            Goebel, R. (2021). A Probabilistic Functional Atlas of Human
-            Occipito-Temporal Visual Cortex. Cerebral cortex (New York, N.Y. :
-            1991), 31(1), 603–619. https://doi.org/10.1093/cercor/bhaa246
+    -   the probabilistic functional atlas of human occipito-temporal visual cortex [@rosenke2020]
 
 Also includes:
 
@@ -87,10 +78,12 @@ Also includes:
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/marcobarilari"><img src="https://avatars.githubusercontent.com/u/38101692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marco Barilari</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=marcobarilari" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Remi-Gau"><img src="https://avatars.githubusercontent.com/u/6961185?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Remi Gau</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=Remi-Gau" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/marcobarilari"><img src="https://avatars.githubusercontent.com/u/38101692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marco Barilari</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=marcobarilari" title="Code">💻</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=marcobarilari" title="Documentation">📖</a> <a href="#ideas-marcobarilari" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/Remi-Gau"><img src="https://avatars.githubusercontent.com/u/6961185?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Remi Gau</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=Remi-Gau" title="Code">💻</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=Remi-Gau" title="Documentation">📖</a> <a href="#infra-Remi-Gau" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#design-Remi-Gau" title="Design">🎨</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/pulls?q=is%3Apr+reviewed-by%3ARemi-Gau" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/issues?q=author%3ARemi-Gau" title="Bug reports">🐛</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=Remi-Gau" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/JeanneCaronGuyon"><img src="https://avatars.githubusercontent.com/u/8718798?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeanne Caron-Guyon </b></sub></a><br /><a href="#ideas-JeanneCaronGuyon " title="Ideas, Planning, & Feedback">🤔</a> <a href="#userTesting-JeanneCaronGuyon " title="User Testing">📓</a></td>
+    <td align="center"><a href="https://github.com/iqrashahzad14"><img src="https://avatars.githubusercontent.com/u/75671348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Iqra Shahzad</b></sub></a><br /><a href="#userTesting-iqrashahzad14" title="User Testing">📓</a></td>
     <td align="center"><a href="https://github.com/fedefalag"><img src="https://avatars2.githubusercontent.com/u/50373329?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Federica Falagiarda</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/issues?q=author%3Afedefalag" title="Bug reports">🐛</a> <a href="#userTesting-fedefalag" title="User Testing">📓</a></td>
-    <td align="center"><a href="https://github.com/CerenB"><img src="https://avatars.githubusercontent.com/u/10451654?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ceren Battal</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=CerenB" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/CerenB"><img src="https://avatars.githubusercontent.com/u/10451654?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ceren Battal</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=CerenB" title="Code">💻</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/pulls?q=is%3Apr+reviewed-by%3ACerenB" title="Reviewed Pull Requests">👀</a> <a href="#userTesting-CerenB" title="User Testing">📓</a></td>
   </tr>
 </table>
 

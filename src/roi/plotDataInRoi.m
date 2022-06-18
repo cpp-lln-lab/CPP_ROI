@@ -222,7 +222,11 @@ function labelAxis(roiAs, rows, cols, subplotList, roiImages, dataLabel)
       subplot(rows, cols, subplotList(1, i));
 
       bf = bids.File(roiImages{i});
-      title(sprintf('roi: %s', bf.entities.label));
+      desc = '';
+      if isfield(bf.entities, 'desc')
+        desc = sprintf('- desc: %s', bf.entities.desc);
+      end
+      title(sprintf('roi: %s%s', bf.entities.label, desc));
 
       subplot(rows, cols, subplotList(end, i));
 
