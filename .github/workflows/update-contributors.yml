@@ -3,7 +3,7 @@ name: allcontributors-auto-detect
 on:
   schedule:
     # Run nightly 1am
-    - cron: 0 1 * * *
+    - cron: 0 1 1 * *
 
   # You can also have it check for changes on each push to master
   push:
