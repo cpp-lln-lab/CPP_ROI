@@ -41,10 +41,10 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: BIDS schema update
+          commit-message: update tributors
           base: main
           delete-branch: true
-          title: '[BOT] update git submodules'
+          title: '[BOT] update tributors'
           body: 'done via this [GitHub Action](https://github.com/cpp-lln-lab/CPP_ROI/blob/main/.github/workflows/update-contributors.yml)'
 
       - name: Check outputs
