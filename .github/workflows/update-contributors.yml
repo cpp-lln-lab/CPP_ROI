@@ -45,7 +45,7 @@ jobs:
           base: main
           delete-branch: true
           title: '[BOT] update git submodules'
-          body: 'done via this [GitHub Action](https://github.com/cpp-lln-lab/CPP_ROI/blob/main/.github/workflows/update-contributors.yml)'            
+          body: 'done via this [GitHub Action](https://github.com/cpp-lln-lab/CPP_ROI/blob/main/.github/workflows/update-contributors.yml)'
 
       - name: Check outputs
         run: |
