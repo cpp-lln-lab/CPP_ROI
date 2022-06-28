@@ -45,6 +45,10 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
 
   hdr.fname = spm_file(inputImage, 'filename', bf.filename);
 
+  if not(any(vol(:)))
+    warning('This image will be empty:\n\t%s\n');
+  end
+
   spm_write_vol(hdr, vol);
 
   outputImage = hdr.fname;
