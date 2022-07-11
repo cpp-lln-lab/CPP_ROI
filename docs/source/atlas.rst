@@ -6,3 +6,4 @@ Atlas
 .. autofunction:: extractRoiFromAtlas
 .. autofunction:: extractRoiByLabel
 .. autofunction:: labelClusters
+.. autofunction:: copyAtlasToSpmDir
