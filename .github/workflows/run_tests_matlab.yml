@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  tests_matlab:
     runs-on: ubuntu-20.04
 
     steps:
