@@ -9,6 +9,10 @@ end
 
 function test_copyAtlasToSpmDir_basic()
 
+  if isGithubCi()
+    return
+  end
+
   copyAtlasToSpmDir('AAL', 'verbose', false);
 
   spmAtlasDir = fullfile(spm('dir'), 'atlas');
