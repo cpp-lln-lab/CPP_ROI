@@ -84,6 +84,7 @@ Also includes:
     <td align="center"><a href="https://github.com/iqrashahzad14"><img src="https://avatars.githubusercontent.com/u/75671348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Iqra Shahzad</b></sub></a><br /><a href="#userTesting-iqrashahzad14" title="User Testing">📓</a></td>
     <td align="center"><a href="https://github.com/fedefalag"><img src="https://avatars2.githubusercontent.com/u/50373329?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Federica Falagiarda</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/issues?q=author%3Afedefalag" title="Bug reports">🐛</a> <a href="#userTesting-fedefalag" title="User Testing">📓</a></td>
     <td align="center"><a href="https://github.com/CerenB"><img src="https://avatars.githubusercontent.com/u/10451654?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ceren Battal</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=CerenB" title="Code">💻</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/pulls?q=is%3Apr+reviewed-by%3ACerenB" title="Reviewed Pull Requests">👀</a> <a href="#userTesting-CerenB" title="User Testing">📓</a></td>
+    <td align="center"><img src="?s=100" width="100px;" alt=""/><br /><sub><b>dependabot[bot]</b></sub><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=dependabot[bot]" title="Code">💻</a></td>
   </tr>
 </table>
 

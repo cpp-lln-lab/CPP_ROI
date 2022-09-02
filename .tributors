@@ -29,5 +29,9 @@
         "blog": "https://github.com/CerenB",
         "orcid": "0000-0002-9844-7630",
         "affiliation": "Université catholique de Louvain"
+    },
+    "dependabot[bot]": {
+        "name": "dependabot[bot]",
+        "blog": null
     }
 }

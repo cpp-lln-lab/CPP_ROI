@@ -81,6 +81,17 @@
             "avatar_url": [
                 "https://avatars.githubusercontent.com/u/10451654?v=4"
             ]
+        },
+        {
+            "login": "dependabot[bot]",
+            "name": "dependabot[bot]",
+            "contributions": [
+                "code"
+            ],
+            "profile": null,
+            "avatar_url": [
+                null
+            ]
         }
     ],
     "contributorsPerLine": 7
