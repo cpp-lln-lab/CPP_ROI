@@ -3,7 +3,7 @@ name: allcontributors-auto-detect
 on:
   schedule:
     # Run nightly 1am
-    - cron: 0 1 * * *
+    - cron: 0 1 1 * *
 
   # You can also have it check for changes on each push to master
   push:
@@ -39,12 +39,12 @@ jobs:
 
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: BIDS schema update
+          commit-message: update tributors
           base: main
           delete-branch: true
-          title: '[BOT] update git submodules'
+          title: '[BOT] update tributors'
           body: 'done via this [GitHub Action](https://github.com/cpp-lln-lab/CPP_ROI/blob/main/.github/workflows/update-contributors.yml)'
 
       - name: Check outputs
