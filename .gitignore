@@ -2,7 +2,6 @@
 
 *.nii
 *.json
-*.xml
 *.log
 *.mat
 *.html
