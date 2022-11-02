@@ -1,5 +1,6 @@
 function image = removePrefix(image, prefix)
   %
+
   % (C) Copyright 2019 CPP ROI developers
 
   basename = spm_file(image, 'basename');

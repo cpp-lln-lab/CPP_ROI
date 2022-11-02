@@ -1,5 +1,5 @@
 # linting
-miss_hit==0.9.30
+miss_hit==0.9.35
 pre-commit
 
 # doc

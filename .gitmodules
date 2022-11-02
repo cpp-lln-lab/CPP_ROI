@@ -1,0 +1,4 @@
+[submodule "lib/marsbar"]
+	path = lib/marsbar
+	url = https://github.com/marsbar-toolbox/marsbar.git
+	datalad-url = https://github.com/marsbar-toolbox/marsbar.git

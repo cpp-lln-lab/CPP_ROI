@@ -6,6 +6,7 @@ function pth = cppRoiRoot()
   %   pth = cppRoiRoot()
   %
   %
+
   % (C) Copyright 2022 CPP ROI developers
 
   pth = fullfile(fileparts(mfilename('fullpath')), '..', '..');

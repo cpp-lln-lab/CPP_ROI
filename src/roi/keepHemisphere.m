@@ -13,6 +13,7 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   % :type hemisphere: string
   %
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO change the hemi entity
@@ -44,6 +45,10 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   bf = bf.reorder_entities;
 
   hdr.fname = spm_file(inputImage, 'filename', bf.filename);
+
+  if not(any(vol(:)))
+    warning('This image will be empty:\n\t%s\n');
+  end
 
   spm_write_vol(hdr, vol);
 

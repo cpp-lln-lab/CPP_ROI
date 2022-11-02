@@ -5,14 +5,8 @@ on:
     branches:
       - dev
       - main
-    paths:
-      - '**.m'
-      - '.github/workflows/*.m'
   pull_request:
     branches: ['*']
-    paths:
-      - '**.m'
-      - '.github/workflows/*.m'
   schedule:
     - cron: "1 1 1 * *"
 
@@ -20,21 +14,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  tests_matlab:
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v1.2.2
         with:
-          # MATLAB release to set up R2020a
           release: R2020a
 
       - name: Install CPP_ROI
         uses: actions/checkout@v3
         with:
           submodules: true
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Install SPM
         run: |
@@ -64,4 +57,4 @@ jobs:
           file: coverage.xml # optional
           flags: unittests # optional
           name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
+          fail_ci_if_error: false # optional (default = false)

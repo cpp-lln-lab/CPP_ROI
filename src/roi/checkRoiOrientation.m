@@ -10,6 +10,7 @@ function [sts, images] = checkRoiOrientation(referenceImage, imagesToCheck)
   % :param imagesToCheck: better if fullfile path
   % :type imagesToCheck: string
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO

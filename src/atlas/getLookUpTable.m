@@ -10,6 +10,7 @@ function roiLabelLUT = getLookUpTable(atlasName)
   %
   % :returns: - :roiLabelLUT: a structure with the fields ``ROI`` and ``label``
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   if exist(atlasName, 'file')

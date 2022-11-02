@@ -12,6 +12,7 @@ function vol = sortAndLabelClusters(l2, num, clusterSize)
   %
   % See also: getClusters, labelClusters
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   % refactor with sortAndThresholdClusters

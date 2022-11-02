@@ -1,5 +1,6 @@
 function unzipAtlas(atlas)
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   atlasDir = returnAtlasDir();

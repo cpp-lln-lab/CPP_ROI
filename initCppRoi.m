@@ -17,7 +17,7 @@ function initCppRoi()
     % we add all the subfunctions that are in the sub directories
     CPP_ROI_PATHS = genpath(fullfile(thisDirectory, 'src'));
     CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
-                        fullfile(thisDirectory, 'lib', 'marsbar-0.44'));
+                        fullfile(thisDirectory, 'lib', 'marsbar', 'marsbar'));
     CPP_ROI_PATHS = cat(2, CPP_ROI_PATHS, pathSep, ...
                         fullfile(thisDirectory, 'atlas'));
     addpath(CPP_ROI_PATHS, '-begin');

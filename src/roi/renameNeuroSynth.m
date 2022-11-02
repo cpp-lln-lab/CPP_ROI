@@ -16,6 +16,7 @@ function outputImage = renameNeuroSynth(inputImage)
   %     fullfile(pwd, 'space-MNI_label-neurosynthMotion_probseg.nii.gz');
   %
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   basename = spm_file(inputImage, 'basename');

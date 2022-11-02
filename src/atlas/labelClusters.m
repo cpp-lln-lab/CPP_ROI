@@ -21,6 +21,7 @@ function outputImage = labelClusters(varargin)
   % Adapted from:
   % https://en.wikibooks.org/wiki/SPM/How-to#How_to_remove_clusters_under_a_certain_size_in_a_binary_mask?
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   default_clusterSize = 0;

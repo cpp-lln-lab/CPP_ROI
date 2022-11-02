@@ -16,6 +16,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
   % :type roiName: string
   % :type hemisphere: string
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   if ~ismember(hemisphere, {'L', 'R'})

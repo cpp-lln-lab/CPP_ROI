@@ -1,4 +1,4 @@
-.PHONY: clean install_dev
+.PHONY: clean install_dev version.txt
 
 clean: clean_lib
 	rm -rf coverage*

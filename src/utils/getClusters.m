@@ -11,6 +11,7 @@ function [l2, num] = getClusters(inputImage, peakThreshold)
   %
   % See also labelClusters, sortAndLabelClusters
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   hdr = spm_vol(inputImage);
