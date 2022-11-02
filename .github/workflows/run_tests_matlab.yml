@@ -5,14 +5,8 @@ on:
     branches:
       - dev
       - main
-    paths:
-      - '**.m'
-      - '.github/workflows/*.m'
   pull_request:
     branches: ['*']
-    paths:
-      - '**.m'
-      - '.github/workflows/*.m'
   schedule:
     - cron: "1 1 1 * *"
 
@@ -21,20 +15,19 @@ on:
 
 jobs:
   tests_matlab:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v1.2.2
         with:
-          # MATLAB release to set up R2020a
           release: R2020a
 
       - name: Install CPP_ROI
         uses: actions/checkout@v3
         with:
           submodules: true
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Install SPM
         run: |
