@@ -52,6 +52,7 @@ function figHandle = plotDataInRoi(varargin)
   %     plotDataInRoi(data, mask);
   %
   %
+
   % (C) Copyright 2022 CPP ROI developers
 
   defaultNbBins = 100;

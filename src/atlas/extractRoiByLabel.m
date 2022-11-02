@@ -14,6 +14,7 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   %                     and ``label`` for the corresponding label
   % :type labelStruct: structure
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   hdr = spm_vol(sourceImage);

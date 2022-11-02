@@ -13,6 +13,7 @@ function copyAtlasToSpmDir(varargin)
   % :type  verbose: boolean
   %
   %
+
   % (C) Copyright 2022 CPP ROI developers
 
   args = inputParser;

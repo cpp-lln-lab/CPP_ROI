@@ -14,6 +14,7 @@ function atlasFilename = getAtlasFilename(atlasName)
   %   PMID: 25452571
   %   Probabilistic Maps of Visual Topography in Human Cortex
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   atlasDir = returnAtlasDir(atlasName);

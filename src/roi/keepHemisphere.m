@@ -13,6 +13,7 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   % :type hemisphere: string
   %
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO change the hemi entity

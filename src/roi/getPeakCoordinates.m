@@ -17,6 +17,7 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
   % :type threshold: numerical
   %
   %
+
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO

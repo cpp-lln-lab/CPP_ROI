@@ -1,5 +1,6 @@
 function status = isBinaryMask(image)
   %
+
   % (C) Copyright 2022 CPP ROI developers
 
   status = true;

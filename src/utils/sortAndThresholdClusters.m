@@ -1,5 +1,6 @@
 function vol = sortAndThresholdClusters(l2, num, clusterSize)
   %
+
   % (C) Copyright 2020 CPP ROI developers
 
   [n, ni] = sort(histc(l2(:), 0:num), 1, 'descend');
