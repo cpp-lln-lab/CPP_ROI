@@ -1,7 +1,7 @@
 % (C) Copyright 2021 CPP ROI developers
 
 %
-% scritps to transform a probability map from neurosynth
+% scripts to transform a probability map from neurosynth
 % into an image with fewer clusters (apply peak and extend threshold) and
 % where each cluster has one label.
 %
@@ -20,8 +20,8 @@ zMap = renameNeuroSynth(zMap);
 
 labeledClusters = labelClusters(zMap, peakThreshold, extendThreshold);
 
-%% Use the ouput of the previous step
-% to vizualize the image and figure out what is the label we want to extract.
+%% Use the output of the previous step
+% to visualize the image and figure out what is the label we want to extract.
 labelStruct = struct('ROI', 'ns left MT', ...
                      'label', 1);
 

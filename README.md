@@ -36,7 +36,7 @@ initCppRoi
 ```
 
 If you are using CPP_SPM, you got nothing to do as CPP_ROI is already installed
-as a submodule, and intitialized when running `initCppSpm`.
+as a submodule, and initialized when running `initCppSpm`.
 
 ### Dependencies
 
@@ -63,7 +63,7 @@ as a submodule, and intitialized when running `initCppSpm`.
 -   Can help generate ROI based on:
     -   the SPM Anatomy toolbox (INSERT URL)
     -   the SPM neuromorphometric atlas
-    -   neurosynth probabilty maps
+    -   neurosynth probability maps
     -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
     -   the probabilistic functional atlas of human occipito-temporal visual cortex [@rosenke2020]

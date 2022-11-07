@@ -59,7 +59,7 @@ function [worldCoord, voxelCoord, maxVal] = getPeakCoordinates(varargin)
 
   data(~mask) = nan(1, sum(~mask(:)));
 
-  % Get the location of the higest t-value in slice space
+  % Get the location of the highest t-value in slice space
   voxeIdx = find(data == maxVal);
   if numel(voxeIdx) > 1
     % TODO return list of all maximums?

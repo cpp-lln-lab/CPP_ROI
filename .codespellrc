@@ -1,0 +1,4 @@
+[codespell]
+skip = .git,env,*build,lib
+builtin = clear,rare
+ignore-words-list = morg, fo
