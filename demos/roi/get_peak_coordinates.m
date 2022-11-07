@@ -10,7 +10,7 @@ dataImage = fullfile(pwd, 'inputs', 'TStatistic.nii');
 % If there is no value above a certain threshold the function will return NaN
 threshold = 1;
 
-% The image and the ROI must have the same dimension if we want to use the thresold option
+% The image and the ROI must have the same dimension if we want to use the threshold option
 reslicedImages = resliceRoiImages(dataImage, roiImage);
 
 % Get to work.
