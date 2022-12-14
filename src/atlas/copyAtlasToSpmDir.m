@@ -27,13 +27,17 @@ function copyAtlasToSpmDir(varargin)
   verbose = args.Results.verbose;
 
   spmAtlasDir = fullfile(spm('dir'), 'atlas');
-  cppRoiAtlasDir = returnAtlasDir();
 
   switch lower(atlas)
 
     case 'aal'
-      sourceAtlasImage = fullfile(cppRoiAtlasDir, 'AAL3', 'AAL3v1_1mm.nii.gz');
-      sourceAtlasXml = fullfile(cppRoiAtlasDir, 'AAL3', 'AAL3v1_1mm.xml');
+      sourceAtlasImage = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.nii.gz');
+      sourceAtlasXml = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.xml');
+
+    case 'hcpex'
+      sourceAtlasImage = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz');
+      sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
+
   end
 
   targetAtlasImage = fullfile(spmAtlasDir, spm_file(sourceAtlasImage, 'filename'));

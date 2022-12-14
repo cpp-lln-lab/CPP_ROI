@@ -13,8 +13,10 @@ function test_getAtlasFilename_wang()
   rmRetinoAtlas();
 
   atlasFilename = getAtlasFilename('wang');
-
   assertEqual(size(atlasFilename, 1), 2);
+
+  atlasFilename = getAtlasFilename('HCPex');
+  assertEqual(size(atlasFilename, 1), 1);
 
   rmRetinoAtlas();
 

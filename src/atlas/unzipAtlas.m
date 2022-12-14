@@ -5,29 +5,44 @@ function unzipAtlas(atlas)
 
   atlasDir = returnAtlasDir();
 
-  if strcmp(atlas, 'wang')
+  switch lower(atlas)
 
-    file = fullfile(atlasDir, 'visual_topography_probability_atlas.zip');
+    case 'wang'
 
-    if ~exist(fullfile(atlasDir, 'visual_topography_probability_atlas'), 'dir')
+      file = fullfile(atlasDir, 'visual_topography_probability_atlas.zip');
 
-      unzip(file, fileparts(file));
+      if ~exist(fullfile(atlasDir, 'visual_topography_probability_atlas'), 'dir')
 
-      labelImages =  spm_select('FPList', ...
-                                fullfile(atlasDir, ...
-                                         'visual_topography_probability_atlas', ...
-                                         'subj_vol_all'), ...
-                                '^.*_dseg.nii.gz$');
+        unzip(file, fileparts(file));
 
-      gunzip(cellstr(labelImages));
+        labelImages =  spm_select('FPList', ...
+                                  fullfile(atlasDir, ...
+                                           'visual_topography_probability_atlas', ...
+                                           'subj_vol_all'), ...
+                                  '^.*_dseg.nii.gz$');
 
-    end
+        gunzip(cellstr(labelImages));
 
-  elseif strcmp(atlas, 'visfAtlas')
+      end
 
-    file = fullfile(atlasDir, 'visfAtlas/space-MNI_atlas-visfAtlas_dseg.nii.gz');
+    case 'visfatlas'
 
-    gunzip(file);
+      file = fullfile(atlasDir, 'visfAtlas/space-MNI_atlas-visfAtlas_dseg.nii.gz');
+
+      gunzip(file);
+
+    case 'hcpex'
+
+      if exist(fullfile(returnAtlasDir('hcpex'), 'HCPex.nii'), 'file')
+        return
+      end
+
+      file = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz');
+      if isOctave()
+        copyfile(file, fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz.bak'));
+      end
+
+      gunzip(file);
 
   end
 

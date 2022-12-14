@@ -66,7 +66,10 @@ as a submodule, and initialized when running `initCppSpm`.
     -   neurosynth probability maps
     -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
-    -   the probabilistic functional atlas of human occipito-temporal visual cortex [@rosenke2020]
+    -   the probabilistic functional atlas of human occipito-temporal visual
+        cortex [@rosenke2020]
+    -   [extended Human Connectome Project multimodal parcellation atlas](https://github.com/wayalan/HCPex.git)
+        of the human cortex and subcortical areas [@huang_extended_2022]
 
 Also includes:
 
