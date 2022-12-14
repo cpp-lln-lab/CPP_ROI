@@ -28,7 +28,6 @@ function initCppRoi()
     catch
     end
 
-    unzipAtlas('hcpex');
     copyAtlasToSpmDir('HCPex', 'verbose', true);
     copyAtlasToSpmDir('AAL', 'verbose', true);
 

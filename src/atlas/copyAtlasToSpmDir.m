@@ -35,7 +35,8 @@ function copyAtlasToSpmDir(varargin)
       sourceAtlasXml = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.xml');
 
     case 'hcpex'
-      sourceAtlasImage = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz');
+      unzipAtlas('hcpex');
+      sourceAtlasImage = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii');
       sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
 
   end
@@ -56,8 +57,11 @@ function copyAtlasToSpmDir(varargin)
     spm_mkdir(spmAtlasDir);
 
     copyfile(sourceAtlasImage, spmAtlasDir);
-    gunzip(fullfile(spmAtlasDir, '*.nii.gz'));
-    delete(fullfile(spmAtlasDir, '*.nii.gz'));
+
+    if exist(fullfile(spmAtlasDir, '*.nii.gz'))
+      gunzip(fullfile(spmAtlasDir, '*.nii.gz'));
+      delete(fullfile(spmAtlasDir, '*.nii.gz'));
+    end
 
     copyfile(sourceAtlasXml, spmAtlasDir);
 
