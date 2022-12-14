@@ -30,6 +30,7 @@ function initCppRoi()
 
     unzipAtlas('hcpex');
     copyAtlasToSpmDir('HCPex', 'verbose', true);
+    copyAtlasToSpmDir('AAL', 'verbose', true);
 
     CPP_ROI_INITIALIZED = true();
 
