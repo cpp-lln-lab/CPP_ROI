@@ -25,6 +25,9 @@ function atlasDir = returnAtlasDir(atlas)
       case 'visfatlas'
         atlasDir = fullfile(atlasDir, 'visfAtlas');
 
+      case 'hcpex'
+        atlasDir = fullfile(atlasDir, 'HCPex', 'HCPex_v1.0');
+
       case 'neuromorphometrics'
 
       otherwise

@@ -24,3 +24,21 @@ function test_copyAtlasToSpmDir_basic()
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
 end
+
+function test_copyAtlasToSpmDir_HPCex()
+
+  if isGithubCi()
+    return
+  end
+
+  copyAtlasToSpmDir('HCPex', 'verbose', false);
+
+  spmAtlasDir = fullfile(spm('dir'), 'atlas');
+
+  targetAtlasImage = fullfile(spmAtlasDir, 'HCPex.nii');
+  targetAtlasXml = fullfile(spmAtlasDir, 'HCPex.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+end

@@ -34,6 +34,15 @@ function test_lut_anat_tb()
 
 end
 
+function test_lut_hcpex()
+
+  lut = getLookUpTable('hcpex');
+
+  assertEqual(lut.label, [2:426]');
+  assertEqual(lut.ROI{417}, 'R_Gpe');
+
+end
+
 function test_lut_neuromorpho()
 
   lut = getLookUpTable('neuromorphometrics');

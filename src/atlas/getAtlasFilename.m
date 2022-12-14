@@ -2,27 +2,17 @@ function atlasFilename = getAtlasFilename(atlasName)
   %
   % Returns the atlas filename
   %
-  % "Probabilistic Maps of Visual Topography in Human Cortex"
-  %
   % USAGE::
   %
   %   atlasFilename = getAtlasFilename(atlasName)
   %
-  %
-  %   DOI 10.1093/cercor/bhu277
-  %   PMCID: PMC4585523
-  %   PMID: 25452571
-  %   Probabilistic Maps of Visual Topography in Human Cortex
   %
 
   % (C) Copyright 2021 CPP ROI developers
 
   atlasDir = returnAtlasDir(atlasName);
 
-  if ~ismember(lower(atlasName), {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfatlas'})
-    % TODO throw a proper error here
-    error('unknown atlas type');
-  end
+  isAKnownAtlas(atlasName);
 
   switch lower(atlasName)
 
@@ -50,6 +40,10 @@ function atlasFilename = getAtlasFilename(atlasName)
     case 'visfatlas'
 
       atlasFilename = fullfile(atlasDir, 'space-MNI_atlas-visfAtlas_dseg.nii');
+
+    case 'hcpex'
+
+      atlasFilename = fullfile(atlasDir, 'HCPex.nii');
 
   end
 

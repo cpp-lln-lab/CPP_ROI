@@ -20,10 +20,7 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
   atlasDir = returnAtlasDir(atlasName);
 
-  if ~ismember(lower(atlasName), {'wang', 'neuromorphometrics', 'anatomy_toobox', 'visfatlas'})
-    % TODO throw a proper error here
-    error('unknown atlas type');
-  end
+  isAKnownAtlas(atlasName);
 
   switch lower(atlasName)
 
@@ -55,6 +52,22 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
       roiLabelLUT = struct('ROI', C(1), ...
                            'label', C(2));
+
+    case 'hcpex'
+
+      roiLabelLUT = fullfile(atlasDir, 'HCPex.nii.txt');
+
+      fid = fopen(roiLabelLUT);
+      pattern = '%f%s%s%f';
+      C = textscan(fid, pattern, 'Headerlines', 1);
+      fclose(fid);
+
+      for i = 1:numel(C{2})
+        ROI{1}{i} = [C{2}{i} '_' C{3}{i}];
+      end
+
+      roiLabelLUT = struct('ROI', ROI(1), ...
+                           'label', C(1));
 
     case 'visfatlas'
 

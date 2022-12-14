@@ -2,3 +2,6 @@
 	path = lib/marsbar
 	url = https://github.com/marsbar-toolbox/marsbar.git
 	datalad-url = https://github.com/marsbar-toolbox/marsbar.git
+[submodule "atlas/HCPex"]
+	path = atlas/HCPex
+	url = https://github.com/wayalan/HCPex.git

@@ -21,6 +21,13 @@ function test_unzipAtlas_default()
                     'file'), ...
               2);
 
+  unzipAtlas('hcpex');
+
+  assertEqual(exist( ...
+                    fullfile(returnAtlasDir('hcpex'), 'HCPex.nii'), ...
+                    'file'), ...
+              2);
+
   cleanUp();
 
 end
