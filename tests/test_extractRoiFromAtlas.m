@@ -59,6 +59,8 @@ end
 
 function test_extractRoiFromAtlas_hcpex()
 
+  unzipAtlas('hcpex');
+
   roiImage = extractRoiFromAtlas(pwd, 'hcpex', 'MT', 'L');
 
   assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-hcpex_label-MT_mask.nii'), ...
