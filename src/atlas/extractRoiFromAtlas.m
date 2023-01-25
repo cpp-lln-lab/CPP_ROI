@@ -8,7 +8,7 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
   %   roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
   %
   % :param outputDir:
-  % :param atlasName: ``wang``, ``neuromorphometrics``, ``'hcpex'``
+  % :param atlasName: ``'wang'``, ``'visfatlas'``, ``'neuromorphometrics'``, ``'hcpex'``
   % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
   % :param hemisphere: ``L`` or ``R``
   % :type outputDir: string
