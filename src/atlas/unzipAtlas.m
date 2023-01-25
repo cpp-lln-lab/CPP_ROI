@@ -22,9 +22,9 @@ function unzipAtlas(atlas)
                                   '^.*_dseg.nii.gz$');
 
         if isOctave()
-          gunzipWithOctave(file);
+          gunzipWithOctave(cellstr(labelImages));
         else
-          gunzip(file);
+          gunzip(cellstr(labelImages));
         end
 
       end
