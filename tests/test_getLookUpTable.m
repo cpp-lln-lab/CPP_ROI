@@ -61,6 +61,15 @@ function test_lut_visfAtlas()
 
 end
 
+function test_lut_visfAtlas_case()
+
+  lut = getLookUpTable('visfAtlas');
+
+  assertEqual(lut.label, [1:33]');
+  assertEqual(lut.ROI{1}, 'lh_mFus');
+
+end
+
 function cleanUp()
 
   pause(1);
