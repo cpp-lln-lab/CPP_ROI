@@ -65,7 +65,7 @@ function cleanUp()
 
   pause(1);
 
-  if isOctave()
+  if bids.internal.is_octave()
     confirm_recursive_rmdir (true, 'local');
   end
   rmdir(returnAtlasDir('wang'), 's');
