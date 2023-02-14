@@ -23,7 +23,7 @@ end
 
 function test_lut_anat_tb()
 
-  if ~isGithubCi
+  if ~bids.internal.is_github_ci()
 
     lut = getLookUpTable('anatomy_toobox');
 
@@ -74,7 +74,7 @@ function cleanUp()
 
   pause(1);
 
-  if isOctave()
+  if bids.internal.is_octave()
     confirm_recursive_rmdir (true, 'local');
   end
   rmdir(returnAtlasDir('wang'), 's');

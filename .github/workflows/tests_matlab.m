@@ -4,7 +4,7 @@
 root_dir = getenv('GITHUB_WORKSPACE');
 
 addpath(fullfile(root_dir, 'spm12'));
-addpath(fullfile(root_dir, 'bids-matlab'));
+addpath(fullfile(root_dir, 'lib', 'bids-matlab'));
 addpath(fullfile(root_dir, 'MOcov', 'MOcov'));
 
 cd(fullfile(root_dir, 'MOxUnit', 'MOxUnit'));

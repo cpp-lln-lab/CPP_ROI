@@ -21,7 +21,7 @@ function unzipAtlas(atlas)
                                            'subj_vol_all'), ...
                                   '^.*_dseg.nii.gz$');
 
-        if isOctave()
+        if bids.internal.is_octave()
           gunzipWithOctave(cellstr(labelImages));
         else
           gunzip(cellstr(labelImages));
@@ -33,7 +33,7 @@ function unzipAtlas(atlas)
 
       file = fullfile(atlasDir, 'visfAtlas/space-MNI_atlas-visfAtlas_dseg.nii.gz');
 
-      if isOctave()
+      if bids.internal.is_octave()
         gunzipWithOctave(file);
       else
         gunzip(file);
@@ -46,7 +46,7 @@ function unzipAtlas(atlas)
       end
 
       file = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz');
-      if isOctave()
+      if bids.internal.is_octave()
         gunzipWithOctave(file);
       else
         gunzip(file);
