@@ -9,7 +9,7 @@ end
 
 function test_copyAtlasToSpmDir_basic()
 
-  if isGithubCi()
+  if bids.internal.is_github_ci()
     return
   end
 
@@ -27,7 +27,7 @@ end
 
 function test_copyAtlasToSpmDir_HPCex()
 
-  if isGithubCi()
+  if bids.internal.is_github_ci()
     return
   end
 

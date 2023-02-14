@@ -23,7 +23,7 @@ end
 
 function test_lut_anat_tb()
 
-  if ~isGithubCi
+  if ~bids.internal.is_github_ci()
 
     lut = getLookUpTable('anatomy_toobox');
 
