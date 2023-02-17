@@ -10,6 +10,7 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   %
   % :param sourceImage: discrete segmentation source image fullpath
   % :type sourceImage: string
+  %
   % :param labelStruct: 1x1 structure with fields ``ROI`` for the ROI name
   %                     and ``label`` for the corresponding label
   % :type labelStruct: structure

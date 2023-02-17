@@ -1,4 +1,4 @@
-function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
+function roiImage = extractRoiFromAtlas(varargin)
   %
   % Outputs a ROI image and side car json for a given atlas, roi name (as
   % defined in the look up table of that atlas) and a hemisphere
@@ -8,22 +8,45 @@ function roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemispher
   %   roiImage = extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
   %
   % :param outputDir:
-  % :param atlasName: ``'wang'``, ``'visfatlas'``, ``'neuromorphometrics'``, ``'hcpex'``
-  % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
-  % :param hemisphere: ``L`` or ``R``
   % :type outputDir: string
+  %
+  % :param atlasName: ``'wang'``, ``'visfatlas'``, ``'neuromorphometrics'``, ``'hcpex'``
   % :type atlasName: string
+  %
+  % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
   % :type roiName: string
+  %
+  % :param hemisphere: ``L`` or ``R``
   % :type hemisphere: string
+  %
+  %
+  % EXAMPLE::
+  %
+  %     outputDir = pwd;
+  %     atlasName = 'neuromorphometrics';
+  %     roiName = 'PCu precuneus';
+  %     hemisphere = 'R';
+  %
+  %     extractRoiFromAtlas(outputDir, atlasName, roiName, hemisphere)
   %
 
   % (C) Copyright 2021 CPP ROI developers
 
-  if ~ismember(hemisphere, {'L', 'R'})
+  isChar = @(x) ischar(x);
 
-    error('\n Hemisphere label %s not valid, try "L" or "R"', hemisphere);
+  args = inputParser;
 
-  end
+  addRequired(args, 'outputDir', isChar);
+  addRequired(args, 'atlasName', @isAKnownAtlas);
+  addRequired(args, 'roiName', isChar);
+  addRequired(args, 'hemisphere', @(x) ismember(x, {'L', 'R'}));
+
+  parse(args, varargin{:});
+
+  outputDir = args.Results.outputDir;
+  atlasName = args.Results.atlasName;
+  roiName = args.Results.roiName;
+  hemisphere = args.Results.hemisphere;
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
 
