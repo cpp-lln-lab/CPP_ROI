@@ -31,16 +31,16 @@ function roiImage = extractRoiFromAtlas(varargin)
   %
 
   % (C) Copyright 2021 CPP ROI developers
-  
+
   isChar = @(x) ischar(x);
-  
+
   args = inputParser;
-  
+
   addRequired(args, 'outputDir', isChar);
   addRequired(args, 'atlasName', @isAKnownAtlas);
   addRequired(args, 'roiName', isChar);
   addRequired(args, 'hemisphere', @(x) ismember(x, {'L', 'R'}));
-  
+
   parse(args, varargin{:});
 
   outputDir = args.Results.outputDir;
