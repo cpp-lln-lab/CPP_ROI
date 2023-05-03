@@ -49,7 +49,7 @@ jobs:
     - name: Add bids-matlab
       run: make install_dev
 
-    - name: Run commands
+    - name: Run tests
       uses: matlab-actions/run-command@v1.1.3
       with:
         command: cd(fullfile(getenv('GITHUB_WORKSPACE'), '.github', 'workflows')); run tests_matlab;

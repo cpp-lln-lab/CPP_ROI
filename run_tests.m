@@ -4,6 +4,11 @@
 
 warning('OFF');
 
+GITHUB_WORKSPACE = getenv('HOME');
+disp('Home is');
+disp(GITHUB_WORKSPACE);
+disp('');
+
 spm('defaults', 'fMRI');
 
 thisDir = fullfile(fileparts(mfilename('fullpath')));
