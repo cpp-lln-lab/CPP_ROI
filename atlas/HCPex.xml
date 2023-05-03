@@ -3,7 +3,7 @@
     <header>
         <name>Extended HCP Atlas</name>
         <version>1.0</version>
-        <description>Compatability testing has been done for MRIcroGL and freeview in freesurfer. For freesurfer user: freeview -v mni_icbm152_t1_tal_nlin_asym_09c.nii HCPex.nii:colormap=LUT:lut=HCPex_LookUpTable.txt. References should be included in all workshop and final publications.</description>
+        <description>Compatibility testing has been done for MRIcroGL and freeview in freesurfer. For freesurfer user: freeview -v mni_icbm152_t1_tal_nlin_asym_09c.nii HCPex.nii:colormap=LUT:lut=HCPex_LookUpTable.txt. References should be included in all workshop and final publications.</description>
         <url></url>
         <licence>CCBY-NC</licence>
         <coordinate_system>MNI</coordinate_system>

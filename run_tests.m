@@ -21,25 +21,23 @@ if isdir(fullfile(thisDir, 'lib', 'bids-matlab'))
   addpath(fullfile(thisDir, 'lib', 'bids-matlab'));
 end
 
-
-
 if ispc
   success = moxunit_runtests(testFolder, ...
-                            '-verbose', '-recursive');
+                             '-verbose', '-recursive');
 
 else
   success = moxunit_runtests(testFolder, ...
-                            '-verbose', '-recursive', '-with_coverage', ...
-                            '-cover', folderToCover, ...
-                            '-cover_xml_file', 'coverage.xml', ...
-                            '-cover_html_dir', fullfile(thisDir, 'coverage_html'));
+                             '-verbose', '-recursive', '-with_coverage', ...
+                             '-cover', folderToCover, ...
+                             '-cover_xml_file', 'coverage.xml', ...
+                             '-cover_html_dir', fullfile(thisDir, 'coverage_html'));
 
 end
 
 fileID = fopen('test_report.log', 'w');
 if success
-    fprintf(fileID, '0');
+  fprintf(fileID, '0');
 else
-    fprintf(fileID, '1');
+  fprintf(fileID, '1');
 end
 fclose(fileID);
