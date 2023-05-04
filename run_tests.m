@@ -11,7 +11,7 @@ disp('');
 
 isCI = getenv('CI');
 disp('CI is');
-disp(CI);
+disp(isCI);
 disp('');
 
 spm('defaults', 'fMRI');
