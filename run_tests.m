@@ -9,6 +9,11 @@ disp('Home is');
 disp(GITHUB_WORKSPACE);
 disp('');
 
+isCI = getenv('CI');
+disp('CI is');
+disp(CI);
+disp('');
+
 spm('defaults', 'fMRI');
 
 thisDir = fullfile(fileparts(mfilename('fullpath')));
