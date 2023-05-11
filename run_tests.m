@@ -23,21 +23,16 @@ end
 
 if ispc
   success = moxunit_runtests(testFolder, ...
-                             '-verbose', '-recursive');
+                             '-verbose', '-recursive', '-randomize_order');
 
 else
   success = moxunit_runtests(testFolder, ...
-                             '-verbose', '-recursive', '-with_coverage', ...
+                             '-verbose', '-recursive', '-randomize_order', ...
+                             '-with_coverage', ...
                              '-cover', folderToCover, ...
                              '-cover_xml_file', 'coverage.xml', ...
                              '-cover_html_dir', fullfile(thisDir, 'coverage_html'));
 
 end
 
-fileID = fopen('test_report.log', 'w');
-if success
-  fprintf(fileID, '0');
-else
-  fprintf(fileID, '1');
-end
-fclose(fileID);
+exit(double(~success));
