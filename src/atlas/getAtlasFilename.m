@@ -44,8 +44,8 @@ function atlasFilename = getAtlasFilename(atlasName)
     case 'hcpex'
 
       atlasFilename = fullfile(atlasDir, 'HCPex.nii');
-      
-        case 'glasser'
+
+    case 'glasser'
 
       atlasFilename = fullfile(atlasDir, 'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
 

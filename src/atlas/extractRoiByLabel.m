@@ -24,14 +24,14 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   outputVol = false(size(vol));
   if strcmp(spm_file(sourceImage, 'filename'), ...
             'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii')
-        vol = round(vol);
+    vol = round(vol);
   end
   outputVol(vol == round(labelStruct.label)) = true;
-  
+
   if sum(outputVol(:)) == 0
-      warning('No voxel in ROI with value "%i"\nin image %s', ...
-          labelStruct.label, ...
-          sourceImage);
+    warning('No voxel in ROI with value "%i"\nin image %s', ...
+            labelStruct.label, ...
+            sourceImage);
   end
 
   bf = bids.File(sourceImage);

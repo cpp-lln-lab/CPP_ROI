@@ -75,7 +75,6 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
       roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
-
   end
 
 end

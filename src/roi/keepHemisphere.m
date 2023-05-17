@@ -17,9 +17,9 @@ function outputImage = keepHemisphere(inputImage, hemisphere, paddingValue)
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO change the hemi entity
-  
+
   if nargin < 3
-      paddingValue = nan();
+    paddingValue = nan();
   end
 
   hdr = spm_vol(inputImage);

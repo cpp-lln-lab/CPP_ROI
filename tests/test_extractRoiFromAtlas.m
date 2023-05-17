@@ -8,7 +8,6 @@ function test_suite = test_extractRoiFromAtlas() %#ok<*STOUT>
   initTestSuite;
 end
 
-
 function test_extractRoiFromAtlas_glasser()
 
   roiImage = extractRoiFromAtlas(pwd, 'Glasser', 'FEF', 'L');

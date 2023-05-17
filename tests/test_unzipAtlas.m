@@ -11,9 +11,9 @@ end
 function test_unzipAtlas_glasser()
 
   unzipAtlas('Glasser');
-  
+
   expectedFile = fullfile(returnAtlasDir('Glasser'), ...
-                             'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+                          'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
 
   assertEqual(exist(expectedFile, 'file'), 2);
 
@@ -38,12 +38,12 @@ end
 function test_unzipAtlas_hcpex()
 
   unzipAtlas('hcpex');
-  
+
   expectedFile = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii');
 
   assertEqual(exist(expectedFile, 'file'), 2);
-  
-    delete(expectedFile);
+
+  delete(expectedFile);
 
 end
 

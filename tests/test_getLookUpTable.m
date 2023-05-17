@@ -1,5 +1,5 @@
 function test_suite = test_getLookUpTable() %#ok<*STOUT>
-% (C) Copyright 2020 CPP ROI developers
+  % (C) Copyright 2020 CPP ROI developers
 
   try % assignment of 'localfunctions' is necessary in Matlab >= 2016
     test_functions = localfunctions(); %#ok<*NASGU>
@@ -78,8 +78,6 @@ function test_lut_visfAtlas_case()
   assertEqual(lut.ROI{1}, 'lh_mFus');
 
 end
-
-
 
 function cleanUp()
 
