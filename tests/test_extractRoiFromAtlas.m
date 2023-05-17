@@ -8,6 +8,23 @@ function test_suite = test_extractRoiFromAtlas() %#ok<*STOUT>
   initTestSuite;
 end
 
+
+function test_extractRoiFromAtlas_glasser()
+
+  roiImage = extractRoiFromAtlas(pwd, 'Glasser', 'FEF', 'L');
+
+  assertEqual(exist(fullfile(pwd, 'hemi-L_space-MNI_atlas-glasser_label-FEF_mask.nii'), ...
+                    'file'), ...
+              2);
+
+  vol =  spm_read_vols(spm_vol(roiImage));
+  assertEqual(sum(vol(:) > 0), 13460); % check the ROI has the right number of voxel
+
+  delete(fullfile(pwd, '*.nii'));
+  delete(fullfile(pwd, '*.json'));
+
+end
+
 function test_extractRoiFromAtlas_wang()
 
   roiImage = extractRoiFromAtlas(pwd, 'wang', 'V1v', 'L');

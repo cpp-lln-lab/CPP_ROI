@@ -29,31 +29,33 @@ function unzipAtlas(atlas)
 
       end
 
+    case 'glasser'
+      file = fullfile(atlasDir, 'Glasser', 'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+      gunzipAtlasIfNecessary(file);
+
     case 'visfatlas'
-
-      file = fullfile(atlasDir, 'visfAtlas/space-MNI_atlas-visfAtlas_dseg.nii.gz');
-
-      if bids.internal.is_octave()
-        gunzipWithOctave(file);
-      else
-        gunzip(file);
-      end
+      file = fullfile(atlasDir, 'visfAtlas', 'space-MNI_atlas-visfAtlas_dseg.nii');
+      gunzipAtlasIfNecessary(file);
 
     case 'hcpex'
-
-      if exist(fullfile(returnAtlasDir('hcpex'), 'HCPex.nii'), 'file')
-        return
-      end
-
-      file = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii.gz');
-      if bids.internal.is_octave()
-        gunzipWithOctave(file);
-      else
-        gunzip(file);
-      end
+      file = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii');
+      gunzipAtlasIfNecessary(file);
 
   end
 
+end
+
+function gunzipAtlasIfNecessary(file)
+  if exist(file, 'file')
+    return
+  end
+
+  file = [file '.gz'];
+  if bids.internal.is_octave()
+    gunzipWithOctave(file);
+  else
+    gunzip(file);
+  end
 end
 
 function gunzipWithOctave(file)

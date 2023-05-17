@@ -28,6 +28,9 @@ function atlasDir = returnAtlasDir(atlas)
       case 'hcpex'
         atlasDir = fullfile(atlasDir, 'HCPex', 'HCPex_v1.0');
 
+      case 'glasser'
+        atlasDir = fullfile(atlasDir, 'Glasser');
+
       case 'neuromorphometrics'
 
       otherwise

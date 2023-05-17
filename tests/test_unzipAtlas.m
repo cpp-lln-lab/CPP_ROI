@@ -8,7 +8,20 @@ function test_suite = test_unzipAtlas() %#ok<*STOUT>
   initTestSuite;
 end
 
-function test_unzipAtlas_default()
+function test_unzipAtlas_glasser()
+
+  unzipAtlas('Glasser');
+  
+  expectedFile = fullfile(returnAtlasDir('Glasser'), ...
+                             'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+
+  assertEqual(exist(expectedFile, 'file'), 2);
+
+  delete(expectedFile);
+
+end
+
+function test_unzipAtlas_wang()
 
   cleanUp();
 
@@ -20,15 +33,17 @@ function test_unzipAtlas_default()
                              'space-MNI_hemi-lh_dseg.nii'), ...
                     'file'), ...
               2);
+end
+
+function test_unzipAtlas_hcpex()
 
   unzipAtlas('hcpex');
+  
+  expectedFile = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii');
 
-  assertEqual(exist( ...
-                    fullfile(returnAtlasDir('hcpex'), 'HCPex.nii'), ...
-                    'file'), ...
-              2);
-
-  cleanUp();
+  assertEqual(exist(expectedFile, 'file'), 2);
+  
+    delete(expectedFile);
 
 end
 

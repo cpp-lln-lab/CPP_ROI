@@ -24,9 +24,9 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
   switch lower(atlasName)
 
-    case 'wang'
+    case {'wang', 'glasser'}
 
-      unzipAtlas('wang');
+      unzipAtlas(lower(atlasName));
 
       roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
 
@@ -74,6 +74,7 @@ function roiLabelLUT = getLookUpTable(atlasName)
       unzipAtlas('visfAtlas');
 
       roiLabelLUT = spm_load(fullfile(atlasDir, 'LUT.csv'));
+
 
   end
 

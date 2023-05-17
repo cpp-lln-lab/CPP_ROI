@@ -10,7 +10,9 @@ function roiImage = extractRoiFromAtlas(varargin)
   % :param outputDir:
   % :type outputDir: string
   %
-  % :param atlasName: ``'wang'``, ``'visfatlas'``, ``'neuromorphometrics'``, ``'hcpex'``
+  % :param atlasName: ``'wang'``, ``'visfatlas'``,
+  %                   ``'neuromorphometrics'``, ``'hcpex'``,
+  %                   ``'glasser'``
   % :type atlasName: string
   %
   % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
@@ -49,8 +51,9 @@ function roiImage = extractRoiFromAtlas(varargin)
   hemisphere = args.Results.hemisphere;
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
-
-  if strcmpi(atlasName, 'wang')
+  
+  switch lower(atlasName)
+      case 'wang'
 
     if strcmpi(hemisphere, 'L')
       atlasFile = atlasFile(1, :);
@@ -60,7 +63,7 @@ function roiImage = extractRoiFromAtlas(varargin)
 
     roiIdx = strcmp(roiName, lut.ROI);
 
-  elseif strcmpi(atlasName, 'neuromorphometrics')
+      case 'neuromorphometrics'
 
     roiName = regexprep(roiName, '(Left )|(Right )', '');
 
@@ -73,7 +76,7 @@ function roiImage = extractRoiFromAtlas(varargin)
 
     roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmpi(atlasName, 'visfatlas')
+      case 'visfatlas'
 
     prefix = '';
     if strcmp(hemisphere, 'L')
@@ -84,9 +87,13 @@ function roiImage = extractRoiFromAtlas(varargin)
 
     roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmpi(atlasName, 'hcpex')
+      case 'hcpex'
 
     roiIdx = strcmp([hemisphere '_' roiName], lut.ROI);
+    
+      case 'glasser'
+
+    roiIdx = strcmp(roiName, lut.ROI);
 
   end
 
@@ -102,11 +109,18 @@ function roiImage = extractRoiFromAtlas(varargin)
                        'label', label);
 
   roiImage = extractRoiByLabel(atlasFile, labelStruct);
+  
+  if strcmpi(atlasName, 'glasser')
+      tmp = roiImage;
+      roiImage = keepHemisphere(tmp, hemisphere, false);
+      delete(tmp);
+      delete(spm_file(tmp, 'ext', '.json'));
+  end
 
   % rename file
   entities = struct('hemi', hemisphere, ...
                     'space', 'MNI', ...
-                    'atlas', atlasName, ...
+                    'atlas', lower(atlasName), ...
                     'label', roiName);
   nameStructure = struct('entities', entities, ...
                          'suffix', 'mask', ...

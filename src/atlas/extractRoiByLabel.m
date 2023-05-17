@@ -22,7 +22,17 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   vol = spm_read_vols(hdr);
 
   outputVol = false(size(vol));
-  outputVol(vol == labelStruct.label) = true;
+  if strcmp(spm_file(sourceImage, 'filename'), ...
+            'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii')
+        vol = round(vol);
+  end
+  outputVol(vol == round(labelStruct.label)) = true;
+  
+  if sum(outputVol(:)) == 0
+      warning('No voxel in ROI with value "%i"\nin image %s', ...
+          labelStruct.label, ...
+          sourceImage);
+  end
 
   bf = bids.File(sourceImage);
   bf.entities.label = bids.internal.camel_case(labelStruct.ROI);
