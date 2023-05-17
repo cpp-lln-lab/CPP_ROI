@@ -1,4 +1,4 @@
 [codespell]
-skip = .git,env,*build,lib
+skip = .git,env,*build,lib,LUT.csv
 builtin = clear,rare
 ignore-words-list = morg, fo
