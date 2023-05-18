@@ -1,6 +1,6 @@
 <atlas version="2.0">
 	<header>
-		<name>space-MNI_atlas-visfAtlas_dseg</name>
+		<name>A probabilistic functional parcellation of human occipito-temporal cortex. Rosenke 2020.</name>
 		<version>1.0</version>
 		<description>space-MNI_atlas-visfAtlas_dseg</description>
 		<url />

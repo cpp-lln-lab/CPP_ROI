@@ -7,6 +7,22 @@ function test_suite = test_copyAtlasToSpmDir %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_copyAtlasToSpmDir_wang()
+
+  copyAtlasToSpmDir('wang', 'verbose', false);
+
+  targetAtlasImage = fullfile(spmAtlasDir(), ...
+                              'space-MNI_atlas-wang_dseg.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), ...
+                            'space-MNI_atlas-wang_dseg.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+  cleanSpmAtlasDir();
+
+end
+
 function test_copyAtlasToSpmDir_visfatlas()
 
   copyAtlasToSpmDir('visfatlas', 'verbose', false);
@@ -18,6 +34,8 @@ function test_copyAtlasToSpmDir_visfatlas()
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+  cleanSpmAtlasDir();
 
 end
 
@@ -37,6 +55,8 @@ function test_copyAtlasToSpmDir_glasser()
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+  cleanSpmAtlasDir();
+
 end
 
 function test_copyAtlasToSpmDir_basic()
@@ -52,6 +72,8 @@ function test_copyAtlasToSpmDir_basic()
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+  cleanSpmAtlasDir();
 
 end
 
@@ -69,8 +91,15 @@ function test_copyAtlasToSpmDir_HPCex()
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+  cleanSpmAtlasDir();
+
 end
 
 function value = spmAtlasDir()
   value = fullfile(spm('dir'), 'atlas');
+end
+
+function cleanSpmAtlasDir()
+  delete(fullfile(spmAtlasDir, '*.nii'));
+  delete(fullfile(spmAtlasDir, '*.xml'));
 end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <atlas version="2.0">
 	<header>
-		<name>space-MNI152ICBM2009anlin_atlas-glasser_dseg</name>
+		<name>A multi-modal parcellation of human cerebral cortex. Glasser 2016</name>
 		<version>1.0</version>
 		<description>space-MNI152ICBM2009anlin_atlas-glasser_dseg</description>
 		<url></url>

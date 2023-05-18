@@ -7,7 +7,7 @@ from pathlib import Path
 
 lut_file = (
     Path(__file__).parent
-    / "visfAtlas"
+    / "visual_topography_probability_atlas"
     / "LUT.csv"
 )
 
@@ -15,8 +15,7 @@ df = pd.read_csv(lut_file, sep=",")
 
 xml_file = (
     Path(__file__).parent
-    / "visfAtlas"
-    / "space-MNI_atlas-visfAtlas_dseg.xml"
+    / "space-MNI_atlas-wang_dseg.xml"
 )
 
 mytree = ET.parse(xml_file)

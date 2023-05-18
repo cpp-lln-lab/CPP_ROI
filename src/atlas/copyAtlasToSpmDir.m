@@ -6,7 +6,7 @@ function copyAtlasToSpmDir(varargin)
   %
   %   copyAtlasToSpmDir(atlas, 'verbose', false)
   %
-  % :param atlas: Any of ``{'aal', 'hcpex', 'glasser', 'visfatlas'}``.
+  % :param atlas: Any of ``{'aal', 'hcpex', 'glasser', 'visfatlas', 'wang'}``.
   %               Defaults to ``'AAL'``
   % :type  atlas: char
   %
@@ -16,8 +16,6 @@ function copyAtlasToSpmDir(varargin)
   %
 
   % (C) Copyright 2022 CPP ROI developers
-
-  SUPPORTED_ATLASES = {'aal', 'hcpex', 'glasser', 'visfatlas'};
 
   args = inputParser;
 
@@ -31,34 +29,7 @@ function copyAtlasToSpmDir(varargin)
 
   spmAtlasDir = fullfile(spm('dir'), 'atlas');
 
-  switch lower(atlas)
-
-    case 'aal'
-      sourceAtlasImage = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.nii.gz');
-      sourceAtlasXml = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.xml');
-
-    case 'hcpex'
-      unzipAtlas(lower(atlas));
-      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'HCPex.nii');
-      sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
-
-    case 'visfatlas'
-      unzipAtlas(lower(atlas));
-      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'space-MNI_atlas-visfAtlas_dseg.nii');
-      sourceAtlasXml = fullfile(returnAtlasDir(lower(atlas)), 'space-MNI_atlas-visfAtlas_dseg.xml');
-
-    case 'glasser'
-      unzipAtlas(lower(atlas));
-      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), ...
-                                  'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
-      sourceAtlasXml = fullfile(returnAtlasDir(lower(atlas)), ...
-                                'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
-
-    otherwise
-      error(['Only the following atlases can be copied to SPM atlas folder:\n', ...
-             bids.internal.create_unordered_list(SUPPORTED_ATLASES)]);
-
-  end
+  [sourceAtlasImage, sourceAtlasXml] = prepareFiles(atlas);
 
   targetAtlasImage = fullfile(spmAtlasDir, spm_file(sourceAtlasImage, 'filename'));
   targetAtlasXml = fullfile(spmAtlasDir, spm_file(sourceAtlasXml, 'filename'));
@@ -94,6 +65,66 @@ function copyAtlasToSpmDir(varargin)
               spmAtlasDir);
     end
 
+  end
+
+end
+
+function [sourceAtlasImage, sourceAtlasXml] = prepareFiles(atlas)
+
+  SUPPORTED_ATLASES = {'aal', 'hcpex', 'glasser', 'visfatlas', 'wang'};
+
+  atlas = lower(atlas);
+  switch atlas
+
+    case 'aal'
+      sourceAtlasImage = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.nii.gz');
+      sourceAtlasXml = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.xml');
+
+    case 'hcpex'
+      sourceAtlasImage = fullfile(returnAtlasDir(atlas), 'HCPex.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
+
+    case 'visfatlas'
+      sourceAtlasImage = fullfile(returnAtlasDir(atlas), 'space-MNI_atlas-visfAtlas_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(atlas), 'space-MNI_atlas-visfAtlas_dseg.xml');
+
+    case 'glasser'
+
+      sourceAtlasImage = fullfile(returnAtlasDir(atlas), ...
+                                  'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(atlas), ...
+                                'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
+
+    case 'wang'
+      sourceAtlasImage = fullfile(returnAtlasDir(atlas), ...
+                                  'subj_vol_all', ...
+                                  'space-MNI_atlas-wang_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(), ...
+                                'space-MNI_atlas-wang_dseg.xml');
+
+    otherwise
+      error(['Only the following atlases can be copied to SPM atlas folder:\n', ...
+             bids.internal.create_unordered_list(SUPPORTED_ATLASES)]);
+
+  end
+
+  if ismember(atlas, {'hcpex', 'glasser', 'visfatlas', 'wang'})
+    if exist(sourceAtlasImage, 'file') ~= 2
+      unzipAtlas(atlas);
+    end
+  end
+
+  if strcmp(atlas, 'wang')
+    % merge left and right
+    files = spm_select('FPList', ...
+                       fullfile(returnAtlasDir(lower(atlas)), 'subj_vol_all'), ...
+                       '^space.*hemi.*nii$');
+    hdr = spm_vol(files);
+    vols = spm_read_vols(hdr);
+    vol = sum(vols, 4);
+    hdr =  hdr(1);
+    hdr(1).fname = sourceAtlasImage;
+    spm_write_vol(hdr, vol);
   end
 
 end
