@@ -9,7 +9,7 @@
 		<coordinate_system>MNI</coordinate_system>
 		<type>Label</type>
 		<images>
-			<imagefile>space-MNI152ICBM2009anlin_atlas-glasser_dseg</imagefile>
+			<imagefile>space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii</imagefile>
 		</images>
 	</header>
 	<data>

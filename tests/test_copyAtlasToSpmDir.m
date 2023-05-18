@@ -7,6 +7,24 @@ function test_suite = test_copyAtlasToSpmDir %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_copyAtlasToSpmDir_glasser()
+
+  if bids.internal.is_github_ci()
+    return
+  end
+
+  copyAtlasToSpmDir('Glasser', 'verbose', false);
+
+  targetAtlasImage = fullfile(spmAtlasDir(), ...
+                              'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), ...
+                            'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+end
+
 function test_copyAtlasToSpmDir_basic()
 
   if bids.internal.is_github_ci()
@@ -15,10 +33,8 @@ function test_copyAtlasToSpmDir_basic()
 
   copyAtlasToSpmDir('AAL', 'verbose', false);
 
-  spmAtlasDir = fullfile(spm('dir'), 'atlas');
-
-  targetAtlasImage = fullfile(spmAtlasDir, 'AAL3v1_1mm.nii');
-  targetAtlasXml = fullfile(spmAtlasDir, 'AAL3v1_1mm.xml');
+  targetAtlasImage = fullfile(spmAtlasDir(), 'AAL3v1_1mm.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), 'AAL3v1_1mm.xml');
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
@@ -33,12 +49,14 @@ function test_copyAtlasToSpmDir_HPCex()
 
   copyAtlasToSpmDir('HCPex', 'verbose', false);
 
-  spmAtlasDir = fullfile(spm('dir'), 'atlas');
-
-  targetAtlasImage = fullfile(spmAtlasDir, 'HCPex.nii');
-  targetAtlasXml = fullfile(spmAtlasDir, 'HCPex.xml');
+  targetAtlasImage = fullfile(spmAtlasDir(), 'HCPex.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), 'HCPex.xml');
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+end
+
+function value = spmAtlasDir()
+  value = fullfile(spm('dir'), 'atlas');
 end

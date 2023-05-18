@@ -29,7 +29,7 @@ Fire up Octave or Matlab and type
 ```matlab
 cd CPP_ROI
 
-% Th following adds the relevant folders to your path.
+% The following adds the relevant folders to your path.
 % This needs to be done once per session (your path will not be saved)
 
 initCppRoi
@@ -64,6 +64,7 @@ as a submodule, and initialized when running `initCppSpm`.
     -   the SPM Anatomy toolbox (INSERT URL)
     -   the SPM neuromorphometric atlas
     -   neurosynth probability maps
+    -   A multi-modal parcellation of human cerebral cortex [@glasser_multi-modal_2016]
     -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
     -   the probabilistic functional atlas of human occipito-temporal visual
