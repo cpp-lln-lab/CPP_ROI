@@ -64,13 +64,13 @@ as a submodule, and initialized when running `initCppSpm`.
     -   the SPM Anatomy toolbox (INSERT URL)
     -   the SPM neuromorphometric atlas
     -   neurosynth probability maps
-    -   A multi-modal parcellation of human cerebral cortex [@glasser_multi-modal_2016]
+    -   A multi-modal parcellation of human cerebral cortex [@glasser2016]
     -   the probabilistic maps of visual topography in human cortex [@wang2014]
         -   https://scholar.princeton.edu/napl/resources
     -   the probabilistic functional atlas of human occipito-temporal visual
         cortex [@rosenke2020]
     -   [extended Human Connectome Project multimodal parcellation atlas](https://github.com/wayalan/HCPex.git)
-        of the human cortex and subcortical areas [@huang_extended_2022]
+        of the human cortex and subcortical areas [@huang2022]
 
 Also includes:
 
