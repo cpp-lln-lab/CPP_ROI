@@ -7,7 +7,7 @@ from pathlib import Path
 
 lut_file = (
     Path(__file__).parent
-    / "Glasser"
+    / "visfAtlas"
     / "LUT.csv"
 )
 
@@ -15,8 +15,8 @@ df = pd.read_csv(lut_file, sep=",")
 
 xml_file = (
     Path(__file__).parent
-    / "Glasser"
-    / "space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml"
+    / "visfAtlas"
+    / "space-MNI_atlas-visfAtlas_dseg.xml"
 )
 
 mytree = ET.parse(xml_file)

@@ -45,7 +45,7 @@ function copyAtlasToSpmDir(varargin)
     case 'visfatlas'
       unzipAtlas(lower(atlas));
       sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'space-MNI_atlas-visfAtlas_dseg.nii');
-      sourceAtlasXml = fullfile(returnAtlasDir(), 'space-MNI_atlas-visfAtlas_dseg.xml');
+      sourceAtlasXml = fullfile(returnAtlasDir(lower(atlas)), 'space-MNI_atlas-visfAtlas_dseg.xml');
 
     case 'glasser'
       unzipAtlas(lower(atlas));
