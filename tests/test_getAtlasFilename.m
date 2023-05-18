@@ -8,6 +8,13 @@ function test_suite = test_getAtlasFilename %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_getAtlasFilename_glasser()
+
+  atlasFilename = getAtlasFilename('Glasser');
+  assertEqual(size(atlasFilename, 1), 1);
+
+end
+
 function test_getAtlasFilename_wang()
 
   rmRetinoAtlas();

@@ -24,6 +24,12 @@ function outputImage = extractRoiByLabel(sourceImage, labelStruct)
   outputVol = false(size(vol));
   outputVol(vol == labelStruct.label) = true;
 
+  if sum(outputVol(:)) == 0
+    warning('No voxel in ROI with value "%i"\n in image %s', ...
+            labelStruct.label, ...
+            sourceImage);
+  end
+
   bf = bids.File(sourceImage);
   bf.entities.label = bids.internal.camel_case(labelStruct.ROI);
   bf.suffix = 'mask';

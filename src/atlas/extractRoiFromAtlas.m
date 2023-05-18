@@ -10,7 +10,9 @@ function roiImage = extractRoiFromAtlas(varargin)
   % :param outputDir:
   % :type outputDir: string
   %
-  % :param atlasName: ``'wang'``, ``'visfatlas'``, ``'neuromorphometrics'``, ``'hcpex'``
+  % :param atlasName: ``'wang'``, ``'visfatlas'``,
+  %                   ``'neuromorphometrics'``, ``'hcpex'``,
+  %                   ``'glasser'``
   % :type atlasName: string
   %
   % :param roiName: run ``getLookUpTable(atlasName)`` to get a list of ROI names to choose from
@@ -50,43 +52,48 @@ function roiImage = extractRoiFromAtlas(varargin)
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
 
-  if strcmpi(atlasName, 'wang')
+  switch lower(atlasName)
+    case 'wang'
 
-    if strcmpi(hemisphere, 'L')
-      atlasFile = atlasFile(1, :);
-    else
-      atlasFile = atlasFile(2, :);
-    end
+      if strcmpi(hemisphere, 'L')
+        atlasFile = atlasFile(1, :);
+      else
+        atlasFile = atlasFile(2, :);
+      end
 
-    roiIdx = strcmp(roiName, lut.ROI);
+      roiIdx = strcmp(roiName, lut.ROI);
 
-  elseif strcmpi(atlasName, 'neuromorphometrics')
+    case 'neuromorphometrics'
 
-    roiName = regexprep(roiName, '(Left )|(Right )', '');
+      roiName = regexprep(roiName, '(Left )|(Right )', '');
 
-    prefix = '';
-    if strcmp(hemisphere, 'L')
-      prefix = 'Left ';
-    elseif strcmp(hemisphere, 'R')
-      prefix = 'Right ';
-    end
+      prefix = '';
+      if strcmp(hemisphere, 'L')
+        prefix = 'Left ';
+      elseif strcmp(hemisphere, 'R')
+        prefix = 'Right ';
+      end
 
-    roiIdx = strcmp([prefix roiName], lut.ROI);
+      roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmpi(atlasName, 'visfatlas')
+    case 'visfatlas'
 
-    prefix = '';
-    if strcmp(hemisphere, 'L')
-      prefix = 'lh_';
-    elseif strcmp(hemisphere, 'R')
-      prefix = 'rh_';
-    end
+      prefix = '';
+      if strcmp(hemisphere, 'L')
+        prefix = 'lh_';
+      elseif strcmp(hemisphere, 'R')
+        prefix = 'rh_';
+      end
 
-    roiIdx = strcmp([prefix roiName], lut.ROI);
+      roiIdx = strcmp([prefix roiName], lut.ROI);
 
-  elseif strcmpi(atlasName, 'hcpex')
+    case 'hcpex'
 
-    roiIdx = strcmp([hemisphere '_' roiName], lut.ROI);
+      roiIdx = strcmp([hemisphere '_' roiName], lut.ROI);
+
+    case 'glasser'
+
+      roiIdx = strcmp(roiName, lut.ROI);
 
   end
 
@@ -103,10 +110,17 @@ function roiImage = extractRoiFromAtlas(varargin)
 
   roiImage = extractRoiByLabel(atlasFile, labelStruct);
 
+  if strcmpi(atlasName, 'glasser')
+    tmp = roiImage;
+    roiImage = keepHemisphere(tmp, hemisphere, false);
+    delete(tmp);
+    delete(spm_file(tmp, 'ext', '.json'));
+  end
+
   % rename file
   entities = struct('hemi', hemisphere, ...
                     'space', 'MNI', ...
-                    'atlas', atlasName, ...
+                    'atlas', lower(atlasName), ...
                     'label', roiName);
   nameStructure = struct('entities', entities, ...
                          'suffix', 'mask', ...

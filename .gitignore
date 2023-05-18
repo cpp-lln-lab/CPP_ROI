@@ -14,23 +14,17 @@ docs/build/*
 # ignore virtual env
 envs/*
 
-# visual studio code stuff
-.vscode
-
 atlas/visual_topography_probability_atlas/
 
 demos/*/derivatives
-
 
 #for testing
 coveragage_html
 lib/bids-matlab
 
-
 ## MATLAB / OCTAVE gitignore template
 
 # From : https://github.com/github/gitignore/blob/master/Global/MATLAB.gitignore
-
 
 # Windows default autosave extension
 *.asv

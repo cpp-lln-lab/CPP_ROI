@@ -16,6 +16,8 @@ function copyAtlasToSpmDir(varargin)
 
   % (C) Copyright 2022 CPP ROI developers
 
+  SUPPORTED_ATLASES = {'aal', 'hcpex'};
+
   args = inputParser;
 
   addOptional(args, 'atlas', 'AAL', @ischar);
@@ -35,9 +37,20 @@ function copyAtlasToSpmDir(varargin)
       sourceAtlasXml = fullfile(returnAtlasDir(), 'AAL3', 'AAL3v1_1mm.xml');
 
     case 'hcpex'
-      unzipAtlas('hcpex');
-      sourceAtlasImage = fullfile(returnAtlasDir('hcpex'), 'HCPex.nii');
+      unzipAtlas(lower(atlas));
+      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'HCPex.nii');
       sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
+
+    case 'glasser'
+      unzipAtlas(lower(atlas));
+      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), ...
+                                  'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(lower(atlas)), ...
+                                'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
+
+    otherwise
+      error(['Only the following atlases can be copied to SPM atlas folder:\n', ...
+             bids.internal.create_unordered_list(SUPPORTED_ATLASES)]);
 
   end
 
@@ -58,8 +71,11 @@ function copyAtlasToSpmDir(varargin)
 
     copyfile(sourceAtlasImage, spmAtlasDir);
 
-    if exist(fullfile(spmAtlasDir, '*.nii.gz'))
-      gunzip(fullfile(spmAtlasDir, '*.nii.gz'));
+    unZippedAtlases = spm_select('FPList', spmAtlasDir, '.*.nii.gz');
+    if ~isempty(unZippedAtlases)
+      for i = 1:size(unZippedAtlases, 1)
+        gunzip(deblank(unZippedAtlases(i, :)));
+      end
       delete(fullfile(spmAtlasDir, '*.nii.gz'));
     end
 

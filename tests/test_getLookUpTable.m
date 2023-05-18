@@ -1,11 +1,20 @@
-% (C) Copyright 2020 CPP ROI developers
-
 function test_suite = test_getLookUpTable() %#ok<*STOUT>
+  % (C) Copyright 2020 CPP ROI developers
+
   try % assignment of 'localfunctions' is necessary in Matlab >= 2016
     test_functions = localfunctions(); %#ok<*NASGU>
   catch % no problem; early Matlab versions can use initTestSuite fine
   end
   initTestSuite;
+end
+
+function test_lut_glasser_case()
+
+  lut = getLookUpTable('Glasser');
+
+  assertEqual(lut.label, [1:180]');
+  assertEqual(lut.ROI{1}, 'V1');
+
 end
 
 function test_lut_wang()

@@ -1,4 +1,4 @@
-function outputImage = keepHemisphere(inputImage, hemisphere)
+function outputImage = keepHemisphere(inputImage, hemisphere, paddingValue)
   %
   % Only keep the values from one hemisphere. Sets the other half to NaN.
   % Writes an image with an extra entity ``_hemi-[R|L]``
@@ -17,6 +17,10 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
   % (C) Copyright 2021 CPP ROI developers
 
   % TODO change the hemi entity
+
+  if nargin < 3
+    paddingValue = nan();
+  end
 
   hdr = spm_vol(inputImage);
   vol = spm_read_vols(hdr);
@@ -37,7 +41,7 @@ function outputImage = keepHemisphere(inputImage, hemisphere)
 
   end
 
-  vol(discard, :, :) = NaN;
+  vol(discard, :, :) = paddingValue;
 
   bf = bids.File(inputImage);
   bf.entity_order = cat(1, 'hemi', fieldnames(bf.entities));
