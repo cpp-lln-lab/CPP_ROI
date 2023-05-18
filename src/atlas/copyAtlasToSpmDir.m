@@ -6,7 +6,8 @@ function copyAtlasToSpmDir(varargin)
   %
   %   copyAtlasToSpmDir(atlas, 'verbose', false)
   %
-  % :param atlas: Any of ``{'AAL'}``. Defaults to ``'AAL'``
+  % :param atlas: Any of ``{'aal', 'hcpex', 'glasser', 'visfatlas'}``.
+  %               Defaults to ``'AAL'``
   % :type  atlas: char
   %
   % :param verbose: Defaults to ``false``
@@ -16,7 +17,7 @@ function copyAtlasToSpmDir(varargin)
 
   % (C) Copyright 2022 CPP ROI developers
 
-  SUPPORTED_ATLASES = {'aal', 'hcpex'};
+  SUPPORTED_ATLASES = {'aal', 'hcpex', 'glasser', 'visfatlas'};
 
   args = inputParser;
 
@@ -40,6 +41,11 @@ function copyAtlasToSpmDir(varargin)
       unzipAtlas(lower(atlas));
       sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'HCPex.nii');
       sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
+
+    case 'visfatlas'
+      unzipAtlas(lower(atlas));
+      sourceAtlasImage = fullfile(returnAtlasDir(lower(atlas)), 'space-MNI_atlas-visfAtlas_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(), 'space-MNI_atlas-visfAtlas_dseg.xml');
 
     case 'glasser'
       unzipAtlas(lower(atlas));

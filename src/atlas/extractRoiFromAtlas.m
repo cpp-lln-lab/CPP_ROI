@@ -92,7 +92,9 @@ function roiImage = extractRoiFromAtlas(varargin)
       roiIdx = strcmp([hemisphere '_' roiName], lut.ROI);
 
     case 'glasser'
-
+      warning(['The volumetric version of the Glasser atlas is not ideally suited ', ...
+               'to be used for standard brain-mapping approaches ', ...
+               'that use volumetric nonlinear deformations.']);
       roiIdx = strcmp(roiName, lut.ROI);
 
   end

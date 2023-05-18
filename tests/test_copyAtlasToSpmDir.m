@@ -7,10 +7,24 @@ function test_suite = test_copyAtlasToSpmDir %#ok<*STOUT>
   initTestSuite;
 end
 
+function test_copyAtlasToSpmDir_visfatlas()
+
+  copyAtlasToSpmDir('visfatlas', 'verbose', false);
+
+  targetAtlasImage = fullfile(spmAtlasDir(), ...
+                              'space-MNI_atlas-visfAtlas_dseg.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), ...
+                            'space-MNI_atlas-visfAtlas_dseg.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+end
+
 function test_copyAtlasToSpmDir_glasser()
 
   if bids.internal.is_github_ci()
-    return
+    moxunit_throw_test_skipped_exception('no SPM in CI.');
   end
 
   copyAtlasToSpmDir('Glasser', 'verbose', false);
