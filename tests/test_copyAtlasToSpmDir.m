@@ -41,10 +41,6 @@ end
 
 function test_copyAtlasToSpmDir_glasser()
 
-  if bids.internal.is_github_ci()
-    moxunit_throw_test_skipped_exception('no SPM in CI.');
-  end
-
   copyAtlasToSpmDir('Glasser', 'verbose', false);
 
   targetAtlasImage = fullfile(spmAtlasDir(), ...
@@ -61,10 +57,6 @@ end
 
 function test_copyAtlasToSpmDir_basic()
 
-  if bids.internal.is_github_ci()
-    return
-  end
-
   copyAtlasToSpmDir('AAL', 'verbose', false);
 
   targetAtlasImage = fullfile(spmAtlasDir(), 'AAL3v1_1mm.nii');
@@ -78,10 +70,6 @@ function test_copyAtlasToSpmDir_basic()
 end
 
 function test_copyAtlasToSpmDir_HPCex()
-
-  if bids.internal.is_github_ci()
-    return
-  end
 
   copyAtlasToSpmDir('HCPex', 'verbose', false);
 

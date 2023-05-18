@@ -67,6 +67,10 @@ function copyAtlasToSpmDir(varargin)
 
   end
 
+  if strcmpi(atlas, 'wang')
+    delete(sourceAtlasImage);
+  end
+
 end
 
 function [sourceAtlasImage, sourceAtlasXml] = prepareFiles(atlas)
