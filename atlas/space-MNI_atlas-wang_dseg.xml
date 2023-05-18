@@ -1,0 +1,41 @@
+<atlas version="2.0">
+    <header>
+        <name>Probabilistic Maps of Visual Topography in Human Cortex. Wang 2015.</name>
+        <version>1.0</version>
+        <description>space-MNI_atlas-wang_dseg</description>
+        <url />
+        <licence />
+        <coordinate_system>MNI</coordinate_system>
+        <type>Label</type>
+        <images>
+            <imagefile>space-MNI_atlas-wang_dseg.nii</imagefile>
+        </images>
+    </header>
+	<data>
+		<label><index>1</index><name>V1v</name></label>
+		<label><index>2</index><name>V1d</name></label>
+		<label><index>3</index><name>V2v</name></label>
+		<label><index>4</index><name>V2d</name></label>
+		<label><index>5</index><name>V3v</name></label>
+		<label><index>6</index><name>V3d</name></label>
+		<label><index>7</index><name>hV4</name></label>
+		<label><index>8</index><name>VO1</name></label>
+		<label><index>9</index><name>VO2</name></label>
+		<label><index>10</index><name>PHC1</name></label>
+		<label><index>11</index><name>PHC2</name></label>
+		<label><index>12</index><name>MST</name></label>
+		<label><index>13</index><name>hMT</name></label>
+		<label><index>14</index><name>LO2</name></label>
+		<label><index>15</index><name>LO1</name></label>
+		<label><index>16</index><name>V3b</name></label>
+		<label><index>17</index><name>V3a</name></label>
+		<label><index>18</index><name>IPS0</name></label>
+		<label><index>19</index><name>IPS1</name></label>
+		<label><index>20</index><name>IPS2</name></label>
+		<label><index>21</index><name>IPS3</name></label>
+		<label><index>22</index><name>IPS4</name></label>
+		<label><index>23</index><name>IPS5</name></label>
+		<label><index>24</index><name>SPL1</name></label>
+		<label><index>25</index><name>FEF</name></label>
+	</data>
+</atlas>

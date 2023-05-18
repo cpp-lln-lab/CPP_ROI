@@ -7,11 +7,39 @@ function test_suite = test_copyAtlasToSpmDir %#ok<*STOUT>
   initTestSuite;
 end
 
-function test_copyAtlasToSpmDir_glasser()
+function test_copyAtlasToSpmDir_wang()
 
-  if bids.internal.is_github_ci()
-    return
-  end
+  copyAtlasToSpmDir('wang', 'verbose', false);
+
+  targetAtlasImage = fullfile(spmAtlasDir(), ...
+                              'space-MNI_atlas-wang_dseg.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), ...
+                            'space-MNI_atlas-wang_dseg.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+  cleanSpmAtlasDir();
+
+end
+
+function test_copyAtlasToSpmDir_visfatlas()
+
+  copyAtlasToSpmDir('visfatlas', 'verbose', false);
+
+  targetAtlasImage = fullfile(spmAtlasDir(), ...
+                              'space-MNI_atlas-visfAtlas_dseg.nii');
+  targetAtlasXml = fullfile(spmAtlasDir(), ...
+                            'space-MNI_atlas-visfAtlas_dseg.xml');
+
+  assertEqual(exist(targetAtlasImage, 'file'), 2);
+  assertEqual(exist(targetAtlasXml, 'file'), 2);
+
+  cleanSpmAtlasDir();
+
+end
+
+function test_copyAtlasToSpmDir_glasser()
 
   copyAtlasToSpmDir('Glasser', 'verbose', false);
 
@@ -23,13 +51,11 @@ function test_copyAtlasToSpmDir_glasser()
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+  cleanSpmAtlasDir();
+
 end
 
 function test_copyAtlasToSpmDir_basic()
-
-  if bids.internal.is_github_ci()
-    return
-  end
 
   copyAtlasToSpmDir('AAL', 'verbose', false);
 
@@ -39,13 +65,11 @@ function test_copyAtlasToSpmDir_basic()
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+  cleanSpmAtlasDir();
+
 end
 
 function test_copyAtlasToSpmDir_HPCex()
-
-  if bids.internal.is_github_ci()
-    return
-  end
 
   copyAtlasToSpmDir('HCPex', 'verbose', false);
 
@@ -55,8 +79,15 @@ function test_copyAtlasToSpmDir_HPCex()
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
 
+  cleanSpmAtlasDir();
+
 end
 
 function value = spmAtlasDir()
   value = fullfile(spm('dir'), 'atlas');
+end
+
+function cleanSpmAtlasDir()
+  delete(fullfile(spmAtlasDir, '*.nii'));
+  delete(fullfile(spmAtlasDir, '*.xml'));
 end

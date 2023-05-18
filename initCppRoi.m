@@ -31,6 +31,8 @@ function initCppRoi()
     copyAtlasToSpmDir('HCPex', 'verbose', true);
     copyAtlasToSpmDir('AAL', 'verbose', true);
     copyAtlasToSpmDir('Glasser', 'verbose', true);
+    copyAtlasToSpmDir('Wang', 'verbose', true);
+    copyAtlasToSpmDir('visfAtlas', 'verbose', true);
 
     CPP_ROI_INITIALIZED = true();
 

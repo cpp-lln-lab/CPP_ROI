@@ -1,0 +1,49 @@
+<atlas version="2.0">
+	<header>
+		<name>A probabilistic functional parcellation of human occipito-temporal cortex. Rosenke 2020.</name>
+		<version>1.0</version>
+		<description>space-MNI_atlas-visfAtlas_dseg</description>
+		<url />
+		<licence />
+		<coordinate_system>MNI</coordinate_system>
+		<type>Label</type>
+		<images>
+			<imagefile>space-MNI_atlas-visfAtlas_dseg.nii</imagefile>
+		</images>
+	</header>
+	<data>
+		<label><index>1</index><name>lh_mFus</name></label>
+		<label><index>2</index><name>lh_pFus</name></label>
+		<label><index>3</index><name>lh_IOG</name></label>
+		<label><index>4</index><name>lh_OTS</name></label>
+		<label><index>5</index><name>lh_ITG</name></label>
+		<label><index>6</index><name>lh_MTG</name></label>
+		<label><index>7</index><name>lh_LOS</name></label>
+		<label><index>8</index><name>lh_pOTS</name></label>
+		<label><index>9</index><name>lh_IOS</name></label>
+		<label><index>10</index><name>lh_CoS</name></label>
+		<label><index>11</index><name>lh_hMT</name></label>
+		<label><index>12</index><name>lh_v1d</name></label>
+		<label><index>13</index><name>lh_v2d</name></label>
+		<label><index>14</index><name>lh_v3d</name></label>
+		<label><index>15</index><name>lh_v1v</name></label>
+		<label><index>16</index><name>lh_v2v</name></label>
+		<label><index>17</index><name>lh_v3v</name></label>
+		<label><index>18</index><name>rh_mFus</name></label>
+		<label><index>19</index><name>rh_pFus</name></label>
+		<label><index>20</index><name>rh_IOG</name></label>
+		<label><index>21</index><name>rh_OTS</name></label>
+		<label><index>22</index><name>rh_ITG</name></label>
+		<label><index>23</index><name>rh_MTG</name></label>
+		<label><index>24</index><name>rh_LOS</name></label>
+		<label><index>25</index><name>rh_CoS</name></label>
+		<label><index>26</index><name>rh_TOS</name></label>
+		<label><index>27</index><name>rh_hMT</name></label>
+		<label><index>28</index><name>rh_v1d</name></label>
+		<label><index>29</index><name>rh_v2d</name></label>
+		<label><index>30</index><name>rh_v3d</name></label>
+		<label><index>31</index><name>rh_v1v</name></label>
+		<label><index>32</index><name>rh_v2v</name></label>
+		<label><index>33</index><name>rh_v3v</name></label>
+	</data>
+</atlas>
