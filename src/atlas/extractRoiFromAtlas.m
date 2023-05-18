@@ -101,7 +101,7 @@ function roiImage = extractRoiFromAtlas(varargin)
 
   % create ROI
   if isempty(roiIdx) || ~any(roiIdx)
-    disp(lut.ROI);
+    disp(sort(lut.ROI));
     error('No ROI named %s for atlas %s. See list of available ROIs above', ...
           roiName, atlasName);
   end
