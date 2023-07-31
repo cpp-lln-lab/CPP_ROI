@@ -39,7 +39,7 @@ function roiImage = extractRoiFromAtlas(varargin)
   args = inputParser;
 
   addRequired(args, 'outputDir', isChar);
-  addRequired(args, 'atlasName', @isAKnownAtlas);
+  addRequired(args, 'atlasName', @(x) isAKnownAtlas(x));
   addRequired(args, 'roiName', isChar);
   addRequired(args, 'hemisphere', @(x) ismember(x, {'L', 'R'}));
 
