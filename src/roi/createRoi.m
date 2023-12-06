@@ -33,11 +33,11 @@ function [mask, outputFile] = createRoi(varargin)
   %
   %   :roiImage: - :string: fullpath of the roi image for ``'mask'``
   %
-  %   :sphere: - :structure: defines the charateristic for ``'sphere'``
+  %   :sphere: - :structure: defines the characteristic for ``'sphere'``
   %                          - ``sphere.location``: X Y Z coordinates in millimeters
   %                          - ``spehere.radius``: radius in millimeters
   %
-  %   :specification: - :structure: defines the charateristic for ``'intersection'`` and ``'expand'``
+  %   :specification: - :structure: defines the characteristic for ``'intersection'`` and ``'expand'``
   %                                 - ``sphere.location``: X Y Z coordinates in millimeters
   %                                 - ``sphere.radius``: radius in millimeters
   %
