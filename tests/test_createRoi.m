@@ -49,7 +49,7 @@ function test_createRoi_intersection_mask_sphere()
 
   mask = createRoi('intersection', specification, volumeDefiningImage, outputDir, saveImg);
 
-  basename = 'space-MNI_atlas-neurosynth_label-visualMotionIntersection_desc-p10pt00_mask';
+  basename = 'space-MNI_seg-neurosynth_label-visualMotionIntersection_desc-p10pt00_mask';
 
   assertEqual(exist(fullfile(thisDir(), [basename '.nii']), 'file'), 2);
   assertEqual(exist(fullfile(thisDir(), [basename '.json']), 'file'), 2);
@@ -75,7 +75,7 @@ function test_createRoi_expand
 
   mask = createRoi('expand', specification, volumeDefiningImage, outputDir, saveImg);
 
-  basename = 'space-MNI_atlas-neurosynth_label-visualMotionExpandVox57_desc-p10pt00_mask';
+  basename = 'space-MNI_seg-neurosynth_label-visualMotionExpandVox57_desc-p10pt00_mask';
 
   assertEqual(mask.roi.size, 57);
 

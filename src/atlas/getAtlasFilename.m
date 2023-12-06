@@ -47,7 +47,7 @@ function atlasFilename = getAtlasFilename(atlasName)
 
     case 'glasser'
 
-      atlasFilename = fullfile(atlasDir, 'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+      atlasFilename = fullfile(atlasDir, 'space-MNI152ICBM2009anlin_seg-glasser_dseg.nii');
 
   end
 

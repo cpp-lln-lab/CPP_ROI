@@ -12,9 +12,9 @@ function test_copyAtlasToSpmDir_wang()
   copyAtlasToSpmDir('wang', 'verbose', false);
 
   targetAtlasImage = fullfile(spmAtlasDir(), ...
-                              'space-MNI_atlas-wang_dseg.nii');
+                              'space-MNI_seg-wang_dseg.nii');
   targetAtlasXml = fullfile(spmAtlasDir(), ...
-                            'space-MNI_atlas-wang_dseg.xml');
+                            'space-MNI_seg-wang_dseg.xml');
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
@@ -28,9 +28,9 @@ function test_copyAtlasToSpmDir_visfatlas()
   copyAtlasToSpmDir('visfatlas', 'verbose', false);
 
   targetAtlasImage = fullfile(spmAtlasDir(), ...
-                              'space-MNI_atlas-visfAtlas_dseg.nii');
+                              'space-MNI_seg-visfAtlas_dseg.nii');
   targetAtlasXml = fullfile(spmAtlasDir(), ...
-                            'space-MNI_atlas-visfAtlas_dseg.xml');
+                            'space-MNI_seg-visfAtlas_dseg.xml');
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);
@@ -44,9 +44,9 @@ function test_copyAtlasToSpmDir_glasser()
   copyAtlasToSpmDir('Glasser', 'verbose', false);
 
   targetAtlasImage = fullfile(spmAtlasDir(), ...
-                              'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+                              'space-MNI152ICBM2009anlin_seg-glasser_dseg.nii');
   targetAtlasXml = fullfile(spmAtlasDir(), ...
-                            'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
+                            'space-MNI152ICBM2009anlin_seg-glasser_dseg.xml');
 
   assertEqual(exist(targetAtlasImage, 'file'), 2);
   assertEqual(exist(targetAtlasXml, 'file'), 2);

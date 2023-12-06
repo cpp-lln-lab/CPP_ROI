@@ -30,11 +30,11 @@ function unzipAtlas(atlas)
       end
 
     case 'glasser'
-      file = fullfile(atlasDir, 'Glasser', 'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+      file = fullfile(atlasDir, 'Glasser', 'space-MNI152ICBM2009anlin_seg-glasser_dseg.nii');
       gunzipAtlasIfNecessary(file);
 
     case 'visfatlas'
-      file = fullfile(atlasDir, 'visfAtlas', 'space-MNI_atlas-visfAtlas_dseg.nii');
+      file = fullfile(atlasDir, 'visfAtlas', 'space-MNI_seg-visfAtlas_dseg.nii');
       gunzipAtlasIfNecessary(file);
 
     case 'hcpex'
