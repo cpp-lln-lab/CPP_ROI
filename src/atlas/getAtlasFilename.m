@@ -39,7 +39,7 @@ function atlasFilename = getAtlasFilename(atlasName)
 
     case 'visfatlas'
 
-      atlasFilename = fullfile(atlasDir, 'space-MNI_atlas-visfAtlas_dseg.nii');
+      atlasFilename = fullfile(atlasDir, 'space-MNI_seg-visfAtlas_dseg.nii');
 
     case 'hcpex'
 
