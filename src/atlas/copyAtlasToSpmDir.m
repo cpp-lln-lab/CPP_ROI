@@ -94,22 +94,22 @@ function [sourceAtlasImage, sourceAtlasXml] = prepareFiles(atlas)
       sourceAtlasXml = fullfile(returnAtlasDir(), 'HCPex.xml');
 
     case 'visfatlas'
-      sourceAtlasImage = fullfile(returnAtlasDir(atlas), 'space-MNI_atlas-visfAtlas_dseg.nii');
-      sourceAtlasXml = fullfile(returnAtlasDir(atlas), 'space-MNI_atlas-visfAtlas_dseg.xml');
+      sourceAtlasImage = fullfile(returnAtlasDir(atlas), 'space-MNI_seg-visfAtlas_dseg.nii');
+      sourceAtlasXml = fullfile(returnAtlasDir(atlas), 'space-MNI_seg-visfAtlas_dseg.xml');
 
     case 'glasser'
 
       sourceAtlasImage = fullfile(returnAtlasDir(atlas), ...
-                                  'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+                                  'space-MNI152ICBM2009anlin_seg-glasser_dseg.nii');
       sourceAtlasXml = fullfile(returnAtlasDir(atlas), ...
-                                'space-MNI152ICBM2009anlin_atlas-glasser_dseg.xml');
+                                'space-MNI152ICBM2009anlin_seg-glasser_dseg.xml');
 
     case 'wang'
       sourceAtlasImage = fullfile(returnAtlasDir(atlas), ...
                                   'subj_vol_all', ...
-                                  'space-MNI_atlas-wang_dseg.nii');
+                                  'space-MNI_seg-wang_dseg.nii');
       sourceAtlasXml = fullfile(returnAtlasDir(), ...
-                                'space-MNI_atlas-wang_dseg.xml');
+                                'space-MNI_seg-wang_dseg.xml');
 
     otherwise
       error(['Only the following atlases can be copied to SPM atlas folder:\n', ...

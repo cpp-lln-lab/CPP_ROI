@@ -18,7 +18,7 @@ function test_labelClusters_basic
 
   labeledClusters = labelClusters(zMap, peakThreshold, extendThreshold);
 
-  expected = 'space-MNI_atlas-neurosynth_label-visualMotion_dseg.nii';
+  expected = 'space-MNI_seg-neurosynth_label-visualMotion_dseg.nii';
   assertEqual(exist(fullfile(demoDir(), expected), 'file'), 2);
 
   labelStruct = struct('ROI', 'ns left MT', ...
@@ -26,7 +26,7 @@ function test_labelClusters_basic
 
   roiName = extractRoiByLabel(labeledClusters, labelStruct);
 
-  expected = 'space-MNI_atlas-neurosynth_label-nsLeftMT_mask.nii';
+  expected = 'space-MNI_seg-neurosynth_label-nsLeftMT_mask.nii';
   assertEqual(exist(fullfile(demoDir(), expected), 'file'), 2);
 
 end

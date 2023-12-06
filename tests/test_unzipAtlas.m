@@ -13,7 +13,7 @@ function test_unzipAtlas_glasser()
   unzipAtlas('Glasser');
 
   expectedFile = fullfile(returnAtlasDir('Glasser'), ...
-                          'space-MNI152ICBM2009anlin_atlas-glasser_dseg.nii');
+                          'space-MNI152ICBM2009anlin_seg-glasser_dseg.nii');
 
   assertEqual(exist(expectedFile, 'file'), 2);
 

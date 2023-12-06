@@ -21,7 +21,7 @@ function test_keepHemisphere_basic()
   leftRoiImage = keepHemisphere(zMap, 'L');
   rightRoiImage = keepHemisphere(zMap, 'R');
 
-  basename = 'space-MNI_atlas-neurosynth_label-visualMotion_probseg.nii';
+  basename = 'space-MNI_seg-neurosynth_label-visualMotion_probseg.nii';
 
   assertEqual(exist(fullfile(inputDir, 'inputs', ...
                              ['hemi-L_' basename]), ...
