@@ -47,8 +47,8 @@ function test_lut_hcpex()
 
   lut = getLookUpTable('hcpex');
 
-  assertEqual(lut.label, [2:426]');
-  assertEqual(lut.ROI{417}, 'R_Gpe');
+  assertEqual(lut.label, [1:426]');
+  assertEqual(lut.ROI{417}, 'R_NAc');
 
 end
 

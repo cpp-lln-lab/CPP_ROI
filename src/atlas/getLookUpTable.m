@@ -62,7 +62,7 @@ function roiLabelLUT = getLookUpTable(atlasName)
 
       fid = fopen(roiLabelLUT);
       pattern = '%f%s%s%f';
-      C = textscan(fid, pattern, 'Headerlines', 1);
+      C = textscan(fid, pattern, 'Headerlines', 0);
       fclose(fid);
 
       for i = 1:numel(C{2})
