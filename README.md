@@ -1,7 +1,10 @@
-[![miss_hit](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/miss_hit.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/cpp-lln-lab/CPP_ROI/main.svg)](https://results.pre-commit.ci/latest/github/cpp-lln-lab/CPP_ROI/main)
+[![miss hit](https://img.shields.io/badge/code%20style-miss_hit-000000.svg)](https://misshit.org/)
 [![tests and coverage with matlab](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml/badge.svg)](https://github.com/cpp-lln-lab/CPP_ROI/actions/workflows/run_tests_matlab.yml)
 [![codecov](https://codecov.io/gh/cpp-lln-lab/CPP_ROI/branch/main/graph/badge.svg?token=8IoRQtbFUV)](https://codecov.io/gh/cpp-lln-lab/CPP_ROI)
 ![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)
+[![DOI](https://zenodo.org/badge/349001542.svg)](https://zenodo.org/doi/10.5281/zenodo.6632692)
+
 
 # CPP ROI
 

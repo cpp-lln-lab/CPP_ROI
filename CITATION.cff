@@ -42,6 +42,16 @@ authors:
   orcid: "https://orcid.org/0000-0001-8681-5267"
   affiliation: "Université catholique de Louvain"
 
+- family-names: "Yang"
+  given-names: "Ying"
+  orcid: "https://orcid.org/0000-0002-4157-2975"
+  affiliation: "Université catholique de Louvain"
+
+- family-names: "Matuszewski"
+  given-names:  "Jacek"
+  affiliation: "Université catholique de Louvain"
+  orcid: "https://orcid.org/0000-0001-9752-3294"
+
 license: GPL-3.0
 
 keywords:
