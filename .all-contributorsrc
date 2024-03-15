@@ -91,6 +91,16 @@
         "bug",
         "userTesting"
       ]
+    },
+    {
+      "login": "yyang1234",
+      "name": "Ying Yang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59220868?v=4",
+      "profile": "https://github.com/yyang1234",
+      "contributions": [
+        "bug",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7,
