@@ -91,6 +91,9 @@ Also includes:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/CerenB"><img src="https://avatars.githubusercontent.com/u/10451654?v=4?s=100" width="100px;" alt="Ceren Battal"/><br /><sub><b>Ceren Battal</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/commits?author=CerenB" title="Code">💻</a> <a href="https://github.com/cpp-lln-lab/CPP_ROI/pulls?q=is%3Apr+reviewed-by%3ACerenB" title="Reviewed Pull Requests">👀</a> <a href="#userTesting-CerenB" title="User Testing">📓</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/JacMatu"><img src="https://avatars.githubusercontent.com/u/94451915?v=4?s=100" width="100px;" alt="Jacek Matuszewski"/><br /><sub><b>Jacek Matuszewski</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/issues?q=author%3AJacMatu" title="Bug reports">🐛</a> <a href="#userTesting-JacMatu" title="User Testing">📓</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yyang1234"><img src="https://avatars.githubusercontent.com/u/59220868?v=4?s=100" width="100px;" alt="Ying Yang"/><br /><sub><b>Ying Yang</b></sub></a><br /><a href="https://github.com/cpp-lln-lab/CPP_ROI/issues?q=author%3Ayyang1234" title="Bug reports">🐛</a> <a href="#userTesting-yyang1234" title="User Testing">📓</a></td>
+    </tr>
   </tbody>
 </table>
 
