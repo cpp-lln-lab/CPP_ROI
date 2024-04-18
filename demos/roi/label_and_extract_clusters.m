@@ -16,8 +16,6 @@ zMap = renameNeuroSynth(zMap);
 peakThreshold = 5;
 extendThreshold = 50;
 
-zMap = renameNeuroSynth(zMap);
-
 labeledClusters = labelClusters(zMap, peakThreshold, extendThreshold);
 
 %% Use the output of the previous step
