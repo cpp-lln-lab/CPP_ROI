@@ -43,9 +43,9 @@ jobs:
     - name: Install SPM
       run: |
         git clone https://github.com/spm/spm12.git --depth 1
-        make -C spm12/src PLATFORM=matlab distclean
-        make -C spm12/src PLATFORM=matlab
-        make -C spm12/src PLATFORM=matlab install
+        make -C spm12/src distclean
+        make -C spm12/src
+        make -C spm12/src install
 
     - name: Install Moxunit and MOcov
       run: |
