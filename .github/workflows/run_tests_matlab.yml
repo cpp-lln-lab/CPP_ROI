@@ -26,7 +26,7 @@ jobs:
         os: [ubuntu-latest, macos-13, windows-latest]
         version: [R2021a, R2023b]
         include:
-        - os: macos-latest
+        - os: macos-14
           version: R2023b
 
     runs-on: ${{matrix.os}}
