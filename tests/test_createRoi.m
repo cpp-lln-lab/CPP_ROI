@@ -88,7 +88,7 @@ function test_createRoi_expand
 end
 
 function value = thisDir()
-  value = fullfile(fileparts(mfilename('fullpath')));
+  value = fileparts(mfilename('fullpath'));
 end
 
 function value = demoDir()

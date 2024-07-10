@@ -4,7 +4,7 @@ warning('OFF');
 
 spm('defaults', 'fMRI');
 
-thisDir = fullfile(fileparts(mfilename('fullpath')));
+thisDir = fileparts(mfilename('fullpath'));
 
 folderToCover = fullfile(thisDir, 'src');
 

@@ -32,7 +32,7 @@ function test_labelClusters_basic
 end
 
 function value = thisDir()
-  value = fullfile(fileparts(mfilename('fullpath')));
+  value = fileparts(mfilename('fullpath'));
 end
 
 function value = demoDir()
