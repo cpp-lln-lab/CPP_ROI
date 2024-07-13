@@ -1,0 +1,78 @@
+---
+name: tests and coverage with octave
+
+env:
+  OCTFLAGS: --no-gui --no-window-system --silent
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches: ['*']
+  schedule:
+  - cron: 0 0 1 * *
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  tests_octave:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install CPP_ROI
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Install SPM
+      run: |
+        git clone https://github.com/spm/spm12.git --depth 1
+
+    - name: Install Moxunit and MOcov
+      run: |
+        git clone https://github.com/MOxUnit/MOxUnit.git --depth 1
+        git clone https://github.com/MOcov/MOcov.git --depth 1
+
+    - name: Install octave
+      run: |
+        sudo apt-get -y -qq update
+        sudo apt-get -y install \
+          octave \
+          liboctave-dev\
+          octave-common \
+          octave-io \
+          octave-image \
+          octave-signal \
+          octave-statistics
+        make -C MOxUnit install
+        make -C MOcov install
+
+    - name: Compile SPM
+      run: |
+        make -C spm12/src PLATFORM=octave distclean
+        make -C spm12/src PLATFORM=octave
+        make -C spm12/src PLATFORM=octave install
+        octave $OCTFLAGS --eval "addpath(fullfile(pwd, 'spm12')); savepath();"
+
+    - name: Add bids-matlab
+      run: make install_dev
+
+    - name: Run tests
+      run: |
+        octave $OCTFLAGS --eval "addpath(fullfile(pwd, 'tests', 'utils')); savepath();"
+        octave $OCTFLAGS --eval "cd(fullfile(getenv('GITHUB_WORKSPACE'), '.github', 'workflows')); run tests_octave;"
+
+    - name: Code coverage
+      uses: codecov/codecov-action@v4
+      with:
+        file: coverage.xml
+        flags: octave
+        name: codecov-umbrella
+        fail_ci_if_error: false

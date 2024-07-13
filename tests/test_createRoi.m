@@ -9,7 +9,8 @@ end
 
 function test_createRoi_sphere()
 
-  volumeDefiningImage = fullfile(demoDir(), 'TStatistic.nii');
+  inputDir = setUpDemoData();
+  volumeDefiningImage = fullfile(inputDir, 'inputs', 'TStatistic.nii');
 
   sphere.location = [44 -67 0];
   sphere.radius = 5;
@@ -91,38 +92,20 @@ function value = thisDir()
   value = fileparts(mfilename('fullpath'));
 end
 
-function value = demoDir()
-
-  value = fullfile(thisDir(), '..', 'demos', 'roi', 'inputs');
-
-  if exist(fullfile(value, 'TStatistic.nii'), 'file') == 0 || ...
-     exist(fullfile(value, 'visual motion_association-test_z_FDR_0.01.nii'), 'file') == 0
-    gunzip(fullfile(value, '*.gz'));
-  end
-
-end
-
 function  [roiFilename, volumeDefiningImage] = prepareRoiAndVolumeDefiningImage()
 
-  volumeDefiningImage = fullfile(demoDir(), 'TStatistic.nii');
+  inputDir = setUpDemoData();
 
-  roiFilename = fullfile(demoDir(), ...
-                         'space-MNI_atlas-neurosynth_label-visualMotion_desc-p10pt00_mask.nii');
+  volumeDefiningImage = fullfile(inputDir, 'inputs', 'TStatistic.nii');
 
-  if exist(roiFilename, 'file') == 2
+  zMap = fullfile(inputDir, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 
-  else
+  zMap = renameNeuroSynth(zMap);
+  zMap = resliceRoiImages(volumeDefiningImage, zMap);
 
-    zMap = fullfile(demoDir(), 'visual motion_association-test_z_FDR_0.01.nii');
+  zMap = removePrefix(zMap, 'r');
 
-    zMap = renameNeuroSynth(zMap);
-    zMap = resliceRoiImages(volumeDefiningImage, zMap);
-
-    zMap = removePrefix(zMap, 'r');
-
-    threshold = 10;
-    roiFilename = thresholdToMask(zMap, threshold);
-
-  end
+  threshold = 10;
+  roiFilename = thresholdToMask(zMap, threshold);
 
 end

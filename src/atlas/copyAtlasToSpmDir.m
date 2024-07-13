@@ -17,11 +17,6 @@ function copyAtlasToSpmDir(varargin)
 
   % (C) Copyright 2022 CPP ROI developers
 
-  if bids.internal.is_octave
-    % the atlas in the spm dir are only useful in matlab with the GUI
-    return
-  end
-
   args = inputParser;
 
   addOptional(args, 'atlas', 'AAL', @ischar);

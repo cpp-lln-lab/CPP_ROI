@@ -1,5 +1,5 @@
 function test_suite = test_thresholdToMask() %#ok<*STOUT>
-  %
+
   % (C) Copyright 2021 CPP ROI developers
 
   try % assignment of 'localfunctions' is necessary in Matlab >= 2016
@@ -9,13 +9,10 @@ function test_suite = test_thresholdToMask() %#ok<*STOUT>
   initTestSuite;
 end
 
-% TODO refactor set up and teardown
-
 function test_thresholdToMask_default()
 
-  image = 'visual motion_association-test_z_FDR_0.01.nii.gz';
-
-  inputImage = setUp(image);
+  inputDir = setUpDemoData();
+  inputImage = fullfile(inputDir, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 
   peakThreshold = 5.0;
   outputImage = thresholdToMask(inputImage, peakThreshold);
@@ -24,15 +21,12 @@ function test_thresholdToMask_default()
   vol = spm_read_vols(spm_vol(outputImage));
   assertEqual(sum(vol(:) > 0), 2008);
 
-  teardown();
-
 end
 
 function test_thresholdToMask_cluster()
 
-  image = 'visual motion_association-test_z_FDR_0.01.nii.gz';
-
-  inputImage = setUp(image);
+  inputDir = setUpDemoData();
+  inputImage = fullfile(inputDir, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 
   peakThreshold = 5;
   clusterSize = 10;
@@ -42,23 +36,4 @@ function test_thresholdToMask_cluster()
   vol = spm_read_vols(spm_vol(outputImage));
   assertEqual(sum(vol(:) > 0), 1926);
 
-  teardown();
-
-end
-
-function inputImage = setUp(image)
-
-  rootDir = fullfile(fileparts(mfilename('fullpath')), '..');
-
-  gzImage = spm_file(fullfile(rootDir, 'demos', 'roi', 'inputs', image), 'cpath');
-  [~, basename] = spm_fileparts(gzImage);
-  gunzip(gzImage, pwd);
-
-  inputImage = renameNeuroSynth(fullfile(pwd, basename));
-
-end
-
-function teardown()
-  delete('*.nii');
-  delete('*.json');
 end

@@ -39,9 +39,9 @@ function roiImage = extractRoiFromAtlas(varargin)
   args = inputParser;
 
   addRequired(args, 'outputDir', isChar);
-  addRequired(args, 'atlasName', @(x) isAKnownAtlas(x));
+  addRequired(args, 'atlasName');
   addRequired(args, 'roiName', isChar);
-  addRequired(args, 'hemisphere', @(x) ismember(x, {'L', 'R'}));
+  addRequired(args, 'hemisphere');
 
   parse(args, varargin{:});
 
@@ -49,6 +49,15 @@ function roiImage = extractRoiFromAtlas(varargin)
   atlasName = args.Results.atlasName;
   roiName = args.Results.roiName;
   hemisphere = args.Results.hemisphere;
+
+  if ~ismember(hemisphere, {'L', 'R'})
+    msg = sprintf('"hemisphere must be "L" or "R"": %s\nGot: "%s"', ...
+                  hemisphere);
+    bids.internal.error_handling(mfilename(), ...
+                                 'invalidHemisphere', msg, false);
+  end
+
+  isAKnownAtlas(atlasName);
 
   [atlasFile, lut] = getAtlasAndLut(atlasName);
 

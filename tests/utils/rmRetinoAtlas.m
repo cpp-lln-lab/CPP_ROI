@@ -1,5 +1,5 @@
 function rmRetinoAtlas()
-  %
+
   % (C) Copyright 2021 CPP ROI developers
 
   pause(0.3);
