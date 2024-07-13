@@ -10,9 +10,7 @@ end
 
 function test_keepHemisphere_basic()
 
-  inputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'demos', 'roi');
-
-  gunzip(fullfile(inputDir, 'inputs', '*.gz'));
+  inputDir = setUpDemoData();
   zMap = fullfile(inputDir, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 
   zMap = renameNeuroSynth(zMap);
@@ -31,9 +29,5 @@ function test_keepHemisphere_basic()
                              ['hemi-R_' basename]), ...
                     'file'), ...
               2);
-
-  % TODO check the data content
-
-  delete(fullfile(inputDir, 'inputs', '*.nii'));
 
 end
