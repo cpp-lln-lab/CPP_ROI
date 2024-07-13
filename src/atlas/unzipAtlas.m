@@ -59,7 +59,13 @@ function gunzipAtlasIfNecessary(file)
 end
 
 function gunzipWithOctave(file)
-  copyfile(file, [file '.bak']);
-  gunzip(file);
-  copyfile([file '.bak'], file);
+  if iscellstr(file)
+    for i = 1:numel(file)
+      gunzipWithOctave(file{i});
+    end
+  else
+    copyfile(file, [file '.bak']);
+    gunzip(file);
+    copyfile([file '.bak'], file);
+  end
 end
