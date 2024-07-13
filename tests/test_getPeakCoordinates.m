@@ -10,9 +10,10 @@ end
 
 function test_getPeakCoordinates_basic()
 
-  roiImage = extractRoiFromAtlas(pwd, 'wang', 'V1v', 'L');
+  inputDir = setUpDemoData();
+  dataImage = fullfile(inputDir, 'inputs', 'TStatistic.nii');
 
-  dataImage = fullfile(demoDir(), 'TStatistic.nii');
+  roiImage = extractRoiFromAtlas(pwd, 'wang', 'V1v', 'L');
 
   reslicedImages = resliceRoiImages(dataImage, roiImage);
 
@@ -21,21 +22,5 @@ function test_getPeakCoordinates_basic()
   assertEqual(worldCoord, [-3 -91 -1]);
   assertEqual(voxelCoord, [28 8 24]);
   assertElementsAlmostEqual(maxVal, 1.6212, 'absolute', 1e-3);
-
-  delete('*hemi-L_space-MNI_atlas-wang_label-V1v_mask.*');
-
-end
-
-function value = thisDir()
-  value = fileparts(mfilename('fullpath'));
-end
-
-function value = demoDir()
-
-  value = fullfile(thisDir(), '..', 'demos', 'roi', 'inputs');
-
-  if exist(fullfile(value, 'TStatistic.nii'), 'file') == 0
-    gunzip(fullfile(value, '*.gz'));
-  end
 
 end
