@@ -67,7 +67,7 @@ jobs:
     - name: Run tests
       run: |
         octave $OCTFLAGS --eval "addpath(fullfile(pwd, 'tests', 'utils')); savepath();"
-        octave $OCTFLAGS --eval "cd(fullfile(getenv('GITHUB_WORKSPACE'), '.github', 'workflows')); run tests_matlab;"
+        octave $OCTFLAGS --eval "cd(fullfile(getenv('GITHUB_WORKSPACE'), '.github', 'workflows')); run tests_octave;"
 
     - name: Code coverage
       uses: codecov/codecov-action@v4

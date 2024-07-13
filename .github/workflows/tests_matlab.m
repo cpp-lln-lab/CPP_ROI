@@ -8,7 +8,6 @@ addpath(fullfile(root_dir, 'lib', 'bids-matlab'));
 addpath(fullfile(root_dir, 'MOcov', 'MOcov'));
 
 cd(fullfile(root_dir, 'MOxUnit', 'MOxUnit'));
-pwd;
 run moxunit_set_path();
 
 cd(fullfile(root_dir));
