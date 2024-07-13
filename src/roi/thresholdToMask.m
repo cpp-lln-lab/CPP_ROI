@@ -57,6 +57,10 @@ function outputImage = thresholdToMask(varargin)
   descSuffix = strrep(descSuffix, '.', 'pt');
   bf.entities.desc = [bf.entities.desc descSuffix];
 
+  if isempty(bf.extension)
+    bf.extension = ".nii";
+  end
+
   bf = bf.update();
 
   hdr = spm_vol(inputImage);

@@ -9,50 +9,20 @@ end
 
 function test_isBinaryMask_true()
 
-  roiFilename = prepareRoiAndVolumeDefiningImage();
+  [roiFilename, zMap] = prepareRoiAndVolumeDefiningImage();
   isBinaryMask(roiFilename);
-
-end
-
-function test_isBinaryMask_false()
-
-  [~, zMap] = prepareRoiAndVolumeDefiningImage();
   assertExceptionThrown(@()isBinaryMask(zMap), 'isBinaryMask:notBinaryImage');
-
-end
-
-function value = thisDir()
-  value = fileparts(mfilename('fullpath'));
-end
-
-function value = demoDir()
-
-  value = fullfile(thisDir(), '..', 'demos', 'roi', 'inputs');
-
-  if exist(fullfile(value, 'visual motion_association-test_z_FDR_0.01.nii'), 'file') == 0
-    gunzip(fullfile(value, '*.gz'));
-  end
 
 end
 
 function  [roiFilename, zMap] = prepareRoiAndVolumeDefiningImage()
 
-  zMap = fullfile(demoDir(), 'space-MNI_atlas-neurosynth_label-visualMotion_probseg.nii');
+  inputDir = setUpDemoData();
 
-  roiFilename = fullfile(demoDir(), ...
-                         'space-MNI_atlas-neurosynth_label-visualMotion_desc-p10pt00_mask.nii');
+  zMap = fullfile(inputDir, 'inputs', 'visual motion_association-test_z_FDR_0.01.nii');
 
-  if exist(roiFilename, 'file') == 2
-
-  else
-
-    zMap = fullfile(demoDir(), 'visual motion_association-test_z_FDR_0.01.nii');
-
-    zMap = renameNeuroSynth(zMap);
-
-    threshold = 10;
-    roiFilename = thresholdToMask(zMap, threshold);
-
-  end
+  zMap = renameNeuroSynth(zMap);
+  threshold = 10;
+  roiFilename = thresholdToMask(zMap, threshold);
 
 end
