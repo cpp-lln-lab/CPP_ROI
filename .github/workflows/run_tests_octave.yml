@@ -1,5 +1,5 @@
 ---
-name: tests and coverage with matlab
+name: tests and coverage with octave
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
