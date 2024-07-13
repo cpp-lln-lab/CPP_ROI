@@ -48,7 +48,7 @@ function outputImage = thresholdToMask(varargin)
 
   % add peakThreshold and clusterSizeInfo to desc
   if ~isfield(bf.entities, 'desc')
-    bf.entities.desc = '';
+    bf.entities(1).desc = '';
   end
   descSuffix = sprintf('p%05.2f', peakThreshold);
   if clusterSize > 0
@@ -58,7 +58,7 @@ function outputImage = thresholdToMask(varargin)
   bf.entities.desc = [bf.entities.desc descSuffix];
 
   if isempty(bf.extension)
-    bf.extension = ".nii";
+    bf.extension = '.nii';
   end
 
   bf = bf.update();
