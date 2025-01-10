@@ -70,7 +70,7 @@ jobs:
         octave $OCTFLAGS --eval "cd(fullfile(getenv('GITHUB_WORKSPACE'), '.github', 'workflows')); run tests_octave;"
 
     - name: Code coverage
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         file: coverage.xml
         flags: octave
