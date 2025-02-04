@@ -159,6 +159,29 @@ function [mask, outputFile] = createRoi(varargin)
 
       mask = createRoiLabel(mask);
 
+    case 'merge'
+
+      roiImages = specification;
+      
+      mask = [];
+                  
+      % loop through the ROIs to merge
+      for iRoi = 1:length(roiImages)
+          
+        % load one ROI per time
+        maskToMerge = spm_read_vols(spm_vol(roiImages{iRoi}));
+        
+        mask = cat(4, mask, maskToMerge);
+        
+      end
+      
+      % merge the logical masks into one
+      mask = any(mask, 4);
+      
+      % assign fileprefix (name to be save?) 
+      % [ WIP ]
+      % mask = createRoiLabel(mask);
+      
     case 'expand'
 
       % Ugly hack
