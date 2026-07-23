@@ -35,7 +35,7 @@ jobs:
         release: ${{matrix.version}}
 
     - name: Install CPP_ROI
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         submodules: true
         fetch-depth: 0
