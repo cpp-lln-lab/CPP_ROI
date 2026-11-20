@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        version: [R2021a, R2025b]
+        version: [R2021a, R2026b]
 
     runs-on: ${{matrix.os}}
 
