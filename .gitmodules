@@ -1,7 +1,7 @@
 [submodule "lib/marsbar"]
 	path = lib/marsbar
-	url = https://github.com/marsbar-toolbox/marsbar.git
-	datalad-url = https://github.com/marsbar-toolbox/marsbar.git
+	url = https://github.com/cpp-lln-lab/marsbar.git
+	datalad-url = https://github.com/cpp-lln-lab/marsbar.git
 [submodule "atlas/HCPex"]
 	path = atlas/HCPex
 	url = https://github.com/wayalan/HCPex.git
