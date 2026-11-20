@@ -3,7 +3,7 @@
 
 root_dir = getenv('GITHUB_WORKSPACE');
 
-addpath(fullfile(root_dir, 'spm12'));
+addpath(fullfile(root_dir, 'spm'));
 addpath(fullfile(root_dir, 'lib', 'bids-matlab'));
 addpath(fullfile(root_dir, 'MOcov', 'MOcov'));
 
